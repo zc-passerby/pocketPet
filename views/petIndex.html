@@ -1,0 +1,1256 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><%= title %></title>
+    <script src="Content/Javascript/jquery-1.8.3.min.js"></script>
+    <style>
+        body {
+            color: #693600;
+        }
+
+        .menu_UL {
+            MARGIN-TOP: 29px;
+        }
+
+            .menu_UL li {
+                LINE-HEIGHT: 23PX;
+                MARGIN-LEFT: 57PX;
+                COLOR: #54d689;
+                CURSOR: POINTER;
+            }
+
+                .menu_UL li:HOVER {
+                    COLOR: #12ff73;
+                    fONT-WEIght: BOLD;
+                }
+        .menu_UL1 {
+	        height: 25px;
+	        margin-top: 15px;
+        }
+
+        .menu_UL1 li {
+	        height: 30px;
+	        width: 44px;
+	        float: left;
+	        MARGIN-LEFT: 2PX;
+	        CURSOR: POINTER;
+        }
+
+
+
+
+        #button1 {
+            z-index: 23232;
+            position: absolute;
+            width: 140px;
+            height: 55px;
+            top: 115px;
+            left: 36px;
+            cursor: pointer;
+        }
+
+        .menu_:hover {
+            margin: 1px;
+        }
+
+        #button5 {
+            position: absolute;
+            width: 142px;
+            height: 56px;
+            top: 170px;
+            left: 36px;
+            cursor: pointer;
+        }
+
+        #button3 {
+            z-index: 23232;
+            position: absolute;
+            width: 140px;
+            height: 54px;
+            top: 231px;
+            left: 36px;
+            cursor: pointer;
+        }
+
+        #button4 {
+            z-index: 23232;
+            position: absolute;
+            width: 140px;
+            height: 58px;
+            top: 287px;
+            left: 36px;
+            cursor: pointer;
+        }
+    </style>
+    <link href="Content/CSS/index.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+
+        var clickState = "0";
+        var jid = null;
+        var jname = "普通攻击";
+        function setJN(i, n) {
+            jid = i;
+            jname = n;
+        }
+        function tabClick(t) {
+
+            var cid = "#con" + t.replace("task", "_task_");
+	        if ($("#" + t).attr("class").indexOf("on") != -1) {
+                $("#" + t).removeClass("on");
+                $(cid).hide();
+            } else {
+                $(cid).show();
+                $("#" + t).addClass("on");
+            }
+
+
+
+        }
+
+        //处理键盘事件 禁止后退键（Backspace）密码或单行、多行文本框除外  
+        function banBackSpace(e) {
+            var ev = e || window.event;//获取event对象     
+            var obj = ev.target || ev.srcElement;//获取事件源     
+
+            var t = obj.type || obj.getAttribute('type');//获取事件源类型    
+
+            //获取作为判断条件的事件类型  
+            var vReadOnly = obj.getAttribute('readonly');
+            var vEnabled = obj.getAttribute('enabled');
+            //处理null值情况  
+            vReadOnly = (vReadOnly == null) ? false : vReadOnly;
+            vEnabled = (vEnabled == null) ? true : vEnabled;
+
+            //当敲Backspace键时，事件源类型为密码或单行、多行文本的，  
+            //并且readonly属性为true或enabled属性为false的，则退格键失效  
+            var flag1 = (ev.keyCode == 8 && (t == "password" || t == "text" || t == "textarea")
+                && (vReadOnly == true || vEnabled != true)) ? true : false;
+
+            //当敲Backspace键时，事件源类型非密码或单行、多行文本的，则退格键失效  
+            var flag2 = (ev.keyCode == 8 && t != "password" && t != "text" && t != "textarea")
+                ? true : false;
+
+            //判断  
+            if (flag2) {
+                return false;
+            }
+            if (flag1) {
+                return false;
+            }
+        }
+
+        //禁止后退键 作用于Firefox、Opera  
+        document.onkeypress = banBackSpace;
+        //禁止后退键  作用于IE、Chrome  
+        document.onkeydown = banBackSpace;
+        function openTask() {
+            var j = $.parseJSON(window.external.取所有可领任务());
+            $(".任务面板").hide();
+            $(".所有任务").html("");
+            for (var i = 0; i < j.length; i++) {
+                var node = "<li class=\"a\" id=\"task_li_{id}\"><a style=\"cursor:pointer\" onclik=\"void(0)\"><p class='ppp'>{name}<span style='display:none' class='ppp_id'>{id}</span></p></a></li>";
+	            node = node.replace("{name}", j[i].任务名);
+                node = node.replace("{id}", j[i].任务序号);
+                node = node.replace("{id}", j[i].任务序号);
+                $(".所有任务").append(node);
+            }
+            $(".ppp").click(function () {
+
+                TaskPage($(this).find(".ppp_id").html(), false);
+            });
+	        var j = $.parseJSON(window.external.取玩家已领任务());
+
+            $(".已领任务").html("");
+            for (var i = 0; i < j.length; i++) {
+                var node = "<li class=\"a\"  id=\"task_li_{id}\"><a style=\"cursor:pointer\" onclik=\"void(0)\"><p class='ppp2'>{name}<span style='display:none' class='ppp_id'>{id}</span></p></a></li>";
+
+	            node = node.replace("{name}", j[i].任务名);
+                node = node.replace("{id}", j[i].任务序号);
+                node = node.replace("{id}", j[i].任务序号);
+                if (j[i].已完成 != "0") {
+
+                    $(".已领任务").append(node);
+                }
+
+            }
+            $(".ppp2").click(function () {
+
+                TaskPage($(this).find(".ppp_id").html(), true);
+            });
+
+
+        }
+        function stop() {
+            return false;
+        }
+        document.oncontextmenu = stop;
+        var mapIID;
+        function zidong(i) {
+
+            if (i == -1) {
+                return;
+            }
+            $("#gw").attr("src", "Battle.html");
+            mapIID = i;
+            if (i == "地狱之门") {
+
+                setTimeout(function () { window.external.updateBattle_page(i, 1, true); }, 100);
+            } else {
+                setTimeout(function () { window.external.updateBattle_page(i, 1); }, 100);
+            }
+
+        }
+        function zidong1() {
+            $("#gw").attr("src", "Battle.html");
+
+	        setTimeout(function () { window.external.updateBattle_page(mapIID, 1); }, 10);
+        }
+        var gj = false;
+        function gjs(i) {
+            gj = i;
+
+        }
+        function Load(n) {
+            //	alert(n);
+            if (clickState == "1") {
+                alert("请等待数据读取完毕后再进行其他操作!");
+                return;
+            }
+            if (gj) {
+                Alert("战斗中不能进行其他操作噢!");
+                return;
+            }
+            $(".gamebox").width("788px");
+	        if (n == 3) {
+                clickState = "1";
+                $("#gw").attr("src", "petInfo.html");
+		        setTimeout(function () { window.external.updatePetInfo_page(); }, 100);
+	        } else if (n == 4) {
+                clickState = "1";
+                $("#gw").attr("src", "PlyaerInfo.html");
+		        setTimeout(function () { window.external.updatePlayerInfo_page(); }, 100);
+	        } else if (n == 2) {
+
+                $("#gw").attr("src", "map.html");
+		        window.external.addHP();
+
+            } else if (n == 1) {
+
+                $("#gw").attr("src", "BattleMap.html");
+		        setTimeout(function () { window.external.showNpc() }, 100);
+
+	        } else if (n == 99) {
+
+                window.location.href = "petIndex.html";
+
+            }
+            return;
+            //  showBox(n);
+        }
+        function StartBattle(i) {
+            clickState = "1";
+            $("#gw").attr("src", "Battle.html");
+	        $(".gamebox").width("988px");
+	        if (i == "地狱之门") {
+                setTimeout(function () { window.external.updateBattle_page(i, 0, true); }, 100);
+	        } else {
+                setTimeout(function () { window.external.updateBattle_page(i, 0); }, 100);
+	        }
+
+        }
+        function updateBattle(i) {
+            if (i == -1) {
+                return;
+            }
+            $("#gw").attr("src", "Battle.html");
+
+	        if (i == "地狱之门") {
+
+                setTimeout(function () { window.external.updateBattle_page(i, 0, true); }, 100);
+	        } else {
+                setTimeout(function () { window.external.updateBattle_page(i, 0); }, 100);
+	        }
+        }
+        function loadOK() {
+
+            clickState = "0";
+        }
+        function loginOk() {
+            $(".OpenLogin").html("您已登录，点击这里重登。");
+        }
+        function openNpc(n) {
+
+
+
+            if (clickState == "1") {
+                alert("请等待数据读取完毕后再进行其他操作!");
+                return;
+            }
+            if (n == 1) {
+                clickState = "1";
+                window.external.updatePetHC();
+                $("#gw").attr("src", "Pasture_test.html");
+	            setTimeout(function () { window.external.updatePasture_page(); }, 100);
+
+
+            } else if (n == 2) {
+                clickState = "1";
+                $("#gw").attr("src", "Malls.html");
+	            setTimeout(function () { window.external.updateMalls_page(); }, 100);
+            } else if (n == 3) {
+                clickState = "1";
+
+                $("#gw").attr("src", "Depot.html");
+	            setTimeout(function () { window.external.updateDepot_page(); }, 100);
+            } else if (n == 4) {
+                clickState = "1";
+                $("#gw").attr("src", "PropMalls.html");
+	            setTimeout(function () { window.external.updatePropMalls_page(); }, 100);
+            } else if (n == 5) {
+                clickState = "1";
+                $("#gw").attr("src", "petMain.html");
+	            setTimeout(function () { window.external.updatePetMain_page(); }, 100);
+            } else if (n == 7) {
+                $("#Notice_page").show();
+            } else if (n == 6) {
+                $("#gw").attr("src", "equip.html");
+	            setTimeout(function () { window.external.loadQHProp(); }, 100);
+            }
+
+
+        }
+        function openMap(n) {
+            if (n == 1) {
+                $("#map1").hide();
+                $("#map").show();
+            } else if (n == 2) {
+                $("#map1").show();
+                $("#map").hide();
+            }
+        }
+        function showTipEquip(A, B, C) {
+
+        }
+        var xx = "";
+        var wpType = 0;
+        function openBB() {
+            $("#wxzh").hide();
+            $("#zbfj").hide();
+            $("#incangku").show();
+            $("#inpiliang").show();
+            window.external.updateIndex_Page();
+            $("#main_bb").show();
+            //pl = 1;
+
+
+        }
+        function openBB1() {
+            $("#wxzh").show();
+            $("#zbfj").show();
+            $("#incangku").hide();
+            $("#inpiliang").hide();
+            window.external.updateIndex_Page1();
+            $("#main_bb").show();
+            //pl = 1;
+
+
+        }
+        function loadProp(json) {
+            //alert(json);
+            $("#propList").html("");
+            var j = $.parseJSON(json);;
+            var node = "<li data-i='{i}' onmouseout=\"$('#baginfo').hide()\">" +
+                "<a>" +
+                "<p class=\"wpid\"style='display:none'>{ID}</p>" +
+                "<p class=\"p1\"><img src=\"Content/Img/prop/{ICO}.gif\" /></p>" +
+                "<p class=\"p2\" style=\"text-align:left;\">{Name}</p>" +
+                "<p class=\"p3\">{Type}</p>" +
+                "<p class=\"p4\">{num}</p>" +
+                "</a>" +
+                "</li>";
+
+
+            $("#propList").html("");
+            $("#dqkj").html(j.length);
+            for (var i = 0; i < j.length; i++) {
+                var jnode = node.replace("{ICO}", j[i].道具图标);
+                jnode = jnode.replace("{Name}", j[i].道具名字);
+                jnode = jnode.replace("{i}", i);
+                jnode = jnode.replace("{Type}", "道具");
+                jnode = jnode.replace("{num}", j[i].道具数量);
+                jnode = jnode.replace("{ID}", j[i].道具序号);
+                //	alert(jnode);		
+                $("#propList").append(jnode);
+
+            }
+
+            $("#propList li").click(function () {
+                wpID = $(this).find(".wpid").html();
+                wpType = $(this).find(".p3").html();
+                xz(this);
+            });
+	        $("#propList li").mouseover(function (e) {
+                e = e || window.event;
+                wpType = $(this).find(".p3").html();
+                hoveWp(e, this, "#FFF", $(this).find(".wpid").html(), false, wpType);
+	        });
+	        $("#propList li").mouseout(function (e) {
+                hoveWp1hide();
+            });
+        }
+        function loadProp1(json) {
+            //alert(json);
+            $("#propList").html("");
+            var j = $.parseJSON(json);
+            var node = "<li data-i='{i}' onmouseout=\"$('#baginfo').hide()\">" +
+                "<a>" +
+                "<p class=\"wpid\"style='display:none'>{ID}</p>" +
+                "<p class=\"p1\"><img src=\"Content/Img/prop/prop/{ICO}.gif\" /></p>" +
+                "<p class=\"p2\" style=\"text-align:left;\">{Name}</p>" +
+                "<p class=\"p3\">{Type}</p>" +
+                "<p class=\"p4\">{num}</p>" +
+                "</a>" +
+                "</li>";
+
+
+            $("#propList").html("");
+	        $("#dqkj").html(j.length);
+            for (var i = 0; i < j.length; i++) {
+                var jnode = node.replace("{ICO}", j[i].ICO);
+                jnode = jnode.replace("{Name}", j[i].Name);
+                jnode = jnode.replace("{i}", i);
+                jnode = jnode.replace("{Type}", "装备");
+                jnode = jnode.replace("{num}", 1);
+                jnode = jnode.replace("{ID}", j[i].ID);
+                //	alert(jnode);		
+                $("#propList").append(jnode);
+
+            }
+
+            $("#propList li").click(function () {
+                wpID = $(this).find(".wpid").html();
+                wpType = $(this).find(".p3").html();
+                xz(this);
+            });
+	        $("#propList li").mouseover(function (e) {
+                e = e || window.event;
+                wpType = $(this).find(".p3").html();
+                hoveWp(e, this, "#FFF", $(this).find(".wpid").html(), false, wpType);
+	        });
+	        $("#propList li").mouseout(function (e) {
+                hoveWp1hide();
+            });
+        }
+        $(function () {
+
+
+
+        });
+
+        function hoveWp(e, i, s, id, kj, t) {
+            //alert(id);
+            var yy = e.pageY - 20;
+            if (kj == true) {
+
+                $("#baginfo").css("left", $("#gw").offset().left + $(i).offset().left + $(i).width() + 25);
+            } else {
+                $("#baginfo").css("left", $(i).offset().left + $(i).width() + 25);
+            }
+            //  var index = $(i).index();
+            $("#baginfo").css("top", yy + "px");
+            //700px
+
+            $("#baginfo").show();
+            $("#bz_wpmc").html($(i).find(".p2").html());
+            $("#bz_wpmc").css("color", s);
+            $("#bz_wpxx").html(window.external.readPropInfo(id, t, null));
+
+            //alert(yycs
+
+        }
+        function hoveWp1(e, i, s, id, pname) {
+            //alert(id);
+            var yy = e.pageY - 20;
+
+            $("#baginfo").css("left", $("#gw").offset().left + $(i).offset().left + $(i).width() + 25);
+            //  var index = $(i).index();
+            $("#baginfo").css("top", yy + "px");
+            $("#baginfo").show();
+            $("#bz_wpmc").html($(i).find(".propName").html());
+            $("#bz_wpmc").css("color", s);
+            $("#bz_wpxx").html(window.external.readPropInfo1(id));
+        }
+        function hoveZB(e, i, s, id, pname, t) {
+            var yy = e.pageY - 20;
+            $("#baginfo").css("left", $("#gw").offset().left + $(i).offset().left + $(i).width() + 25);
+            $("#baginfo").css("top", yy + "px");
+            $("#baginfo").show();
+            $("#bz_wpmc").html($(i).find(".propName").html());
+            $("#bz_wpmc").css("color", s);
+            $("#bz_wpxx").html(window.external.readPropInfo(id, t, null));
+        }
+        function hoveZB_1(e, i, s, id, pname, t, cid) {
+            var yy = e.pageY - 20;
+            $("#baginfo").css("left", $("#gw").offset().left + $(i).offset().left + $(i).width() + 25);
+            $("#baginfo").css("top", yy + "px");
+            $("#baginfo").show();
+            $("#bz_wpmc").html($(i).find(".propName").html());
+            $("#bz_wpmc").css("color", s);
+            $("#bz_wpxx").html(window.external.readPropInfo(id, t, cid));
+        }
+        function hoveWp1hide() {
+            $("#baginfo").hide();
+        }
+        var wpID = -1;
+        var dom;
+        function xz(i) {
+
+
+            //alert(wpID);
+            dom = i;
+            $(".pack_cont ul li").removeClass("xz");
+            $(i).addClass("xz");
+
+        }
+        $(function () {
+
+            if (typeof (window.external.check) == "undefined" || window.external.check() != "true") {
+                $("body").css("color", "#fff");
+	            //	$("body").html("请不要在浏览器中打开HTML文件,如果您确定是按正常方式打开还显示这段文字的话<br/><a style=\"color:#fff\"href=\"https://www.baidu.com/s?word=.NET4.5&tn=96209389_hao_pg&ie=utf-8&sc=UWY4PWcsrHn3rNqCmyqxTAThIjYkPjTdnWDYP1DznWnvFhnqpA7EnHc1Fh7W5Hmzn1b4rjbs&ssl_sample=normal&srcqid=271864909777885200\">点击这里下载Microsoft .NET Framework 4.5</a>");
+            }
+        });
+
+        function use() {
+
+
+
+            if (wpID != -1) {
+                if (wpType == "装备") {
+                    showBox(window.external.useZB(wpID));
+                    window.external.updateIndex_Page1();
+                    return;
+                }
+                var 结果 = window.external.useProp(wpID);
+                window.external.updateIndex_Page();
+                if (结果.indexOf("失败") == -1) {
+
+                    var $p4 = $(dom).find("a .p4");
+
+                    if (parseInt($p4.html()) > 1) {
+                        $p4.html(parseInt($p4.html()) - 1);
+
+                    } else {
+
+                        $(dom).remove();
+                    }
+                    showBox(结果);
+                } else {
+                    wpID = -1;
+                    showBox(结果);
+                }
+            } else {
+                showBox("请选择一个道具!");
+            }
+        }
+        function zhwx() {
+            if (wpID != -1) {
+                window.external.WXZH(wpID);
+                window.external.updateIndex_Page1();
+                return;
+            }
+            else {
+                showBox("请选择一个装备!");
+            }
+        }
+        function fjzb() {
+            if (wpID != -1) {
+                if (confirm("您确定要花20万金币分解该装备吗？分解后无法恢复！")) {
+                    if (window.external.FJZB(wpID)) {
+                        showBox("装备分解成功！");
+                        window.external.updateIndex_Page1();
+                        return;
+                    }
+                    else {
+                        showBox("装备分解失败！");
+                    }
+                }
+
+
+
+            }
+            else {
+                showBox("请选择一个装备!");
+            }
+        }
+        function showBox(i) {
+            $("#systips").html(i);
+            $("#systips").show();
+            setTimeout(function () { $("#systips").hide(); }, 8000);
+        }
+        function Alert(i) {
+            showBox(i);
+        }
+        function LostWp() {
+            if (confirm("您确定要丢弃该物品吗？丢弃后无法恢复（称号类道具无法丢弃）！")) {
+
+                if (window.external.deleteProp(wpID, wpType)) {
+                    showBox("丢弃物品成功！");
+                    $(dom).remove();
+                } else {
+                    showBox("系统繁忙，请稍后再试！");
+                }
+            }
+
+        }
+        function toDepot() {
+            if (window.external.toDepot(wpID)) {
+                showBox("道具已经放入仓库！");
+                $(dom).remove();
+            } else {
+                showBox("系统繁忙，请稍后再试！");
+            }
+        }
+        function showPropList(JSON) {
+
+
+        }
+        function TaskPage(i, b) {
+
+            $(".任务面板").hide();
+            var j = $.parseJSON(window.external.getTaskPage(i, b));
+            $(".任务介绍").html(j.任务介绍);
+            $(".任务目标").html(j.任务目标);
+            $(".任务名字").html(j.任务名字);
+            $(".任务奖励").html(j.任务奖励);
+            $(".任务进度").html(j.任务进度);
+
+
+            if (j.位置) {
+                $("#task_delete").removeClass("b");
+                $("#task_delete").addClass("c");
+                $("#task_delete").attr("disabled", false);
+                taskID = i;
+                $("#task_get").removeClass("c");
+                $("#task_get").addClass("b");
+                $("#task_get").attr("disabled", true);
+
+                $("#task_set").removeClass("b");
+                $("#task_set").addClass("c");
+                $("#task_set").attr("disabled", false);
+            } else {
+                $("#task_delete").removeClass("c");
+                $("#task_delete").addClass("b");
+                $("#task_delete").attr("disabled", true);
+
+                $("#task_get").removeClass("b");
+                $("#task_get").addClass("c");
+                taskID = i;
+
+                $("#task_get").attr("disabled", false);
+
+                $("#task_set").removeClass("c");
+                $("#task_set").addClass("b");
+                $("#task_set").attr("disabled", true);
+            }
+
+            $(".任务面板").show();
+        }
+        var taskID;
+        function gettask() {
+            if (window.external.getTask(taskID)) {
+                $("#task_li_" + taskID).remove();
+                $(".任务面板").hide();
+                openTask();
+            } else {
+                alert("领取任务失败!");
+            }
+        }
+        function deletetask() {
+            if (window.external.deleteTask(taskID)) {
+                $("#task_li_" + taskID).remove();
+                $(".任务面板").hide();
+                openTask();
+            } else {
+                alert("放弃任务失败!");
+            }
+        }
+        function settask() {
+            if (window.external.setTask(taskID)) {
+                $("#task_li_" + taskID).remove();
+                $(".任务面板").hide();
+                openTask();
+            } else {
+                alert("完成任务失败!");
+            }
+        }
+
+        function showUserInfo(json) {
+
+	        $("#道具容量").html(json);
+
+        }
+    </script>
+    </head>
+
+    <body>
+<div id="systips" style="display:none;position: absolute; width: 246px; left: 400px; top: 410px; font-size: 12px; color: rgb(255, 255, 255); height: 142px; border:0; display:none; padding: 10px; z-index: 30001; background: url(Content/Img/Index/boxk.gif);">欢迎登录口袋精灵！</div>
+<div class="box_task RENWU" id="Box_Tools_3" style="display: none;position: absolute;left: 250px;top: 105px;width: 700px;height: 430px;overflow: hidden;background:url(img/task_bg.gif);    Z-INDEX: 9999;">
+      <div id="Box_Tools_3_handle" style="position: absolute; left: 20px; top: 6px; border: 0px solid rgb(255, 0, 0); width: 83px; height: 25px; cursor: move;"> </div>
+      <div class="box_cont">
+    <div class="close_btn" onclick="$('.RENWU').hide()"></div>
+    <div class="i_task" id="activity_show">
+          <ul>
+        <li><a style="cursor:pointer" onclik="void(0)"><span onmouseover="javascript:showcontent_ac('家族战场','20:00|21:00','active1',event);" onmouseout="javascript:closecontent();" id="active_1"><img src="img/xt07.jpg"></span></a></li>
+        <li><a style="cursor:pointer" onclik="void(0)"><span onmouseover="javascript:showcontent_ac('限时冲级','','active2',event);" onmouseout="javascript:closecontent();" id="active_2"><img src="img/xt01.jpg"></span></a></li>
+        <li><a style="cursor:pointer" onclik="void(0)"><span onmouseover="javascript:showcontent_ac('三倍经验','1:00|23:00','active3',event);" onmouseout="javascript:closecontent();" id="active_3"><img src="img/xt06.jpg"></span></a></li>
+        <li><a style="cursor:pointer" onclik="void(0)">暂无活动</a></li>
+      </ul>
+        </div>
+    <div class="task_nav">
+          <h2>任务列表</h2>
+          <div class="task_list" id="task_title_list">
+        <ul class="lev">
+              <li onclick="tabClick('task2')" id="task2"> <a style="cursor:pointer" onclick="getTaskDetail('2');bid=2;void(0);">
+                <p onclick="taskASwap(this)">已接受任务</p>
+                </a> </li>
+            </ul>
+        <ul id="con_task_2" class="con hiden 已领任务">
+            </ul>
+        <ul id="con_task_11" class="con hiden">
+            </ul>
+        <ul class="lev">
+              <li id="task12" class="on" onclick="setTab('task',12,12)"><a style="cursor:pointer" onclick="getTaskDetail('12');bid=12;void(0);">
+                <p onclick="tabClick('task12')">所有任务</p>
+                </a></li>
+            </ul>
+        <ul id="con_task_12" class="con hiden 所有任务">
+            </ul>
+      </div>
+        </div>
+    <div class="task_cont 任务面板" id="task_every_list" style="display: none;">
+          <h2 style="text-align:center;" class="任务名字"></h2>
+          <div class="task_info" style="overflow-x:hidden; overflow-y:auto; scrollbar-arrow-color:#ffffff;scrollbar-face-color:#e1d395; scrollbar-darkshadow-color:#e1d395; scrollbar-base-color:#f3edc9; scrollbar-highlight-color:#f3edc9; scrollbar-shadow-color:#f3edc9; scrollbar-track-color:#f3edc9; scrollbar-3dlight-color:#e1d395;height:280px;padding-left:10px;">
+        <h2 style="text-align:left;">任务描述：</h2>
+        接受地点:任务使者<br/>
+        接受描述:<br/>
+        <span class="任务介绍"></span><br/>
+        <br/>
+        <h2 style="text-align:left;">任务目标：</h2>
+        <span class="任务目标"></span>
+        <h2 style="text-align:left;">完成进度：</h2>
+        <span class="任务进度"></span>
+        <h2 style="text-align:left;">任务奖励：</h2>
+        获得物品：<span class="任务奖励"></span><br/>
+      </div>
+          <div class="btn" align="center">
+        <input type="button" id="task_get" class="b" onclick="gettask();" disabled="disabled" value="接受">
+        <input type="button" id="task_set" class="b" onclick="settask();" disabled="disabled" value="完成">
+        <input type="button" id="task_delete" class="c" style="cursor:pointer;color:green;" onclick="deletetask();" value="放弃">
+      </div>
+          <div class="tip02" id="do_task" style="text-align:center;color:red;"></div>
+        </div>
+  </div>
+    </div>
+<div id="main">
+      <div style="" class="side l">
+    <div style="padding-top:33px;padding-left:0px">
+          <div style=" background-image:url(Content/Img/Index/12.png)" class="menu_" id="button1" onclick="Load(1)"></div>
+          <div style=" background-image:url(Content/Img/Index/9.png)" class="menu_" id="button5" onclick="Load(2)"></div>
+          <div style=" background-image:url(Content/Img/Index/3.png)" class="menu_" id="button3" onclick="Load(3)"></div>
+          <div  style=" background-image:url(Content/Img/Index/6.png)" class="menu_" id="button4" onclick="Load(4)"></div>
+        </div>
+  </div>
+      <div class="content l">
+    <div class="tools"></div>
+    <div class="tools_btn"> <a onclick="openBB();return false;">背包</a><a id="ab" onclick="openBB1();return false;">装备</a><a onclick="openTask();$('.RENWU').toggle();"> 任务 </a><a class="t4" onclick="addBookmark();">收藏</a> </div>
+    <div class="gamebox">
+          <iframe class="win01" id="gw" name="gamewindow" src="Update.html" style="width:988px; height:319px;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        </div>
+  </div>
+      <div style="clear:both"></div>
+      <div id="bottom">
+    <div class="chat l"> 
+          <!-- 在线玩家 开始 -->
+          
+	    <div class="ol" style="display:block; margin-top:8px;margin-left:615px;color:#FFF"><span onclick="Load(99)" id="onlinec">点此刷新</span></div>
+	    <input type="button" class="zaixian" value="在线礼包" onclick="window.alert('功能开发中，敬请期待！')" />
+          <!-- 在线玩家 结束 -->
+          <div class="chat_box"> 
+        <!-- 聊天框 开始 -->
+	          <div class="chat_cont" id="chatDiv"><font color="#FF0000">[系统]：欢迎进入时空口袋单机版，您可以输入“/help”或点击游戏右下方“帮助”按钮以获取帮助。</font><br/>
+	              <font color="#FF0000">[系统]：近日，本游戏制作组发现有无良奸商在各平台上出售本游戏。制作组在此严正声明：本游戏为免费软件，未经授权，不得用于任何商业用途。如果你是花钱买到此游戏的，请立刻申请退钱，并投诉非法贩卖者! 欢迎加入我们的QQ交流群，群号为123134909（群内可免费下载本游戏）。</font></div>
+        <div id="help_chat_info" style="z-index:100;position:absolute;top:100px;display:block; left:250px"></div>
+        <div id="bbshow" style="z-index:100; position:absolute; display:block; left:235px; width:300px; top: -27px;"></div>
+        <div id="challenge_info" style="z-index:100; position:absolute; display:none; left:388px; width:300px; top: 46px;"></div>
+        <!-- 聊天框 结束 --> 
+        <!-- 聊天工具条 开始 -->
+        <div class="chat_tool">
+              <input id="cmsg" onkeydown="key();" class="inp" value="" type="text" />
+              <div class="select_lt" id="select_lt"> <span>公聊</span>
+            <ul class="hidden">
+                  <li class="i">发送到</li>
+                  <li><a href="javascript:;" target="_self" title="公聊" name="0">公聊</a></li>
+                  <li><a href="javascript:;" target="_self" title="私聊" name="1">私聊</a></li>
+                  <li><a href="javascript:;" target="_self" title="队聊" name="2">队聊</a></li>
+                  <li><a href="javascript:;" target="_self" title="家族聊" name="3">家族聊</a></li>
+                </ul>
+          </div>
+              <div class="select_pd" onclick="if($('.select_pd ul').css('display')=='none'){$('.select_pd ul').css('display','block')}else{$('.select_pd ul').css('display','none')}" id="select_pd"> <span>全部</span>
+            <ul class="hidden">
+                  <li class="i">显示频道</li>
+                  <li onclick="showSpecialMsg('')"><a href="javascript:;" target="_self" title="全部" name="">全部</a></li>
+                  <li onclick="showSpecialMsg('WP')"><a href="javascript:;" target="_self" title="私聊" name="WP">私聊</a></li>
+                  <li onclick="showSpecialMsg('SG')"><a href="javascript:;" target="_self" title="组队" name="SG">组队</a></li>
+                  <li onclick="showSpecialMsg('GC')"><a href="javascript:;" target="_self" title="家族" name="GC">家族</a></li>
+                </ul>
+          </div>
+              <div class="select_ys" id="select_ys" onclick="if($('.select_ys ul').css('display')=='none'){$('.select_ys ul').css('display','block')}else{$('.select_ys ul').css('display','none')}" style="display:block"> <span>黑</span>
+            <ul class="hidden">
+                  <li><a href="javascript:;" target="_self" title="黑色" name="">黑</a></li>
+                  <li><a href="javascript:;" target="_self" title="粉色" name="!"><font color="#ff3399">粉</font></a></li>
+                  <li><a href="javascript:;" target="_self" title="绿色" name="#"><font color="#33cc00">绿</font></a></li>
+                  <li><a href="javascript:;" target="_self" title="蓝色" name="!!"><font color="#0000ff">蓝</font></a></li>
+                </ul>
+          </div>
+              <input name="type" type="hidden" id="tknew" />
+              <input name="type" type="hidden" id="tklist" />
+              <input name="type" type="hidden" id="ccolor" />
+              <img style="" onclick="if($('#cmdiv').css('display')=='none'){$('#cmdiv').css('display','block')}else{$('#cmdiv').css('display','none')}" src="Content/Img/Index/3.gif" />
+              <input id="snd" class="but" value=" " onclick="sendMsg();" type="button" />
+              <img title="添加好友或屏蔽玩家" style="cursor: pointer;" src="Content/Img/Index/friends.gif" onclick="if($('.select_ys ul').css('display')=='none'){$('.select_ys ul').css('display','block')}else{$('.select_ys ul').css('display','none')}" class="add" /> </div>
+        <!-- 聊天工具条 结束 --> 
+      </div>
+        </div>
+    <div class="tip l">
+          <div class="wiki">
+        <form>
+              <input type="text" id="baike_input" class="inp" />
+              <input type="button" class="btn" value=" " onclick="searchPocketBaike(); return false;" />
+            </form>
+      </div>
+          <div>
+	          <ul class="menu_UL">
+		          <li class="OpenLogin" onclick="window.external.OpenLogin()">登录时空论坛</li>
+		          <li onclick="window.external.OpenTG()">打开导航推广链接</li>
+		          <li onclick="window.external.OpenPlayerHelper()">打开玩家助手</li>
+	          </ul>
+	          <ul class="menu_UL1">
+		          <li onclick="window.external.recv('/help')"></li>
+		          <li onclick="window.alert('官网正在制作中！')"></li>
+		          <li onclick=javascript:void(0);></li>
+		          <li onclick="window.alert('有问题请到QQ群反馈！')"></li>
+		          <li onclick="window.external.OpenBBS()"></li>
+		          <li onclick= window.external.QuitGame;></li>
+	          </ul>
+      </div>
+        </div>
+    <div style="clear:both"></div>
+  </div>
+    </div>
+<div id="main_bb" style="display:none">
+      <div class="close_btn" onclick="$('#main_bb').hide()"></div>
+      <div class="box_cont" id="bags">
+    <div class="i_pack">空间：<span id="dqkj"></span>&nbsp;道具总容量：<span id="道具容量"></span></div>
+    <div class="pack_title">
+          <ul class="list l1">
+        <li>
+              <p class="p1">图标</p>
+              <p class="p2">物品名称</p>
+              <p class="p3">类型</p>
+              <p class="p4">数量</p>
+            </li>
+      </ul>
+        </div>
+    <div class="pack_cont">
+          <ul id="propList" class="list l1 clearfix">
+        <li onmouseover="hoveWp(event)" onmouseout="$('#baginfo').hide()"> </li>
+      </ul>
+        </div>
+    <div class="pac_btn">
+          <input type="button" class="ico_btn" value="使用" id="inused" onclick="use();" />
+          <input type="button" id="wxzh" class="ico_btn" value="五行点化" onclick="zhwx();" />
+          <input type="button" id="zbfj" class="ico_btn" value="分解" onclick="fjzb();">
+          <input type="button" id="incangku" class="ico_btn" value="放入仓库" onclick="toDepot();" />
+          <input type="button" class="ico_btn" value="丢弃" onclick="LostWp();" />
+          <input type="button" id="inpiliang" class="ico_btn" onmousedown="ax()" onmouseup="sk()" onmouseout="sk()" value="批量使用"  />
+        </div>
+  </div>
+    </div>
+<div id="baginfo" style="left: 700px; top: 10px; z-index: 20; position: absolute; display: none;">
+      <table style="font-size:12px;" width="185" cellpadding="0" cellspacing="0" border="0">
+    <tbody>
+          <tr>
+        <td background="Content/Img/prop/border4_bl.gif" width="5" height="5"></td>
+        <td background="Content/Img/prop/border4_t.gif"></td>
+        <td background="Content/Img/prop/border4_tr.gif"></td>
+      </tr>
+          <tr>
+        <td width="5" background="Content/Img/prop/border4_l.gif"></td>
+        <td style="background:#1F1F30;filter:Alpha(opacity=90);" align="center"></td>
+        <td width="5" background="Content/Img/prop/border4_r.gif"></td>
+      </tr>
+          <tr>
+        <td width="5" background="Content/Img/prop/border4_l.gif"></td>
+        <td style="background:#1F1F30;filter:Alpha(opacity=90);"><font color="#FEFDFA"><b><span id="bz_wpmc"></span></b></font><br />
+              <font color="#FEFDFA"><span id="bz_wpxx"></span></font><br /></td>
+        <td width="5" background="Content/Img/prop/border4_r.gif"></td>
+      </tr>
+          <tr>
+        <td background="Content/Img/prop/border4_bl.gif" width="5" height="5"></td>
+        <td background="Content/Img/prop/border4_b.gif"></td>
+        <td background="Content/Img/prop/border4_br.gif"></td>
+      </tr>
+        </tbody>
+  </table>
+      <form id="ajaxs" runat="server">
+  </form>
+    </div>
+<div id="mcbbshow" style="height: 232px; width: 290px; padding: 0; z-index: 100; position: absolute; left: 460px; top: 350px; display: none;">
+      <div style="z-index:10000; width:40px; height:20px; position:absolute; left:269px; font-size:12px; text-align:center; padding-top:5px; padding-right:5px"><span onclick="$('#mcbbshow').hide();" style="cursor:pointer"><font color="#FF0000">关闭</font></span></div>
+      <div style=" clear:both;width:300px;height:230px; background-image:url(Content/Img/Pasture/petbg.gif) ; background-repeat:no-repeat;position:absolute; z-index:9999; ">
+    <div style="width:177px;height:230px;float:left;"><img class="形象" src="" width="177px" height="230px"></div>
+    <div style="width:123px;height:230px;float:left;position:relative">
+          <div style="position:absolute; text-align:center;top:16px;left:9px;width:99px;height:24px; font-size:12px; color:#FFFFFF;font-family:微软雅黑,黑体,arial,vendana;color:#ffffff"><span class="宠物名字"></span></div>
+          <div style="font-size:12px;line-height:20px;position:absolute;top:40px;padding:2px;left:5px;height:180px;width:110px;overflow:hidden;"> 五行：<span class="五行"></span><br/>
+        生命：<span class="生命"></span><br/>
+        魔法：<span class="魔法"></span><br/>
+        攻击：<span class="攻击"></span><br/>
+        防御：<span class="防御"></span><br/>
+        命中：<span class="命中"></span><br/>
+        闪避：<span class="闪避"></span><br/>
+        成长：<span class="成长"></span><br/>
+        等级：<span class="等级"></span> </div>
+        </div>
+  </div>
+    </div>
+<div style="display:none; z-index:0; left:515px; top:500px; position:absolute; width:1px; height:1px; overflow:hidden"> </div>
+<div id="cmdiv" style="display:none;position: absolute; left: 380px; top: 470px; z-index: 100; font-size: 0.8em; width: 300px; border: 1px solid rgb(204, 204,
+
+204); padding: 5px; line-height: 1.5; background-color: rgb(255, 255, 255);"> <img src="Content/Chat/1.gif" onclick="sendm('(1)')" /> <img src="Content/Chat/2.gif"
+                                                                      onclick="    sendm('(2)')" /> <img src="Content/Chat/3.gif" onclick="    sendm('(3)')" /> <img src="Content/Chat/4.gif" onclick="    sendm('(4)')" /> <img src="Content/Chat/5.gif" onclick="    sendm('(5)')" /> <img src="Content/Chat/6.gif" onclick="    sendm('(6)')" /> <img src="Content/Chat/7.gif" onclick="    sendm
+
+('(7)')" /> <img src="Content/Chat/8.gif" onclick="    sendm('(8)')" /> <img src="Content/Chat/9.gif" onclick="    sendm('(9)')" /> <img src="Content/Chat/10.gif"
+                                                                                                                                           onclick="    sendm('(10)')" /> <img src="Content/Chat/11.gif" onclick="    sendm('(11)')" /> <img src="Content/Chat/12.gif" onclick="    sendm('(12)')" /> <img src="Content/Chat/13.gif" onclick="    sendm('(13)')" /> <img src="Content/Chat/14.gif" onclick="    sendm('(14)')" /> <img src="Content/Chat/15.gif" onclick="
+
+sendm('(15)')" /> <img src="Content/Chat/16.gif" onclick="    sendm('(16)')" /> <img src="Content/Chat/17.gif" onclick="    sendm('(17)')" /> <img src="Content/Chat/18.gif" onclick="    sendm('(18)')" /> <img src="Content/Chat/19.gif" onclick="    sendm('(19)')" /> <img src="Content/Chat/20.gif" onclick="
+
+sendm('(20)')" /> <img src="Content/Chat/21.gif" onclick="    sendm('(21)')" /> <img src="Content/Chat/22.gif" onclick="    sendm('(22)')" /> <img src="Content/Chat/23.gif" onclick="    sendm('(23)')" /> <img src="Content/Chat/24.gif" onclick="    sendm('(24)')" /> <img src="Content/Chat/25.gif" onclick="
+
+sendm('(25)')" /> <img src="Content/Chat/26.gif" onclick="    sendm('(26)')" /> <img src="Content/Chat/27.gif" onclick="    sendm('(27)')" /> <img src="Content/Chat/28.gif" onclick="    sendm('(28)')" /> <img src="Content/Chat/29.gif" onclick="    sendm('(29)')" /> <img src="Content/Chat/30.gif" onclick="
+
+sendm('(30)')" /> <img src="Content/Chat/31.gif" onclick="    sendm('(31)')" /> <img src="Content/Chat/32.gif" onclick="    sendm('(32)')" /> <img src="Content/Chat/33.gif" onclick="    sendm('(33)')" /> <img src="Content/Chat/34.gif" onclick="    sendm('(34)')" /> <img src="Content/Chat/35.gif" onclick="
+
+sendm('(35)')" /> <img src="Content/Chat/36.gif" onclick="    sendm('(36)')" /> <span onclick="    $('cmdiv').style.display='none'"
+                                                                                       style="cursor:pointer;">&nbsp;&nbsp;<u onclick="    $('#cmdiv').css('display','none')"><b><font color="red">关</font></b></u></span>
+      <div class="mf_box">
+    <h2>好友列表：</h2>
+    <div class="mf_box_cont" id="flist"> <span style="cursor:pointer;display:block;" onclick="chat('NOOB');"><u>NOOB</u></span> </div>
+    <div class="mf_box_inp"> 玩家名称：
+          <input type="text" class="inp" name="nickname" id="nickname">
+          <br/>
+          <input type="button" class="btn" value="添加" onclick="friend('add')" id="badd">
+          <input type="button" class="btn" value="删除" onclick="friend('del')" id="bdel">
+        </div>
+  </div>
+    </div>
+<script type="text/javascript">
+
+    function sendState(s) {
+        if (s == "1") {
+            showBox("连接通讯服务器成功！");
+	        thisMovie("sw").login("canku|6fb3f919ee284040ddf3d092ca36b7");
+        } else if (s == "2") {
+            showBox("正在连接通讯服务器……请稍等……！");
+        } else if (s == "-1") {
+            showBox("正在启动连接。。");
+	        thisMovie("sw").connection("120.24.160.228", 8371);
+        } else {
+            showBox(s);
+        }
+    }
+    var xname = "";
+    function sendm(c) {
+        $("#cmdiv").css("display", "none");
+        $("#cmsg").val($("#cmsg").val() + c);
+        $("#cmsg").focus();
+
+    }
+    function sl(c) {
+
+        $("#cmsg").val(" //" + c + ":" + $("#cmsg").val());
+        xname = (" //" + c + ":");
+    }
+    function getSubstr(ret, strs, stre) {
+
+        var deps = ret.indexOf(strs) + strs.length;
+
+        //如果结束字符为空，则取从开始字符到结束字符的所有字符串
+
+        if (stre == "")
+
+            var depe = ret.length;
+
+        else
+
+            var depe = ret.indexOf(stre);
+
+        var dep = ret.substr(deps, depe - deps);
+
+        return dep;
+
+    }
+    var n = 0;
+    function recvMsg(msg) {
+
+        var msgList = msg.split("@@@end");
+
+        for (var i = 0; i < msgList.length; i++) {
+            var msgs = msgList[i].split('|');
+
+            if (msgs[0] != "gu" && msgs[0] != "T" && msgs[0] != "") {
+
+                n++;
+            }
+
+
+            // alert(msg);
+
+            //   alert(msgList[i])
+            if (msgs[0] == "lt") {
+                var c = getSubstr(msgs[2], "(", ")");
+                while (c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9' || c == '10' || c == '11' || c == '12' || c == '13' || c == '14' || c == '15' || c == '16' || c == '17' || c == '18' || c == '19' || c == '20' || c == '21' || c == '22' || c == '23' || c == '24' || c == '25' || c == '26' || c == '27' || c == '28' || c == '29' || c == '30' || c == '31' || c == '32' || c == '33' || c == '34' || c == '35' || c == '36') {
+                    msgs[2] = msgs[2].replace("(" + c + ")", "<img class='c14'src='Content/Chat/" + c + ".gif' />");
+                    c = getSubstr(msgs[2], "(", ")");
+
+                }
+                if (c == "petinfo_pk") {
+                    var json = getSubstr(msgs[2], "+++", "---");
+                    var j = $.parseJSON(json);
+                    if (gj) {
+                        Alert("战斗中不能进行其他操作噢!");
+                        return;
+                    }
+
+                    var html = "<span style='cursor:pointer;color:#2700FF' class='tiaozhan'>>>>点击这里挑战我吧!<<<&nbsp;&nbsp;<div style='display:none;' class=\"json\">" + json + "</div></span><span class='showInfo' style='color:#A3ABAD;cursor:pointer;color: #FF0000;font-weight: bold' >[" + j.宠物名字 + "]<div style='display:none;' class=\"json\">" + json + "</div></span>";
+                    $('#chatDiv').append("<div class='send_ms0'><a href=\"javascript:void(0);return false;\"><font onclick=\"sl('" + msgs[1] + "')\" color=\"#ff0000\">" + msgs[1] + "</font></a>说：" + html + "</div>");
+                    $(".tiaozhan").click(function () {
+                        $("#gw").attr("src", "Battle.html");
+
+	                    var json = $(this).find(".json").html();
+
+                        setTimeout(function () {
+
+                            window.external.updateBattle_page('-1', '-1', false, json);
+                        }, 100);
+
+                    });
+	                $(".showInfo").click(function (e) {
+
+                        e = e || window.event;
+                        var json = $(this).find(".json").html();
+                        var j = $.parseJSON(json);
+                        if (j.五行 != "聖" && j.五行 != "佛") {
+                            $(".形象").attr("src", "Content/PetPhoto/q" + j.形象 + ".gif");
+                        } else {
+                            $(".形象").attr("src", "Content/PetPhoto/q" + j.形象 + ".png");
+                        }
+                        updateMainPet(j);
+                        $("#mcbbshow").show();
+                        $("#mcbbshow").css("left", e.pageX);
+
+
+                    });
+	                return;
+                }
+                $('#chatDiv').append("<div class='send_ms0'><a href=\"javascript:void(0);return false;\"><font onclick=\"sl('" + msgs[1] + "')\" color=\"#ff0000\">" + msgs[1] + "</font></a>说：" + msgs[2] + "</div>");
+
+            } else if (msgs[0] == "sm") {
+                //
+                $('#chatDiv').append("<div class='send_ms0'><font color=\"#0041F9\">[系统]：" + msgs[1] + "</font></div>");
+
+
+            } else if (msgs[0] == "Login") {
+                //#D100EA
+                $('#chatDiv').append("<div class='send_ms0'><font color=\"#D100EA\">[玩家]：" + msgs[1] + "上线啦！</font></div>");
+            }
+            else if (msgs[0] == "tc") {
+                //#D100EA
+                $('#chatDiv').append("<div class='send_ms0'><font color=\"#D100EA\">[玩家]：" + msgs[1] + "离开了游戏！</font></div>");
+            } else if (msgs[0] == "gu") {
+                var moban = "<li style='cursor:pointer; color:#6CE895' onclick=\"sl('[name]')\">[name]</li>";
+                //#D100EA
+                var ul = msgs[1].split("<<");
+                $(".在线列表").html("");
+
+	            for (var i = 0; i < ul.length; i++) {
+
+                    if (i == 0) {
+                        $(".在线人数").html(ul[i]);
+                    } else {
+
+                        var li = moban;
+                        li = li.replace("[name]", ul[i]);
+                        li = li.replace("[name]", ul[i]);
+
+                        $(".在线列表").append(li);
+                    }
+                }
+
+            }
+            else if (msgs[0] == "gg") {
+                $('#chatDiv').append("<div class='send_ms0'><font color=\"#FF0000\">[公告]：" + msgs[1] + "</font></div>");
+            } else if (msgs[0] == "sl") {
+                var c = getSubstr(msgs[2], "(", ")");
+                while (c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9' || c == '10' || c == '11' || c == '12' || c == '13' || c == '14' || c == '15' || c == '16' || c == '17' || c == '18' || c == '19' || c == '20' || c == '21' || c == '22' || c == '23' || c == '24' || c == '25' || c == '26' || c == '27' || c == '28' || c == '29' || c == '30' || c == '31' || c == '32' || c == '33' || c == '34' || c == '35' || c == '36') {
+                    msgs[2] = msgs[2].replace("(" + c + ")", "<img class='c14'src='Content/Chat/" + c + ".gif' />");
+                    c = getSubstr(msgs[2], "(", ")");
+
+                }
+                $('#chatDiv').append("<div class='send_ms0'><a href=\"javascript:void(0)\"><font onclick=\"sl('" + msgs[1] + "')\" color=\"#f00\">[私聊]" + msgs[1] + "</font></a><font color=\"#0000FF\">对你说：</font>" + msgs[2] + "</div>");
+            } else if (msgs[0] == "slok") {
+
+                var c = getSubstr(msgs[2], "(", ")");
+                while (c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9' || c == '10' || c == '11' || c == '12' || c == '13' || c == '14' || c == '15' || c == '16' || c == '17' || c == '18' || c == '19' || c == '20' || c == '21' || c == '22' || c == '23' || c == '24' || c == '25' || c == '26' || c == '27' || c == '28' || c == '29' || c == '30' || c == '31' || c == '32' || c == '33' || c == '34' || c == '35' || c == '36') {
+                    msgs[2] = msgs[2].replace("(" + c + ")", "<img class='c14'src='Content/Chat/" + c + ".gif' />");
+                    c = getSubstr(msgs[2], "(", ")");
+
+                }
+
+                $('#chatDiv').append("<div class='send_ms0'><font color=\"#0041F9\">[私聊]您</font>对<a href=\"javascript:void(0)\"><font onclick=\"sl('" + msgs[1] + "')\" color=\"#D100EA\">" + msgs[1] + "</font></a>说：<font color=\"\">" + msgs[2] + "</font></div>");
+            } else {
+                n--;
+
+                //      alert(msg);
+            }
+            $('#chatDiv').scrollTop($('#chatDiv')[0].scrollHeight);
+            if (n >= 36) {
+                //$('#chatDiv').html("");
+                // n=0;
+                //alert("!01");
+                //alert($(".send_ms0:eq(0)").html());
+                $(".send_ms0:eq(0)").attr("data-delete", "0");
+
+
+	            //$("[data-delete=0]").remove();
+                //alert("!00");
+            }
+        }
+
+    }
+    setInterval(function () { $("[data-delete=0]").remove(); }, 500);
+
+    function updateMainPet(json) {
+
+        $(".等级").html(json.等级);
+        if (typeof (json.等级) == "undefined") $(".等级").html("0");
+
+        $(".五行").html(json.五行);
+        if (typeof (json.五行) == "undefined") $(".五行").html("0");
+
+        $(".生命").html(json.生命);
+        if (typeof (json.生命) == "undefined") $(".生命").html("0");
+
+
+        $(".魔法").html(json.魔法);
+	    if (typeof (json.魔法) == "undefined") $(".魔法").html("0");
+
+
+	    $(".攻击").html(json.攻击);
+	    if (typeof (json.攻击) == "undefined") $(".攻击").html("0");
+
+
+	    $(".防御").html(json.防御);
+	    if (typeof (json.防御) == "undefined") $(".防御").html("0");
+
+	    $(".命中").html(json.命中);
+	    if (typeof (json.命中) == "undefined") $(".命中").html("0");
+
+
+	    $(".闪避").html(json.闪避);
+	    if (typeof (json.闪避) == "undefined") $(".闪避").html("0");
+
+	    $(".速度").html(json.速度);
+	    if (typeof (json.速度) == "undefined") $(".速度").html("0");
+
+	    $(".成长").html(json.成长);
+	    if (typeof (json.成长) == "undefined") $(".成长").html("0");
+
+	    $(".当前经验").html(json.当前经验);
+	    if (typeof (json.当前经验) == "undefined") $(".当前经验").html("0");
+
+	    //	$(".升级经验").html(window.external.getExp(JSON.等级));
+
+        $(".宠物名字").html(json.宠物名字);
+        if (typeof (json.宠物名字) == "undefined") $(".宠物名字").html("0");
+
+    }
+    function thisMovie(movieName) {
+        if (typeof (window[movieName]) != 'undefined' && typeof (window[movieName].sendMsg) != 'undefined') {
+            return window[movieName];
+        } else {
+            return document[movieName];
+        }
+    }
+    function sendMsg() {
+
+        var s = $("#cmsg").val();
+        //recvMsg("lt|您|"+s);
+        if (xname != "") {
+            if (s.indexOf(xname) == -1) {
+                xname = "";
+            }
+        }
+        window.external.recv(s);
+	    if (xname != "") {
+            $("#cmsg").val(xname);
+        } else {
+            $("#cmsg").val("");
+        }
+
+
+
+    }
+    function key() {
+        if (event.keyCode == 13) {  //回车键的键值为13
+            sendMsg();
+
+        }
+    }
+
+    var jb_;
+    function sk() {
+
+
+        clearInterval(jb_);
+
+    }
+
+
+    function ax() {
+
+        jb_ = setInterval(
+            function () {
+                use();
+
+
+            },
+            200
+        );
+
+    }
+    function openUrl(u) {
+        $("#gw").attr("src", u);
+    }
+    </script>
+<div id="frienlist" style="position: absolute; width: 120px; padding: 6px; height: 165px; z-index: 1; left: 1007px; top: 436px; background-repeat: no-repeat; overflow: hidden; display: block; background-image:url(img/friend_blacklist_m.gif);">
+      <div id="frienlisthandle"  style="cursor:move; width:89px; height:21px; float: left; color:#FFFFFF"></div>
+      <div style="cursor: pointer; position: relative; float: right; width: 15px; margin-right: 7px; height: 17px;"></div>
+      <div id="frienlistDiv" style="width:100px; overflow:hidden; overflow-y:auto; width:110px; height:132px">
+        <ul class="在线列表" style="list-style:none; line-height:21px">
+        </ul>
+  </div>
+    </div>
+</body>
+</html>
