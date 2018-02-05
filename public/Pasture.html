@@ -1,0 +1,1023 @@
+﻿
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>牧场</title>
+    <link href="Content/CSS/Pasture.css" rel="stylesheet" />
+    <link href="Content/CSS/main.css" rel="stylesheet" />
+    <script src="Content/Javascript/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+		var jLoad="%load%";
+		var JSONS;
+		$(function(){
+	
+			if(window.external.check()=="true"){
+				updatePetList(jLoad);
+				JSONS= $.parseJSON(jLoad);
+		
+				
+			
+			}
+		});
+		var wuxing = "";
+				function updateMainPet(json){
+			
+			$(".等级").html(json.等级);
+			if(typeof(json.等级)=="undefined")$(".等级").html("0");
+		
+			$(".五行").html(json.五行);
+			if(typeof(json.五行)=="undefined")$(".五行").html("0");
+			wuxing=json.五行;
+			$(".生命").html(json.生命);
+			if(typeof(json.生命)=="undefined")$(".生命").html("0");
+			
+			
+			$(".魔法").html(json.魔法);
+					if(typeof(json.魔法)=="undefined")$(".魔法").html("0");
+
+
+					$(".攻击").html(json.攻击);
+					if(typeof(json.攻击)=="undefined")$(".攻击").html("0");
+
+
+					$(".防御").html(json.防御);
+					if(typeof(json.防御)=="undefined")$(".防御").html("0");
+
+					$(".命中").html(json.命中);
+					if(typeof(json.命中)=="undefined")$(".命中").html("0");
+
+
+					$(".闪避").html(json.闪避);
+					if(typeof(json.闪避)=="undefined")$(".闪避").html("0");
+
+					$(".速度").html(json.速度);
+					if(typeof(json.速度)=="undefined")$(".速度").html("0");
+
+					$(".成长").html(json.成长);
+					if(typeof(json.成长)=="undefined")$(".成长").html("0");
+
+					$(".当前经验").html(json.当前经验);
+					if(typeof(json.当前经验)=="undefined")$(".当前经验").html("0");
+
+					//	$(".升级经验").html(window.external.getExp(JSON.等级));
+			
+			$(".宠物名字").html(json.宠物名字);
+			if(typeof(json.宠物名字)=="undefined")$(".宠物名字").html("0");
+			setPetICO(json.形象);
+				}
+		function setPetICO(id){
+			if(wuxing!="聖" && wuxing!="佛"){
+				$(".形象").attr("src","Content/PetPhoto/q"+id+".gif");
+			}else{
+				$(".形象").attr("src","Content/PetPhoto/q"+id+".png");	
+			}
+		}
+		function updatePet(json){
+		
+			$(".箭头 td").removeClass("ch01");
+			var j = $.parseJSON(json);
+		    $(".背包宠物").html("");
+		
+			
+			var su = 3;
+			var i;
+			var html;
+			for(i = 0;i<j.length;i++){
+				var fc = "bb02";
+				if(j[i].状态==0){
+					fc="bb01";
+				}
+				su=su-1;
+				html = "<td class=\"petMain_ "+fc+"\"><div class=\"pet\" id=\"p1\"><img src=\"Content/PetPhoto/k"+j[i].形象+".gif\" onerror=\"this.src='Content/PetPhoto/k"+j[i].形象+".png'\" style=\"cursor:pointer;\"></div><p class=\"petid\" style=\"display:none\">"+j[i].宠物序号+"</p><p class=\"i\" style=\"display:none\">"+i+"</p></td>";
+				$(".背包宠物").html( $(".背包宠物").html()+html);
+			
+				
+				if(j[i].状态==0){
+				
+					$("#j"+(i+1)).addClass("ch01");	
+					
+				}
+
+			}
+			for(i = 0;i<su;i++){
+				html = "<td><div class=\"pet\" id=\"p1\"></div></td>";
+				$(".背包宠物").html( $(".背包宠物").html()+html);
+			}
+			$(".petMain_").click(function(){
+				zhixiang(this,$(this).find(".petid").html(),$(this).find(".i").html());
+				Display($(this).find(".petid").html());
+			});
+		}
+        function setTab(cursel, n) {
+			var name="tab";
+            for (var i = 1; i <= n; i++) {
+                var menu = document.getElementById(name + i);
+                var con = document.getElementById("con_tab_" + i);
+                menu.className = i == cursel ? "on" : "";
+                con.style.display = i == cursel ? "block" : "none";
+            }
+        }
+		function updatePetList(json){
+			var j = $.parseJSON(json);
+		    $("#petList").html("");
+			$(".当前数量").html(j.length);
+			$("#tgbb").html("<option value=\"\">可托管宠物</option>");
+			for(var i = 0;i<j.length;i++){
+				var html=
+				"<tr onClick=\"selec(this,"+j[i].宠物序号+");copyWord('"+j[i].宠物名字+"');Display("+j[i].宠物序号+");\">"+
+					"<td width=\"130px\" onMouseOver=\"mcbbshow("+j[i].宠物序号+","+i+");\" style=\"cursor:pointer;text-align:left;\" onMouseOut=\"ctips(this)\"><img src=\"Content/Img/Pasture/mc05.gif\">"+j[i].宠物名字+"</td>"+
+					"<td width=\"70px\" style=\"text-align:left;\">"+j[i].五行+"</td>"+
+					"<td style=\"text-align:left;\">LV "+j[i].等级+"</td>"+
+				"</tr>";
+				
+				
+			
+				 $(html).appendTo($("#petList"));
+				 html = "<option value=\""+j[i].宠物序号+"\">"+j[i].宠物名字+"</option>";
+				 $(html).appendTo($("#tgbb"));
+
+			}
+	
+				
+		}
+		
+		
+    </script>
+    <script language="javascript" src="../javascript/prototype.js"></script>
+</head>
+
+
+<body>
+    <div id="Layer1" style="cursor:pointer" onClick="window.parent.$('gw').src='./function/City_Mod.php'">
+        <label></label>
+    </div>
+    <div class="task">
+        <div class="task_left"></div>
+
+        <div class="task_right">
+
+            <ul class="task_nav">
+                <li id="tab1" onClick="setTab(1,2)" class="on"><a class="a01" href="javascript:void(0)"></a></li>
+                <!--<li id="tab2" onClick="setTab(2,2)"><a class="a02" href="javascript:void(0)"></a></li>-->
+            </ul>
+          
+            <div class="dt_task" id="con_tab_1">
+
+                <div class="box01">
+                    <div class="box02">
+                        <div class="bb01"><img src="Content/Img/Pasture/muchang_09.jpg" width="95" height="25"></div>
+                    </div>
+                    <div class="box03">
+                        <div id="showbba">
+                            <table border="0" cellpadding="0" cellspacing="0" class="tit01">
+                                <tbody>
+                                    <tr>
+                                        <td height="24" align="center" style="width:40px;">名称</td>
+                                        <td align="center" style="width:80px;">五行</td>
+                                        <td align="center" style="width:80px;">等级</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="dt_list clearfix">
+                                <table class="tit01" id="shoplist">
+                                    <tbody id="petList">
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- added by Zheng.Ping -->
+                        <div style="display:none; width:100%; text-align:left; font-size:12px; line-height:1.5; height:127px; overflow:auto; scrollbar-face-color:#E1D395; scrollbar-highlight-color:#ffffff; scrollbar-3dlight-color:#E1D395; scrollbar-shadow-color:#ffffff; scrollbar-darkshadow-color:#F3EDC9; scrollbar-track-color:#F3EDC9; scrollbar-arrow-color:#ffffff; cursor:default; color:#BF7D1A; margin-left:3px; margin-top:60px; z-index:3; position:absolute; left: 156px; top: 31px;" id="abc">
+                            原密码：<input type="password" name="old_pwd" id="old_pwd"><br/><br/>新新建密码：<input type="password" name="pwd" id="pwd"><br/><br/>
+                            重复密码：<input type="password" name="repwd" id="repwd"><br/><br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="Submit" onClick="resetPwd();" value="提交" hidefocus="">&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="button" name="Submit2" value="取消" onClick="pwd2()" hidefocus="">
+                        </div>
+
+                        <div style="display:none; width:300px; text-align:left; font-size:12px; line-height:1.5; height:127px; overflow:auto; scrollbar-face-color:#E1D395; scrollbar-highlight-color:#ffffff; scrollbar-3dlight-color:#E1D395; scrollbar-shadow-color:#ffffff; scrollbar-darkshadow-color:#F3EDC9; scrollbar-track-color:#F3EDC9; scrollbar-arrow-color:#ffffff; cursor:default; color:#BF7D1A; margin-left:3px; margin-top:60px; z-index:3; position:absolute; left: 156px; top: 31px;" id="pwd_input">
+                            密码：<input type="password" name="pwd2" id="pwd2"><br/><br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="Submit" onClick="delbb()" value="提交" hidefocus="">&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="button" name="Submit2" value="取消" onClick="pwd2()" hidefocus="">
+                        </div>
+                        <!-- added by Zheng.Ping -->
+                    </div>
+                    <div class="box04">牧场宠物数量：<span class="当前数量"></span>/120<input type="button" class="conbtn" value="主战" onClick="Setbb();"><input type="button" class="conbtn" value="寄养" onClick="Savebb();"><input type="button" class="conbtn" value="携带" onClick="Getbb();"></div>
+                </div>
+                <div class="box01">
+                    <div class="box02">
+                        <div class="bb01"><img src="Content/Img/Pasture/muchang_11.jpg" width="82" height="25"></div>
+                    </div>
+                    <div id="mcbbshow" style="height: 232px; width: 290px; padding: 0px; z-index: 100; position: absolute; left: 460px; top: 59px; display: none;">
+                        <div style="z-index:10000; width:40px; height:20px; position:absolute; left:269px; font-size:12px; text-align:center; padding-top:5px; padding-right:5px"><span onClick="mcbbdisplay();" style="cursor:pointer"><font color="#FF0000">关闭</font></span></div>
+                        <div style=" clear:both;width:300px;height:230px; background-image:url(Content/Img/Pasture/petbg.gif) ; background-repeat:no-repeat;position:absolute; z-index:9999; ">
+                          
+                                <div  style="width:177px;height:230px;float:left;"><img class="形象" src="" width="177" height="230"></div>
+                                <div style="width:123px;height:230px;float:left;position:relative">
+                                    <div style="position:absolute; text-align:center;top:16px;left:9px;width:99px;height:24px; font-size:12px; color:#FFFFFF;font-family:微软雅黑,黑体,arial,vendana;color:#ffffff;"><span class="宠物名字"></span></div>
+                                    <div style="font-size:12px;line-height:20px;position:absolute;top:40px;padding:2px;left:5px;height:180px;width:110px;overflow:hidden;">
+                                        五行：<span class="五行"></span><br/>
+                                        生命：<span class="生命"></span><br/>
+                                        魔法：<span class="魔法"></span><br/>
+                                        攻击：<span class="攻击"></span><br/>
+                                        防御：<span class="防御"></span><br/>
+                                        命中：<span class="命中"></span><br/>
+                                        闪避：<span class="闪避"></span><br/>
+                                        成长：<span class="成长"></span><br/>
+                                        等级：<span class="等级"></span>
+                                    </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box06">
+                        <table class="petab">
+                            <tbody>
+                                <tr class="箭头">
+                                    <td id="j1" class="">&nbsp;</td>
+                                    <td id="j2">&nbsp;</td>
+                                    <td id="j3">&nbsp;</td>
+
+                                </tr>
+                                <tr class="背包宠物">
+                                  
+                                  
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <b>说明：</b><br/>
+                            1）设置主战宠物后，该宠物可获得装备道具、以及 获得任务经验、道具使用效果等。<br/>
+                            2）主战宠物无法寄养，请设置其他宠物后再寄养 。<br/>
+                        </p>
+
+                    </div>
+
+
+                    <div class="plus" style="text-align:left"><input type="button" class="conbtn" value="丢弃" onClick="discardBb();"><a onClick="pwd()" href="#"><img src="Content/Img/Pasture/add02.gif" border="0"></a></div>
+                </div>
+            </div>
+
+            <div class="dt_task con" id="con_tab_2">
+                <div class="answer">
+                    <p>
+                        <b>托管说明：托管开启时间为：22：00--10：00，托管后会扣除玩家托管时间在托管期间勿取回宠物，否则需要再消耗托管时间进行托管(只有放置在牧场且等级到达10级以上的宠物才可以托管)。</b><br/>
+                        <strong>
+                            托管内容说明：<br/>
+                            休息：获得正常经验，无法获得道具，每托管1小时消耗1小时托管时间。<br/>
+                            武力修炼：获得2倍托管经验，无法获得道具，每托管1小时消耗2小时托管时间。<br/>
+                            冒险修炼：获得2.5倍托管经验，每5分钟随机获得道具1个，每托管1小时消耗3小时托管时间。<br/>
+                            加速：点击后可立即完成托管，需要消耗水晶，每小时消耗100水晶币<br/>
+                        </strong>
+                    </p>
+                    <table class="tgtab" style="font-size:12px">
+                        <tbody>
+                            <tr>
+                                <td>托管宠物</td>
+                                <td>
+                                    <select name="tgbb" id="tgbb">
+                                        <option value="">可托管宠物</option>
+
+                                     
+                                    </select>
+                                </td>
+                                <td>托管时间</td>
+                                <td>
+                                    <select name="tgtimes" id="tgtimes">
+                                        <option value="1">1小时</option>
+                                        <option value="2">2小时</option>
+                                        <option value="4">4小时</option>
+                                        <option value="8">8小时</option>
+                                        <option value="10">10小时</option>
+                                    </select>
+                                </td>
+                                <td>托管内容</td>
+                                <td>
+                                    <select name="tgmes" id="tgmes">
+                                        <option value="1">休息</option>
+                                        <option value="2">武力修炼</option>
+                                        <option value="3">冒险修炼</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <span id="tgflag">
+                                        <span style="">
+                                            <input name="button" type="button" class="conbtn" onClick="tg();" value="托管">
+                                            <input name="button2" type="button" class="conbtn" onClick="auto();" value="自动">
+                                           
+                                        </span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="color:#BF7D1A; font-size:12px; margin-left:20px;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    已托管的宠物&nbsp;&nbsp;<select name="bb2" id="bb2" onChange="gettginfo(this.options[this.selectedIndex].value)">
+                                        <option value="">在托管所的宠物</option>
+
+                                    </select>&nbsp;&nbsp;<span style="left:10px;" id="tgflags"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="plus" style="width:580px;margin-left:auto;margin-right:auto">
+                    水晶币：9015 剩余托管时间：1674小时  剩余托管最大数目：1
+                    <input type="button" class="conbtn" value="取回" onClick="offpets();"><input type="button" class="conbtn" value="详情" onClick="detail();"><input type="button" class="conbtn" value="加速" onClick="times();">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script language="javascript">
+        var style = "";
+        if (style == 2) {
+            setTab('tab', 2, 4);
+        }
+        var dtips = document.createElement('DIV');
+        var bid = 0;
+        var selid = 0;
+        var types = -1;
+		var xid=0;
+        dtips.id = 'dtips';
+        dtips.style.cssText = 'position:absolute;display:none;padding:5px;line-height:1.6;fong-size:12px;border:1px solid #fff;color:gray;z-index:1;background-color:#DFDABC;';
+        document.body.appendChild(dtips);
+        function vtips(obj) {
+            dtips.style.left = event.x + 20 + 'px';
+            dtips.style.top = (event.y > 225 ? event.y - 70 : event.y + 10) + 'px';
+            dtips.innerHTML = obj.title;
+            obj.title = '';
+            dtips.style.display = '';
+            obj.style.border = 'solid 1px #DFD496';
+        }
+        function ctips(obj) {
+            obj.title = dtips.innerHTML;
+            dtips.innerHTML = '';
+            dtips.style.display = 'none';
+            obj.style.border = '0';
+        }
+      
+        function copyWord(words) {
+            window.parent.$('baike_input').value = words;
+        }
+		var odom;
+        function selec(obj,id) {
+     
+			
+			$("#petList tr").css("backgroundColor","#FFF");
+
+	        selid = id;
+			odom=obj;
+            obj.style.backgroundColor = '#DFD496';
+        }
+        function Display(bbid) {
+            bid = bbid;
+
+        }
+    
+        function Savebb()	
+        {
+            if (selid == 0) { alert('您需要先选择一个宝宝噢!'); return; }
+            if(window.external.jiyang(selid)){
+				selid=0;
+			
+			}else{
+				alert("存入仓库失败,主宠是不能存入宠物仓库的噢!");	
+			}
+        }
+    
+        function Getbb()
+        {
+            if (selid == 0) {alert('您需要先选择一个宝宝噢!'); return; }
+           	if(window.external.xiedai(selid)){
+				selid=0;
+				$(odom).remove();
+			}else{
+				alert("携带失败,背包已满或者宠物已经在您的背包中.");	
+			}
+        }
+        function Setbb()	
+        {
+            if (xid == 0) { alert('您需要先选择一个宝宝噢!'); return; }
+            window.external.getPetInfo(xid);
+			window.parent.jid=null;
+			window.parent.jname="普通攻击";
+			alert("设置主宠成功!");
+			selid=0;
+        }
+        /*function delbb()
+        {
+            var pwd = $('pwd2').value;
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var ret = parseInt(t.responseText);
+                    if (ret == 1) {
+                        alert('密码错误！');
+                    } else if (t.responseText != '') { alert(t.responseText); window.location.reload(); }
+                },
+                asynchronous: true
+            };
+
+	        var ajax = new Ajax.Request('../function/mcGate.php?op=d&pwd=' + pwd + '&id=' + bid, opt);
+        }
+        String.prototype.trim = function () {
+            return this.replace(/^[\s\t ]+|[\s\t ]$/g, '');
+        };*/
+
+        function discardBb() {
+            if (bid == 0) { alert('您需要先选择一个宝宝噢!'); return; }
+            else if (!confirm('为了口袋精灵世界的健康发展，丢弃需要花费您10000金币处理费!\n注意，您一旦丢弃宝宝，就再也找不回来了，并且宝宝穿戴的装备\n也会一起消失。当然您在丢弃前也可以先取下来，您确定要丢弃该宝宝吗?')) return;
+			
+        	var r = window.external.deletePet(selid,1);   
+			
+			if(r!=true){
+				alert("丢弃失败!请确定您丢弃的宠物不是主战宠物或者他存在!");	
+			}else{
+				
+				$(odom).remove();
+				alert("丢弃成功!");
+			}
+        }
+
+        /*function pwd() {
+            $('abc').style.display = "";
+            $('pwd_input').style.display = "none";
+            $('shoplist').style.display = "none";
+            $('showbba').style.display = "none";
+        }
+
+        function pwd2() {
+            $('abc').style.display = "none";
+            $('pwd_input').style.display = "none";
+            $('shoplist').style.display = "";
+            $('showbba').style.display = "";
+        }
+
+        function pwd3() {
+            $('abc').style.display = "none";
+            $('pwd_input').style.display = "";
+            $('shoplist').style.display = "none";
+            $('showbba').style.display = "none";
+        }
+
+        function jiami() {
+            var pwd = $('pwd').value;
+            var repwd = $('repwd').value;
+            if (pwd == "") {
+                alert("请先填写密码！");
+                return false;
+            }
+            if (repwd == "") {
+                alert("请先填写重复密码！");
+                return false;
+            }
+            if (repwd != pwd) {
+                alert("两次密码不一致！");
+                return false;
+            }
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var n = parseInt(t.responseText);
+                    if (n == 0) {
+                        alert("请先填写密码！");
+                        return false;
+                    }
+                    else if (n == 1) {
+                        alert("请先填写重复密码！");
+                        return false;
+                    }
+                    else if (n == 2) {
+                        alert("两次密码不一致！");
+                        return false;
+                    }
+                    else if (n == 3) {
+                        alert("您的牧场已经设置密码,如要修改，请先输入旧密码！");
+                        return false;
+                    }
+                    else if (n == 4) {
+                        alert("您输入的密码长度不正确！");
+                        return false;
+                    }
+                    else if (n == 10) {
+                        if (!confirm("请牢记您的密码！！如若遗忘，后果自负！您确定要设置密码吗？")) {
+                            return false;
+                        }
+                        dos(pwd);
+                    }
+                    else {
+                        alert("设置密码失败！");
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/ext_Muchang.php?pwd=' + pwd + '&repwd=' + repwd + '&action=reg', opt);
+        }
+
+        function dos(pwd) {
+            if (pwd == "") {
+                alert("信息有误！");
+                return false;
+            }
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var n = parseInt(t.responseText);
+                    if (n == 0) {
+                        alert("住处有误");
+                        return false;
+                    }
+                    else if (n == 10) {
+                        window.location.href = '../function/Muchang_Mod.php';
+                        alert("密码设置成功！");
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+
+	        var ajax = new Ajax.Request('../function/ext_Muchang.php?pwd=' + pwd + '&action=do', opt);
+        }
+
+        function login() {
+            var pwd = $('login').value;
+            if (pwd == "") {
+                alert("请先填写密码！");
+                return false;
+            }
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var n = parseInt(t.responseText);
+                    if (n == 0) {
+                        alert("请先填写密码！");
+                        return false;
+                    }
+                    else if (n == 1) {
+                        alert("密码错误！");
+                    }
+                    else if (n == 10) {
+                        window.location.href = '../function/Muchang_Mod.php';
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/ext_Muchang.php?pwd=' + pwd + '&action=login', opt);
+        }
+
+        function update() {
+            var pwd = $('login').value;
+            if (pwd == "") {
+                alert("请先填写旧密码！");
+                return false;
+            }
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var n = parseInt(t.responseText);
+                    if (n == 0) {
+                        alert("请先填写旧密码！");
+                        return false;
+                    }
+                    else if (n == 1) {
+                        alert("密码错误！");
+                    }
+                    else if (n == 10) {
+                        $('abc').style.display = "";
+                        $('shoplist').style.display = "none";
+                        $('showbba').style.display = "none";
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/ext_Muchang.php?pwd=' + pwd + '&action=login', opt);
+        }
+
+        function resetPwd() {
+            var oldPwd = $('old_pwd').value;
+            var pwd = $('pwd').value;
+            var repwd = $('repwd').value;
+            if (oldPwd == "") {
+                alert("请先填写原密码！");
+                $('old_pwd').focus();
+                return false;
+            }
+            if (pwd == "") {
+                alert("请填写新密码！");
+                $('pwd').focus();
+                return false;
+            }
+            if (repwd == "") {
+                alert("请重新输入新密码！");
+                $('repwd').focus();
+                return false;
+            }
+            if (repwd != pwd) {
+                alert("两次输入的新密码不一致！");
+                $('repwd').focus();
+                return false;
+            }
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var n = parseInt(t.responseText);
+                    if (n == 0) {
+                        alert("请先填写密码！");
+                        return false;
+                    }
+                    else if (n == 1) {
+                        alert("原密码错误！");
+                    }
+                    else if (n == 10) {
+                        alert("密码设置成功！");
+                        window.location.href = '../function/Muchang_Mod.php';
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/ext_Muchang.php?pwd=' + oldPwd + '&action=reset&repwd=' + repwd, opt);
+        }
+
+
+        function times() {
+            var pets = $('bb2').value;
+            if (pets <= 0) {
+                return;
+            }
+            if (!confirm('使用水晶币加速将大大提高宠物托管效率，\r\n每节省1小时消耗100水晶币！是否要立即完成托管？')) {
+                return;
+            }
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var str = t.responseText;
+                    if (str == 1) {
+                        alert('数据错误！');
+                        return;
+                    } else if (str == 2) {
+                        alert('该宠物正在等待，不能加速！');
+                        return false;
+                    } else if (str == 3) {
+                        alert('该宠物该宠物托管已经完成，不用加速了！');
+                        return;
+                    } else {
+                        if (!confirm(str)) {
+                            return;
+                        }
+                        var opt = {
+                            method: 'get',
+                            onSuccess: function (t) {
+                                var str = t.responseText;
+                                if (str == 1) {
+                                    alert('您的水晶不足！');
+                                }
+                                else {
+                                    alert('加速成功！');
+                                    if (!confirm(str)) {
+                                        return;
+                                    }
+                                    off(pets);
+                                }
+                            },
+                            on404: function (t) {
+                            },
+                            onFailure: function (t) {
+                            },
+                            asynchronous: true
+                        };
+	                    var ajax = new Ajax.Request('../function/tuoGuanGate.php?id=' + pets + '&action=timesdo', opt);
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/tuoGuanGate.php?id=' + pets + '&action=times', opt);
+        }
+        function gettginfo(bid) {
+            if (bid == '') {
+                return;
+            }
+            $('tgflags').innerHTML = '数据加载中，请稍候……';
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var n = t.responseText;
+                    if (n == 1) {
+                        return;
+                    }
+                    else {
+                        $('tgflags').innerHTML = n;
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/tuoGuanGate.php?id=' + bid + '&action=getinfo', opt);
+        }
+        function tg() {
+            var pets = $('tgbb').value;
+            var time = $('tgtimes').value;
+            var mes = $('tgmes').value;
+            if (pets == '' || time == '' || mes == '') {
+                alert('请先选择宠物及托管信息！');
+                return;
+            }
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var n = t.responseText;
+                    if (n == 0) {
+                        alert("只有22：00--10：00 才可以托管！");
+                    }
+                    else if (n == 1) {
+                        alert("请选择要托管的宠物！");
+                    }
+                    else if (n == 2) {
+                        alert("托管失败，您的托管时间不足！您可以购买“托管卷”来增加时间。");
+                    }
+                    else if (n == 3) {
+                        alert("您的该宠物正在托管中！");
+                    }
+                    else if (n == 4) {
+                        alert("当前宠物托管已完成，请先取回再托管!");
+                    }
+                    else if (n == 5) {
+                        alert("托管个数已达上限，不能再托管了!");
+                    }
+                    else if (n == 6) {
+                        alert("您的托管个数已经达到上限，请通过购买使用托管所扩充卷扩充您的托管所！");
+                    }
+                    else if (n == 7) {
+                        alert("超出托管结束时间,请重新选择时间！");
+                    }
+                    else if (n == 8) {
+                        alert("该宠物正在等待中！");
+                    }
+                    else if (n == 10) {
+                        alert("托管成功!");
+                        window.parent.$('gw').src = './function/Muchang_Mod.php?style=2';
+                    } else {
+                        alert(n);
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/tuoGuanGate.php?pets=' + pets + '&time=' + time + '&mes=' + mes + '&action=tuoguan', opt);
+        }
+
+        function getflag(obj) {
+            var petsid = obj.value;
+            var id = obj.id;
+            var num = id.split("s");
+            var id1 = id.replace(id, "flag" + num[1]);
+            var org = $(id1);
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var n = parseInt(t.responseText);
+                    if (n == 0) {
+                        org.innerHTML = "未托管";
+                    }
+                    else if (n == 1) {
+                        org.innerHTML = "托管中";
+                    }
+                    else if (n == 2) {
+                        org.innerHTML = "托管完成";
+                    }
+                    else if (n == 3) {
+                        org.innerHTML = "等待中";
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/tuoGuanGate.php?id=' + petsid + '&action=change', opt);
+        }
+
+        function offpets() {
+
+            var pets = $('bb2').value;
+            if (pets <= 0) {
+                return;
+            }
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var n = parseInt(t.responseText);
+                    if (n == 0) {
+                        alert("请选择您要取回的宠物！");
+                    }
+                    else if (n == 1) {
+                        alert("您还没有进行任何托管操作，不用取回宠物。");
+                    }
+                    else if (n == 2) {
+                        alert("托管已完成，您可以取回您的宠物了！");
+                        off(pets);
+                    }
+                    else if (n == 3) {
+                        if (!confirm("提前取回宠物，您之前消耗托管时间将失效，确认取回吗？")) {
+                            return false;
+                        }
+                        off(pets);
+                    }
+                    else if (n == 4) {
+                        if (!confirm("还没有开始托管，如果取回但是时间不会退还哦~！")) {
+                            return false;
+                        }
+                        off(pets);
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/tuoGuanGate.php?id=' + pets + '&action=offpets', opt);
+        }
+        function off(id) {
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var n = parseInt(t.responseText);
+                    if (n == 10) {
+                        alert("取回宠物成功！");
+                        window.location.reload();
+                    }
+                    else if (n == 11) {
+                        alert("取回宠物失败！");
+                        window.location.reload();
+                    }
+                    else if (n == 0) {
+                        alert("信息出错！");
+                    }
+                    else if (n == 12) {
+                        alert("包裹空间不够，请先清理包裹！");
+                    }
+                    else if (n == 13) {
+                        alert("牧场格子已经占满！");
+                    }
+                    else {
+                        alert("信息出错！");
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/tuoGuanGate.php?id=' + id + '&action=offpet', opt);
+        }
+
+        function detail() {
+            var pets = $('bb2').value;
+            if (pets <= 0) {
+                return;
+            }
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var str = t.responseText;
+                    alert(str);
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/tuoGuanGate.php?id=' + pets + '&action=show', opt);
+        }
+
+
+        function auto() {
+            var pets = $('tgbb').value;
+            var time = $('tgtimes').value;
+            var mes = $('tgmes').value;
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    var n = t.responseText;
+                    if (n == 1) {
+                        alert("请选择要托管的宠物！");
+                    }
+                    else if (n == 2) {
+                        alert("托管失败，您的托管时间不足！您可以购买“托管卷”来增加时间。");
+                    }
+                    else if (n == 3) {
+                        alert("您的该宠物正在托管中！");
+                    }
+                    else if (n == 4) {
+                        alert("当前宠物托管已完成，请先取回再托管!");
+                    }
+                    else if (n == 5) {
+                        alert("托管个数已达上限，不能再托管了!");
+                    }
+                    else if (n == 6) {
+                        alert("您的托管个数已经达到上限，请通过购买使用托管所扩充卷扩充您的托管所！");
+                    }
+                    else if (n == 7) {
+                        alert("超出托管结束时间,请重新选择时间！");
+                    }
+                    else if (n == 10) {
+                        alert("自动托管成功!");
+                        window.location.reload();
+                    }
+                    else if (n == 8) {
+                        alert("该宠物正在等待中！");
+                    }
+                    else {
+                        alert("自动托管失败!");
+                        window.location.reload();
+                    }
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+
+	        var ajax = new Ajax.Request('../function/tuoGuanGate.php?pets=' + pets + '&time=' + time + '&mes=' + mes + '&action=auto', opt);
+        }*/
+
+        var bbT;
+
+   
+        function mcbbshow(id,i) {
+			
+		//	alert(getPetInfo(id));
+           updateMainPet(JSONS[i]);
+		   
+			$("#mcbbshow").show();
+			$("#mcbbshow").width(291);
+        }
+        function getPetInfo(id)
+        {
+			var j = JSONS;
+            for (var i = 0; i < j.length; i++)
+            {
+                if (j[i].宠物序号 == id)
+                {
+					return j[i];	
+				}	
+            }
+	        return -1;
+        }
+
+        function mcbbdisplay() {
+            $("#mcbbshow").css("display","NONE");
+        }
+		var xz_=-1;
+        function zhixiang(obj, id,i) {
+			bid=id;
+         	$(".箭头 td").removeClass("ch01");
+			$(".箭头 td:eq("+i+")").addClass("ch01");
+			xz_=i;
+			if (selid != 0) odom.style.backgroundColor = '#fff';
+            selid = id;
+			xid=id;
+          
+        }
+
+    </script><div id="dtips" style="position: absolute; display: none; padding: 5px; line-height: 1.6; border: 1px solid rgb(255, 255, 255); color: gray; z-index: 1; background-color: rgb(223, 218, 188);"></div>
+</body>
+</html>

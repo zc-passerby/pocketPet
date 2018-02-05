@@ -1,0 +1,292 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	font-size: 100%;
+}
+body {
+	color: #693600;
+	background: none;
+	font: 12px/normal '宋体';
+
+}
+#left {
+	background-image:url(../img/PetInfo/pet_bg_l.jpg);
+	width:291px;
+	height:319px;
+	float:left;
+}
+#right {
+	float:left;
+	background-image:url(../img/PetInfo/pet_bg_r.jpg);
+	width:497px;
+	height:319px;
+}
+#left_left {
+	position: absolute;
+	left: 25px;
+	top: 13px;
+	width: 120px;
+	line-height: 20px;
+}
+div {
+	display: block;
+}
+#left_right {
+	position: absolute;
+	left: 149px;
+	top: 9px;
+	width: 112px;
+	height: 180px;
+	text-align: center;
+    white-space:nowrap;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, em {
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+
+#bottom {
+	position: absolute;
+	left: 30px;
+	top: 224px;
+	width: 240px;
+}
+#bottom div {
+	position: relative;
+	float: left;
+	width: 67px;
+	height: 84px;
+	margin-right: 13px;
+	cursor: pointer;
+	z-index:9999999;
+}
+#bottom div em {
+	position: absolute;
+	padding: 4px;
+	line-height: 14px;
+	color: #000;
+}
+em a{
+	
+	DISPlay: block;
+    width: 65px;
+}
+a, a:visited, a:hover {
+	color: #330000;
+	text-decoration: none;
+ blr: expression(this.onFocus=this.blur());
+	font: 12px/normal '宋体';
+}
+.yy {
+	cursor:hand;
+	opacity: 0.5;
+filter : progid:DXImageTransform.Microsoft.Alpha(style=0, opacity=50, finishOpacity=100);
+}
+#right li {
+	float: left;
+	
+	height: 27px;
+	margin-right: 1px;
+	cursor: pointer;
+}
+#right li.on p {
+    background-position: 0 -27px;
+}
+#right li.on p.p2 {
+	background-position: -88px -27px;
+}
+#right li.on p.p3 {
+    background-position: -176px -27px;
+}
+#right li p.p3 {
+    background-position: -176px 0;
+}
+
+#right li p {
+	width: 87px;
+	height: 27px;
+	text-indent: -9999px;
+	overflow: hidden;
+	background:url(../img/PetInfo/pet_tab_bg.jpg);
+}
+.pettab {
+	margin: 2px 0 0 28px;
+	height: 27px;
+}
+#rb_left {
+	width: 336px;
+	margin-left: 27px;
+	display: inline;
+	float: left;
+	margin-top: 9px;
+}
+#rbl_left {
+	position: relative;
+	width: 324px;
+	height: 238px;
+	background:url(../img/PetInfo/pet_1_bg.jpg)
+}
+#rbl_left li img {
+	width:36px;
+	height:35px
+}
+#rbl_left li.i1 {
+	left:4px;
+	top:5px
+}
+#rbl_left li.i2 {
+	left:144px;
+	top:5px
+}
+#rbl_left li.i3 {
+	left:282px;
+	top:5px
+}
+#rbl_left li.i4 {
+	left:4px;
+	top:69px
+}
+#rbl_left li.i5 {
+	left:282px;
+	top:69px
+}
+#rbl_left li.i6 {
+	left:4px;
+	top:132px
+}
+#rbl_left li.i7 {
+	left:282px;
+	top:132px
+}
+#rbl_left li.i8 {
+	left:4px;
+	top:196px
+}
+#rbl_left li.i9 {
+	left:144px;
+	top:196px
+}
+#rbl_left li.i10 {
+	left:282px;
+	top:196px
+}
+#rbl_left li.i11 {
+	left:213px;
+	top:6px
+}
+#rbl_left li.i12{
+	left:73px;
+	top:6px
+}
+#rbl_left li.i13{
+	left:73px;
+	top:200px
+}
+#rbl_left h2 {
+	position:absolute;
+	left:46px;
+	top:47px;
+	width:232px;
+	height:144px
+}
+#rbl_left li {
+    z-index: 99999;
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	line-height: 35px;
+	text-align: center;
+	left: 213px;
+	top: 200px;
+    white-space:nowrap;
+}
+ol, ul {
+	list-style: none;
+}
+#rb_right {
+	width: 124px;
+	line-height: 24px;
+	padding: 5px 0 5px 10px;
+	background:url(../img/PetInfo/pet_c1_r.jpg) left center no-repeat;
+	float: right;
+}
+#right li p.p2 {
+	background-position: -88px 0;
+}
+
+#right li.on p.p3 {
+    background-position: -176px -27px;
+}
+#p2_left {
+	float: left;
+	background:url(../img/PetInfo/pet_2_bg.jpg) center top no-repeat;
+}
+#p2_left h2 {
+	height: 179px;
+}
+#page2 {
+	margin-top: 9px;
+}
+#p2_left li {
+	float: left;
+	width: 100px;
+	padding-left: 10px;
+	line-height: 22px;
+}
+#p2_right {
+	float: right;
+	line-height: 20px;
+	width: 124px;
+	padding: 5px 0 5px 10px;
+	background: url(../img/PetInfo/pet_c1_r.jpg) left center no-repeat;
+}
+#p3_left {
+	background:url(../img/PetInfo/pet_2_bg.jpg) center top no-repeat;
+	width: 313px;
+	margin-top: 9px;
+	float:left;
+}
+#p3_left h2 {
+	height: 189px;
+}
+#p3_left h3{
+	width: 210px;
+    margin: 15px auto;}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, em {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+#p3_right{
+	    width: 174px;
+    height: 245px;
+	float:right;
+	width: 170px;
+    line-height: 24px;
+    padding: 5px 0 5px 10px;
+    background:url(../img/PetInfo/pet_c1_r.jpg) left center no-repeat;
+	margin-top:20px;
+	}
+#p3_right ul li input {
+    width: 39px;
+    height: 17px;
+    margin: 0 10px;
+    border: none;
+    background:url(../img/PetInfo/pet_c1_l_btn.gif);
+    cursor: pointer;
+}
+#p3_right ul li input {
+    float: right;
+        margin: 2px 0 0 0;
+}
+#p3_right ul li{
+	    line-height: 22px;
+		    width: 145px;}
+#p3_right ul {
+    width: 145px;
+    padding-left: 10px;
+    overflow: hidden;
+}

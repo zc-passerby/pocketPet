@@ -1,0 +1,673 @@
+﻿        body {
+            padding: 0px;
+            margin: 0px min-width:1400px;
+        }
+
+        .side {
+            width: 197px;
+            height: 369px;
+            background: url(../img/index/side.jpg);
+        }
+.box_cont {
+    position: relative;
+    color: #724908;
+}
+.zaixian {
+    position: absolute;
+    left: 65px;
+    top: 6px;
+    width: 59px;
+    height: 17px;
+    color: #772200;
+    border: none;
+    background: url(../img/prop/ico_btn.gif);
+    cursor: pointer;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+.task_list ul.lev li.on p {
+    background: url(../../img/ico_1.gif) 10px center no-repeat;
+    color: #ff4200;
+}
+.i_task li#date {
+    width: 120px;
+    line-height: 20px;
+}
+.i_task li {
+    float: left;
+    width: 42px;
+    height: 42px;
+    margin-right: 8px;
+}
+.close_btn {
+    position: absolute;
+    right: 22px;
+    top: 10px;
+    width: 25px;
+    height: 17px;
+    background: url(../../img/none.gif);
+    cursor: pointer;
+}
+.task_list ul.lev li a:hover, .task_list ul.lev li.on a {
+    background-position: 0 -25px;
+}
+.task_list ul.lev li.on p {
+    background: url(../../img/ico_1.gif) 10px center no-repeat;
+    color: #ff4200;
+}
+.task_list ul.lev li a {
+    display: block;
+    height: 25px;
+    background: url(../../img/task_line.jpg) no-repeat;
+}
+a, a:visited, a:hover {
+    color: #330000;
+    text-decoration: none;
+    blr: expression(this.onFocus=this.blur());
+    outline: none;
+}
+.task_list ul.lev li p {
+    cursor: pointer;
+    line-height: 25px;
+    padding: 0 20px 0 30px;
+    color: #915d0c;
+    font-weight: bold;
+    background: url(../../img/ico_2.gif) 10px center no-repeat;
+}
+.task_list {
+    height: 289px;
+    height: 290px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-arrow-color: #ffffff;
+    scrollbar-face-color: #e1d395;
+    scrollbar-darkshadow-color: #e1d395;
+    scrollbar-base-color: #f3edc9;
+    scrollbar-highlight-color: #f3edc9;
+    scrollbar-shadow-color: #f3edc9;
+    scrollbar-track-color: #f3edc9;
+    scrollbar-3dlight-color: #e1d395;
+}
+.task_nav h2, .task_cont h2 {
+    height: 29px;
+    padding: 0 15px;
+    line-height: 29px;
+    font-weight: bold;
+}
+.task_nav {
+    position: absolute;
+    left: 26px;
+    top: 70px;
+    width: 227px;
+    height: 339px;
+}
+.i_task li a, .i_task li a:visited {
+    display: block;
+    height: 40px;
+    text-align: center;
+    color: #b18033;
+    background: #edcf9e;
+    border: 1px solid #b7945b;
+}
+.i_task li {
+    float: left;
+    width: 42px;
+    height: 42px;
+    margin-right: 8px;
+}
+.i_task {
+    position: absolute;
+    left: 115px;
+    top: 20px;
+}
+.task_list ul.con li a {
+    display: block;
+    height: 25px;
+    background: url(../../img/task_lev.jpg) no-repeat;
+}
+.task_list ul.con li.a p {
+    line-height: 25px;
+    padding: 0 20px 0 40px;
+    color: #d55f00;
+    background: url(../../img/task_ico_can.jpg) 20px center no-repeat;
+}
+.task_list ul.con li.afocus p {
+    line-height: 25px;
+    padding: 0 20px 0 40px;
+    color: #d55f00;
+    background: url(../../img/task_ico_can.jpg) 20px center no-repeat;
+    background-color: #B2E7F9;
+}
+.task_list ul.con li:hover{
+ 	color: #d55f00;
+	background-color: #B2E7F9;
+}
+.task_list ul.con li p:hover{
+ 	color: #d55f00;
+	background-color: #B2E7F9;
+}
+.task_list ul.con li.t p {
+    line-height: 25px;
+    padding: 0 20px 0 40px;
+    background: url(../../img/task_ico_cant.jpg) 20px center no-repeat;
+    color: #3e8400;
+}
+.task_list ul.con li.tfocus p {
+    line-height: 25px;
+    padding: 0 20px 0 40px;
+    color: #d55f00;
+    background: url(../../img/task_ico_cant.jpg) 20px center no-repeat;
+    background-color: #B2E7F9;
+}
+.task_list ul.con li.u p {
+    line-height: 25px;
+    padding: 0 20px 0 40px;
+    background: url(../../img/task_ico_ok.jpg) 20px center no-repeat;
+    color: #3e8400;
+}
+.task_list ul.con li.ufocus p {
+    line-height: 25px;
+    padding: 0 20px 0 40px;
+    color: #d55f00;
+    background: url(../../img/task_ico_ok.jpg) 20px center no-repeat;
+    background-color: #B2E7F9;
+}
+.task_list ul.con li.c p {
+    line-height: 25px;
+    padding: 0 20px 0 40px;
+    color: #d55f00;
+    background: url(../../img/task_ico_new.jpg) 20px center no-repeat;
+}
+.task_cont {
+    position: absolute;
+    left: 265px;
+    top: 72px;
+    width: 411px;
+    height: 333px;
+}
+.task_cont div.btn {
+    height: 30px;
+    margin-top: 5px;
+}
+.btn {
+    cursor: pointer;
+}
+
+.task_cont div.btn input.b {
+    background: url(../../img/ico_btn2.gif) no-repeat;
+    width: 59px;
+    height: 17px;
+    font-size: 12px;
+    line-height: 17px;  
+    border: 0px;
+    color: #772200;
+    cursor: pointer;
+}
+.task_cont div.btn input.c {
+    background: url(../../img/ico_btn.gif) no-repeat;
+    width: 59px;
+    height: 17px;
+    font-size: 12px;
+    line-height: 17px;
+    border: 0px;
+    color: #772200;
+    cursor: pointer;
+}
+input, textarea {
+    font: 12px/normal;
+    color: #000;
+}
+.task_list ul.con li.cfocus p {
+    line-height: 25px;
+    padding: 0 20px 0 40px;
+    color: #d55f00;
+    background: url(../../img/task_ico_new.jpg) 20px center no-repeat;
+    background-color: #B2E7F9;
+}
+    .gamebox {
+            width: 788px;
+            height: 319px;
+            overflow: hidden;
+        }
+
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, em {
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+        .c14 {
+            padding:0;
+            margin:0;    
+        }
+        .content {
+            position: relative;
+            width: 803px;
+            height: 337px;
+            padding-top: 32px;
+            background: url(../img/index/content.jpg);
+        }
+
+        .l {
+            float: left;
+        }
+
+        .r {
+            float: right;
+        }
+
+        .tools {
+            z-index: 5;
+            background: url(../img/index/tools.png);
+            _background: none;
+            _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='../img/index/tools.png');
+        }
+
+        .tools, .tools_btn {
+            position: absolute;
+            z-index: 10;
+            right: 0;
+            top: 0;
+            width: 185px;
+            height: 45px;
+        }
+
+            .tools_btn a {
+                float: left;
+                width: 46px;
+                height: 45px;
+                text-indent: -9999px;
+                overflow: hidden;
+                background: url(../img/index/none.gif);
+                cursor: pointer;
+            }
+
+        a, a:visited, a:hover {
+            color: #330000;
+            text-decoration: none;
+            blr: expression(this.onFocus=this.blur());
+            outline: none;
+        }
+
+        #main {
+            background: url(../img/index/page_r.jpg) 1000px top no-repeat;
+            min-width: 1167px;
+        }
+
+        .chat {
+            position: relative;
+            width: 710px;
+            height: 239px;
+            background: url(../img/index/chat_bg.jpg);
+        }
+
+        .tip {
+            position: relative;
+            width: 290px;
+            height: 239px;
+            background: url(../img/index/tip_bg.jpg);
+        }
+
+        .wiki {
+            height: 38px;
+            margin: 16px 0 0 12px;
+            padding: 7px 0 0 77px;
+            background: url(../img/index/so_bg.gif) no-repeat;
+        }
+
+            .wiki input.inp {
+                float: left;
+                width: 128px;
+                height: 17px;
+                padding: 2px 0 0 3px;
+                margin-right: 5px;
+                border: none;
+                background: none;
+            }
+
+        input, textarea {
+            font: 12px/normal;
+            color: #000;
+        }
+
+        body {
+            font: 12px/normal '宋体';
+            color: #000;
+            background: #188a8d url(../img/index/bg.gif) repeat;
+        }
+
+        .wiki input.btn {
+            float: left;
+            width: 46px;
+            height: 19px;
+            border: none;
+            background: url(../img/index/so_btn.gif);
+            cursor: pointer;
+        }
+
+        #main_bb {
+            background-image: url(../img/prop/pack.gif);
+            width: 370px;
+            height: 410px;
+            left: 455px;
+            font: 12px/normal '宋体';
+            color: #724908;
+            position: absolute;
+            top: 28px;
+        }
+
+        .close_btn {
+            position: absolute;
+            right: 22px;
+            top: 10px;
+            width: 25px;
+            height: 17px;
+            background: url(../img/index/none.gif);
+            cursor: pointer;
+        }
+
+        .i_pack {
+            position: absolute;
+            left: 135px;
+            top: 19px;
+            width: 180px;
+            font-weight: bold;
+        }
+
+        .pack_title {
+            position: absolute;
+            left: 23px;
+            top: 40px;
+            width: 328px;
+            height: 29px;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        .pack_title li {
+            height: 29px;
+            border: none;
+            font-weight: bold;
+        }
+
+        .list li {
+            float: left;
+            width: 100%;
+            height: 24px;
+            overflow: hidden;
+            border-bottom: 1px dashed #DAB579;
+        }
+
+        .l1 p.p1 {
+            width: 40px;
+            text-align: center;
+        }
+
+        .pack_title li p {
+            line-height: 29px;
+        }
+
+        .list li p {
+            float: left;
+            text-align: center;
+        }
+
+        .list li {
+            float: left;
+            width: 100%;
+            height: 24px;
+            overflow: hidden;
+            border-bottom: 1px dashed #DAB579;
+        }
+
+        .pack_title li {
+            height: 29px;
+            border: none;
+            font-weight: bold;
+        }
+
+        .box_cont {
+            position: relative;
+            color: #724908;
+        }
+
+        .l1 p.p2 {
+            width: 130px;
+        }
+
+        .l1 p.p1 {
+            width: 40px;
+            text-align: center;
+        }
+
+        .l1 p.p3 {
+            width: 100px;
+        }
+
+        .l1 p.p4 {
+            width: 40px;
+        }
+
+        .pack_cont, .msg_cont {
+            position: absolute;
+            left: 23px;
+            top: 69px;
+            width: 328px;
+            height: 288px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scrollbar-arrow-color: #ffffff;
+            scrollbar-face-color: #e1d395;
+            scrollbar-darkshadow-color: #e1d395;
+            scrollbar-base-color: #f3edc9;
+            scrollbar-highlight-color: #f3edc9;
+            scrollbar-shadow-color: #f3edc9;
+            scrollbar-track-color: #f3edc9;
+            scrollbar-3dlight-color: #e1d395;
+        }
+
+        .l1 p.p1 img {
+            width: 18px;
+            height: 18px;
+            padding-top: 3px;
+        }
+
+        .list a, .list a:visited {
+            display: block;
+            height: 24px;
+            line-height: 25px;
+            overflow: hidden;
+            color: #915d0c;
+            cursor: pointer;
+        }
+
+            .list a:hover {
+                color: #ff4200;
+                font-weight: bold;
+                background: url(../img/prop/list_hover.jpg) left 1px no-repeat;
+            }
+
+        .pac_btn {
+            position: absolute;
+            left: 53px;
+            top: 370px;
+        }
+
+            .pac_btn input {
+                float: left;
+                margin-right: 11px;
+                width: 59px;
+                height: 17px;
+                color: #772200;
+                border: none;
+                background: url(../img/prop/ico_btn.gif);
+                cursor: pointer;
+            }
+
+        .box_cont {
+            position: relative;
+            color: #724908;
+        }
+
+        .xz {
+            color: red;
+            font-weight: bold;
+        }
+
+        .chat_cont {
+            position: absolute;
+            left: 60px;
+            top: 47px;
+            width: 595px;
+            height: 145px;
+            line-height: 20px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scrollbar-arrow-color: #fff;
+            scrollbar-face-color: #603011;
+            scrollbar-darkshadow-color: #603011;
+            scrollbar-base-color: #996332;
+            scrollbar-highlight-color: #996332;
+            scrollbar-shadow-color: #996332;
+            scrollbar-track-color: #996332;
+            scrollbar-3dlight-color: #603011;
+        }
+
+        .chat_cont {
+            position: absolute;
+            left: 60px;
+            top: 47px;
+            width: 595px;
+            height: 145px;
+            line-height: 20px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scrollbar-arrow-color: #fff;
+            scrollbar-face-color: #603011;
+            scrollbar-darkshadow-color: #603011;
+            scrollbar-base-color: #996332;
+            scrollbar-highlight-color: #996332;
+            scrollbar-shadow-color: #996332;
+            scrollbar-track-color: #996332;
+            scrollbar-3dlight-color: #603011;
+        }
+
+            .chat_cont u {
+                cursor: pointer;
+            }
+
+            .chat_cont img {
+                margin: 0 3px;
+            }
+
+        .chat_tool {
+            position: absolute;
+            left: 41px;
+            top: 209px;
+            background: url(../img/index/inp.gif) no-repeat;
+        }
+
+            .chat_tool input, .chat_tool img, .chat_tool div {
+                float: left;
+                margin-right: 5px;
+            }
+
+            .chat_tool img {
+                cursor: pointer;
+            }
+
+            .chat_tool .inp {
+                width: 336px;
+                height: 17px;
+                padding: 2px 0 0 6px;
+                border: 0;
+                background: none;
+            }
+
+            .chat_tool .but {
+                width: 46px;
+                height: 19px;
+                border: 0;
+                background: url(../img/index/btn.gif);
+                cursor: pointer;
+            }
+
+            .chat_tool ul.hidden {
+                display: none;
+            }
+
+        .select_lt, .select_pd, .select_ys {
+            position: relative;
+            width: 64px;
+            height: 19px;
+        }
+
+        .select_lt {
+            width: 72px;
+        }
+
+        .select_ys {
+            width: 44px;
+        }
+
+            .select_lt span, .select_pd span, .select_ys span {
+                display: block;
+                height: 19px;
+                line-height: 19px;
+                padding-left: 9px;
+                cursor: pointer;
+                background: url(../img/index/s2.gif);
+            }
+
+        .select_lt span {
+            background: url(../img/index/s1.gif);
+        }
+
+        .select_ys span {
+            background: url(../img/index/s3.gif);
+        }
+
+        .select_lt ul, .select_pd ul, .select_ys ul {
+            position: absolute;
+            top: -108px;
+            left: 0;
+            width: 70px;
+            background: #ffdba1;
+            border: 1px solid #cfb283;
+        }
+
+        .select_pd ul {
+            width: 62px;
+        }
+
+        .select_ys ul {
+            top: -87px;
+            width: 42px;
+        }
+
+        .select_lt li, .select_pd li, .select_ys li {
+            height: 21px;
+            line-height: 21px;
+        }
+
+            .select_lt li.i, .select_pd li.i {
+                text-align: center;
+                font-style: italic;
+                font-weight: bold;
+                background: #d37c66;
+            }
+
+            .select_lt a, .select_lt a:visited, .select_pd li a, .select_ys li a, .select_pd li a:visited, .select_ys li a:visited {
+                display: block;
+                height: 21px;
+                padding-left: 9px;
+                text-decoration: none;
+            }
+
+                .select_lt a:hover, .select_pd li a:hover, .select_ys li a:hover {
+                    text-decoration: none;
+                    background: #cfb283;
+                }

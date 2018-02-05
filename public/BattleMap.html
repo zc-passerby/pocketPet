@@ -1,0 +1,269 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<script language="javascript" src="../javascript/prototype.js"></script>
+    <script src="Content/Javascript/jquery-1.8.3.min.js"></script>
+<link href="../css/iframe.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+<!--
+body {
+	margin-left: 15px;
+	margin-top: 15px;
+	
+	margin-right: 0;
+	margin-bottom: 0;
+	font-size:12px;
+}
+#Layer1 {
+	position:absolute;
+	left:413px;
+	top:75px;
+	width:27px;
+	height:26px;
+	z-index:1;
+}
+
+#ico{
+	background-image:url(img/npc.jpg) ;
+	background-position:-1px 0;
+	height:242px;
+	width:788px;
+	position: absolute;
+	left: 5px;
+	top: 82px;
+	z-index:999;
+	display:none;
+	
+}
+#btn{
+    width: 129px;
+    height: 34px;
+    POSITION: absolute;
+    LEFT: 653px;
+    top: 204px;
+    cursor: pointer;
+
+	}
+#btn:hover{
+	    background-image: url(img/npc1.png);
+    background-position: 134px 522px;}
+-->
+</style>
+<!--[if IE 6]>
+<script type="text/javascript">try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {}
+</script>
+<![endif]-->
+</head>
+<!--background-image:url(../images/ui/map/map.jpg)-->
+<body style="margin:0;" oncontextmenu="event.returnValue=false" onkeydown="KeyDown()">
+
+<div style="width:786px;height:321px;margin-left:5px;margin-top:5px; background-image:url(img/map6.jpg) ; background-repeat:no-repeat" oncontextmenu="event.returnValue=false" onkeydown="KeyDown()"></div>
+
+<div style="position:absolute;left:329px;top:255px;border:0;cursor:pointer;" title="新手训练营" >
+<div onclick="openMode('1')" style="width:83px; height:24px;background:url(img/1.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/1.png');
+"></div>
+<!--img src="img/1.png" alt="新手训练营"/--></div>
+
+	
+<div style="position:absolute;left:236px;top:192px;border:0;cursor:pointer;" title="妖精森林">
+<div onclick="openMode('2')" style="width:83px; height:24px;background:url(img/2.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/3.png');
+"></div></div>
+
+	
+<div onclick="openMode('3')" style="position:absolute;left:334px;top:155px;border:0;cursor:pointer;" title="潮汐海涯" >
+<div style="width:83px; height:24px;background:url(img/3.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/3.png');
+"></div></div>
+
+<div  onclick="openMode('11')" style="position:absolute;left:475px;top:135px;border:0;cursor:pointer;" title="海底世界" >
+<div style="width:83px; height:24px;background:url(img/16.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/03.png');
+"></div></div>
+	
+<div onclick="openMode('4')" style="position:absolute;left:37px;top:38px;border:0;cursor:pointer;" title="巨石山脉">
+<div style="width:83px; height:24px;background:url(img/4.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/4.png');
+"></div></div>
+
+
+<div onclick="openMode('5')" style="position:absolute;left:644px;top:282px;border:0;cursor:pointer;" title="黄金陵" >
+<div style="width:83px; height:24px;background:url(img/5.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/5.png');
+"></div></div>
+
+				
+<div onclick="openMode('6')" style="position:absolute;left:28px;top:148px;border:0;cursor:pointer;" title="炽热沙滩">
+<div style="width:83px; height:24px;background:url(img/6.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/7.png');
+"></div></div>
+
+	
+<div onclick="openMode('7')" style="position:absolute;left:234px;top:72px;border:0;cursor:pointer;" title="尤玛火山" >
+<div style="width:83px; height:24px;background:url(img/7.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/7.png');
+"></div></div>	
+
+	
+<div onclick="openMode('8')" style="position:absolute;left:166px;top:136px;border:0;cursor:pointer;" title="死亡沙漠">
+<div style="width:83px; height:24px;background:url(img/8.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/03.png');
+"></div></div>
+		
+
+<div  onclick="openMode('9')" style="position:absolute;left:126px;top:271px;border:0;cursor:pointer;" title="海市盛楼" >
+<div style="width:83px; height:24px;background:url(img/9.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/03.png');
+"></div></div>
+
+	
+<div onclick="openMode('10')" style="position:absolute;left:688px;top:82px;border:0;cursor:pointer;" title="冰滩" >
+<div style="width:83px; height:24px;background:url(img/10.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/10.png');
+"></div></div>
+
+
+
+<div onclick="openMode('103')" id="sfk" style="position:absolute; cursor:pointer; left:22px; top:232px;" width=20 height=20 title="史芬克斯密穴">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+<div onclick="openMode('102')" id="hlw" style="position:absolute; cursor:pointer; left:153px; top:32px;" width=20 height=20 title="火龙王的宫殿" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+<div onclick="openMode('101')" id="ysw" style="position:absolute;cursor:pointer;left:695px;top:226px;border:1;" width=20 height=20 title="伊苏王的神墓" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+<div onclick="openMode('106')" id="llc" style="position:absolute;cursor:pointer;left:523px;top:38px;border:1;" width=20 height=20 title="玲珑城" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+
+
+<!--div id="battlefield" style="position:absolute; cursor:pointer; width:142px; height:36px; left: 507px; top: 192px;" onclick="copyWord('神圣战场');window.parent.$('gw').src='./function/guild_battle_mod.php';">&nbsp;&nbsp;&nbsp;&nbsp;家族战场</div-->
+
+<div id="battlefield" onclick="window.parent.Alert('副本暂未开发')" style="position:absolute; cursor:pointer; width:77px; height:28px; left: 507px; top: 285px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+
+<!--div style="position:absolute; left:527px; top:94px; border:0px; cursor:pointer; line-height:23px" title="神秘小屋" onclick="copyWord('圣诞小屋');window.parent.$('gw').src='./function/tarot_Mod.php';">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;塔罗牌</div-->
+
+<div style="position:absolute; left:663px; top:175px; border:0; cursor:pointer; line-height:23px; width: 74px;" onclick="window.parent.StartBattle('99999')" title="女神要塞" >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+<div style="position:absolute; left:535px; top:177px; border:0; cursor:pointer; line-height:23px; width: 87px;" onclick="window.parent.StartBattle('地狱之门')" title="地狱之门" >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+<div style="position:absolute; left:367px; top:95px; border:0; cursor:pointer; line-height:23px" title="圣诞小屋" onclick="openMode('12')" >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div id="ico"><div id="btn" onclick="lingqu()"></div></div>
+
+<div style="position:absolute; left:420px; top:8px; border:0; cursor:pointer; width: 15px;" title="切换地图" onClick="window.parent.openUrl('BattleMap_1.html')">
+<img src="img/up.gif" alt="切换地图"></div>
+	
+</div>
+</body>
+</html>
+<script language="javascript" type="text/javascript">
+	function showNpc(){
+		$("#ico").show();
+	}
+	function lingqu(){
+		$("#ico").hide();
+		window.parent.Alert(window.external.lingqu());
+	}
+	function goMap(n,t)
+	{
+		//if(n==0) 
+		//{
+			//if(confirm('您还没有打开该地图，要使用钥匙打开吗？')==true)
+			//{
+				//openMap(t);
+			//}
+			//else return;
+		//}
+		//else
+		//{
+			var opt = {
+    		 	method: 'get',
+				 onSuccess: function(e) {
+					//window.parent.Alert(t.responseText);
+					var v = e.responseText;
+					if(isNaN(v))
+					{
+						if(!confirm(v))
+						{
+							return false;
+						}
+						var opt = {
+						method: 'get',
+						onSuccess: function(f) {
+						//window.parent.Alert(t.responseText);
+							var v = parseInt(f.responseText);
+							if(v == 11)
+							{
+								window.parent.Alert("开启地图成功！");
+								window.parent.$('gw').src='./function/Team_Mod.php?n='+t;
+							}
+						},
+							on404: function(f) {
+							},
+							onFailure: function(f) {
+							},
+							asynchronous:true        
+						};
+						//window.status = '../function/mapGate.php?type=1&n='+n;return false;
+						var ajax=new Ajax.Request('../function/mapGate.php?type=2&n='+t, opt);
+					}
+					else if(v == 10)
+					{
+						window.parent.$('gw').src='./function/Team_Mod.php?n='+t;
+					}
+					else if(v == 1)
+					{
+						window.parent.Alert("地图数据错误！");
+					}
+					else if(v == 2)
+					{
+						window.parent.Alert("您的当前威望不够！");
+					}
+					else if(v == 3)
+					{
+						window.parent.Alert("您没有这个物品！");
+					}
+					else if(v == 12)
+					{
+						if(n==0) 
+						{
+							if(confirm('您还没有打开该地图，要使用钥匙打开吗？')==true)
+							{
+								openMap(t);
+							}
+							else return;
+						}
+						else
+						{
+							window.parent.$('gw').src='./function/Team_Mod.php?n='+t;
+						}
+					}
+    		 	},
+    		 	on404: function(e) {
+    		 	},
+    		 	onFailure: function(e) {
+    		 	},
+    		 	asynchronous:true        
+			};
+		//window.status = '../function/mapGate.php?type=1&n='+t;return false;
+			var ajax=new Ajax.Request('../function/mapGate.php?type=1&n='+t, opt);
+			/*if(!confirm(""))
+			{
+				return false;
+			}
+			window.parent.$('gw').src='./function/Team_Mod.php?n='+n;*/
+		//}
+	}
+	
+	//副本地图判断
+	function fbMap(id)
+	{
+		if(id != "")
+		{
+			window.parent.$('gw').src = './function/fb_Mod.php?mapid='+id;
+		}
+	}
+	function openMode(i){
+		window.location.href = "MapInfo/t"+i+".html";
+		}
+	// Add by DuHao 2009-5-13
+function copyWord(words)
+{
+	window.parent.$('baike_input').value=words;
+}
+</script>  

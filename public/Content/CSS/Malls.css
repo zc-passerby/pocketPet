@@ -1,0 +1,275 @@
+﻿        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, em {
+            padding: 0;
+            margin: 0;
+            outline: none;
+            font-size: 12px;
+        }
+
+        .task {
+            width: 788px;
+            height: 319px;
+            background: #f2ebc5;
+            color: #B06A01;
+            font-size: 12px;
+        }
+
+        .task_left {
+            width: 138px;
+            height: 319px;
+            float: left;
+            background-image: url(../../Content/Img/Malls/smshop01.jpg);
+        }
+
+        .task_right {
+            width: 650px;
+            height: 319px;
+            float: left;
+            background-image: url(../../Content/Img/Malls/cangku02.jpg);
+        }
+
+        #Layer1 {
+            position: absolute;
+            width: 39px;
+            height: 17px;
+            z-index: 1;
+            left: 89px;
+            top: 281px;
+            background-image: url(../../Content/Img/Malls/cangku04.jpg);
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clearfix {
+            zoom: 1;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        .leaft {
+            margin: 3px 0 0 5px;
+            background: url(../../Content/Img/Malls/i_bnt.gif) repeat scroll 0 -68px;
+            width: 39px;
+            height: 17px;
+            border: 0 none;
+            cursor: pointer;
+        }
+
+        .task_nav {
+            width: 640px;
+            height: 29px;
+        }
+
+            .task_nav li {
+                float: left;
+                height: 29px;
+            }
+
+                .task_nav li a {
+                    width: 90px;
+                    display: block;
+                }
+
+        .a01 {
+            background: url(../../Content/Img/Malls/smshop02.jpg) no-repeat;
+            height: 29px;
+        }
+
+        .task_nav li.on .a01 {
+            background: url(../../Content/Img/Malls/smshop02.jpg) no-repeat 0 -29px;
+            height: 29px;
+        }
+
+        .a02 {
+            background: url(../../Content/Img/Malls/smshop02.jpg) no-repeat -90px 0;
+            height: 29px;
+        }
+
+        .task_nav li.on .a02 {
+            background: url(../../Content/Img/Malls/smshop02.jpg) no-repeat -90px -29px;
+            height: 29px;
+        }
+
+        .a03 {
+            background: url(../../Content/Img/Malls/smshop02.jpg) no-repeat -179px 0;
+            height: 29px;
+        }
+
+        .task_nav li.on .a03 {
+            background: url(../../Content/Img/Malls/smshop02.jpg) no-repeat -179px -29px;
+            height: 29px;
+        }
+
+        .a04 {
+            background: url(../../Content/Img/Malls/smshop02.jpg) no-repeat -268px 0;
+            height: 29px;
+        }
+
+        .task_nav li.on .a04 {
+            background: url(../../Content/Img/Malls/smshop02.jpg) no-repeat -268px -29px;
+            height: 29px;
+        }
+
+        .task_dh02 {
+            width: 300px;
+            height: 20px;
+            float: left;
+        }
+
+        .cion {
+            height: 18px;
+            float: left;
+            padding: 3px 0 0 10px;
+        }
+
+        .cion01 {
+            height: 16px;
+            float: left;
+            padding: 5px 0 0 5px;
+            color: #333;
+        }
+
+        .box {
+            width: 650px;
+            height: 290px;
+            float: left;
+        }
+
+        .box01 {
+            width: 292px;
+            float: left;
+            padding-left: 14px;
+        }
+
+        .box02 {
+            width: 292px;
+            float: left;
+            height: 28px;
+        }
+
+        .box03 {
+            width: 290px;
+            float: left;
+            border: #D9BD7A 1px solid;
+            height: 235px;
+            background-color: #FFF;
+        }
+
+        .box04 {
+            width: 292px;
+            float: left;
+            height: 20px;
+            color: #B06A01;
+            padding-top: 4px;
+        }
+
+        .bb01 {
+            height: 24px;
+            float: left;
+            padding-top: 6px;
+        }
+
+        .bb02 {
+            height: 24px;
+            float: right;
+            padding-top: 5px;
+        }
+
+        .txt01 {
+            color: #FF0000;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .dt_list {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            background: #fff;
+            height: 210px;
+            width: 290px;
+            scrollbar-face-color: #E1D395;
+            scrollbar-highlight-color: #ffffff;
+            scrollbar-3dlight-color: #E1D395;
+            scrollbar-shadow-color: #ffffff;
+            scrollbar-darkshadow-color: #F3EDC9;
+            scrollbar-track-color: #F3EDC9;
+            scrollbar-arrow-color: #ffffff;
+            color: #BF7D1A;
+            border-top-width: 1px;
+            border-right-width: 0px;
+            border-bottom-width: 0px;
+            border-left-width: 0px;
+            border-top-style: solid;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+            border-top-color: #D9BD7A;
+        }
+
+            .dt_list li {
+                line-height: 24px;
+                height: 24px;
+                overflow: hidden;
+            }
+
+                .dt_list li a {
+                    overflow: hidden;
+                    padding-left: 5px;
+                }
+
+                .dt_list li span {
+                    padding-right: 5px;
+                    float: right;
+                    color: #060;
+                }
+
+        .tit01 {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 12px;
+            color: #BF7D1A;
+        }
+
+        .con {
+            display: none;
+        }
+
+        #apDiv1 {
+            position: absolute;
+            width: 305px;
+            height: 20px;
+            z-index: 2;
+            left: 496px;
+            top: 5px;
+        }
+
+        .plus {
+            clear: both;
+            height: 24px;
+            line-height: 24px;
+            text-align: right;
+            color: #BF7D1A;
+        }
+
+        .conbtn {
+            background: url(../../Content/Img/Malls/bnt.gif) no-repeat;
+            width: 39px;
+            height: 17px;
+            cursor: pointer;
+            border: 0 none;
+            margin: 0px 5px 0 5px;
+        }
+
+        .sx {
+            width: 40px;
+            float: left;
+            padding-top: 3px;
+            height: 17px;
+        }

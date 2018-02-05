@@ -1,0 +1,192 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>野外探险</title>
+
+<style type="text/css"> 
+<!--
+body { width: auto; height: auto; margin: 0px auto; font-size: 12px; background:#eeeeee;}
+*{ margin: 0px; padding: 0px; }
+pre { margin: 0px; padding: 0px; float: left; }
+img { margin: 0px; padding: 0px; border: 0px; }
+ul { margin: 0px; padding: 0px; }
+li { display: inline; list-style-type: none; }
+tr td{
+	float:left;
+	margin-right:10px;}
+.zdzd_box { width:788px; height:319px; float:left;}
+.box_left { width:301px; height:319px; float:left; background:url(img/zdzd_bj1.jpg);}
+.box_zhong { width:283px; height:319px; float:left; background:url(img/zdzd_bj2.jpg);}
+.box_right { width:204px; height:319px; float:left; background:url(img/zdzd_bj3.jpg);}
+.zdzd_jiesao { width:230px; height:90px; float:left; margin:70px 0px 0px 40px; -margin:70px 0px 0px 20px;float:left; line-height:22px; overflow:hidden;}
+.zdzd_cong { width:247px; height:84px; float:left; margin:50px 0px 0px 10px; line-height:22px;}
+.zhong_list { width:260px; height:210px; float:left; margin:0px 0px 0px 5px;line-height:22px; margin-top:59px; color:#335e00; overflow:hidden;scrollbar-face-color:#a1d87c;scrollbar-highlight-color:#ffffff;scrollbar-3dlight-color:#cdefb9;scrollbar-shadow-color:#ffffff;scrollbar-darkshadow-color:#cdefb9;scrollbar-track-color:#cdefb9;scrollbar-arrow-color:#ffffff;}
+.zhong_list a { text-decoration:none; color:#335e00;}
+.zhong_list a:hover { text-decoration:none; color:#335e00;}
+ 
+.zhong_list li { width:240px; height:26px; float:left;line-height:27px; display:inline;}
+.title { width:120px; height:22px; float:left;line-height:22px; overflow:hidden;}
+.title2 { width:35px; height:22px; float:left;line-height:22px;}
+.title3 { width:69px; height:17px; float:left;line-height:22px; text-align:center; margin-top:2px;}
+.anniu { width:265px; height:29px; float:left; margin:15px 0px 0px 5px; -margin:15px 0px 0px 0px;}
+.anniu1 { width:80px; height:29px; float:left; margin:0px 0px 0px 7px; -margin:0px 0px 0px 5px;}
+ 
+.zdzd_zxwj { width:170px; height:260px; float:left; margin:44px 0px 0px 10px; color:#335e00; overflow:auto; scrollbar-face-color:#a1d87c;scrollbar-highlight-
+
+color:#ffffff;scrollbar-3dlight-color:#cdefb9;scrollbar-shadow-color:#ffffff;scrollbar-darkshadow-color:#cdefb9;scrollbar-track-color:#cdefb9;scrollbar-arrow-color:#ffffff; 
+
+line-height:26px;}
+.zdzd_zxwj a{ text-decoration:none; color:#335e00;}
+.zdzd_zxwj a:hover{ text-decoration:none; color:#335e00;}
+ 
+ 
+.zxwj_list  { width:30px; height:26px; line-height:26px; float:left;}
+.zxwj_list img { margin:5px 0px 0px 4px;}
+.zxwj_list2  { width:120px; height:26px; line-height:26px; float:left;}
+-->
+.yy {
+	cursor:hand;
+	opacity: 0.5;
+filter : progid:DXImageTransform.Microsoft.Alpha(style=0, opacity=50, finishOpacity=100);
+}
+</style>
+<!--[if IE 6]>
+<script type="text/javascript">try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {}
+</script>
+<![endif]-->
+ <script src="../Content/Javascript/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		window.external.showListPet();
+	})
+	 function setPetWz(id,d) {
+            pid = id;
+            var r = "";
+         //   var strR = ajax.setPetMain(id).value.split('<f>');
+            
+           $("#bottom td").addClass("yy");
+		   $(d).removeClass("yy");
+				
+				updateMainPet($.parseJSON(window.external.getPetInfo(id)));
+                 window.parent.jid=null;
+				window.parent.jname="普通攻击";
+            
+
+		}
+	function readPet(JSON){
+		
+		var j = $.parseJSON(JSON);
+		$("#bottom").html(" <td >&nbsp;</td>")
+		var ii=0;
+	//	alert(JSON);
+		for(var i = 0;i<j.length;i++){
+			c = "yy"
+			ii++;
+			if(j[i].状态=="0"){
+				
+					//setPetICO(j[i].形象);
+					//updateMainPet(j[i])
+					c = ""
+					
+				}
+			var html = " <td class='"+c+"' onclick='setPetWz("+j[i].宠物序号+",this)'><img src='../Content/PetPhoto/k"+j[i].形象+".gif' onerror=\"this.src='../Content/PetPhoto/k"+j[i].形象+".png'\"  id='i1'> </td>";
+			
+			 $("#bottom").html($("#bottom").html() + html);
+
+		}
+		for(var i = 0;i<3-ii;i++){
+				  var html = "<td></td>";
+			   $("#bottom").append(html);
+				 
+		}		
+		$("#bottom").append(" <td width='10'>&nbsp;</td>");
+			
+	}
+</script>
+
+</head>
+ 
+<body>
+
+<div class="zdzd_box">
+	<div class="box_left">
+   	  <div class="zdzd_jiesao">
+        	 
+		
+			出现怪物：<span>金波姆</span>、<span>绿波姆</span>、<span>水波姆</span>、<span>火波姆</span>、<span>土波姆</span>、<span>波光姆</span>、<span>波碧姆</span>、<span>波波姆</span>、<span>波岩姆</span>、<span>波纳姆</span>、<span>§凶残的黄金鸟§</span>
+      </div>
+        <div class="zdzd_cong">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr id="bottom">
+              <td width="25">&nbsp;</td>
+              <td><img src='../Content/PetPhoto/k264.gif' alt="拉暮" style='cursor:pointer;filter:alpha(opacity=50);' id='i1'> </td>
+              <td><img src='../Content/PetPhoto/k280.gif' alt="格斗宝宝" style='cursor:pointer;filter:alpha(opacity=100);' id='i2'> </td>
+              <td></td>
+              <td width="20">&nbsp;</td>
+            </tr>
+          </table>
+        </div>
+    </div>
+  <div class="box_zhong">
+  	<div class="zhong_list">		
+		
+	<table border="0" style="border-bottom:1px solid #CCCCCC; color:#005500" cellpadding="0" cellspacing="0">
+  <tbody><tr>
+    <td align="center" height="21" width="95" style="border-bottom:1px solid #005500; ">队长</td>
+    <td align="center" width="50" style="border-bottom:1px solid #005500; ">队员人数</td>
+    <td align="center" width="80" style="border-bottom:1px solid #005500; ">申请加入</td>
+  </tr>
+</tbody></table>
+    </div>
+	
+	<div class="anniu">
+			<div class="anniu1"><img src="img/zd.gif" width="78" height="29" style="cursor:pointer;"  onclick="window.parent.StartBattle('2')"/></div>
+			<div class="anniu1" id="creatUTeam"><img src="img/cjdw.gif" width="78" height="29" style="cursor:pointer;" onclick="if(confirm('确定要建立你的队伍？')){createTeam()}" /></div>
+		</div>
+  </div>
+    <div class="box_right">
+    	<div class="zdzd_zxwj">
+        	<ul>
+				
+			<li>
+				<div class="zxwj_list "><img src="img/ren.gif" width="13" height="15" />                    </div>
+				<div class="zxwj_list2 " style="cursor:pointer">未开发
+				</div>
+			</li>
+			<li>
+				<div class="zxwj_list "><img src="img/ren.gif" width="13" height="15" />                    </div>
+				<div class="zxwj_list2 " style="cursor:pointer">未开发
+				</div>
+			</li>            	
+            </ul>
+        </div>
+    </div>
+    
+</div>
+<div id="menu" style="display:none; position:absolute; left:0;top:0; background-color:#FFFFFF; border:0px solid #006666; background:url(img/team_menu.png); background-repeat:no-repeat;height:123px; color:#FFFFFF">
+<table width="87" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="18" scope="col" align="right"><span style="cursor:pointer; line-height:18px" onclick="$('menu').style.display='none';window.clearTimeout(closeMenu);">&nbsp;&nbsp;</span></th>
+  </tr>
+  <tr>
+    <td height="18" align="center" onclick="team();$('menu').style.display='none';" style="cursor:pointer" onmouseover="this.style.color='#DCEAAA'" onmouseout="this.style.color='#ffffff'">邀请组队</td>
+  </tr>
+  <tr>
+    <td height="18" align="center" onclick="friend();$('menu').style.display='none';" style="cursor:pointer" onmouseover="this.style.color='#DCEAAA'" onmouseout="this.style.color='#ffffff'">加为好友</td>
+  </tr>
+  <tr>
+    <td height="21" align="center" onclick="player_fight();$('menu').style.display='none';" style="cursor:pointer" onmouseover="this.style.color='#DCEAAA'" onmouseout="this.style.color='#ffffff'">挑战</td>
+  </tr>
+  <tr>
+    <td height="19" align="center" onclick="detectview();$('menu').style.display='none';" style="cursor:pointer" onmouseover="this.style.color='#DCEAAA'" onmouseout="this.style.color='#ffffff'">侦察</td>
+  </tr>
+  <tr>
+    <td height="18" align="center" onclick="parent.$('cmsg').value='//'+cUser+' ';parent.$('cmsg').focus();$('menu').style.display='none';" style="cursor:pointer" onmouseover="this.style.color='#DCEAAA'" onmouseout="this.style.color='#ffffff'">私聊</td>
+  </tr>
+</table>
+
+</div>
+</body> 
+</html> 

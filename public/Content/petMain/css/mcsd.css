@@ -1,0 +1,419 @@
+﻿@charset "utf-8";
+/* CSS Document */
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, em {
+            padding: 0;
+            margin: 0;
+            outline: none;
+            font-size: 12px;
+        }
+
+        .task {
+            width: 788px;
+            height: 319px;
+            background: #f2ebc5;
+            color: #B06A01;
+            font-size: 12px;
+        }
+        .task_left {
+            width: 138px;
+            height: 319px;
+            float: left;
+            background-image: url(../img/sd01.png);
+        }
+
+        .task_right {
+            width: 650px;
+            height: 319px;
+            float: left;
+            background-image: url(../img/cangku02.jpg);
+        }
+
+        #Layer1 {
+            position: absolute;
+            width: 39px;
+            height: 17px;
+            z-index: 1;
+            left: 89px;
+            top: 281px;
+            background-image: url(../img/cangku04.jpg);
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clearfix {
+            zoom: 1;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        .leaft {
+            margin: 3px 0 0 5px;
+            background: url(../img/i_bnt.gif) repeat scroll 0 -68px;
+            width: 39px;
+            height: 17px;
+            border: 0 none;
+            cursor: pointer;
+        }
+
+        .task_nav {
+            width: 640px;
+            height: 29px;
+        }
+
+            .task_nav li {
+                float: left;
+                height: 29px;
+            }
+
+                .task_nav li a {
+                    width: 90px;
+                    display: block;
+                }
+
+        .a01 {
+            background: url(../img/sd03_cd.jpg) no-repeat;
+            height: 29px;
+        }
+
+        .task_nav li.on .a01 {
+            background: url(../img/sd03_cd.jpg) no-repeat 0 -29px;
+            height: 29px;
+        }
+
+        .a02 {
+            background: url(../img/sd03_cd.jpg) no-repeat -90px 0;
+            height: 29px;
+        }
+
+        .task_nav li.on .a02 {
+            background: url(../img/sd03_cd.jpg) no-repeat -90px -29px;
+            height: 29px;
+        }
+
+        .a03 {
+            background: url(../img/sd03_cd.jpg) no-repeat -179px 0;
+            height: 29px;
+        }
+
+        .task_nav li.on .a03 {
+            background: url(../img/sd03_cd.jpg) no-repeat -179px -29px;
+            height: 29px;
+        }
+
+        .a04 {
+            background: url(../img/sd03_cd.jpg) no-repeat -268px 0;
+            height: 29px;
+        }
+
+        .task_nav li.on .a04 {
+            background: url(../img/sd03_cd.jpg) no-repeat -268px -29px;
+            height: 29px;
+        }
+
+        .a05 {
+            background: url(../img/sd03_cd.jpg) no-repeat -357px 0;
+            height: 29px;
+        }
+
+        .task_nav li.on .a05 {
+            background: url(../img/sd03_cd.jpg) no-repeat -357px -29px;
+            height: 29px;
+        }
+
+        .con {
+            display: none;
+        }
+
+        #apDiv1 {
+            position: absolute;
+            width: 305px;
+            height: 20px;
+            z-index: 2;
+            left: 414px;
+            top: 5px;
+        }
+
+        .plus {
+            clear: both;
+            height: 24px;
+            line-height: 24px;
+            text-align: right;
+            color: #BF7D1A;
+        }
+
+        .conbtn {
+            background: url(../img/bnt.gif) no-repeat;
+            width: 39px;
+            height: 17px;
+            cursor: pointer;
+            border: 0 none;
+            margin: 0px 5px 0 5px;
+        }
+
+        .sd_hc_l {
+            width: 300px;
+            height: 281px;
+            float: left;
+            padding-left: 20px;
+        }
+
+        .sd_hc_01 {
+            width: 263px;
+            height: 212px;
+            background-image: url(../img/sd06.jpg);
+            float: left;
+            margin: 2px 0 0 0;
+        }
+
+        .sd_hc_02 {
+            width: 263px;
+            height: 50px;
+            float: left;
+        }
+
+        .sd_hc_r {
+            width: 300px;
+            height: 261px;
+            float: left;
+            line-height: 22px;
+            color: #630;
+            padding: 20px 20px 0 0;
+        }
+
+        .hc_pet_01 {
+            width: 71px;
+            height: 107px;
+            margin: 20px 0 0 30px;
+            float: left;
+        }
+
+        .hc_pet_02 {
+            width: 71px;
+            height: 107px;
+            margin: 20px 30px 0 0;
+            float: right;
+        }
+
+        #Layer2 {
+            position: absolute;
+            width: 305px;
+            height: 185px;
+            z-index: 11;
+            left: 213px;
+            top: 102px;
+        }
+
+        .con {
+            display: none;
+        }
+
+        #apDiv1 {
+            position: absolute;
+            width: 305px;
+            height: 20px;
+            z-index: 2;
+            left: 414px;
+            top: 5px;
+        }
+
+        .plus {
+            clear: both;
+            height: 24px;
+            line-height: 24px;
+            text-align: right;
+            color: #BF7D1A;
+        }
+
+        .conbtn {
+            background: url(../img/bnt.gif) no-repeat;
+            width: 39px;
+            height: 17px;
+            cursor: pointer;
+            border: 0 none;
+            margin: 0px 5px 0 5px;
+        }
+
+        .sd_l {
+            width: 360px;
+            height: 281px;
+            float: left;
+            background-image: url(../img/sd03.jpg);
+        }
+
+            .sd_l p {
+                color: #333;
+                line-height: 18px;
+                padding: 50px 90px 20px 20px;
+            }
+
+        .sd_item {
+            width: 320px;
+            margin-left: 35px;
+            margin-right: auto;
+        }
+
+        .sd_pet {
+            width: 67px;
+            height: 84px;
+            float: left;
+        }
+
+        .r00 {
+            margin-right: 10px;
+        }
+
+        .sd_r {
+            height: 281px;
+            float: left;
+        }
+
+        .sd_step {
+            clear: both;
+            height: 140px;
+            position: relative;
+            width: 290px;
+        }
+
+            .sd_step p {
+                color: #bf7d1a;
+                line-height: 20px;
+                padding-top: 20px;
+            }
+
+                .sd_step p img {
+                    float: right;
+                    position: absolute;
+                    right: 22px;
+                    top: 23px;
+                }
+
+
+        .sd_bg1 {
+            background-image: url(../img/sdbg01.jpg);
+            width: 650px;
+            height: 290px;
+            float: left;
+        }
+
+        .sd_bg2 {
+            background-image: url(../img/sdbg02.jpg);
+            width: 650px;
+            height: 290px;
+            float: left;
+        }
+
+        .sd_l01 {
+            width: 300px;
+            height: 281px;
+            float: left;
+        }
+
+        .sd_r01 {
+            height: 281px;
+            float: left;
+            width: 330px;
+        }
+
+        .sd_item01 {
+            width: 260px;
+            margin-left: 35px;
+            margin-right: auto;
+            margin-top: 55px;
+            float: left;
+        }
+
+        .sd_item02 {
+            width: 210px;
+            height: 110px;
+            float: left;
+            margin-left: 35px;
+            margin-right: auto;
+            margin-top: 20px;
+            color: #653E17;
+            line-height: 20px;
+        }
+
+        .sd_item03 {
+            width: 330px;
+            height: 110px;
+            float: left;
+            margin-top: 45px;
+            color: #653E17;
+            line-height: 20px;
+        }
+
+        .sd_item04 {
+            width: 330px;
+            height: 85px;
+            float: left;
+            margin-top: 35px;
+            color: #653E17;
+            line-height: 20px;
+        }
+
+        .sd_item05 {
+            width: 330px;
+            height: 110px;
+            float: left;
+            margin-top: 25px;
+            color: #653E17;
+            line-height: 20px;
+        }
+
+        .sd_item06 {
+            width: 330px;
+            margin-left: 0px;
+            margin-top: 55px;
+        }
+
+        .sd_hc_l {
+            width: 300px;
+            height: 281px;
+            float: left;
+            padding-left: 20px;
+        }
+
+        .sd_hc_01 {
+            width: 263px;
+            height: 212px;
+            background-image: url(../img/sd06.jpg);
+            float: left;
+            margin: 2px 0 0 0;
+        }
+
+        .sd_hc_02 {
+            width: 263px;
+            height: 50px;
+            float: left;
+        }
+
+        .sd_hc_r {
+            width: 300px;
+            height: 261px;
+            float: left;
+            line-height: 22px;
+            color: #630;
+            padding: 20px 20px 0 0;
+        }
+
+        .hc_pet_01 {
+            width: 71px;
+            height: 107px;
+            margin: 20px 0 0 30px;
+            float: left;
+        }
+
+        .hc_pet_02 {
+            width: 71px;
+            height: 107px;
+            margin: 20px 30px 0 0;
+            float: right;
+        }

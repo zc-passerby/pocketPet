@@ -1,0 +1,501 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>道具商店</title>
+    <link href="Content/CSS/main.css" rel="stylesheet" />
+    <link href="Content/CSS/PropMalls.css" rel="stylesheet" />
+	<script src="Content/Javascript/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        function setTab(name, cursel, n) {
+            for (i = 1; i <= n; i++) {
+                var menu = document.getElementById(name + i);
+                var con = document.getElementById("con_" + name + "_" + i);
+                menu.className = i == cursel ? "on" : "";
+                con.style.display = i == cursel ? "block" : "none";
+            }
+        }
+    </script>
+    <script language="javascript" src="../javascript/prototype.js"></script>
+    <script type="text/JavaScript">
+		<!--
+		function MM_jumpMenu(targ,selObj,restore){ //v3.0
+		  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+		  if (restore) selObj.selectedIndex=0;
+		}
+		
+		/* added by Zheng.PIng */
+		function hiddenContent() {
+			$('props_types').style.display = 'none';
+		}
+		
+		function showContent() {
+			$('props_types').style.display = '';
+		}
+		/* addded by Zheng.Ping */
+		function readJinbi(json){
+			var htmln=
+			 "<tr class='row'>"+
+			    "<td class=\"wpid\"style='display:none'>{ID}</td>"+
+				"<td width=\"35px\"><img style=\"width:25px;height:25px;\" src=\"Content/Img/prop/{图标}.gif\"></td>"+
+				"<td class=\"propName\" width=\"110px\" id=\"t1\" style=\"cursor:pointer;text-align:left\" onMouseOver=\"window.parent.showTipEquip(1,1,event);this.style.border='solid 1px #DFD496';\" onMouseOut=\"this.style.border=0;\">{名字}</td>"+
+				"<td class='p3' width=\"60px\" style=\"text-align:left\">{价格}</td>"+
+				"<td style=\"text-align:left\">可叠加</td>"+
+			"</tr>";
+			var j = $.parseJSON(json);
+				
+			$(".道具列表").html("");
+			for(var i = 0;i<j.length;i++){
+				var h = htmln.replace("{图标}",j[i].道具图标);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{名字}",j[i].道具名字);
+				
+				h = h.replace("{价格}",j[i].商品价格);
+				h = h.replace("{价格}",j[i].商品价格);
+				$(".道具列表").html($(".道具列表").html()+h);
+			
+			}
+			$(".道具列表 tr").click(function(){
+				sel(this);
+				bid=$(this).find(".wpid").html();
+				price=$(this).find(".p3").html();
+				
+				 　
+			});
+			$(".道具列表 tr").mouseover(function(e){
+				
+				 　e = e||window.event;
+				   window.parent.hoveWp1(e,this,"#FFF",$(this).find(".wpid").html());
+			});
+			$(".道具列表 tr").mouseout(function(e){
+				
+				 
+				   window.parent.hoveWp1hide();
+			});
+
+		}
+
+        function readWeiwang(json){
+			var htmln=
+			 "<tr class='row'>"+
+			    "<td class=\"wpid\"style='display:none'>{ID}</td>"+
+				"<td width=\"35px\"><img style=\"width:25px;height:25px;\" src=\"Content/Img/prop/{图标}.gif\"></td>"+
+				"<td class=\"propName\" width=\"110px\" id=\"t1\" style=\"cursor:pointer;text-align:left\" onMouseOver=\"window.parent.showTipEquip(1,1,event);this.style.border='solid 1px #DFD496';\" onMouseOut=\"this.style.border=0;\">{名字}</td>"+
+				"<td class='p3' width=\"60px\" style=\"text-align:left\">{价格}</td>"+
+				"<td style=\"text-align:left\">可叠加</td>"+
+			"</tr>";
+			var j = $.parseJSON(json);
+				
+			$(".威望道具列表").html("");
+			for(var i = 0;i<j.length;i++){
+				var h = htmln.replace("{图标}",j[i].道具图标);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{名字}",j[i].道具名字);
+				
+				h = h.replace("{价格}",j[i].商品价格);
+				h = h.replace("{价格}",j[i].商品价格);
+				$(".威望道具列表").html($(".威望道具列表").html()+h);
+			
+			}
+			$(".威望道具列表 tr").click(function(){
+				sel(this);
+				bid=$(this).find(".wpid").html();
+				price=$(this).find(".p3").html();
+				
+				 　
+			});
+	        $(".威望道具列表 tr").mouseover(function(e){
+				
+				 　e = e||window.event;
+				   window.parent.hoveWp1(e,this,"#FFF",$(this).find(".wpid").html());
+	        });
+	        $(".威望道具列表 tr").mouseout(function(e){
+				
+				 
+				   window.parent.hoveWp1hide();
+			});
+
+        }
+		
+		function readPropList(json){
+			selid=0;
+			var j = $.parseJSON(json);
+			var node=  "<tbody>"+
+							"<tr class='row'>"+
+								"<td class=\"wpid\"style='display:none'>{ID}</td>"+
+								"<td width=\"35px\"><img style=\"width:25px;height:25px;\" src=\"Content/Img/prop/{ICO}.gif\"></td>"+
+								"<td class='p2' width=\"110px\" id=\"t660509\" style=\"cursor:pointer;text-align:left\" onMouseOver=\"sthis.style.border='solid 1px #DFD496';\" onMouseOut=\"this.style.border=0;\">{Name}</td>"+
+								"<td class='p3' width=\"60px\" style=\"text-align:left\">{price}</td>"+
+								"<td style=\"text-align:left\" id=\"s660509\">{num}</td>"+
+							"</tr>"+
+						"</tbody>";
+			  $(".背包列表").html("");
+			for(var i = 0;i<j.length;i++){
+				var jnode = node.replace("{ICO}",j[i].道具图标);
+				jnode = jnode.replace("{Name}",j[i].道具名字);
+				jnode = jnode.replace("{Type}","道具");
+				jnode = jnode.replace("{num}",j[i].道具数量);
+				jnode = jnode.replace("{ID}",j[i].道具序号);
+				jnode = jnode.replace("{ID}",j[i].道具序号);
+				jnode = jnode.replace("{price}",j[i].道具价格);
+				jnode = jnode.replace("{price}",j[i].道具价格);
+				$(".背包列表").append(jnode);
+			  
+			}	
+			$(".背包列表 tr").click(function(){
+				sel(this);
+				bid=$(this).find(".wpid").html();
+				price=$(this).find(".p3").html();
+				
+				 　
+			});
+			$(".背包列表 tr").mouseover(function(e){
+				
+				 　e = e||window.event;
+				   window.parent.hoveWp(e,this,"#FFF",$(this).find(".wpid").html(),true);
+			});
+			$(".背包列表 tr").mouseout(function(e){
+				
+				 
+				   window.parent.hoveWp1hide();
+			});
+
+			$(".道具数量").html(j.length);
+		}
+		function showUserInfo(json){
+			
+			var j = $.parseJSON(json);
+			$(".玩家名字").html(j.名字);
+			$(".金币").html(j.金币);
+            $(".威望").html(j.威望);
+			$(".道具容量").html(j.道具容量);
+            
+		}
+	//-->
+		var bid=0;
+		var price=0;
+		var selid=0;
+		var types=-1;
+    </script>
+</head>
+
+
+<body>
+    <div id="Layer1" style="cursor:pointer" onClick="window.parent.$('gw').src='./function/City_Mod.php'">
+        <label></label>
+    </div>
+    <div class="task">
+        <div class="task_left"></div>
+
+        <div class="task_right">
+
+            <ul class="task_nav">
+                <li id="tab1" onClick="setTab('tab',1,2)" class=""><a class="a01" href="javascript:void(0)"></a></li>
+                <li id="tab2" onClick="setTab('tab',2,2)" class=""><a class="a02" href="javascript:void(0)"></a></li>
+            </ul>
+            <div class="dt_task" id="con_tab_1">
+
+                <div class="box01">
+                    <div class="box02">
+                        <div class="bb01"><img src="Content/Img/PropMalls/shop03.jpg" width="65" height="25"></div>
+                    </div>
+                    <div class="box03">
+                        <table border="0" cellspacing="0" class="tit01">
+                            <tbody>
+                                <tr>
+                                    <td height="24" style="width:35px; text-align:left"></td>
+                                    <td style="width:100px; text-align:left">名称</td>
+                                    <td style="width:60px; text-align:left">价格</td>
+                                    <td style="text-align:left">属性</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="dt_list clearfix">
+                            <table class="tit01" id="shoplist">
+                                <tbody class="道具列表">
+                                   
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="plus">数量：<input type="text" class="txt02" id="num" size="5"/><input type="button" class="conbtn" onClick="buy();" value="购买"><input type="button" class="conbtn" value="卖出" onClick="sell();"></div>
+                </div>
+                <div class="box01">
+                    <div class="box02">
+                        <div class="bb01"><img src="Content/Img/PropMalls/icon04.jpg" width="65" height="25"></div>
+                       
+                    </div>
+                    <div class="box03">
+                        <table border="0" cellspacing="0" class="tit01">
+                            <tbody>
+                                <tr>
+                                    <td height="24" style="width:35px; text-align:left"></td>
+                                    <td style="width:100px; text-align:left">名称</td>
+                                    <td style="width:60px; text-align:left">卖出金币</td>
+                                    <td style="text-align:left">数量</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="dt_list clearfix" id="mybag1">
+
+                            <table class="tit01 背包列表" id="mybag1">
+                                <tbody>
+                                    <tr>
+                                        <td width="35px"><img style="width:25px;height:25px;" src="Content/Img/prop/7.gif"></td>
+                                        <td width="110px" id="t660509" style="cursor:pointer;text-align:left" onMouseOver="showTip(660509,0,1,2);this.style.border='solid 1px #DFD496';" onMouseOut="window.parent.UnTip();this.style.border=0;" onClick="sel(this);copyWord('进化之书');bid=660509;price=1;">进化之书</td>
+                                        <td width="60px" style="text-align:left">1</td>
+                                        <td style="text-align:left" id="s660509">327</td>
+                                    </tr>
+                                </tbody>
+							</table>                        
+
+                        </div>
+
+                    </div>
+                    <div class="plus">背包道具数：<span class="道具数量"></span>    &nbsp; 背包仓库总容量：<span class="道具容量"></span></div>
+                </div>
+                <div id="apDiv1">
+                    <div class="task_dh02">
+                        <div class="cion"><img src="Content/Img/PropMalls/icon02.jpg" width="20" height="18"></div><div class="cion01">金币：<span class="金币"></span></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="dt_task con" id="con_tab_2">
+
+                <div class="box01">
+                    <div class="box02">
+                        <div class="bb01"><img src="Content/Img/PropMalls/shop03.jpg" width="65" height="25"></div>
+                    </div>
+                    <div class="box03">
+                        <table border="0" cellspacing="0" class="tit01">
+                            <tbody>
+                                <tr>
+                                    <td height="24" style="width:35px; text-align:left"></td>
+                                    <td style="width:100px; text-align:left">名称</td>
+                                    <td style="width:60px; text-align:left">价格</td>
+                                    <td style="text-align:left">属性</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="dt_list clearfix">
+                            <table class="tit01" id="shoplist">
+                                <tbody class="威望道具列表">
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="plus">数量：<input type="text" class="txt02" id="prenum" size="5"><input type="button" class="conbtn" onClick="prebuy();" value="购买"></div>
+                </div>
+                <div class="box01">
+                    <div class="box02">
+                        <div class="bb01"><img src="Content/Img/PropMalls/icon04.jpg" width="65" height="25"></div>
+                        
+                    </div>
+                    <div class="box03">
+                        <table border="0" cellspacing="0" class="tit01">
+                            <tbody>
+                                <tr>
+                                    <td height="24" style="width:35px; text-align:left"></td>
+                                    <td style="width:100px; text-align:left">名称</td>
+                                    <td style="width:60px; text-align:left">卖出金币</td>
+                                    <td style="text-align:left">数量</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="dt_list clearfix" id="mybag1">
+
+                            <table class="tit01 背包列表" id="mybag1">
+                              
+                            </table>
+
+
+                        </div>
+                    </div>
+                    <div class="plus">背包道具数：<span class="道具数量"></span>    &nbsp; 背包仓库总容量：<span class="道具容量"></span></div>
+                </div>
+                <div id="apDiv1">
+                    <div class="task_dh02">
+
+                        <div class="cion"><img src="Content/Img/PropMalls/icon02.jpg" width="20" height="18"></div><div class="cion01">威望：<span class="威望"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script language="javascript">
+        // Add by DuHao 2009-5-13
+        function copyWord(words) {
+            window.parent.$('baike_input').value = words;
+        }
+        function sel(obj) {
+            $(".row").css("background-color",'#fff');
+            
+		
+            obj.style.backgroundColor = '#DFD496';
+            try {
+                var pro = $(obj.id.replace("t", "s")).innerHTML;
+                $('num').value = parseInt(pro);
+            }
+            catch (e) {
+                $('num').value = "";
+            }
+        }
+        function buy() {
+	    var nums = $('#num').val();
+            if (bid == 0) {window.parent.Alert('请先选择要购买的物品。'); return; }
+            else if (!validInt(nums)) { window.parent.Alert('数量必须是数字!'); return; }
+            else if (nums < 1 || nums > 100) { window.parent.Alert('购买数量范围是1-100之间的整数！'); return; }
+			else{
+				 var sump = price * parseInt($('#num').val());
+
+                if (sump == 0) { window.parent.Alert('数据错误！'); return; }
+                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + '金币！')){
+					
+					if(window.external.buy(3,bid,nums)){
+						window.external.updateProp();
+						window.parent.Alert('购买成功!'); 
+					}else{
+						window.parent.Alert('购买失败,请确定您的金币是否足够！'); 	
+					}
+				
+				}
+			}
+            
+        }
+//判断是否是正整数
+		function validInt(s)
+		{
+			if(s!=null){
+				var r,re;
+				re = /\d*/i; //\d表示数字,*表示匹配多个数字
+				r = s.match(re);
+				return (r==s)?true:false;
+			}
+			return false;
+		}
+        function prebuy() {
+            var nums = $('#prenum').val();
+		
+            if (bid == 0) { window.parent.window.parent.Alert('请先选择要购买的物品。'); return; }
+            else if (!validInt(nums)) { window.parent.Alert('数量必须是数字!'); return; }
+            else if (nums < 1 || nums > 100) { window.parent.Alert('购买数量范围是1-100之间的整数！'); return; }
+            else {
+                var sump = price * parseInt($('#prenum').val());
+	            if (sump == 0) { window.parent.Alert('数据错误！'); return; }
+                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + '威望！')){
+					
+					if(window.external.buy(5,bid,nums)){
+						window.external.updateProp();
+						window.parent.Alert('购买成功!'); 
+					}else{
+						window.parent.Alert('购买失败,请确定您的威望是否足够！'); 	
+					}
+				
+				}
+			}
+            
+        }
+
+        function ajaxfun() {
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    $('mybag1').innerHTML = t.responseText;
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/getBag.php?style=3', opt);
+        }
+        function ajaxfun2() {
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    $('mybag2').innerHTML = t.responseText;
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/getBag.php?style=3', opt);
+        }
+
+        function sell() {
+			
+            var nums = $('#num').val();
+            if (bid == 0) { window.parent.Alert('请先选择要卖出的物品。'); return; }
+            else {
+                if (!validInt(nums)) { window.parent.Alert('数量只能是数字！'); return false; }
+                else if (nums < 1 || nums > 100) { window.parent.Alert('卖出数量范围是1-100之间的整数！'); return; }
+
+                if (types == 2 && nums != 1) {
+                    window.parent.Alert('不可叠加物品只能单一卖出'); return;
+                }
+
+                //var sump = price * parseInt(nums);
+                if (confirm('你确定卖出选中的物品吗?')) {
+                   
+					var str = window.external.sell(bid,nums);
+					if(str.indexOf("成功")!=-1){
+						window.external.updateProp();
+						
+					}
+					window.parent.Alert(str);
+				
+				
+                }
+                else return;
+            }
+
+
+        }
+        var equipInfos = {};
+        var LastKey = "";
+        if (!document.all) {
+            var Event;
+            window.onmousemove = function () {
+                Event = window.parent.event;
+            };
+        }
+
+        function showTip(id, bid, sign, type) {
+            var x = 500;
+            var y = 100;
+            equipInfos = window.parent.equipInfos;
+            var key = id + "_" + bid + "_" + sign + "_" + type;
+            if (typeof (equipInfos[key]) != 'undefined') {
+                window.parent.showTips(equipInfos[key], x, y);
+                return;
+            }
+            if (LastKey == key) {
+                return;
+            }
+            LastKey = key;
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    equipInfos[key] = t.responseText;
+                    window.parent.showTips(t.responseText, x, y);
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+
+	        var ajax = new Ajax.Request('../function/getPropsInfo.php?id=' + id + '&bid=' + bid + '&sign=' + sign + '&type=' + type, opt);
+        }
+    </script>
+
+    <div id="qq-sendUrl-btn"></div>
+</body>
+</html>

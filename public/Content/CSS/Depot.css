@@ -1,0 +1,163 @@
+﻿       .task {
+            width: 788px;
+            height: 319px;
+            background: #f2ebc5;
+        }
+
+        .task_left {
+            width: 138px;
+            height: 319px;
+            float: left;
+            background-image: url(../../Content/Img/Depot/cangku01.jpg);
+        }
+
+        .task_right {
+            width: 650px;
+            height: 319px;
+            float: left;
+            background-image: url(../../Content/Img/Depot/cangku02.jpg);
+        }
+
+        #Layer1 {
+            position: absolute;
+            width: 39px;
+            height: 17px;
+            z-index: 1;
+            left: 86px;
+            top: 281px;
+            background-image: url(../../Content/Img/Depot/cangku04.jpg);
+        }
+
+        .task_dh {
+            width: 650px;
+            height: 29px;
+            float: left;
+        }
+
+        .task_dh01 {
+            width: 90px;
+            height: 29px;
+            float: left;
+            margin-left: 10px;
+            background-image: url(../../Content/Img/Depot/cangku03.jpg);
+        }
+
+        .task_dh02 {
+            width: 300px;
+            height: 20px;
+            float: left;
+            margin: 8px 0 0 100px;
+        }
+
+        .cion {
+            height: 18px;
+            float: left;
+            padding-left: 10px;
+        }
+
+        .cion01 {
+            height: 16px;
+            float: left;
+            padding: 5px 0 0 5px;
+        }
+
+        .box {
+            width: 650px;
+            height: 290px;
+            float: left;
+        }
+
+        .box01 {
+            width: 292px;
+            float: left;
+            padding-left: 14px;
+        }
+
+        .box02 {
+            width: 292px;
+            float: left;
+            height: 28px;
+        }
+
+        .box03 {
+            width: 290px;
+            float: left;
+            border: #D9BD7A 1px solid;
+            height: 235px;
+            background-color: #FFF;
+        }
+
+        .box04 {
+            width: 292px;
+            float: left;
+            height: 20px;
+            color: #B06A01;
+            padding-top: 4px;
+        }
+
+        .bb01 {
+            height: 24px;
+            float: left;
+            padding-top: 3px;
+        }
+
+        .bb02 {
+            height: 24px;
+            float: right;
+            padding-top: 5px;
+        }
+
+        .txt01 {
+            color: #FF0000;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .dt_list {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            background: #fff;
+            height: 210px;
+            width: 290px;
+            scrollbar-face-color: #E1D395;
+            scrollbar-highlight-color: #ffffff;
+            scrollbar-3dlight-color: #E1D395;
+            scrollbar-shadow-color: #ffffff;
+            scrollbar-darkshadow-color: #F3EDC9;
+            scrollbar-track-color: #F3EDC9;
+            scrollbar-arrow-color: #ffffff;
+            color: #BF7D1A;
+            border-top-width: 1px;
+            border-right-width: 0px;
+            border-bottom-width: 0px;
+            border-left-width: 0px;
+            border-top-style: solid;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+            border-top-color: #D9BD7A;
+        }
+
+            .dt_list li {
+                line-height: 24px;
+                height: 24px;
+                overflow: hidden;
+            }
+
+                .dt_list li a {
+                    overflow: hidden;
+                    padding-left: 5px;
+                }
+
+                .dt_list li span {
+                    padding-right: 5px;
+                    float: right;
+                    color: #060;
+                }
+
+        .tit01 {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 12px;
+            color: #BF7D1A;
+        }

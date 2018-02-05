@@ -1,0 +1,768 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>神秘商店</title>
+    <link href="Content/CSS/main.css" rel="stylesheet" />
+    <link href="Content/CSS/Malls.css" rel="stylesheet" />
+    <script src="Content/Javascript/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        var equipInfos = {};
+        function setTab(name, cursel, n) {
+			bid = 0;
+            for (i = 1; i <= n; i++) {
+                var menu = document.getElementById(name + i);
+                var con = document.getElementById("con_" + name + "_" + i);
+                menu.className = i == cursel ? "on" : "";
+                con.style.display = i == cursel ? "block" : "none";
+            }
+
+        }
+		function sel(t){
+			$(".xz").css("color","#BF7D1A");
+			$(".xz").removeClass("xz");
+			
+			$(t).addClass("xz");
+			$(t).css("color","#F00");
+		
+			}
+		function xuanfu(t){
+			$('.daoju').css('font-weight','normal');
+			$(t).css('font-weight','bold');
+}
+		function showUserInfo(json){
+			
+			var j = $.parseJSON(json);
+			$(".玩家名字").html(j.名字);
+			$(".金币").html(j.金币);
+			$(".元宝").html(j.元宝);
+			$(".水晶").html(j.水晶);
+            $(".积分").html(j.VIP积分);
+			$(".道具容量").html(j.道具容量);
+		}
+		function loadjiejing(j){
+			
+			$(".结晶").html(j);
+		}
+    </script>
+    <style >
+
+    	
+		.xz{
+			color:#F00;}
+		.xf{
+			font-weight:normal
+			}
+			
+		
+    </style>
+    <script language="javascript" src="../javascript/prototype.js"></script>
+    <script type="text/JavaScript">
+<!--
+		function MM_jumpMenu(targ,selObj,restore){ //v3.0
+		  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+		  if (restore) selObj.selectedIndex=0;
+		}
+		
+		/* added by Zheng.Ping */
+		function hiddenContent() {
+			$('props_types').style.display = 'none';
+		}
+		
+		function showContent() {
+			$('props_types').style.display = '';
+		}
+		/* addded by Zheng.Ping */
+		//-->
+		var bid=0;
+		var price=0;
+		var selid=0;
+		var types=-1;
+		var cardid=0;
+		
+		//卡片
+		function card(id){
+			var card = document.getElementById('card');
+			cardid = id;
+			if(card.style.display == "none"){
+				card.style.display = "block";
+			}else{
+				card.style.display = "none";
+			}
+		}
+		
+		function cardpwd(){
+			if(!confirm('请预留背包格子数，如因为背包已满而不能得到奖励，官方不补偿！')){
+				return false;
+			}
+			var cardids = document.getElementById('cardids').value;
+			var pwd = '';
+			pwd = document.getElementById('cardpwd').value;
+			if(cardid == ''){
+				window.parent.Alert('请填写完整！');
+				return;
+			}
+			var opt = {
+				method: 'get',
+				onSuccess: function(t) {
+					var n = t.responseText;
+					if(n != ''){
+						window.parent.Alert(n);
+					}
+				},
+				asynchronous:true
+			};
+			//window.status = '../function/getTaskinfo.php?n='+n+'&t='+tid;
+			var ajax=new Ajax.Request('../function/newcard.php?id='+cardid+'&cardid='+cardids+'&pwd='+pwd, opt);
+		}
+		
+		function cardpwd1(){
+			var card = document.getElementById('card');
+			card.style.display = "none";
+		}
+		function readYuanbao(json){
+			var html=
+			"<tr class=\"daoju\" onClick=\"sel(this);bid={ID};price={价格};\" onMouseOver=\"xuanfu(this)\" >"+
+			    "<td class=\"wpid\"style='display:none'>{ID}</td>"+
+				"<td width=\"35px\"><img style=\"width:25px;height:25px;\" src=\"Content/Img/prop/{图标}.gif\"></td>"+
+				"<td class=\"propName\" width=\"110px\" id=\"t{ID}\" style=\"cursor:pointer;text-align:left\">{名字}</td>"+
+				"<td width=\"60px\" style=\"text-align:left\">{价格}</td>"+
+				"<td style=\"text-align:left\">可叠加</td>"+
+			"</tr>";
+			var j = $.parseJSON(json);
+			$(".元宝列表").html("");
+			for(var i = 0;i<j.length;i++){
+				var h = html.replace("{图标}",j[i].道具图标);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{ID}",j[i].商品序号);
+			    h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{名字}",j[i].道具名字);
+				
+				h = h.replace("{价格}",j[i].商品价格);
+				h = h.replace("{价格}",j[i].商品价格);
+				$(".元宝列表").html($(".元宝列表").html()+h);
+			}
+			 $(".元宝列表 tr").mouseover(function(e){
+				
+				 　e = e||window.event;
+				   window.parent.hoveWp1(e,this,"#FFF",$(this).find(".wpid").html());
+
+			 });
+			$(".元宝列表 tr").mouseout(function(e){
+				
+				 
+				   window.parent.hoveWp1hide();
+			});
+
+		}
+		function readJiejing(json){
+			var html=
+			"<tr class=\"daoju\" onClick=\"sel(this);bid={ID};price={价格};\" onMouseOver=\"xuanfu(this)\" >"+
+			    "<td class=\"wpid\"style='display:none'>{ID}</td>"+
+				"<td width=\"35px\"><img style=\"width:25px;height:25px;\" src=\"Content/Img/prop/{图标}.gif\"></td>"+
+				"<td class=\"propName\" width=\"110px\" id=\"t{ID}\" style=\"cursor:pointer;text-align:left\">{名字}</td>"+
+				"<td width=\"60px\" style=\"text-align:left\">{价格}</td>"+
+				"<td style=\"text-align:left\">可叠加</td>"+
+			"</tr>";
+			var j = $.parseJSON(json);
+			$(".结晶列表").html("");
+			bid=null;
+			for(var i = 0;i<j.length;i++){
+				var h = html.replace("{图标}",j[i].道具图标);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{ID}",j[i].商品序号);
+			    h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{名字}",j[i].道具名字);
+				
+				h = h.replace("{价格}",j[i].商品价格);
+				h = h.replace("{价格}",j[i].商品价格);
+				$(".结晶列表").html($(".结晶列表").html()+h);
+			}
+			 $(".结晶列表 tr").mouseover(function(e){
+				
+				 　e = e||window.event;
+				   window.parent.hoveWp1(e,this,"#FFF",$(this).find(".wpid").html());
+
+			 });
+			$(".结晶列表 tr").mouseout(function(e){
+				
+				 
+				   window.parent.hoveWp1hide();
+			});
+
+		}
+		function readPropList(json){
+			var j = $.parseJSON(json);
+			var node="<tr>"+
+			      "<td class=\"wpid\"style='display:none'>{ID}</td>"+
+				  "<td width=\"35px\"><img style=\"width:25px;height:25px;\" src=\"Content/Img/prop/{ICO}.gif\"></td>"+
+				  "<td class=\"p2\" width=\"110px\" id=\"t{}\" style=\"cursor:pointer;text-align:left\" onMouseOver=\"showTip(660509,0,1,2);this.style.border='solid 1px #DFD496';\" onMouseOut=\"this.style.border=0;\" onClick=\"copyWord('进化之书');sel(this);bid={ID};price={price};\">{Name}</td>"+
+				  "<td width=\"60px\" style=\"text-align:left\">{price}</td>"+
+				  "<td style=\"text-align:left\">{num}</td>"+
+			  "</tr>";
+			  $(".背包列表").html("");
+			for(var i = 0;i<j.length;i++){
+				var jnode = node.replace("{ICO}",j[i].道具图标);
+				jnode = jnode.replace("{Name}",j[i].道具名字);
+				jnode = jnode.replace("{Type}","道具");
+				jnode = jnode.replace("{num}",j[i].道具数量);
+				jnode = jnode.replace("{ID}",j[i].道具序号);
+			    jnode = jnode.replace("{ID}",j[i].道具序号);
+				jnode = jnode.replace("{ID}",j[i].道具序号);
+				jnode = jnode.replace("{price}",j[i].道具价格);
+				jnode = jnode.replace("{price}",j[i].道具价格);
+				$(".背包列表").append(jnode);
+			  
+			}	
+			$(".道具数量").html(j.length);
+			$(".背包列表 tr").mouseover(function(e){
+				
+				 　e = e||window.event;
+				   window.parent.hoveWp(e,this,"#FFF",$(this).find(".wpid").html(),true);
+			});
+			$(".背包列表 tr").mouseout(function(e){
+				
+				 
+				   window.parent.hoveWp1hide();
+			});
+		}
+		function readShuiJing(json){
+				var html=
+			"<tr class=\"daoju\" onClick=\"sel(this);bid={ID};price={价格};\" onMouseOver=\"xuanfu(this)\" >"+
+			  "<td class=\"wpid\"style='display:none'>{ID}</td>"+
+				"<td width=\"35px\"><img style=\"width:25px;height:25px;\" src=\"Content/Img/prop/{图标}.gif\"></td>"+
+				"<td class=\"propName\" width=\"110px\" id=\"t{ID}\" style=\"cursor:pointer;text-align:left\">{名字}</td>"+
+				"<td width=\"60px\" style=\"text-align:left\">{价格}</td>"+
+				"<td style=\"text-align:left\">可叠加</td>"+
+			"</tr>";
+			var j = $.parseJSON(json);
+			$(".水晶列表").html("");
+			for(var i = 0;i<j.length;i++){
+				var h = html.replace("{图标}",j[i].道具图标);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{ID}",j[i].商品序号);
+			h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{名字}",j[i].道具名字);
+			
+				h = h.replace("{价格}",j[i].商品价格);
+				h = h.replace("{价格}",j[i].商品价格);
+				$(".水晶列表").html($(".水晶列表").html()+h);
+				
+			}
+			 $(".水晶列表 tr").mouseover(function(e){
+				
+				 　e = e||window.event;
+				   window.parent.hoveWp1(e,this,"#FFF",$(this).find(".wpid").html());
+
+			 });
+			$(".水晶列表 tr").mouseout(function(e){
+				
+				 
+				   window.parent.hoveWp1hide();
+			});
+		}
+		function readJiFen(json){
+				var html=
+			"<tr class=\"daoju\" onClick=\"sel(this);bid={ID};price={价格};\" onMouseOver=\"xuanfu(this)\" >"+
+			  "<td class=\"wpid\"style='display:none'>{ID}</td>"+
+				"<td width=\"35px\"><img style=\"width:25px;height:25px;\" src=\"Content/Img/prop/{图标}.gif\"></td>"+
+				"<td class=\"propName\" width=\"110px\" id=\"t{ID}\" style=\"cursor:pointer;text-align:left\">{名字}</td>"+
+				"<td width=\"60px\" style=\"text-align:left\">{价格}</td>"+
+				"<td style=\"text-align:left\">可叠加</td>"+
+			"</tr>";
+			var j = $.parseJSON(json);
+			$(".积分列表").html("");
+			for(var i = 0;i<j.length;i++){
+				var h = html.replace("{图标}",j[i].道具图标);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{ID}",j[i].商品序号);
+			h = h.replace("{ID}",j[i].商品序号);
+				h = h.replace("{名字}",j[i].道具名字);
+			
+				h = h.replace("{价格}",j[i].商品价格);
+				h = h.replace("{价格}",j[i].商品价格);
+				$(".积分列表").html($(".积分列表").html()+h);
+				
+			}
+			 $(".积分列表 tr").mouseover(function(e){
+				
+				 　e = e||window.event;
+				   window.parent.hoveWp1(e,this,"#FFF",$(this).find(".wpid").html());
+
+			 });
+			$(".积分列表 tr").mouseout(function(e){
+				
+				 
+				   window.parent.hoveWp1hide();
+			});
+		}
+    </script>
+</head>
+
+
+<body>
+    <div id="Layer1" style="cursor:pointer" onClick="window.parent.$('gw').src='./function/City_Mod.php'">
+        <label></label>
+    </div>
+                    <div class="box01" style=" POSITION: absolute; LEFT: 447PX; top: 29px;">
+                    <div class="box02">
+                        <div class="bb01"><img src="Content/Img/Malls/icon04.jpg" width="65" height="25"></div>
+                        <div class="bb02">
+                            
+                        </div>
+                    </div>
+                    <div class="box03">
+                        <table border="0" cellspacing="0" class="tit01">
+                            <tbody>
+                                <tr>
+                                    <td height="24" style="width:45px; text-align:left"></td>
+                                    <td style="width:100px; text-align:left">名称</td>
+                                    <td style="width:60px; text-align:left">卖出价格</td>
+                                    <td style="text-align:left">数量</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="dt_list clearfix">
+                            <table class="tit01" id="shoplist">
+                                <tbody  class="背包列表">
+                                 
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="plus">背包道具数：<span class="道具数量"></span>    &nbsp; 背包仓库总容量：<span class="道具容量"></span></div>
+                </div>
+              
+
+
+    <div class="task">
+        <div class="task_left"></div>
+
+        <div class="task_right">
+
+            <ul class="task_nav">
+                <li id="tab1" onClick="setTab('tab',1,4)" class="on"><a class="a01"></a></li>
+                <li id="tab2" onClick="setTab('tab',2,4)" class=""><a class="a02"></a></li>
+                <li id="tab3" onClick="window.parent.Alert('拉取商品列表中，该过程可能需要2秒左右，请耐心等待！');window.external.getJifenProp(1);setTab('tab',3,4);window.parent.Alert('拉取列表成功，如果列表为空，请检查您是否登录了时空论坛！');" class=""><a class="a03"></a></li>
+                <li id="tab4" onClick="window.parent.Alert('拉取商品列表中，该过程可能需要2秒左右，请耐心等待！');window.external.getJiejingProp(1);setTab('tab',4,4);window.parent.Alert('拉取列表成功，如果列表为空，请检查您是否登录了时空论坛！');" class=""><a class="a04"></a></li>
+            </ul>
+            <div class="dt_task" id="con_tab_1" style="display: none;">
+
+                <div class="box01">
+                    <div class="box02">
+                        <div class="bb01"><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_01.jpg" alt="热卖" border="0"></a><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_02.jpg" alt="进化合成" border="0"></a><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_03.jpg" alt="宠物相关" border="0"></a><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_04.jpg" alt="装备相关" border="0"></a></div>
+                    </div>
+                    <div class="box03">
+                        <table border="0" cellspacing="0" class="tit01">
+                            <tbody>
+                                <tr>
+                                    <td height="24" style="width:35px; text-align:left"></td>
+                                    <td style="width:100px; text-align:left">名称</td>
+                                    <td style="width:60px; text-align:left">元宝价格</td>
+                                    <td style="text-align:left">属性</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="dt_list clearfix">
+                            <table class="tit01 元宝列表" id="shoplist">
+                                <tbody>
+                                  
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                    <div class="plus">数量：<input type="text" class="txt02" id="num_" size="5"><input type="button" class="conbtn" onClick="buy();" value="购买"></div>
+                </div>
+  <div id="apDiv1">
+                    <div class="task_dh02">
+                        <div class="cion"><img src="Content/Img/Malls/icon01.jpg" width="20" height="18"></div>
+                        <div class="cion01">元宝：<span class="元宝"></span> </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card" style="width:235px;height:158px;left:184px;top:91px;z-index:1000; display:none; position:absolute; background-color:#BF7D1A">
+                <p align="center"><br>-请输入领奖卡片信息-</p>
+                <p>
+                    &nbsp;卡号:
+                    <input name="cardid" type="text" id="cardids" data-form-un="1464421669835.7893">
+                    <br>
+                    <br>
+                    &nbsp;密码:
+                    <input name="cardpwd" type="password" id="cardpwd" data-form-pw="1464421669835.7893"><br><br>
+                    &nbsp;(如果没有密码则不填)<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="button" name="Submit" value="确定" onClick="cardpwd()">
+                    <input type="button" name="Submit2" value="关闭" onClick="cardpwd1()">
+                </p>
+            </div>
+            <div class="dt_task con" id="con_tab_2" style="display: none;">
+
+                <div class="box01">
+                    <div class="box02">
+                        <div class="bb01"><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_01.jpg" alt="热卖" border="0"></a><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_02.jpg" alt="进化合成" border="0"></a><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_03.jpg" alt="宠物相关" border="0"></a><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_04.jpg" alt="装备相关" border="0"></a></div>
+                    </div>
+                    <div class="box03">
+                        <table border="0" cellspacing="0" class="tit01">
+                            <tbody>
+
+                                <tr>
+                                    <td height="24" style="width:35px; text-align:left"></td>
+                                    <td style="width:100px; text-align:left">名称</td>
+                                    <td style="width:60px; text-align:left">水晶价格</td>
+                                    <td style="text-align:left">属性</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="dt_list clearfix">
+                            <table  class="tit01 水晶列表" id="shoplist">
+                                <tbody>
+                                    <tr onClick="copyWord('好事成双之八');sel(this);bid=1461;price=140;" onMouseOver="$(this).css('color','#c0c');" onMouseOut="$(this).css('color','#BF7D1A')" >
+                                        <td width="35px"><img style="width:25px;height:25px;" src="Content/Img/prop/13.gif"></td>
+                                        <td width="110px" id="t1461" style="cursor:pointer;text-align:left">好事成双之八</td>
+                                        <td width="60px" style="text-align:left">140</td>
+                                        <td style="text-align:left">可叠加</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                	<div class="plus">数量：<input type="text" class="txt02" id="sjnum" size="5"><input type="button" class="conbtn" onClick="sjbuy();" value="购买"></div>
+
+                </div>
+                <div id="apDiv1">
+                    <div class="task_dh02">
+                        <div class="cion"><img src="Content/Img/Malls/icon06.jpg" width="20" height="18" style="cursor:pointer" onClick="window.location.reload()"></div><div class="cion01">水晶:<span class="水晶"></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dt_task con" id="con_tab_3" style="display: none;">
+
+                <div class="box01">
+                    <div class="box02">
+                        <div class="bb01"><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_01.jpg" alt="热卖" border="0"></a><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_02.jpg" alt="进化合成" border="0"></a><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_03.jpg" alt="宠物相关" border="0"></a><a href="javascript:void(0)"><img src="Content/Img/Malls/smshop_04.jpg" alt="装备相关" border="0"></a></div>
+                    </div>
+                    <div class="box03">
+                        <table border="0" cellspacing="0" class="tit01">
+                            <tbody>
+                                <tr>
+                                    <td height="24" style="width:35px; text-align:left"></td>
+                                    <td style="width:100px; text-align:left">名称</td>
+                                    <td style="width:60px; text-align:left">vip积分</td>
+                                    <td style="text-align:left">属性</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="dt_list clearfix">
+                            <table  class="tit01 积分列表" id="shoplist">
+                                <tbody>
+                                    <tr onClick="copyWord('下次更新');sel(this);bid=1461;price=999999;" onMouseOver="$(this).css('color','#c0c');" onMouseOut="$(this).css('color','#BF7D1A')" >
+                                        <td width="35px"><img style="width:25px;height:25px;" src="Content/Img/prop/13.gif"></td>
+                                        <td width="110px" id="t1461" style="cursor:pointer;text-align:left">下次更新</td>
+                                        <td width="60px" style="text-align:left">140</td>
+                                        <td style="text-align:left">可叠加</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>                         
+                        </div>
+                    </div>
+                    <div class="plus"><div class="sx"><img src="Content/Img/Malls/smshop_06.jpg" width="39" height="17" style="cursor:pointer" onClick="window.external.getJifenProp(0)"></div>数量：<input type="text" class="txt02" id="vipnum" size="5"><input type="button" class="conbtn" onClick="vipbuy();" value="购买"></div>
+                </div>
+               
+                <div id="apDiv1">
+                    <div class="task_dh02">
+                        <div class="cion"><img src="Content/Img/Malls/icon05.jpg" width="20" height="18"></div><div class="cion01">VIP积分:<span class="积分"></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dt_task con" id="con_tab_4" style="display: none;">
+
+                <div class="box01">
+                    <div class="box02">
+                        <span style="line-height:30px; margin-left:30px"><font color="#FF0000"><span id="timelimit">如果无法点击道具，请重新打开商店</span></font></span>
+                    </div>
+                    <div class="box03">
+                        <table border="0" cellspacing="0" class="tit01">
+                            <tbody>
+                                <tr>
+                                    <td height="24" style="width:35px; text-align:left"></td>
+                                    <td style="width:100px; text-align:left">名称</td>
+                                    <td style="width:60px; text-align:left">时之结晶</td>
+                                    <td style="text-align:left">剩余数量</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="dt_list clearfix">
+
+                             <table  class="tit01 结晶列表" id="shoplist">
+                                <tbody>
+                                    <tr onClick="copyWord('下次更新');sel(this);bid=1461;price=999999;" onMouseOver="$(this).css('color','#c0c');" onMouseOut="$(this).css('color','#BF7D1A')" >
+                                        <td width="35px"><img style="width:25px;height:25px;" src="Content/Img/prop/13.gif"></td>
+                                        <td width="110px" id="t1461" style="cursor:pointer;text-align:left">下次更新</td>
+                                        <td width="60px" style="text-align:left">140</td>
+                                        <td style="text-align:left">可叠加</td>
+                                    </tr>
+                                     <tr onClick="copyWord('下次更新');sel(this);bid=1461;price=999999;" onMouseOver="$(this).css('color','#c0c');" onMouseOut="$(this).css('color','#BF7D1A')" >
+                                        <td width="35px"><img style="width:25px;height:25px;" src="Content/Img/prop/13.gif"></td>
+                                        <td width="110px" id="t1461" style="cursor:pointer;text-align:left">下次更新</td>
+                                        <td width="60px" style="text-align:left">140</td>
+                                        <td style="text-align:left">可叠加</td>
+                                    </tr>
+                                </tbody>
+                            </table>      
+                        </div>
+                    </div>
+                    <div class="plus"><div class="sx"><img src="Content/Img/Malls/smshop_06.jpg" width="39" height="17" style="cursor:pointer" onClick="window.external.getJeijingProp(0)"></div>数量：<input type="text" class="txt02" id="spannum" size="5"><input type="button" class="conbtn" onClick="spanbuy();" value="购买"></div>
+                </div>
+               
+                <div id="apDiv1">
+                    <div class="task_dh02">
+                        <div class="cion"><img src="Content/Img/Malls/icon06.jpg" width="20" height="18"></div><div class="cion01">时之结晶:<span class="结晶"></span></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <script language="javascript" src="../javascript/smshop.js">
+    </script>
+    <script>
+        var style = "1";//$style表示商店的小类
+        var sjtype = "1";
+        var stime = '0';
+        //倒计时
+        tl(stime);
+        function tl(t1) {
+            if (t1 == -1) {
+                $('timelimit').innerHTML = '暂时没有限时折扣商品！';
+            } else if (t1 == 0) {
+                $('timelimit').innerHTML = '活动已经结束！';
+            } else {
+                d = parseInt(t1 / (3600 * 24));
+                h = parseInt(t1 % (3600 * 24) / 3600);
+                m = parseInt(t1 % (3600 * 24) % 3600 / 60);
+                s = parseInt(t1 % (3600 * 24) % 3600 % 60);
+                $('timelimit').innerHTML = '离活动结束还有：' + d + '天' + h + "小时" + m + "分" + s + '秒';
+                t1--;
+                window.setTimeout("tl(" + t1 + ")", 1000);
+            }
+        }
+        if (sjtype == 1) {
+            setTab('tab', 1, 4);
+        }
+        else if (sjtype == 2) {
+            setTab('tab', 2, 4);
+        }
+        else if (sjtype == 3) {
+            setTab('tab', 3, 4);
+        } else {
+            setTab('tab', 4, 4);
+        }
+
+        function showPrizeListDiv(id) {
+            var msg = $('prizelist_' + id).innerHTML;
+            //var msg = document.getElementById('prizelist_'+id).innerHTML;
+            //alert(msg);
+            $('prizelist_real').style.display = 'block';
+            $('prizelist_real').innerHTML = msg;
+        }
+
+
+        var LastKey = "";
+
+        if (!document.all) {
+            window.onmousemove = DRAGs;
+        } else {
+            document.onmousemove = DRAGs;
+        }
+        function DRAGs() {
+            if (!document.all) {
+                Event = arguments[0];
+            } else {
+                Event = event;
+            }
+        }
+
+        // Add by DuHao 2009-5-13
+        function copyWord(words) {
+            window.parent.$('baike_input').value = words;
+        }
+        function showTip(id, bid, sign, type) {
+			
+　try {
+　　// 此处是可能产生例外的语句
+　
+            var x = 500;
+            var y = 100;
+            equipInfos = window.parent.equipInfos;
+            var key = id + "_" + bid + "_" + sign + "_" + type;
+            if (typeof (equipInfos[key]) != 'undefined') {
+                window.parent.showTips(equipInfos[key], x, y);
+                return;
+            }
+            if (LastKey == key) {
+                return;
+            }
+            LastKey = key;
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    equipInfos[key] = t.responseText;
+                    window.parent.showTips(t.responseText, x, y);
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	 var ajax = new Ajax.Request('../function/getPropsInfo.php?id=' + id + '&bid=' + bid + '&sign=' + sign + '&type=' + type, opt);
+　} catch(error) {
+　　// 此处是负责例外处理的语句
+　　} finally {
+　　// 此处是出口语句
+　　}
+        }
+        function getprize(nums) {
+
+            var opt = {
+                method: 'get',
+                onSuccess: function (t) {
+                    alert(t.responseText);
+                },
+                on404: function (t) {
+                },
+                onFailure: function (t) {
+                },
+                asynchronous: true
+            };
+	        var ajax = new Ajax.Request('../function/zhaohui.php?nums=' + nums, opt);
+        }
+
+        function close_window() {
+            document.getElementById('prizelist_real').style.display = 'none';
+        }
+
+
+		
+		function buy(){
+		    var nums = $('#num_').val();
+            if (bid == 0) {window.parent.Alert('请先选择要购买的物品。'); return; }
+            else if (!validInt(nums)) { window.parent.Alert('数量必须是数字!'); return; }
+            else if (nums < 1 || nums > 100) { window.parent.Alert('购买数量范围是1-100之间的整数！'); return; }
+			else{
+				 var sump = price * parseInt($('#num_').val());
+
+                if (sump === 0) { window.parent.Alert('数据错误！'); return; }
+                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + '元宝！')){
+					
+					if(window.external.buy(1,bid,nums)){
+						window.external.updateProp();
+						window.parent.Alert('购买成功!'); 
+					}else{
+						window.parent.Alert('购买失败,请确定您的元宝是否足够！'); 	
+					}
+				
+				}
+			}
+			
+		}
+		//判断是否是正整数
+		function validInt(s)
+		{
+			if(s!=null){
+				var r,re;
+				re = /\d*/i; //\d表示数字,*表示匹配多个数字
+				r = s.match(re);
+				return (r == s)?true:false;
+			}
+			return false;
+		}
+
+        function sjbuy() {
+            //window.parent.Alert('神秘商店暂时未开门!');
+            // return;
+            //
+            var nums = $('#sjnum').val();
+            if (bid == 0) {window.parent.Alert('请先选择要购买的物品。'); return; }
+            else if (!validInt(nums)) { window.parent.Alert('数量必须是数字!'); return; }
+            else if (nums < 1 || nums > 100) { window.parent.Alert('购买数量范围是1-100之间的整数！'); return; }
+			else{
+				 var sump = price * parseInt($('#sjnum').val());
+
+                if (sump == 0) { window.parent.Alert('数据错误！'); return; }
+                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + '水晶！')){
+					
+					if(window.external.buy(2,bid,nums)){
+						window.external.updateProp();
+						window.parent.Alert('购买成功!'); 
+					}else{
+						window.parent.Alert('购买失败,请确定您的水晶是否足够！'); 	
+					}
+				
+				}
+			}
+        }
+		 function spanbuy() {
+            //window.parent.Alert('神秘商店暂时未开门!');
+            // return;
+            //
+            var nums = $('#spannum').val();
+            if (bid == 0) {window.parent.Alert('请先选择要购买的物品。'); return; }
+            else if (!validInt(nums)) { window.parent.Alert('数量必须是数字!'); return; }
+            else if (nums < 1 || nums > 100) { window.parent.Alert('购买数量范围是1-100之间的整数！'); return; }
+			else{
+				 var sump = price * parseInt($('#spannum').val());
+
+                if (sump == 0) { window.parent.Alert('数据错误！'); return; }
+                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + '时之结晶！')){
+					
+					if(window.external.buy(6,bid,nums)){
+						window.external.updateProp();
+						window.parent.Alert('购买成功!'); 
+					}else{
+						window.parent.Alert('购买失败,请确定您的时之结晶是否足够！'); 	
+					}
+				
+				}
+			}
+        }
+
+        function vipbuy() {
+            //window.parent.Alert('神秘商店暂时未开门!');
+            // return;
+            var nums = $('#vipnum').val();
+            if (bid == 0) { window.parent.Alert('请先选择要购买的物品。'); return; }
+            else if (!validInt(nums)) { window.parent.Alert('数量必须是数字!'); return; }
+            else if (nums < 1 || nums > 100) { window.parent.Alert('购买数量范围是1-100之间的整数！'); return; }
+            else {
+                var sump = price * parseInt($('#vipnum').val());
+
+                if (sump == 0) { window.parent.Alert('数据错误！'); return; }
+                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + ' VIP积分！')) {
+				
+					if(window.external.buy(4,bid,nums)){
+						window.external.updateProp();
+						window.parent.Alert('购买成功!'); 
+					}else{
+						window.parent.Alert('购买失败,请确定您的VIP积分是否足够！'); 	
+					}
+				
+				}
+            }    
+        }
+    </script>
+    </body>
+</html>

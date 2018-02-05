@@ -1,0 +1,688 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>petInfo</title>
+    <link href="Content/CSS/PetInfo.css" rel="stylesheet" />
+    <script src="Content/Javascript/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        var zbList;
+        var tzList;
+		
+		function loadIF(){
+
+			if(window.external.check()=="true"){
+		//		
+				//$("body").remove();
+			}
+		}
+		function text(msg){
+			alert("recv:"+msg);
+		}
+        $(function () {
+		
+			
+			$("#bottom div").width(66);
+            $(".pettab li").click(function () {
+                $("#page1").hide();
+                $("#page2").hide();
+                $("#page3").hide();
+                $(".pettab li").removeClass("on");
+                $(this).addClass("on");
+                $("#page" + ($(this).index() + 1)).show();
+            });
+
+
+        });
+
+        function showInt(i){
+			var num=i;
+			if (i >=100000000000000){
+			    i=toDecimal(i/100000000000000);
+				num = i+"百兆";	
+			}
+			else if(i>=1000000000000){
+				i=toDecimal(i/1000000000000);
+				num = i+"兆";	
+			}
+			else if(i>=10000000000){
+				i=toDecimal(i/10000000000);
+				num = i+"百亿";	
+			}else if(i>=100000000){
+				i=toDecimal(i/100000000);
+				num = i+"亿";	
+			}
+			return num;
+		}
+		function toDecimal(x) {  
+            var f = parseFloat(x);  
+            if (isNaN(f)) {  
+                return;  
+            }  
+            f = Math.round(x*100)/100;  
+            return f;  
+			
+        }  var Mid;
+		var 战斗力=0;
+		function updateMainPet(json){
+			Mid=json.宠物序号;
+			战斗力=0;
+			$(".等级").html(json.等级);
+			if(typeof(json.等级)=="undefined")$(".等级").html("0");
+		
+			$(".五行").html(json.五行);
+			if(typeof(json.五行)=="undefined")$(".五行").html("0");
+			
+			$(".生命").html(showInt(json.生命));
+			if(typeof(json.生命)=="undefined")$(".生命").html("0");
+			战斗力+=json.生命/10000;
+			
+			$(".魔法").html(showInt(json.魔法));
+			if(typeof(json.魔法)=="undefined")$(".魔法").html("0");
+			战斗力+=json.魔法/10000;
+			
+			$(".最大生命").html(showInt(json.最大生命));
+			if(typeof(json.最大生命)=="undefined")$(".最大生命").html("0");
+			
+			$(".最大魔法").html(showInt(json.最大魔法));
+			if(typeof(json.最大魔法)=="undefined")$(".最大魔法").html("0");
+
+			if (isNaN(parseFloat(json.加深)) != true)
+            {
+                $(".加深").html(parseInt(100 * parseFloat(json.加深)) + "%");
+	            if(typeof(json.加深)=="undefined")$(".加深").html("0");
+            }
+            else
+            {
+               $(".加深").html("0%");
+            }
+
+            if (isNaN(parseFloat(json.抵消))!= true)
+            {
+                $(".抵消").html(parseInt(100 * parseFloat(json.抵消)) + "%");
+	            if(typeof(json.抵消)=="undefined")$(".抵消").html("0");
+            }
+            else
+            {
+               $(".抵消").html("0%");
+            }
+            
+            if (isNaN(parseFloat(json.吸血))!= true)
+            {
+                $(".吸血").html(parseInt(100 * parseFloat(json.吸血)) + "%");
+	            if(typeof(json.吸血)=="undefined")$(".吸血").html("0");
+            }
+            else
+            {
+               $(".吸血").html("0%");
+            }
+
+            if (isNaN(parseFloat(json.吸魔))!= true)
+            {
+                $(".吸魔").html(parseInt(100 * parseFloat(json.吸魔)) + "%");
+	            if(typeof(json.吸魔)=="undefined")$(".吸魔").html("0");
+            }
+            else
+            {
+               $(".吸魔").html("0%");
+            }
+			
+			$(".攻击").html(showInt(json.攻击));
+			if(typeof(json.攻击)=="undefined")$(".攻击").html("0");
+			战斗力+=json.攻击/800;
+			
+			$(".防御").html(showInt(json.防御));
+			if(typeof(json.防御)=="undefined")$(".防御").html("0");
+			战斗力+=json.防御/1000;
+			$(".命中").html(showInt(json.命中));
+			if(typeof(json.命中)=="undefined")$(".命中").html("0");
+			战斗力+=json.命中/500;
+			
+			$(".闪避").html(showInt(json.闪避));
+			if(typeof(json.闪避)=="undefined")$(".闪避").html("0");
+			战斗力+=json.闪避/4000;
+			$(".速度").html(showInt(json.速度));
+			if(typeof(json.速度)=="undefined")$(".速度").html("0");
+			战斗力+=json.速度/2500;
+			$(".成长").html(showInt(json.成长));
+			if(typeof(json.成长)=="undefined")$(".成长").html("0");
+
+
+			$(".进化次数").html(json.已进化次数);
+			if(typeof(json.已进化次数)=="undefined")$(".进化次数").html("0");
+			if(typeof(json.技能显示)!="undefined"){
+				var 技能 = json.技能显示.split(",");
+				$(".技能列表").html("");
+				for(var i = 0;i<技能.length;i++){
+					var 技能组 = 技能[i].split("|");
+					if(技能组.length>=2){
+						if(技能组[4]=="true"){
+							$(".技能列表").html($(".技能列表").html()+"<li onselectstart='return false;'  onclick=\"sj('BUFF',"+技能组[2]+",this,"+Mid+")\"><b>[加成]</b>&nbsp;"+技能组[0]+"(<span class='jnlv'>"+技能组[1]+"</span>)</li>");
+							战斗力+=技能组[1]*35;
+						}else{
+							
+							$(".技能列表").html($(".技能列表").html()+"<li onselectstart='return false;' onclick=\"sj('技能',"+技能组[2]+",this,"+Mid+")\"><b>[技能]</b>&nbsp;"+技能组[0]+"(<span class='jnlv'>"+技能组[1]+"</span>)</li>");
+							战斗力+=技能组[1]*25;
+						}
+					}
+					
+				}
+				形象=json.形象;
+				if(json.五行=="聖" || json.五行=="佛"
+){
+					
+					showFlashPet("z");
+					
+					
+				}else{
+					setPetICO(json.形象);
+				}
+			}
+			战斗力=Math.ceil(战斗力);
+			$(".战斗力").html(战斗力);
+			/*	
+			$(".升级经验").html(showInt(window.external.getExp(JSON.等级)));	
+			$(".cwjson").html(window.external.getPetInfo1(JSON.宠物序号));
+			$(".当前经验").html(showInt(window.external.getExp_(JSON.当前经验,JSON.等级)))*/
+			if(typeof(json.当前经验)=="undefined")$(".当前经验").html("0");
+
+		}
+		function sj(type,id,dom,petid){
+			var returns = window.external.jnsj(petid,id,type);
+			if(returns>-1){
+				window.parent.showBox("技能升级成功！");
+				$(dom).find(".jnlv").html(returns);
+			}else if(returns==-2){
+				window.parent.showBox("技能已经满级啦~~");	
+			}else{
+				window.parent.showBox("技能升级失败！请确定您拥有升级道具！");	
+			}
+		}
+		function getJSONStr(i){
+			return JSON.stringify(i);
+		}
+		var 形象;
+		function readPet(json){
+			
+			var j = $.parseJSON(json);
+			 $("#bottom").html("");
+			 var ii=0;
+		//	alert(JSON);
+			var html;
+			var i;
+			for(i = 0;i<j.length;i++){
+				var c = "yy";
+				ii++;
+				if(j[i].状态=="0"){
+				
+					//setPetICO(j[i].形象);
+					updateMainPet(j[i]);
+
+					c = "";
+				}
+				html = "<div  class=\""+c+"\" onclick=\"setPetWz("+j[i].宠物序号+",$(this).index())\">"+
+					"<em>"+
+					"<a style='' >"+j[i].宠物名字+"<br />LV "+j[i].等级+"</a>"+
+					"</em>"+
+					"<img style=\"border-radius: 5px; \" src=\"Content/PetPhoto/k"+j[i].形象+".gif\" onerror=\"this.src='Content/PetPhoto/k"+j[i].形象+".png'\" />"+
+					"</div>";
+				
+			
+				 $("#bottom").html($("#bottom").html() + html);
+
+			}
+			for(i = 0;i<3-ii;i++){
+				html = "<div>"+
+					"<em>"+
+                       
+					"</em>"+
+					"<img style=\"border-radius: 5px; \" src=\"Content/PetPhoto/nopet.gif\" />"+
+					"</div>";
+				$("#bottom").append(html);
+				 
+			}
+			
+		
+		}
+		function setPetICO(id){
+
+			var html;
+			if(id>=1000) {
+				html = " <IMG STYLE=\" height: 150px;width: 166px;\" src=\"Content/PetPhoto/z"+id+".gif\" />";
+			} else {
+				html = " <IMG src=\"Content/PetPhoto/z"+id+".gif\" />";
+			}
+
+			$(".petO").html(html);
+		}
+		var Init=0;
+		function showPNG(t){
+			 html = " <IMG class='petPng' id='pet"+形象+"'  src=\"Content/PetPhoto/"+t+形象+"_1.png\" style='height:311px;width:788px;z-index:999' />";
+			 
+			if(Init!=0)clearInterval(Init);
+			
+			Init = setInterval("play"+t+"()",100);
+			$(".petO").html(html);
+			if(形象==516 || 形象 == 524){
+				
+				$(".petO .petPng:eq(0)").css("POSITION","ABSOLUTE");
+
+				$(".petO .petPng:eq(0)").css("TOP","-110PX");
+				$(".petO .petPng:eq(0)").css("LEFT","-20px");
+
+				$(".petO .petPng:eq(1)").css("POSITION","ABSOLUTE");
+				$(".petO .petPng:eq(1)").css("TOP","-50PX");
+				
+				$(".petO .petPng:eq(2)").css("POSITION","ABSOLUTE");
+				$(".petO .petPng:eq(2)").css("TOP","-50PX");
+			}
+		}
+		var zI=1;
+		function playz(){
+	
+			zI++;
+			if(zI>zCount){
+				zI=1;
+			}
+		
+			$(".petPng").attr("src","Content/PetPhoto/z"+形象+"_"+zI+".png");
+		
+		}
+		var zCount = 10;
+		var sCount = 31;
+		function showFlashPet(t){
+            if (形象 == 516 || 形象 == 524){
+				zCount = 10;
+				sCount = 31;
+				showPNG(t);
+				return;
+			}
+			var width=488;
+			if(形象>513){
+				t="f";	
+				width=232;
+			}
+			var fhtml =  "<div><object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' id='sw' width='"+width+"' height='200' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab'>"+
+			"<param name='movie' value='Content/FlashPet/"+t+形象+".swf'>"+
+			"<param name='allowScriptAccess' value='never' />  "+
+			"<param name='allowFullScreen' value='false' />  "+
+			"<param name='quality' value='high' />  "+
+			"<param name='wmode' value='transparent' />"+  
+			"<embed src='Content/FlashPet/"+t+形象+".swf' quality='high' width='488' height='200' name='sw' align='middle' play='true' loop='false' allowScriptAccess='never' type='application/x-shockwave-flash' wmode='transparent' pluginspage='http://www.macromedia.com/go/getflashplayer'></object></div>";
+					
+					$(".petO").html(fhtml);	
+			}
+        function t(i,t,s) {
+            if (ajax.vailZb(i).value == "ok") {
+                $(t).remove();
+                if($("#zbst").html()==""){
+                    $("#zbst").html("身体");
+                }
+                if ($("#zbwq").html() == "") {
+                    $("#zbwq").html("武器");
+                }
+                if ($("#zbjb").html() == "") {
+                    $("#zbjb").html("脚部");
+                }
+                if ($("#zbcb").html() == "") {
+                    $("#zbcb").html("翅膀");
+                }
+                if ($("#zbbs").html()== "") {
+                    $("#zbbs").html("宝石");
+                }
+                if ($("#zbdj").html() == "") {
+                    $("#zbdj").html("道具");
+                }
+                if ($("#zbjz").html() == "") {
+                    $("#zbjz").html("戒指");
+                }
+                if ($("#zbsz").html() == "") {
+                    $("#zbsz").html("手镯");
+                }
+                if ($("#zbxl").html()== "") {
+                    $("#zbxl").html("项链");
+                }
+                if ($("#zbtb").html() == "") {
+                    $("#zbtb").html("头部");
+                }
+                if ($("#zbls").html() == "") {
+                    $("#zbls").html("灵饰");
+                }
+                if ($("#zbfb").html() == "") {
+                    $("#zbfb").html("法宝");
+                }
+
+
+
+            } else {
+                parent.window.showBox("系统繁忙！");
+            }
+        }
+        var pid;
+        function setPetWz(id, index) {
+            pid = id;
+            var r = "";
+         //   var strR = ajax.setPetMain(id).value.split('<f>');
+            
+            var data = "0";
+			if (data == "0") {
+				
+				var dom = $("#bottom div");
+				for (var i = 0; i < dom.length ; i++) {
+
+					if ($(dom[i]).find("img").attr("src") != undefined && $(dom[i]).index() != $("#bottom div:eq(" + index + ")").index()) {
+
+						$(dom[i]).addClass("yy");
+
+					}else{
+						$(dom[i]).removeClass	("yy");
+						}
+					}
+				}
+				
+				updateMainPet($.parseJSON(window.external.getPetInfo(id)));
+                 window.parent.jid=null;
+			window.parent.jname="普通攻击";
+            
+
+		}
+        function getSkill(id) {
+            var skillStr = ajax.getSkillList(id).value;
+            var skillStrList = skillStr.split("|");
+            var html = "";
+            for (var i = 0; i < skillStrList.length; i++) {
+                var skillInfo = skillStrList[i].split(",");
+
+                html += "<li><span> <input type='button' onclick='upSkill(" + skillInfo[2] + ")' value='升级'>" + skillInfo[0] + "&nbsp;&nbsp;<span id='j" + skillInfo[2] + "'>" + skillInfo[1] + "</span>  级 </li>";
+
+            }
+            $("#p3_right ul").html(html);
+
+        }
+        function getSkillProp() {
+            var skillPropStr = ajax.getPropSkill().value;
+            var skillPropList = skillPropStr.split("|");
+            var html = "";
+            for (var i = 0; i < skillPropList.length; i++) {
+                var skillPropInfo = skillPropList[i].split(",");
+                html += "<option value='" + skillPropInfo[1] + "'>" + skillPropInfo[0] + "</option>";
+            }
+            $("#jlist").html(html);
+        }
+        function upSkill(sId) {
+            var r = ajax.upSkill(sId).value.split("|");
+            if (r.length > 1) {
+                if (r[0] == "xxk") {
+                    window.parent.showBox(r[1]);
+                }
+            } else if (r == "ok") {
+                var l = $("#j" + sId).html();
+                l = parseInt(l) + 1;
+                $("#j" + sId).html(l);
+            }
+
+        }
+        function useSkillProp() {
+            var propId = $("#jlist option:selected").val();
+            var r = ajax.useSkillProp(propId, pid).value.split("|");
+            if (r.length > 1) {
+                if (r[0] == "xxk") {
+                    window.parent.showBox(r[1]);
+                }
+            } else if (r == "ok") {
+                window.parent.showBox("学习成功！");
+                window.location = window.location;
+            }
+        }
+		function showUserInfo(json){
+			var j = $.parseJSON(json);
+			$(".玩家名字").html(j.名字);
+			$(".金币").html(j.金币);
+			$(".元宝").html(j.元宝);
+			$(".主宠名字").html(j.主宠名字);
+			$(".水晶").html(j.水晶);
+			$(".宠物数量").html(j.宠物数量);
+		    windows.alert("test");
+		}
+		function loadZB(j){
+			
+			
+			$(".身体").html("身体");
+	 
+			$(".武器").html("武器");
+	   
+			$(".脚部").html("脚部");
+	  
+			$(".翅膀").html("翅膀");
+	   
+			$(".宝石").html("宝石");
+	  
+			$(".道具").html("道具");
+	   
+			$(".戒指").html("戒指");
+		
+			$(".手镯").html("手镯");
+	   
+			$(".项链").html("项链");
+	 
+			$(".头部").html("头部");
+            $(".卡牌左").html("<img src=\"Content/Img/PetInfo/zbsx.gif\">");
+			$(".卡牌右").html("<img src=\"Content/Img/PetInfo/zbsx.gif\">");
+            $(".灵饰").html("灵饰");
+            $(".法宝").html("法宝");
+
+			var j = $.parseJSON(j);
+			for(var i = 0;i < j.length;i++){
+				$("."+j[i].类型).html("<img src=\"Content/Img/prop/prop/"+j[i].ICO+".gif\"/><div class='wpid' style='display:none'>"+j[i].ID+"</div><div class='propName' style='display:none'>"+j[i].Name+"</div>");
+				
+				
+			}
+			//装备槽
+			 $(".装备槽 li").mouseover(function(e){
+				 　e = e||window.event;
+				 //  window.parent.hoveWp1(e,this,"#FFF",$(this).find(".wpid").html())
+				   window.parent.hoveZB_1(e,this,"#FFF",$(this).find(".wpid").html(),$(this).find(".propName").html(),"装备",Mid);
+			 });
+			$(".装备槽 li").mouseout(function(e){
+				 　window.parent.hoveWp1hide();
+			});
+			$(".装备槽 li").dblclick(function(e){
+				
+				if(window.external.xiexia($(this).find(".wpid").html())){
+					 window.parent.showBox("卸下装备成功！");
+					 $(this).html("");
+				}
+			});
+		}
+    </script>
+    <style type="text/css">
+        #pageZb {
+            display: none;
+            position: absolute;
+            overflow: hidden;
+            padding: 0;
+            width: auto;
+            left: 0;
+            top: 0;
+            z-index: 1010;
+            background: #1F1F30;
+            filter: Alpha(opacity=90);
+        }
+    </style>
+</head>
+
+<body onload="loadIF()" style="width:788px;">
+    <div id="baginfo" style="margin-top: 0; z-index: 10020; position: absolute; display: none;">
+        <table style="font-size:12px;" width="185" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                <tr>
+                    <td background="Content/Img/prop/border4_tl.gif" width="5" height="5"></td>
+                    <td background="Content/Img/prop/border4_t.gif"></td>
+                    <td background="Content/Img/prop/border4_tr.gif"></td>
+                </tr>
+                <tr>
+                    <td width="5" background="Content/Img/prop/border4_l.gif"></td>
+                    <td style="background:#1F1F30;filter:Alpha(opacity=90);" align="center"></td>
+                    <td width="5" background="Content/Img/prop/border4_r.gif"></td>
+                </tr>
+             
+                <tr>
+                    <td width="5" background="Content/Img/prop/border4_l.gif"></td>
+                    <td style="background:#1F1F30;filter:Alpha(opacity=90);">
+	                    <font color="#FEFDFA"><b><span id="bz_wpmc"></span></b></font><br/>
+	                    <font color="#FEFDFA"><span id="bz_wpxx"></span></font><br/>
+                    </td>
+                    <td width="5" background="Content/Img/prop/border4_r.gif"></td>
+                </tr>
+                <tr>
+                    <td background="Content/Img/prop/border4_bl.gif" width="5" height="5"></td>
+                    <td background="Content/Img/prop/border4_b.gif"></td>
+                    <td background="Content/Img/prop/border4_br.gif"></td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <div id="main">
+        <div id="left">
+            <div id="left_left">
+
+	            <span class="玩家名字">canku</span><br/>宝贝：<font color="green"><span class="主宠名字"></span></font><br/>
+               
+                
+	            战斗力：<span class="战斗力" >0</span><br/>
+	            性别：美女<br/>
+	            宠物数量：<span class="宠物数量"></span><br/>
+	            金币：<span class="金币">0</span><br/>
+	            元宝：<span class="元宝"></span><br/>
+	            水晶：<span class="水晶"></span><br/>
+               
+            </div>
+            <div id="left_right">
+                <img src="Content/player/26.gif?rd=4847848" />
+      
+            </div>
+    <div id="bottom" style=" word-wrap: break-word;">
+          
+    </div>
+
+        </div>
+        <div id="right">
+            <ul class="pettab" style="position:absolute;z-index:999999">
+                <li id="pet1" class="on"><p class="p1">带领的宠物</p></li>
+                <li id="pet2"><p class="p2">属性</p></li>
+                <li id="pet3"><p class="p3">技能</p></li>
+            </ul>
+			<div style="height:35px"></div>
+            <div id="page1" >
+                <div id="right_bottom" style="display:block">
+                    <div id="rb_left">
+                        <div id="rbl_left">
+                            <ul class="装备槽">
+                                <li class="i1 身体">身体</li>
+                                <li class="i2 头部">头部</li>
+                                <li class="i3 项链">项链</li>
+                                <li class="i4 武器">武器</li>
+                                <li class="i5 手镯">手镯</li>
+                                <li class="i6 脚部">脚部</li>
+                                <li class="i7 戒指">戒指</li>
+                                <li class="i8 翅膀">翅膀</li>
+                                <li class="i9 宝石">宝石</li>
+                                <li class="i10 道具">道具</li>
+
+                                <li class="i11 卡牌右"><img src="Content/Img/PetInfo/zbsx.gif"></li>
+                                <li class="i12 卡牌左"><img src="Content/Img/PetInfo/zbsx.gif"></li>
+                                <li class="i13 灵饰">灵饰</li>
+                                <li class="i14 法宝">法宝</li>
+                            </ul>
+                       
+                           
+                            <h2 class="petO" >
+                                
+                            </h2>
+                        </div>
+                        <h2 style="    margin-top: 10px;">说明：双击装备图标可以脱下装备！</h2>
+                        <!--<div style="cursor:pointer;" onclick="javascript:void(0);">发送挑战信息</div>-->
+                    </div>
+
+                    <div id="rb_right">
+	                    等级：<span class="等级">10</span><br/>
+	                    五行：<span class="五行">圣</span><br/>
+	                    生命：<span class="最大生命">1000</span><br/>
+	                    魔法：<span class="最大魔法">2000</span><br/>
+	                    攻击：<span class="攻击">68000</span><br/>
+	                    防御：<span class="防御">4000</span><br/>
+	                    命中：<span class="命中">6000</span><br/>
+	                    闪避：<span class="闪避">7000</span><br/>
+	                    速度：<span class="速度">5000</span><br/>
+                        成长：<span class="成长">50.5</span>
+                    </div>
+                </div>
+            </div>
+            <!--page1结束标签-->
+            <div id="page2" style="display:none">
+                <div id="p2_left" style="    margin: 0 0 0 30px;">
+                    <h2 class="petO">
+
+                            
+
+
+                    </h2>
+                   
+                    <ul style="z-index:99999">
+                        <li>
+	                        等级：<span class="等级">10</span><br/>
+	                        当前经验：<span class="当前经验">0</span><br/>
+	                        升级经验：<span class="升级经验"></span><br/>
+                            五行：<span class="五行">圣</span>
+                        </li>
+                        <li>
+	                        生命：<span class="最大生命">1000</span><br/>
+	                        魔法：<span class="最大魔法">2000</span><br/>
+	                        攻击：<span class="攻击">68000</span><br/>
+                            防御：<span class="防御">4000</span>
+                        </li>
+                        <li>
+	                        命中：<span class="命中">6000</span><br/>
+	                        闪避：<span class="闪避">7000</span><br/>
+	                        速度：<span class="速度">5000</span><br/>
+                            成长：<span class="成长">50.5</span>
+                        </li>
+                    </ul>
+                </div>
+                <div id="p2_right">
+                    金抗：0<br>
+                    木抗：0<br>
+                    水抗：0<br>
+                    火抗：0<br>
+                    土抗：0<br>
+	                加深：<span class="加深">0%</span><br/>
+	                抵消：<span class="抵消">0%</span><br/>
+	                吸血：<span class="吸血">0%</span><br/>
+	                吸魔：<span class="吸魔">0%</span><br/>
+                    进化次数：<span class="进化次数">0</span>
+                </div>
+            </div>
+            <!--page2结束标签-->
+            <div id="page3" style="display:none">
+                <div id="p3_left">
+                    <h2 class="petO">
+                    </h2>
+                    <h3>
+                        <select id="jlist" name="jlist">
+                            <option value="0">包裹中没有技能书</option>
+                        </select>
+                        <input type="button" onclick="useSkillProp()" style="width:39px; height:17px; margin-top:2px; background:url(i_bnt.gif) left -34px; border:none; cursor:pointer" value="">
+                    </h3>
+                </div>
+
+                <div id="p3_right" style="position:relative;z-index:9999">
+                    <ul class="技能列表"></ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
