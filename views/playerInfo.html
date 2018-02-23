@@ -1,8 +1,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-    <title>¿Ú´ü¾«Áé</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>å£è¢‹ç²¾çµ</title>
     <link href="Content/CSS/playerInfo.css" rel="stylesheet" />
      <script src="Content/Javascript/jquery-1.8.3.min.js"></script>
     <link href="Content/CSS/playerInfo1.css" rel="stylesheet" />
@@ -33,17 +33,17 @@
         function friend(op) {
             var name = $('nickname').value;
             if (name == '' || name.length < 2) {
-                window.parent.Alert('ÇëÕýÈ·ÊäÈëÍæ¼ÒµÄ½ÇÉ«Ãû£¡');
+                window.parent.Alert('è¯·æ­£ç¡®è¾“å…¥çŽ©å®¶çš„è§’è‰²åï¼');
                 return false;
             }
-          	   window.parent.Alert('Áª»úÄ£Ê½ÔÝÎ´¿ªÆô£¡');
+          	   window.parent.Alert('è”æœºæ¨¡å¼æš‚æœªå¼€å¯ï¼');
             //$('f'+op).disabled=true;
         }
         function black(op) {
             var name = $('nicknames').value;
-            if (name == '') window.parent.Alert('ÇëÕýÈ·ÊäÈëÍæ¼ÒµÄ½ÇÉ«Ãû£¡');
+            if (name == '') window.parent.Alert('è¯·æ­£ç¡®è¾“å…¥çŽ©å®¶çš„è§’è‰²åï¼');
          
-            window.parent.Alert('Áª»úÄ£Ê½ÔÝÎ´¿ªÆô£¡');
+            window.parent.Alert('è”æœºæ¨¡å¼æš‚æœªå¼€å¯ï¼');
          
 
          
@@ -62,20 +62,20 @@
 		function showUserInfo(json){
 			
 			var j = $.parseJSON(json);
-			$(".Íæ¼ÒÃû×Ö").html(j.Ãû×Ö);
-			$(".½ð±Ò").html(j.½ð±Ò);
-			$(".Ôª±¦").html(j.Ôª±¦);
-			$(".Ê±Ö®È¯").html(j.Ê±Ö®È¯);
-			$(".³èÎïÊýÁ¿").html(j.³èÎïÊýÁ¿);
-			$(".Ë®¾§").html(j.Ë®¾§);
-			$(".»ý·Ö").html(j.VIP»ý·Ö);
-			$(".×Ô¶¯Õ½¶·´ÎÊý").html(j.×Ô¶¯Õ½¶·´ÎÊý);
-            $(".VIPµÈ¼¶").html(j.vip);
-            $(".ÍþÍû").html(j.ÍþÍû);
-            $(".×Ô¶¯Äù˜„").html(j.AutoTime);
-            $(".ÂÛÌ³ID").html(j.ÂÛÌ³ID);
-            $(".Ë¢¹ÖÊý").html(j.Ë¢¹ÖÊý);
-            $(".³ÆºÅ").html(j.³ÆºÅ);
+			$(".çŽ©å®¶åå­—").html(j.åå­—);
+			$(".é‡‘å¸").html(j.é‡‘å¸);
+			$(".å…ƒå®").html(j.å…ƒå®);
+			$(".æ—¶ä¹‹åˆ¸").html(j.æ—¶ä¹‹åˆ¸);
+			$(".å® ç‰©æ•°é‡").html(j.å® ç‰©æ•°é‡);
+			$(".æ°´æ™¶").html(j.æ°´æ™¶);
+			$(".ç§¯åˆ†").html(j.VIPç§¯åˆ†);
+			$(".è‡ªåŠ¨æˆ˜æ–—æ¬¡æ•°").html(j.è‡ªåŠ¨æˆ˜æ–—æ¬¡æ•°);
+            $(".VIPç­‰çº§").html(j.vip);
+            $(".å¨æœ›").html(j.å¨æœ›);
+            $(".è‡ªåŠ¨æ¶…æ§ƒ").html(j.AutoTime);
+            $(".è®ºå›ID").html(j.è®ºå›ID);
+            $(".åˆ·æ€ªæ•°").html(j.åˆ·æ€ªæ•°);
+            $(".ç§°å·").html(j.ç§°å·);
 		}
 		</script>
 </head>
@@ -86,17 +86,17 @@
 
     <div class="box">
         <div class="self_l l">
-            <div class="self_name"><strong>Íæ¼ÒÃû³Æ£º<span class="Íæ¼ÒÃû×Ö">²Ð¿á</span></strong></div>
+            <div class="self_name"><strong>çŽ©å®¶åç§°ï¼š<span class="çŽ©å®¶åå­—">æ®‹é…·</span></strong></div>
             <div class="self_role"><img src="Content/Img/player/26.gif?rd=4564"></div>
         </div>
 
         <div class="self_r r">
             <ul class="selftab">
                 <li onClick="setTab('self',1,3)" id="self1" class="on">
-                    <p class="p1">ÊôÐÔ</p>
+                    <p class="p1">å±žæ€§</p>
                 </li>
                 <li onClick="setTab('self',2,3)" id="self2" class="">
-                    <p class="p2">ºÃÓÑ</p>
+                    <p class="p2">å¥½å‹</p>
                 </li>
 
             </ul>
@@ -104,47 +104,47 @@
                 <div class="mi_box">
                     <ul class="top  clearfix">
                         <li>                                            <li>
-                        <li>Íæ¼ÒêÇ³Æ£º<span class="Íæ¼ÒÃû×Ö">²Ð¿á</span></li>
-                        <li>ÂÛÌ³ID£º<span class="ÂÛÌ³ID">Ò»Î­ÒÔº½</span></li>
-                        <li>³èÎïÊýÁ¿£º<span class="³èÎïÊýÁ¿" >0</span></li>
-	                    <li>Ë¢¹ÖÊý£º<span class="Ë¢¹ÖÊý" >0</span></li>              
-                        <li>Ôª±¦£º<span class="Ôª±¦" >0</span></li>
-                        <li>Ë®¾§£º<span class="Ë®¾§" >0</span></li>    
-                        <li>½ð±Ò£º<span class="½ð±Ò"></span></li>
-                        <li>Ê±Ö®È¯£º<span class="Ê±Ö®È¯" >0</span></li>           
-                        <li>VIPµÈ¼¶£º<span class="VIPµÈ¼¶" >0</span></li>                     
-                        <li>VIP»ý·Ö£º<span class="»ý·Ö" >0</span></li>
-	                    <li>ÍþÍû£º<span class="ÍþÍû" >0</span></li>
-	                    <li>×Ô¶¯Äù˜„´ÎÊý£º<span class="×Ô¶¯Äù˜„">0</span></li>
+                        <li>çŽ©å®¶æ˜µç§°ï¼š<span class="çŽ©å®¶åå­—"><%= user.UserName %></span></li>
+                        <li>è®ºå›IDï¼š<span class="è®ºå›ID">ä¸€è‹‡ä»¥èˆª</span></li>
+                        <li>å® ç‰©æ•°é‡ï¼š<span class="å® ç‰©æ•°é‡" >0</span></li>
+	                    <li>åˆ·æ€ªæ•°ï¼š<span class="åˆ·æ€ªæ•°" >0</span></li>              
+                        <li>å…ƒå®ï¼š<span class="å…ƒå®" >0</span></li>
+                        <li>æ°´æ™¶ï¼š<span class="æ°´æ™¶" >0</span></li>    
+                        <li>é‡‘å¸ï¼š<span class="é‡‘å¸"></span></li>
+                        <li>æ—¶ä¹‹åˆ¸ï¼š<span class="æ—¶ä¹‹åˆ¸" >0</span></li>           
+                        <li>VIPç­‰çº§ï¼š<span class="VIPç­‰çº§" >0</span></li>                     
+                        <li>VIPç§¯åˆ†ï¼š<span class="ç§¯åˆ†" >0</span></li>
+	                    <li>å¨æœ›ï¼š<span class="å¨æœ›" >0</span></li>
+	                    <li>è‡ªåŠ¨æ¶…ï¿½ï¿½æ¬¡æ•°ï¼š<span class="è‡ªåŠ¨æ¶…ï¿½ï¿½">0</span></li>
                     
                     </ul>
                     <ul class="bot">
-                        <li class="v">×Ô¶¯Õ½¶·´ÎÊý£º<span class="×Ô¶¯Õ½¶·´ÎÊý"></span></li>
+                        <li class="v">è‡ªåŠ¨æˆ˜æ–—æ¬¡æ•°ï¼š<span class="è‡ªåŠ¨æˆ˜æ–—æ¬¡æ•°"></span></li>
                   
-                        <li class="v">³ÆºÅ£º<span class="³ÆºÅ">ÎÞ</span></li>
+                        <li class="v">ç§°å·ï¼š<span class="ç§°å·">æ— </span></li>
                     </ul>
                 </div>
             </div>
             <div class="self_cont clearfix" id="con_self_2" style="display: none;">
                 <div class="mf_box">
-                    <h2>ºÃÓÑÁÐ±í£º</h2>
+                    <h2>å¥½å‹åˆ—è¡¨ï¼š</h2>
                     <div class="mf_box_cont" id="flist">
                         <span style="cursor:pointer;display:block;" onClick="chat('NOOB');"><u>NOOB</u></span>
 
                     </div>
                     <div class="mf_box_inp">
-                        Íæ¼ÒÃû³Æ£º<input type="text" class="inp" name="nickname" id="nickname"><br>
-                        <input type="button" class="btn" value="Ìí¼Ó" onClick="friend('add')" id="badd"> <input type="button" class="btn" value="É¾³ý" onClick="friend('del')" id="bdel">
+                        çŽ©å®¶åç§°ï¼š<input type="text" class="inp" name="nickname" id="nickname"><br>
+                        <input type="button" class="btn" value="æ·»åŠ " onClick="friend('add')" id="badd"> <input type="button" class="btn" value="åˆ é™¤" onClick="friend('del')" id="bdel">
                     </div>
                 </div>
                 <div class="mf_box">
-                    <h2>ºÚÃûµ¥ÁÐ±í(ÄÜÆÁ±ÎºÚÃûµ¥Íæ¼ÒÁÄÌì)£º</h2>
+                    <h2>é»‘åå•åˆ—è¡¨(èƒ½å±è”½é»‘åå•çŽ©å®¶èŠå¤©)ï¼š</h2>
                     <div class="mf_box_cont" id="flists">
-                        Äú»¹Î´Ìí¼ÓÈÎºÎºÚÃûµ¥£¡
+                        æ‚¨è¿˜æœªæ·»åŠ ä»»ä½•é»‘åå•ï¼
                     </div>
                     <div class="mf_box_inp">
-                        Íæ¼ÒÃû³Æ£º<input type="text" class="inp" name="nicknames" id="nicknames"><br>
-                        <input type="button" class="btn" value="Ìí¼Ó" onClick="black('addblacklist')" id="faddblacklist"> <input type="button" class="btn" value="É¾³ý" onClick="black('deleteblacklist')" id="fdel">
+                        çŽ©å®¶åç§°ï¼š<input type="text" class="inp" name="nicknames" id="nicknames"><br>
+                        <input type="button" class="btn" value="æ·»åŠ " onClick="black('addblacklist')" id="faddblacklist"> <input type="button" class="btn" value="åˆ é™¤" onClick="black('deleteblacklist')" id="fdel">
                     </div>
                 </div>
             </div>
