@@ -16,6 +16,8 @@
     "mongoose": "^4.13.9",
     "morgan": "~1.9.0",
     "multer": "^0.1.6",
+    "mysql": "^2.15.0",
+    "node-uuid": "^1.4.8",
     "serve-favicon": "~2.4.5"
   }
 }

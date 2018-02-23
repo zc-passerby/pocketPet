@@ -5,16 +5,22 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
-var mongoose = require('mongoose');
 var session = require('express-session');
+var tableDefine = require('./common/tableDefine');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+global.db = require('./common/dbutil').Instance();
 global.pwdKey = 'justForPocketPet';
-global.dbHandler = require('./database/dbHandler');
-global.db = mongoose.connect('mongodb://47.89.246.80:27017/pocketPet');
 
+//用户的数据
+global.playerInfomation = null;
+
+//定义数据表实体
+db.define(tableDefine);
+
+//Express配置
 var app = express();
 app.use(session({
     secret : 'secretKey',

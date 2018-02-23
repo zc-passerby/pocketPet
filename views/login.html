@@ -61,12 +61,12 @@
             var password = $("#password").val();
             var data = {"username":username,"password":password};
             $.ajax({
-                url:'/login',
+                url:'/users/login',
                 type:'post',
                 data: data,
                 success: function(data,status){
                     if(status == 'success'){
-                        location.href = 'petIndex';
+                        location.href = 'home';
                     }
                 },
                 error: function(data,status){

@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>口袋精灵</title>
     <link href="Content/CSS/playerInfo.css" rel="stylesheet" />
-     <script src="Content/Javascript/jquery-1.8.3.min.js"></script>
+     <script src="../public/Content/Javascript/jquery-1.8.3.min.js"></script>
     <link href="Content/CSS/playerInfo1.css" rel="stylesheet" />
     <script type="text/javascript">
 		$(function(){
@@ -87,7 +87,7 @@
     <div class="box">
         <div class="self_l l">
             <div class="self_name"><strong>玩家名称：<span class="玩家名字">残酷</span></strong></div>
-            <div class="self_role"><img src="Content/Img/player/26.gif?rd=4564"></div>
+            <div class="self_role"><img src="../public/Content/Img/player/26.gif?rd=4564"></div>
         </div>
 
         <div class="self_r r">
@@ -104,22 +104,22 @@
                 <div class="mi_box">
                     <ul class="top  clearfix">
                         <li>                                            <li>
-                        <li>玩家昵称：<span class="玩家名字"><%= user.UserName %></span></li>
+                        <li>玩家昵称：<span class="玩家名字"><%= user.nickname %></span></li>
                         <li>论坛ID：<span class="论坛ID">一苇以航</span></li>
                         <li>宠物数量：<span class="宠物数量" >0</span></li>
 	                    <li>刷怪数：<span class="刷怪数" >0</span></li>              
-                        <li>元宝：<span class="元宝" >0</span></li>
-                        <li>水晶：<span class="水晶" >0</span></li>    
-                        <li>金币：<span class="金币"></span></li>
+                        <li>元宝：<span class="元宝" ><%= user.goldIngot %></span></li>
+                        <li>水晶：<span class="水晶" ><%= user.crystal %></span></li>
+                        <li>金币：<span class="金币"><%= user.goldCoin %></span></li>
                         <li>时之券：<span class="时之券" >0</span></li>           
                         <li>VIP等级：<span class="VIP等级" >0</span></li>                     
                         <li>VIP积分：<span class="积分" >0</span></li>
 	                    <li>威望：<span class="威望" >0</span></li>
-	                    <li>自动涅��次数：<span class="自动涅��">0</span></li>
+	                    <li>自动涅槃次数：<span class="自动涅槃">0</span></li>
                     
                     </ul>
                     <ul class="bot">
-                        <li class="v">自动战斗次数：<span class="自动战斗次数"></span></li>
+                        <li class="v">自动战斗次数：<span class="自动战斗次数"><%= user.autoAttack %></span></li>
                   
                         <li class="v">称号：<span class="称号">无</span></li>
                     </ul>
