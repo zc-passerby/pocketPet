@@ -4,15 +4,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>口袋精灵</title>
     <link href="Content/CSS/playerInfo.css" rel="stylesheet" />
-     <script src="../public/Content/Javascript/jquery-1.8.3.min.js"></script>
+     <script src="Content/Javascript/jquery-1.8.3.min.js"></script>
     <link href="Content/CSS/playerInfo1.css" rel="stylesheet" />
     <script type="text/javascript">
 		$(function(){
-	
 			if(window.external.check()=="true"){
 			window.external.updatePlayerInfo_page();
-				
-			
 			}
 		});
 
@@ -86,8 +83,12 @@
 
     <div class="box">
         <div class="self_l l">
-            <div class="self_name"><strong>玩家名称：<span class="玩家名字">残酷</span></strong></div>
-            <div class="self_role"><img src="../public/Content/Img/player/26.gif?rd=4564"></div>
+            <div class="self_name">
+                <strong>
+                    玩家名称：<span class="玩家名字"><%= user.nickname %></span>
+                </strong>
+            </div>
+            <div class="self_role"><img src="Content/Img/player/26.gif?rd=4564"></div>
         </div>
 
         <div class="self_r r">

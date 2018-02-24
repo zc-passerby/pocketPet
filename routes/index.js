@@ -14,35 +14,60 @@ router.get('/login', function (req, res) {      // 到达此路径则渲染login
 
 /* GET register page. */
 router.get('/register', function (req, res) {         // 到达此路径则渲染register文件，并传出title值供 register.html使用
-    res.render('register', {title : '注册帐号'})
+    res.render('register1', {title : '注册帐号'})
 });
 
 /* GET petIndex page. */
-router.get('/home', function (req, res) {
+router.get('/petIndex', function (req, res) {
     if (!req.session.user) {
-        req.session.error == "请先登录！";
+        req.session.error = "请先登录！";
         res.redirect('/login');
     }
-    res.render('home', {title:"欢迎" + req.session.user.nickname + "进入口袋精灵世界", userInfo:req.session.user})
+    res.render('petIndex', {title:"欢迎" + req.session.user.nickname + "进入口袋精灵世界", userInfo:req.session.user})
+});
+
+/* GET update page. */
+//更新日志
+router.get('/showUpdateLog', function (req, res) {
+    if (!req.session.user) {
+        req.session.error = "请先登录！";
+        res.redirect('/login');
+    }
+    res.render('update');
 });
 
 /* GET field expedition page. */
 //野外探险
-
+router.get('/fieldExpedition', function (req, res) {
+    if (!req.session.user) {
+        req.session.error = "请先登录！";
+        res.redirect('/login');
+    }
+});
 
 /* GET central town page. */
 //中心城镇
-
+router.get('/centralTown', function (req, res) {
+    if (!req.session.user) {
+        req.session.error = "请先登录！";
+        res.redirect('/login');
+    }
+});
 
 /* GET pet information page. */
 //宠物资料
-
+router.get('/petInfo', function (req, res) {
+    if (!req.session.user) {
+        req.session.error = "请先登录！";
+        res.redirect('/login');
+    }
+});
 
 /* GET player information page. */
 //个人信息
 router.get('/playerInfo', function (req, res) {
     if (!req.session.user) {
-        req.session.error == "请先登录！";
+        req.session.error = "请先登录！";
         res.redirect('/login');
     }
     var User = db.get('User');
@@ -52,8 +77,8 @@ router.get('/playerInfo', function (req, res) {
             console.log(err);
         } else {
             if (result) {
-                var userInfo = result;
-                playerInfomation = userInfo;
+                //var userInfo = result;
+                playerInfomation = result;
                 req.session.user = playerInfomation;
                 res.render('playerInfo', {userInfo:playerInfomation});
             }

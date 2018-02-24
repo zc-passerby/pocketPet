@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var uuid = require('node-uuid');
+var svgCaptcha = require('svg-captcha');
 var cryptoData = require('../common/cryptoData');
 
 //获取用户IP
@@ -100,6 +101,41 @@ router.post('/register', function (req, res) {
             }
         }
     });
+});
+
+//获取验证码
+router.get('/getCaptcha', function (req, res) {
+    console.log('-----------------------------');
+    console.log(req.body);
+    console.log('-----------------------------');
+    var width = req.body.width ? req.body.width : 150;
+    var height = req.body.height ? req.body.height : 40;
+    var noise = req.body.noise ? req.body.noise : 4;
+    var color = req.body.isColor ? req.body.isColor : false;
+    var background = req.body.background ? req.body.background : '';
+    var size = req.body.size ? req.body.size : 4;
+    var ignoreChars = req.body.ignoreChars ? req.body.ignoreChars : '0o1i';
+    var fontSize = req.body.fontSize ? req.body.fontSize : 40
+    ;
+    var codeConfig = {
+        size: size, // 验证码长度
+        ignoreChars: ignoreChars, // 验证码字符中排除 0o1i
+        noise: noise, // 干扰线条的数量
+        color: color, // 验证码的字符是否有颜色，默认没有，如果设定了背景，则默认有
+        background: background, // 验证码图片背景颜色
+        width: width, // width of captcha
+        height: height, // height of captcha
+        fontSize: fontSize // captcha text size
+    };
+    var captcha = svgCaptcha.create(codeConfig);
+    req.session.captcha = captcha.text.toLowerCase(); //存session用于验证接口获取文字码
+    console.log(captcha.text.toLowerCase());
+    console.log(captcha.data);
+    //res.type('image/svg+xml');
+    res.setHeader('Content-Type', 'image/svg+xml');
+    res.write(String(captcha.data));
+    res.end();
+    //res.send(captcha.data);
 });
 
 module.exports = router;
