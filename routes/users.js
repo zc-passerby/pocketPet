@@ -63,13 +63,27 @@ router.post('/login', function (req, res) {
 router.post('/register', function (req, res) {
     var User = db.get('User');  //从数据库中获取userInfo表的句柄
     var tableName = User.tableName; //表名
-    var userName = req.body.username; // 获取post中的username值
-    var nickName = req.body.nickname; // 获取post中的nickname值
-    var userPswd = cryptoData.md5PwdKeyEncrypto(req.body.password); // 获取post中的password值并加密
+    var userName = req.body.username; // 获取post中的用户名值
+    var nickName = req.body.nickname; // 获取post中的昵称值
+    var captcha = req.body.captcha; //获取post中的验证码
+    var sex = req.body.sex; //获取post中的性别值
+    var head = req.body.head; //获取post中的头像值
+    var userPswd = cryptoData.md5PwdKeyEncrypto(req.body.password); // 获取post中的密码值并加密
     var userId = uuid.v1();
     var params = {id:userId, username:userName, nickname:nickName, password:userPswd, registerTime:new Date()};
     var sql = 'select (select count(0) from ' + tableName + ' where username=?) as userNameCount, (select count(0) from ' + tableName + ' where nickname=?) as nickNameCount from ' + tableName;
     var sqlParams = [userName, nickName];
+    var retData = {errorCode:0, errorMsg:'', userId:''};
+    console.log(captcha);
+    console.log(req.session.captcha);
+    if (captcha != req.session.captcha) {
+        retData.errorCode = 1;
+        retData.errorMsg = "验证码错误";
+        res.send(retData);
+        return;
+    }
+    res.send(retData);
+    return;
     User.executeSql(sql, sqlParams, function (err, result) { //查询用户名是否存在
         if (err) {  //查询数据库失败就返回给原post处（login.html) 状态码为500的错误
             res.send(500);
@@ -108,8 +122,8 @@ router.get('/getCaptcha', function (req, res) {
     console.log('-----------------------------');
     console.log(req.body);
     console.log('-----------------------------');
-    var width = req.body.width ? req.body.width : 150;
-    var height = req.body.height ? req.body.height : 40;
+    var width = req.body.width ? req.body.width : 120;
+    var height = req.body.height ? req.body.height : 30;
     var noise = req.body.noise ? req.body.noise : 4;
     var color = req.body.isColor ? req.body.isColor : false;
     var background = req.body.background ? req.body.background : '';
@@ -132,10 +146,15 @@ router.get('/getCaptcha', function (req, res) {
     console.log(captcha.text.toLowerCase());
     console.log(captcha.data);
     //res.type('image/svg+xml');
-    res.setHeader('Content-Type', 'image/svg+xml');
-    res.write(String(captcha.data));
-    res.end();
+    //res.setHeader('Content-Type', 'text');
+    //res.write(String(captcha.data));
+    //res.end();
+    //res.type('svg');
     //res.send(captcha.data);
+    var codeData = {
+        img: captcha.data
+    };
+    res.send(codeData);
 });
 
 module.exports = router;
