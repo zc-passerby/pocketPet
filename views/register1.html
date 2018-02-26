@@ -50,11 +50,14 @@
     <script type="text/javascript" src="javascripts/jquery.min.js"></script>
     <script type="text/javascript">
         var flag=false;
-        var opbak="";
+        var opbak= '';
         var sex = '';
         var head = '';
         var user  = '';
+        var userId = '';
         var no_word = ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''];  //限制字符集
+
+        refreshCaptcha();
 
         function C(obj,id)
         {
@@ -97,11 +100,58 @@
             }
             $(ids).className = "arole0"+ids.replace(/[^\d]/g,"");
         }
+        function register() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('pass').value;
+            var nickname = document.getElementById('bname').value;
+            var captcha = document.getElementById('captcha').value;
+            for(var i=0; i < no_word.length; i++)
+            {
+                if(nickname.indexOf(no_word[i]) != -1)
+                {
+                    alert('昵称中包含特殊字符，请重新输入');
+                    return;
+                }
+            }
+            if(sex == '' || head == ''){
+                sex = 1;
+                head = 5;
+            }
+            var data = {
+                "username":username,
+                "nickname":nickname,
+                "password":password,
+                'captcha':captcha,
+                'sex': sex,
+                'head': head
+            };
+            $.ajax({
+                url: '/users/register',
+                type: 'post',
+                data: data,
+                success: function(resData, status){
+                    if(status == 'success' && resData.errorCode == 0){
+                        //location.href = 'login';
+                        userId = resData.userId;
+                        alert('恭喜您，注册成功！点确定将选择初始宠物！');
+                        OpenLogin();
+                    } else if (resData.errorCode == 1) {
+                        alert(resData.errorMsg);
+                    } else {
+                        alert('对不起，注册失败了！');
+                    }
+                },
+                error: function(resData, err) {
+                    //location.href = 'register';
+                    alert('对不起，注册失败了！');
+                }
+            });
+        }
         function nexta(){
             var user = document.getElementById('bname').value;
-            var captcha=document.getElementById('captcha').value;
+            var captcha = document.getElementById('captcha').value;
             //alert(user);
-            for(var i=0;i<no_word.length;i++)
+            for(var i=0; i < no_word.length; i++)
             {
                 if(user.indexOf(no_word[i]) != -1)
                 {
@@ -164,7 +214,7 @@
                     onFailure: function(t) {
                     },
                     asynchronous:true
-                }
+                };
 
                 var ajax=new Ajax.Request('register.php?'+rop, opt);
             }
@@ -205,7 +255,7 @@
         function unghfun(){
             $('ghtips').innerHTML='';
         }
-        function refreshCaptcha(t, data) {
+        function refreshCaptcha(data) {
             $.ajax({
                 url:'/users/getCaptcha',
                 type:'get',
@@ -213,16 +263,20 @@
                 success: function(data,status){
                     if(status == 'success'){
                         console.log(data);
-                        for (var m in data) {
+                        //for (var m in data) {
                             //console.log(m + "======" + data[m]);
-                        }
+                        //}
                         //console.log(data.documentElement);
-                        $(t).attr('src', data);
+                        //$(t).attr('src', data);
+                        var image = document.getElementById('justForCaptcha');
+                        console.log(image);
+                        console.log(image.src);
+                        image.innerHTML = data.img;
                     }
                 },
                 error: function(data,status){
                     if(status == 'error'){
-
+                        return;
                     }
                 }
             });
@@ -263,9 +317,9 @@
                         密码：<input type="password" style="width:50px;" class="pass" name="password"  id="pass"  />
                         角色名： <input type="text" style="width:50px;" class="bname" name="nickname"  id="bname"  />
                         <!-- 验证码: 	<img src="/users/getCaptcha" onclick="(function(t){t.src=$.get('/users/getCaptcha', {width:40,noise:4,fontSize:40});t.reload();})(this)" alt="CAPTCHA"  /> -->
-                        验证码: 	<img src="/users/getCaptcha" onclick="refreshCaptcha(this, {width:40,noise:4,fontSize:40})" alt="CAPTCHA"  />
+                        验证码: 	<div style="display: inline" id="justForCaptcha" src="/users/getCaptcha" onclick="refreshCaptcha()" alt="CAPTCHA"></div>
                         <input type="text" style="width:50px;" class="" name="captcha"  id="captcha"  />
-                        <input name="button" type="button" class="sbtn" onclick="nexta();" value="" />
+                        <input name="button" type="button" class="sbtn" onclick="register()" value="" />
                         <br/><br/><br/>
                     </div>
                     <div style="position:absolute; font-size:12px; z-index:2; left:809px; top:540px; width:300px;margin-left:10px" align="left">
@@ -347,7 +401,10 @@
 <script type="text/javascript">
     var dBody = null;
     function getBody(){
-        if(!dBody)dBody=(document.compatMode&&document.compatMode.indexOf('CSS')>-1)?document.documentElement:document.body;return dBody;
+        if(!dBody) {
+            dBody = (document.compatMode && document.compatMode.indexOf('CSS') > -1) ? document.documentElement : document.body;
+        }
+        return dBody;
     }
     function getScrollX(){
         return window.pageXOffset||window.scrollX||getBody().scrollLeft||0;
@@ -356,11 +413,11 @@
         return window.pageYOffset||window.scrollY||getBody().scrollTop||0;
     }
     function OpenLogin(){
-        var x=document.documentElement.clientWidth/2+getScrollX()-446/2;
-        var y=document.documentElement.clientHeight/2+getScrollY()-264/2;
-        var sWidth=document.body.scrollWidth;
-        var sHeight=document.body.scrollHeight;
-        var xHeight=document.documentElement.clientHeight;
+        var x = document.documentElement.clientWidth / 2 + getScrollX() - 446 / 2;
+        var y = document.documentElement.clientHeight / 2 + getScrollY() - 264 / 2;
+        var sWidth = document.body.scrollWidth;
+        var sHeight = document.body.scrollHeight;
+        var xHeight = document.documentElement.clientHeight;
         if (sHeight > xHeight)
         {
             var SSS = sHeight
