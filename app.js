@@ -14,9 +14,6 @@ var users = require('./routes/users');
 global.db = require('./common/dbutil').Instance();
 global.pwdKey = 'justForPocketPet';
 
-//用户的数据
-global.playerInfomation = null;
-
 //定义数据表实体
 db.define(tableDefine);
 

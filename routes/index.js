@@ -78,9 +78,8 @@ router.get('/playerInfo', function (req, res) {
         } else {
             if (result) {
                 //var userInfo = result;
-                playerInfomation = result;
-                req.session.user = playerInfomation;
-                res.render('playerInfo', {userInfo:playerInfomation});
+                req.session.user = result;
+                res.render('playerInfo');
             }
         }
     });

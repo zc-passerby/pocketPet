@@ -11,3 +11,4 @@
 7. [NodeJS ejs模板中发送ajax请求后如何局部刷新数据?](https://segmentfault.com/q/1010000012761320)
 8. [git上传本地单独修改的文件](http://blog.csdn.net/web_hwg/article/details/72312954)
 9. [程序猿必备技能之解决github访问慢方案](http://blog.csdn.net/wu__di/article/details/50538916)
+10. [JS操作符转化字符串为数字](http://cnodejs.org/topic/53400c0c018dc21c220082b3)

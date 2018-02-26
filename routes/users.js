@@ -46,8 +46,7 @@ router.post('/login', function (req, res) {
                     req.session.error = "密码错误！！！";
                     res.send(404);
                 } else { //信息匹配成功，则将此对象（匹配到的user) 赋给session.user ,更新登陆时间并返回成功
-                    playerInfomation = userInfo;
-                    req.session.user = playerInfomation;
+                    req.session.user = userInfo;
                     setUserData(req, User, userInfo);
                     res.send(200);
                 }
@@ -82,11 +81,10 @@ router.post('/register', function (req, res) {
         res.send(retData);
         return;
     }
-    res.send(retData);
-    return;
     User.executeSql(sql, sqlParams, function (err, result) { //查询用户名是否存在
         if (err) {  //查询数据库失败就返回给原post处（login.html) 状态码为500的错误
-            res.send(500);
+            retData.errorCode = 1;
+            retData.errorMsg = '查询数据库失败';
             console.log(err);
         } else {
             var userNameCount = 0;
@@ -96,15 +94,27 @@ router.post('/register', function (req, res) {
                 nickNameCount = result[0].nickNameCount;
             }
             if (userNameCount != 0) {
-                req.session.error = "用户名已存在";
-                res.send(500);
+                //req.session.error = "用户名已存在";
+                //res.send(500);
+                retData.errorCode = 1;
+                retData.errorMsg = "用户名已存在";
             } else if (nickNameCount != 0) {
-                req.session.error = "昵称已存在";
-                res.send(500);
+                //req.session.error = "昵称已存在";
+                //res.send(500);
+                retData.errorCode = 1;
+                retData.errorMsg = "昵称已存在";
             } else { //可以注册
+                params.sex = sex;
+                var headImg = 'images/head/35.gif';
+                if (~~head >= 1 && ~~head <= 6) {
+                    headImg = 'imags/head/3' + ~~head + '.gif';
+                }
+                params.headImg = headImg;
                 User.insert(params, function (err, result) {
                     if (err) {  //查询数据库失败就返回给原post处（login.html) 状态码为500的错误
-                        res.send(500);
+                        //res.send(500);
+                        retData.errorCode = 1;
+                        retData.errorMsg = '查询数据库失败';
                         console.log(err);
                     } else {
                         req.session.error = "用户名注册成功";
@@ -114,6 +124,7 @@ router.post('/register', function (req, res) {
                 });
             }
         }
+        res.send(retData);
     });
 });
 
