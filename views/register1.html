@@ -46,40 +46,18 @@
         .backbg{display:none;width:100%;height:100%;left:0;position:absolute;z-index:99;background:#000; filter:alpha(opacity=50); -moz-opacity:0.5; opacity:0.5}
         .tip02{background:url(images/taskinfobg.gif) repeat-y;padding:0 20px 5px 20px;line-height:20px;color:#f00}
     </style>
-    <script language="javascript" src="javascripts/prototype.js"></script>
+    <script type="text/javascript" src="javascripts/prototype.js"></script>
     <script type="text/javascript" src="javascripts/jquery.min.js"></script>
     <script type="text/javascript">
-        var flag=false;
-        var opbak= '';
+        //var flag=false;
+        //var opbak= '';
         var sex = '';
         var head = '';
-        var user  = '';
+        //var user  = '';
         var userId = '';
         var no_word = ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''];  //限制字符集
 
         refreshCaptcha();
-
-        function C(obj,id)
-        {
-            if(flag){
-                return;
-            }
-            var op='';
-            if(id=='cuser') op='u='+obj.value;
-            else op='n='+obj.value;
-            var opt = {
-                method: 'get',
-                onSuccess: function(t) {
-                    $(id).innerHTML=t.responseText;
-                },
-                on404: function(t) {
-                },
-                onFailure: function(t) {
-                },
-                asynchronous:true
-            };
-            var ajax=new Ajax.Request('loginCheck.php?'+ op, opt);
-        }
 
         function nextstep(ids)
         {
@@ -88,23 +66,23 @@
                 return;
             }
             head = sid;
-            if(sid == 1 || sid == 3 || sid == 5){//男
+            if(sid == 1 || sid == 3 || sid == 5) {//男
                 sex = '1';
-            }else{
+            } else {
                 sex = '2';
             }
-            for(i=1;i<7;i++)
-            {
-                $("lr"+i).className = "role0"+i;
-                //alert($("lr"+i).className)
+            for(var i = 1; i < 7; i++) {
+                $("#lr"+i)[0].className = "role0"+i;
+                //alert($("#lr"+i).className);
+                //console.log(document.getElementById('lr'+i));
             }
-            $(ids).className = "arole0"+ids.replace(/[^\d]/g,"");
+            $('#' + ids)[0].className = "arole0"+ids.replace(/[^\d]/g,"");
         }
         function register() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('pass').value;
-            var nickname = document.getElementById('bname').value;
-            var captcha = document.getElementById('captcha').value;
+            var username = $('#username')[0].value;
+            var password = $('#pass')[0].value;
+            var nickname = $('#bname')[0].value;
+            var captcha = $('#captcha')[0].value;
             for(var i=0; i < no_word.length; i++)
             {
                 if(nickname.indexOf(no_word[i]) != -1)
@@ -147,114 +125,34 @@
                 }
             });
         }
-        function nexta(){
-            var user = document.getElementById('bname').value;
-            var captcha = document.getElementById('captcha').value;
-            //alert(user);
-            for(var i=0; i < no_word.length; i++)
-            {
-                if(user.indexOf(no_word[i]) != -1)
-                {
-                    alert('昵称中包含特殊字符，请重新输入');
-                    return;
-                }
-            }
-            var op = 'n='+encodeURIComponent(user)+'&captcha='+captcha;
-            var opt = {
-                method: 'get',
-                onSuccess: function(t) {
-                    var result = t.responseText;
-                    if(result == 'ok' || result == 'OK'){
-                        if(sex == '' || head == ''){
-                            sex = 1;
-                            head = 5;
+
+        function reg2(id) {
+            if(userId == "") {
+                returnreg();
+            } else {
+                $.ajax({
+                    url: 'user/setFirstPet',
+                    type: 'post',
+                    data: {userId:userId},
+                    success: function (resData, status) {
+                        if (status == 'success') {
+                            alert('宠物选择成功，点确定将转到登录页面！');
+                            location.href = 'login';
                         }
-                        opbak='bname='+user+'&sex='+sex+'&head='+head+'&captcha='+captcha;
-                        OpenLogin();
-                        //document.getElementById('reg2').style.display='';
-                    }else{
-                        alert(result);
-                        return;
+                    },
+                    error: function (resData, err) {
+                        alert('宠物选择出错，默认使用金波姆！')
+                        location.href = 'login';
                     }
-                },
-                on404: function(t) {
-                },
-                onFailure: function(t) {
-                },
-                asynchronous:true
-            }
-            var ajax=new Ajax.Request('loginCheck.php?'+op, opt);
-        }
-
-        function reg2(id){
-            if(opbak == ""){
-                returnreg()
-            }else{
-                var username = document.getElementById('username').value;
-                var pass = document.getElementById('pass').value;
-                var rop = opbak+'&bc='+id+'&username='+username+'&pass='+pass;;
-
-                var opt = {
-                    method: 'get',
-                    onSuccess: function(t) {
-                        var r = t.responseText;
-                        if (r=='OK1')
-                        {
-                            alert('恭喜您，注册成功！点确定将立即进入游戏！');
-                            document.location.href="login.php?";
-                        }
-                        else
-                        {
-                            alert(r);
-                            CloseLogin();
-                        }
-                    },
-                    on404: function(t) {
-                    },
-                    onFailure: function(t) {
-                    },
-                    asynchronous:true
-                };
-
-                var ajax=new Ajax.Request('register.php?'+rop, opt);
+                });
             }
         }
 
         function returnreg()
         {
-            flag=false;
             window.location.reload();
         }
 
-
-        function ghfun(){
-            var ghflag = "pmkd2";
-            if(ghflag == '0'){
-                return false;
-            }
-            var gh = $('gh').value;
-            if(gh!=''){
-                var opt = {
-                    method: 'get',
-                    onSuccess: function(t) {
-                        var n = t.responseText;
-                        if(n == '不好意思，可能是您太倒霉了，没有得到任何奖励！'){
-                            $('ghtips').innerHTML='激活成功！';
-                        }
-                        if(n != '' && n != '不好意思，可能是您太倒霉了，没有得到任何奖励！'){
-                            $('ghtips').innerHTML=n;
-                            return false;
-                        }
-                    },
-                    asynchronous:true
-                };
-                //window.status = '../function/getTaskinfo.php?n='+n+'&t='+tid;
-                var ajax=new Ajax.Request('../function/newcard.php?id='+ghflag+'&cardid='+gh+'&pwd=', opt);
-            }
-        }
-        function unghfun(){
-            $('ghtips').innerHTML='';
-        }
         function refreshCaptcha(data) {
             $.ajax({
                 url:'/users/getCaptcha',
@@ -341,59 +239,31 @@
 
                                  width="112" height="47"></td>
             <td background="images/login1/zc07.gif">&nbsp;</td>
-            <td width="66"><img src="images/login1/zc08.gif"
-
-                                width="66" height="47" style="cursor:pointer" onClick="CloseLogin()"></td>
+            <td width="66">
+                <img src="images/login1/zc08.gif" width="66" height="47" style="cursor:pointer" onClick="CloseLogin()">
+            </td>
         </tr>
     </table>
     <table width="535" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="15"><img src="images/login1/zc16.jpg"
-
-                                width="15" height="224"></td>
-            <td width="94"><img src="images/login1/zc17.jpg"
-
-                                style="cursor:pointer" width="94" height="224"  onClick="reg2(2)"></td>
-            <td width="13"><img src="images/login1/zc18.jpg"
-
-                                width="13" height="224"></td>
-            <td width="92"><img src="images/login1/zc19.jpg"
-
-                                style="cursor:pointer" width="92" height="224"  onClick="reg2(4)"></td>
-            <td width="10"><img src="images/login1/zc20.jpg"
-
-                                width="10" height="224"></td>
-            <td width="92"><img src="images/login1/zc21.jpg"
-
-                                style="cursor:pointer" width="92" height="224"  onClick="reg2(1)"></td>
-            <td width="12"><img src="images/login1/zc22.jpg"
-
-                                width="12" height="224"></td>
-            <td width="93"><img src="images/login1/zc23.jpg"
-
-                                style="cursor:pointer" width="92" height="224"  onClick="reg2(5)"></td>
-            <td width="9"><img src="images/login1/zc24.jpg" width="9"
-
-                               height="224"></td>
-            <td width="93"><img src="images/login1/zc25.jpg"
-
-                                style="cursor:pointer" width="92" height="224"  onClick="reg2(3)"></td>
-            <td><img src="images/login1/zc26.jpg" width="14"
-
-                     height="224"></td>
+            <td width="15"><img src="images/login1/zc16.jpg" width="15" height="224"></td>
+            <td width="94"><img src="images/login1/zc17.jpg" style="cursor:pointer" width="94" height="224"  onClick="reg2(2)"></td>
+            <td width="13"><img src="images/login1/zc18.jpg" width="13" height="224"></td>
+            <td width="92"><img src="images/login1/zc19.jpg" style="cursor:pointer" width="92" height="224"  onClick="reg2(4)"></td>
+            <td width="10"><img src="images/login1/zc20.jpg" width="10" height="224"></td>
+            <td width="92"><img src="images/login1/zc21.jpg" style="cursor:pointer" width="92" height="224"  onClick="reg2(1)"></td>
+            <td width="12"><img src="images/login1/zc22.jpg" width="12" height="224"></td>
+            <td width="93"><img src="images/login1/zc23.jpg" style="cursor:pointer" width="92" height="224"  onClick="reg2(5)"></td>
+            <td width="9"><img src="images/login1/zc24.jpg" width="9" height="224"></td>
+            <td width="93"><img src="images/login1/zc25.jpg" style="cursor:pointer" width="92" height="224"  onClick="reg2(3)"></td>
+            <td><img src="images/login1/zc26.jpg" width="14" height="224"></td>
         </tr>
     </table>
     <table width="535" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="15"><img src="images/login1/zc09.gif"
-
-                                width="15" height="26"></td>
-            <td width="505"
-
-                background="images/login1/zc27.jpg">&nbsp;</td>
-            <td width="15"><img src="images/login1/zc10.gif"
-
-                                width="15" height="26"></td>
+            <td width="15"><img src="images/login1/zc09.gif" width="15" height="26"></td>
+            <td width="505" background="images/login1/zc27.jpg">&nbsp;</td>
+            <td width="15"><img src="images/login1/zc10.gif" width="15" height="26"></td>
         </tr>
     </table>
 
@@ -427,17 +297,17 @@
             var SSS = xHeight
         }
         var sHH = document.documentElement.clientHeight;
-        document.getElementById('light').style.display='block';
-        document.getElementById('light').style.width=sWidth+"px";
-        document.getElementById('light').style.height=SSS+"px";
-        document.getElementById('tasktip').style.display='block';
-        document.getElementById('tasktip').style.display='block';
-        document.getElementById('tasktip').style.top=y-150+"px";
-        document.getElementById('tasktip').style.left=x+"px";
+        $('#light')[0].style.display = 'block';
+        $('#light')[0].style.width = sWidth + "px";
+        $('#light')[0].style.height = SSS + "px";
+        $('#tasktip')[0].style.display = 'block';
+        $('#tasktip')[0].style.display = 'block';
+        $('#tasktip')[0].style.top = y - 150 + "px";
+        $('#tasktip')[0].style.left = x + "px";
     }
     function CloseLogin(){
-        document.getElementById('light').style.display='none';
-        document.getElementById('tasktip').style.display='none';
+        $('#light')[0].style.display='none';
+        $('#tasktip')[0].style.display='none';
     }
 
 </script>

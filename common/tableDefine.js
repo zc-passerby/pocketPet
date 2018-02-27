@@ -2,6 +2,11 @@ module.exports = [
     {
         key: 'User',
         name: 'userInfo',
-        fields: ['id', 'username', 'email', 'nickname', 'password', 'sex', 'headImg', 'goldCoin', 'crystal', 'goldIngot', 'autoAttack', 'lastLoginTime', 'registerTime', 'lastLoginIp', 'timestamp']
+        fields: ['id', 'username', 'email', 'nickname', 'password', 'sex', 'headImg', 'playerInfo', 'lastLoginTime', 'registerTime', 'lastLoginIp', 'timestamp']
+    },
+    {
+        key: 'UserPet',
+        name: 'userPetInfo',
+        fields: ['id', 'userId', 'petIndex', 'petExp', 'petCC', 'initialAttributes', 'equipments', 'equipPlus']
     }
 ]

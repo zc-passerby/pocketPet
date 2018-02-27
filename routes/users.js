@@ -14,6 +14,18 @@ function createUserData(userId) {
     console.log('createUserData');
 }
 
+//用户的初始数据
+function getDefaultPlayerInfo() {
+    var playerInfo = {
+        goldCoin: 500000,       //金币
+        crystal: 0,             //水晶
+        goldIngot: 0,           //元宝
+        autoAttack: 1000,       //自动攻击次数
+        prestige: 0             //威望值
+    };
+    return JSON.stringify(playerInfo);
+}
+
 //登录成功后相关数据的获取与设置
 function setUserData(req, User, userInfo) {
     console.log('setUserData');
@@ -47,6 +59,7 @@ router.post('/login', function (req, res) {
                     res.send(404);
                 } else { //信息匹配成功，则将此对象（匹配到的user) 赋给session.user ,更新登陆时间并返回成功
                     req.session.user = userInfo;
+                    req.session.playerInfo = JSON.parse(userInfo.playerInfo);
                     setUserData(req, User, userInfo);
                     res.send(200);
                 }
@@ -72,7 +85,7 @@ router.post('/register', function (req, res) {
     var params = {id:userId, username:userName, nickname:nickName, password:userPswd, registerTime:new Date()};
     var sql = 'select (select count(0) from ' + tableName + ' where username=?) as userNameCount, (select count(0) from ' + tableName + ' where nickname=?) as nickNameCount from ' + tableName;
     var sqlParams = [userName, nickName];
-    var retData = {errorCode:0, errorMsg:'', userId:''};
+    var retData = {errorCode:0, errorMsg:'', userId:userId};
     console.log(captcha);
     console.log(req.session.captcha);
     if (captcha != req.session.captcha) {
@@ -110,6 +123,7 @@ router.post('/register', function (req, res) {
                     headImg = 'imags/head/3' + ~~head + '.gif';
                 }
                 params.headImg = headImg;
+                params.playerInfo = getDefaultPlayerInfo();
                 User.insert(params, function (err, result) {
                     if (err) {  //查询数据库失败就返回给原post处（login.html) 状态码为500的错误
                         //res.send(500);
@@ -117,9 +131,9 @@ router.post('/register', function (req, res) {
                         retData.errorMsg = '查询数据库失败';
                         console.log(err);
                     } else {
-                        req.session.error = "用户名注册成功";
+                        //req.session.error = "用户名注册成功";
                         createUserData(userId);
-                        res.send(200);
+                        //res.send(200);
                     }
                 });
             }
@@ -140,8 +154,7 @@ router.get('/getCaptcha', function (req, res) {
     var background = req.body.background ? req.body.background : '';
     var size = req.body.size ? req.body.size : 4;
     var ignoreChars = req.body.ignoreChars ? req.body.ignoreChars : '0o1i';
-    var fontSize = req.body.fontSize ? req.body.fontSize : 40
-    ;
+    var fontSize = req.body.fontSize ? req.body.fontSize : 40;
     var codeConfig = {
         size: size, // 验证码长度
         ignoreChars: ignoreChars, // 验证码字符中排除 0o1i
@@ -166,6 +179,11 @@ router.get('/getCaptcha', function (req, res) {
         img: captcha.data
     };
     res.send(codeData);
+});
+
+//设置初始宠物
+router.get('/setFirstPet', function (req, res) {
+    res.send(200);
 });
 
 module.exports = router;
