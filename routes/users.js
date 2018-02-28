@@ -3,6 +3,7 @@ var router = express.Router();
 var uuid = require('node-uuid');
 var svgCaptcha = require('svg-captcha');
 var cryptoData = require('../common/cryptoData');
+var iconv = require('iconv-lite');
 
 //获取用户IP
 function getClienIp(req) {
@@ -42,9 +43,10 @@ router.get('/', function(req, res, next) {
 
 /* Login system */
 router.post('/login', function (req, res) {
+    console.log("--------------------------------");
     var User = db.get('User');  //从数据库中获取userInfo表的句柄
     var userName = req.body.username; // 获取post中的username值
-    var userPswd = cryptoData.md5PwdKeyEncrypto(req.body.password); // 获取post中的password值并加密
+    var userPswd = cryptoData.md5PwdKeyEncrypt(req.body.password); // 获取post中的password值并加密
     var params = {username:userName}; //查询数据库的条件
     User.selectByCondition(params, function (err, result) {
         if (err) {  //查询数据库失败就返回给原post处（login.html) 状态码为500的错误
@@ -80,7 +82,7 @@ router.post('/register', function (req, res) {
     var captcha = req.body.captcha; //获取post中的验证码
     var sex = req.body.sex; //获取post中的性别值
     var head = req.body.head; //获取post中的头像值
-    var userPswd = cryptoData.md5PwdKeyEncrypto(req.body.password); // 获取post中的密码值并加密
+    var userPswd = cryptoData.md5PwdKeyEncrypt(req.body.password); // 获取post中的密码值并加密
     var userId = uuid.v1();
     var params = {id:userId, username:userName, nickname:nickName, password:userPswd, registerTime:new Date()};
     var sql = 'select (select count(0) from ' + tableName + ' where username=?) as userNameCount, (select count(0) from ' + tableName + ' where nickname=?) as nickNameCount from ' + tableName;
@@ -144,17 +146,17 @@ router.post('/register', function (req, res) {
 
 //获取验证码
 router.get('/getCaptcha', function (req, res) {
-    console.log('-----------------------------');
-    console.log(req.body);
-    console.log('-----------------------------');
-    var width = req.body.width ? req.body.width : 120;
-    var height = req.body.height ? req.body.height : 30;
-    var noise = req.body.noise ? req.body.noise : 4;
-    var color = req.body.isColor ? req.body.isColor : false;
-    var background = req.body.background ? req.body.background : '';
-    var size = req.body.size ? req.body.size : 4;
-    var ignoreChars = req.body.ignoreChars ? req.body.ignoreChars : '0o1i';
-    var fontSize = req.body.fontSize ? req.body.fontSize : 40;
+    // console.log('-----------------------------');
+    // console.log(req.query);
+    // console.log('-----------------------------');
+    var width = req.query.width ? req.query.width : 120;
+    var height = req.query.height ? req.query.height : 30;
+    var noise = req.query.noise ? req.query.noise : 8;
+    var color = req.query.isColor ? req.query.isColor : false;
+    var background = req.query.background ? req.query.background : '';
+    var size = req.query.size ? req.query.size : 4;
+    var ignoreChars = req.query.ignoreChars ? req.query.ignoreChars : '0o1i';
+    var fontSize = req.query.fontSize ? req.query.fontSize : 40;
     var codeConfig = {
         size: size, // 验证码长度
         ignoreChars: ignoreChars, // 验证码字符中排除 0o1i
@@ -165,10 +167,11 @@ router.get('/getCaptcha', function (req, res) {
         height: height, // height of captcha
         fontSize: fontSize // captcha text size
     };
-    var captcha = svgCaptcha.create(codeConfig);
+    var captcha = svgCaptcha.createMathExpr(codeConfig);
     req.session.captcha = captcha.text.toLowerCase(); //存session用于验证接口获取文字码
-    console.log(captcha.text.toLowerCase());
-    console.log(captcha.data);
+    //console.log(req.session.captcha);
+    //console.log(captcha.text.toLowerCase());
+    //console.log(captcha.data);
     //res.type('image/svg+xml');
     //res.setHeader('Content-Type', 'text');
     //res.write(String(captcha.data));

@@ -10,8 +10,9 @@ var app = {
     mysqlUser: 'root',
     mysqlPswd: 'Passerby',
     mysqlDbName: 'pocketPet',
-    logger_path: './bin/logs/error.log',
-    logger_level: 'debug'
+    logger_path: 'bin/logs/error.log',
+    logger_level: 'debug',
+    userData_path: 'bin/userData'
 };
 
 module.exports = app;

@@ -115,8 +115,10 @@
                         OpenLogin();
                     } else if (resData.errorCode == 1) {
                         alert(resData.errorMsg);
+                        refreshCaptcha();
                     } else {
                         alert('对不起，注册失败了！');
+                        refreshCaptcha();
                     }
                 },
                 error: function(resData, err) {
