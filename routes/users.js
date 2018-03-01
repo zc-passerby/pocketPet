@@ -3,7 +3,7 @@ var router = express.Router();
 var uuid = require('node-uuid');
 var svgCaptcha = require('svg-captcha');
 var cryptoData = require('../common/cryptoData');
-var iconv = require('iconv-lite');
+var userDataHandler = require('../common/userDataHandler');
 
 //获取用户IP
 function getClienIp(req) {
@@ -13,6 +13,8 @@ function getClienIp(req) {
 //用户注册成功后相关数据的创建
 function createUserData(userId) {
     console.log('createUserData');
+    var playerInfo = getDefaultPlayerInfo();
+    userDataHandler.saveUserDataByKey(userId, playerInfo, userDataHandler.userDataSettings.userInfo);
 }
 
 //用户的初始数据
@@ -24,7 +26,8 @@ function getDefaultPlayerInfo() {
         autoAttack: 1000,       //自动攻击次数
         prestige: 0             //威望值
     };
-    return JSON.stringify(playerInfo);
+    //return JSON.stringify(playerInfo);
+    return playerInfo;
 }
 
 //登录成功后相关数据的获取与设置
@@ -60,8 +63,10 @@ router.post('/login', function (req, res) {
                     req.session.error = "密码错误！！！";
                     res.send(404);
                 } else { //信息匹配成功，则将此对象（匹配到的user) 赋给session.user ,更新登陆时间并返回成功
+                    req.session.userId = userInfo.id;
                     req.session.user = userInfo;
-                    req.session.playerInfo = JSON.parse(userInfo.playerInfo);
+                    req.session.playerInfo = userDataHandler.loadUserDataByKey(req.session.userId, userDataHandler.userDataSettings.userInfo);
+                    console.log(req.session.playerInfo);
                     setUserData(req, User, userInfo);
                     res.send(200);
                 }
@@ -125,7 +130,7 @@ router.post('/register', function (req, res) {
                     headImg = 'imags/head/3' + ~~head + '.gif';
                 }
                 params.headImg = headImg;
-                params.playerInfo = getDefaultPlayerInfo();
+                params.playerInfo = JSON.stringify(getDefaultPlayerInfo());
                 User.insert(params, function (err, result) {
                     if (err) {  //查询数据库失败就返回给原post处（login.html) 状态码为500的错误
                         //res.send(500);

@@ -70,19 +70,22 @@ router.get('/playerInfo', function (req, res) {
         req.session.error = "请先登录！";
         res.redirect('/login');
     }
-    var User = db.get('User');
-    var userId = req.session.user.id;
-    User.select(userId, function (err, result) {
-        if (err) {
-            console.log(err);
-        } else {
-            if (result) {
-                //var userInfo = result;
-                req.session.user = result;
-                res.render('playerInfo');
-            }
-        }
-    });
+    // var User = db.get('User');
+    // var userId = req.session.user.id;
+    // User.select(userId, function (err, result) {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         if (result) {
+    //             //var userInfo = result;
+    //             req.session.user = result;
+    //             res.render('playerInfo');
+    //         }
+    //     }
+    // });
+    //var userId = req.session.userId;
+    var playerInfo = req.session.playerInfo;
+    res.render('playerInfo', {playerInfo:playerInfo});
 });
 
 module.exports = router;
