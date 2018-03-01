@@ -12,7 +12,7 @@ var app = {
     mysqlDbName: 'pocketPet',
     logger_path: 'bin/logs/error.log',
     logger_level: 'debug',
-    userData_path: 'bin/userData'
+    userData_dir: 'bin/userData'
 };
 
 module.exports = app;
