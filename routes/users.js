@@ -127,7 +127,7 @@ router.post('/register', function (req, res) {
                 params.sex = sex;
                 var headImg = 'images/head/35.gif';
                 if (~~head >= 1 && ~~head <= 6) {
-                    headImg = 'imags/head/3' + ~~head + '.gif';
+                    headImg = 'images/head/3' + ~~head + '.gif';
                 }
                 params.headImg = headImg;
                 params.playerInfo = JSON.stringify(getDefaultPlayerInfo());
