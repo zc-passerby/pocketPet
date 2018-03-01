@@ -23,7 +23,7 @@ var aes192Encrypt = function (str, key) {
 var aes192Decrypt = function (str, key) {
     const decipher = crypto.createDecipher('aes192', key);
     var retStr = decipher.update(str, 'hex', 'utf8');
-    retStr += decipher.update('utf8');
+    retStr += decipher.final('utf8');
     return retStr;
 };
 
