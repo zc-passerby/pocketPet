@@ -5,48 +5,49 @@ var svgCaptcha = require('svg-captcha');
 var cryptoData = require('../common/cryptoData');
 var userDataHandler = require('../common/userDataHandler');
 
-//获取用户IP
-function getClienIp(req) {
-    return req.connection.remoteAddress || req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-}
+var userFun = require('../functions/user');
 
-//用户注册成功后相关数据的创建
-function createUserData(userId) {
-    console.log('createUserData');
-    var playerInfo = getDefaultPlayerInfo();
-    userDataHandler.saveUserDataByKey(userId, playerInfo, userDataHandler.userDataSettings.userInfo);
-}
-
-//用户的初始数据
-function getDefaultPlayerInfo() {
-    var playerInfo = {
-        goldCoin: 500000,       //金币
-        crystal: 0,             //水晶
-        goldIngot: 0,           //元宝
-        autoAttack: 1000,       //自动攻击次数
-        prestige: 0             //威望值
-    };
-    //return JSON.stringify(playerInfo);
-    return playerInfo;
-}
-
-//登录成功后相关数据的获取与设置
-function setUserData(req, User, userInfo) {
-    console.log('setUserData');
-    var clientIp = getClienIp(req);
-    console.log(clientIp);
-    var params = {id:userInfo.id, lastLoginTime:new Date(), lastLoginIp:clientIp};
-    User.update(params); //更新登陆时间
-}
+// //获取用户IP
+// function getClienIp(req) {
+//     return req.connection.remoteAddress || req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+// }
+//
+// //用户注册成功后相关数据的创建
+// function createUserData(userId) {
+//     console.log('createUserData');
+//     var playerInfo = getDefaultPlayerInfo();
+//     userDataHandler.saveUserDataByKey(userId, playerInfo, userDataHandler.userDataSettings.userInfo);
+// }
+//
+// //用户的初始数据
+// function getDefaultPlayerInfo() {
+//     var playerInfo = {
+//         goldCoin: 500000,       //金币
+//         crystal: 0,             //水晶
+//         goldIngot: 0,           //元宝
+//         autoAttack: 1000,       //自动攻击次数
+//         prestige: 0             //威望值
+//     };
+//     //return JSON.stringify(playerInfo);
+//     return playerInfo;
+// }
+//
+// //登录成功后相关数据的获取与设置
+// function setUserData(req, User, userInfo) {
+//     console.log('setUserData');
+//     var clientIp = getClienIp(req);
+//     console.log(clientIp);
+//     var params = {id:userInfo.id, lastLoginTime:new Date(), lastLoginIp:clientIp};
+//     User.update(params); //更新登陆时间
+// }
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.send('respond with a resource');
 });
 
 /* Login system */
 router.post('/login', function (req, res) {
-    console.log("--------------------------------");
     var User = db.get('User');  //从数据库中获取userInfo表的句柄
     var userName = req.body.username; // 获取post中的username值
     var userPswd = cryptoData.md5PwdKeyEncrypt(req.body.password); // 获取post中的password值并加密
@@ -67,7 +68,7 @@ router.post('/login', function (req, res) {
                     req.session.user = userInfo;
                     req.session.playerInfo = userDataHandler.loadUserDataByKey(req.session.userId, userDataHandler.userDataSettings.userInfo);
                     console.log(req.session.playerInfo);
-                    setUserData(req, User, userInfo);
+                    userFun.setUserData(req, User, userInfo);
                     res.send(200);
                 }
             } else { //查询不到用户名匹配信息，则用户名不存在，状态码返回404
@@ -93,8 +94,8 @@ router.post('/register', function (req, res) {
     var sql = 'select (select count(0) from ' + tableName + ' where username=?) as userNameCount, (select count(0) from ' + tableName + ' where nickname=?) as nickNameCount from ' + tableName;
     var sqlParams = [userName, nickName];
     var retData = {errorCode:0, errorMsg:'', userId:userId};
-    console.log(captcha);
-    console.log(req.session.captcha);
+    //console.log(captcha);
+    //console.log(req.session.captcha);
     if (captcha != req.session.captcha) {
         retData.errorCode = 1;
         retData.errorMsg = "验证码错误";
@@ -139,7 +140,7 @@ router.post('/register', function (req, res) {
                         console.log(err);
                     } else {
                         //req.session.error = "用户名注册成功";
-                        createUserData(userId);
+                        userFun.createUserData(userId);
                         //res.send(200);
                     }
                 });
@@ -151,9 +152,6 @@ router.post('/register', function (req, res) {
 
 //获取验证码
 router.get('/getCaptcha', function (req, res) {
-    // console.log('-----------------------------');
-    // console.log(req.query);
-    // console.log('-----------------------------');
     var width = req.query.width ? req.query.width : 120;
     var height = req.query.height ? req.query.height : 30;
     var noise = req.query.noise ? req.query.noise : 8;

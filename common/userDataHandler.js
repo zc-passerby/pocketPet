@@ -51,9 +51,13 @@ var loadUserDataByKey = function (userId, key) {
         var userDataArr = readUserData(userId);
         key -= 1;
         if (userDataArr.length > key) {
-            console.log("--------------------------");
-            var userInfoData = cryptoData.aes192Decrypt(userDataArr[key].toLowerCase(), global.pwdKey);
-            return JSON.parse(userInfoData);
+            var retJson = {};
+            var targetStr = userDataArr[key].toLowerCase();
+            if (typeof targetStr == 'string' && targetStr != '') {
+                var userInfoData = cryptoData.aes192Decrypt(targetStr, global.pwdKey);
+                retJson = JSON.parse(userInfoData);
+            }
+            return retJson;
         } else {
             return -1;
         }
@@ -65,20 +69,30 @@ var loadUserDataByKey = function (userId, key) {
 var saveUserDataByKey = function (userId, userDataSrc, key) {
     var userData = JSON.stringify(userDataSrc);
     userData = cryptoData.aes192Encrypt(userData, global.pwdKey);
+    userData = userData.toUpperCase();
     if (typeof key == 'number' && key >= 1) {
         key -= 1;
         var userDataArr = readUserData(userId);
-        if (userDataArr.length > key) {
-            userDataArr[key] = userData.toUpperCase();
-            saveUserData(userId, userDataArr);
-        } else {
-            if (key == 0) {
-                userDataArr = [userData.toUpperCase()];
-                saveUserData(userId, userDataArr);
-            } else {
-                return -2;
+        // if (userDataArr.length > key) {
+        //     userDataArr[key] = userData;
+        //     saveUserData(userId, userDataArr);
+        // } else {
+        //     if (key == 0) {
+        //         userDataArr = [userData];
+        //         saveUserData(userId, userDataArr);
+        //     } else {
+        //         return -2;
+        //     }
+        // }
+        if (userDataArr.length <= key) {
+            for (var i = 0; i <= key; i++) {
+                if (i >= userDataArr.length) {
+                    userDataArr.push('');
+                }
             }
         }
+        userDataArr[key] = userData;
+        saveUserData(userId, userDataArr);
         return 0;
     } else {
         return -2;

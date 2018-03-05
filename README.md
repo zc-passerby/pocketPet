@@ -17,3 +17,4 @@
 13. [NodeJS 内置模块之crypto](http://blog.csdn.net/qq_33315185/article/details/53436364)
 14. [廖雪峰crypto](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434501504929883d11d84a1541c6907eefd792c0da51000)
 15. [Node.js 文件系统](http://www.runoob.com/nodejs/nodejs-fs.html)
+16. [游戏中常见英语词汇](https://wenku.baidu.com/view/e7cc04e99b6648d7c1c746ac.html)
