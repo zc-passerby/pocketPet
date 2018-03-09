@@ -67,12 +67,12 @@ var loadUserDataByKey = function (userId, key) {
 };
 
 var saveUserDataByKey = function (userId, userDataSrc, key) {
-    var userData = JSON.stringify(userDataSrc);
-    userData = cryptoData.aes192Encrypt(userData, global.pwdKey);
-    userData = userData.toUpperCase();
     if (typeof key == 'number' && key >= 1) {
         key -= 1;
         var userDataArr = readUserData(userId);
+        var userData = JSON.stringify(userDataSrc);
+        userData = cryptoData.aes192Encrypt(userData, global.pwdKey);
+        userData = userData.toUpperCase();
         // if (userDataArr.length > key) {
         //     userDataArr[key] = userData;
         //     saveUserData(userId, userDataArr);

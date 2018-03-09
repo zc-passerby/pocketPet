@@ -6,7 +6,7 @@ module.exports = [
     },
     {
         key: 'UserPet',
-        name: 'userPetInfo',
-        fields: ['id', 'userId', 'petIndex', 'petExp', 'petCC', 'initialAttributes', 'equipments', 'equipPlus']
+        name: 'userPetDefine',
+        fields: ['petId', 'petName', 'petDept', 'petClass', 'petSkills', 'timestamp']
     }
 ]

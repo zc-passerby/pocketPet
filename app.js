@@ -7,12 +7,14 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var session = require('express-session');
 var tableDefine = require('./common/tableDefine');
+var pet = require('./functions/pet');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 global.db = require('./common/dbutil').Instance();
 global.pwdKey = 'justForPocketPet';
+global.userPetDefine = null;
 
 //定义数据表实体
 db.define(tableDefine);

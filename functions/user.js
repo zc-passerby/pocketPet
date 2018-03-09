@@ -31,7 +31,7 @@ function setUserData(req, User, userInfo) {
     var clientIp = getClientIp(req);
     //console.log(clientIp);
     var params = {id:userInfo.id, lastLoginTime:new Date(), lastLoginIp:clientIp};
-    User.update(params); //更新登陆时间
+    User.update(params); //更新登陆时间、IP等
 }
 
 //exports.getClientIp = getClientIp;
