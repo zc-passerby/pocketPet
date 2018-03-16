@@ -42,15 +42,21 @@
 				"<td class='p3' width=\"60px\" style=\"text-align:left\">{价格}</td>"+
 				"<td style=\"text-align:left\">可叠加</td>"+
 			"</tr>";
-			var j = $.parseJSON(json);
+            var j = $.parseJSON(json);
 				
-			$(".道具列表").html("");
+            $(".道具列表").html("");
+
+
+
+
 			for(var i = 0;i<j.length;i++){
 				var h = htmln.replace("{图标}",j[i].道具图标);
 				h = h.replace("{ID}",j[i].商品序号);
 				h = h.replace("{ID}",j[i].商品序号);
-				h = h.replace("{ID}",j[i].商品序号);
-				h = h.replace("{名字}",j[i].道具名字);
+                h = h.replace("{ID}", j[i].商品序号);
+
+                var sl = String(j[i].商品数量);
+                h = h.replace("{名字}", j[i].道具名字 + (sl == '1' ? "" : "*" + sl));
 				
 				h = h.replace("{价格}",j[i].商品价格);
 				h = h.replace("{价格}",j[i].商品价格);
@@ -93,8 +99,10 @@
 				var h = htmln.replace("{图标}",j[i].道具图标);
 				h = h.replace("{ID}",j[i].商品序号);
 				h = h.replace("{ID}",j[i].商品序号);
-				h = h.replace("{ID}",j[i].商品序号);
-				h = h.replace("{名字}",j[i].道具名字);
+                h = h.replace("{ID}", j[i].商品序号);
+
+				var sl = String(j[i].商品数量);
+				h = h.replace("{名字}", j[i].道具名字 + (sl == '1' ? "" : "*" + sl));
 				
 				h = h.replace("{价格}",j[i].商品价格);
 				h = h.replace("{价格}",j[i].商品价格);
@@ -169,7 +177,6 @@
 		function showUserInfo(json){
 			
 			var j = $.parseJSON(json);
-			$(".玩家名字").html(j.名字);
 			$(".金币").html(j.金币);
             $(".威望").html(j.威望);
 			$(".道具容量").html(j.道具容量);
@@ -360,7 +367,7 @@
 				 var sump = price * parseInt($('#num').val());
 
                 if (sump == 0) { window.parent.Alert('数据错误！'); return; }
-                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + '金币！')){
+                if (confirm('你确定购买选中的物品吗? 总共将花费您' + sump + '金币！')){
 					
 					if(window.external.buy(3,bid,nums)){
 						window.external.updateProp();
@@ -393,7 +400,7 @@
             else {
                 var sump = price * parseInt($('#prenum').val());
 	            if (sump == 0) { window.parent.Alert('数据错误！'); return; }
-                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + '威望！')){
+                if (confirm('你确定购买选中的物品吗? 总共将花费您' + sump + '威望！')){
 					
 					if(window.external.buy(5,bid,nums)){
 						window.external.updateProp();

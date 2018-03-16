@@ -269,6 +269,8 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, 
     padding: 5px 0 5px 10px;
     background:url(../img/PetInfo/pet_c1_r.jpg) left center no-repeat;
 	margin-top:20px;
+	z-index: 10000;
+	POSITION: relative;
 	}
 #p3_right ul li input {
     width: 39px;

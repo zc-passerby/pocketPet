@@ -152,40 +152,119 @@
                     }
                 }
             });
-            // var j = $.parseJSON(window.external.取所有可领任务());
-            // $(".任务面板").hide();
-            // $(".所有任务").html("");
-            // for (var i = 0; i < j.length; i++) {
-            //     var node = "<li class=\"a\" id=\"task_li_{id}\"><a style=\"cursor:pointer\" onclik=\"void(0)\"><p class='ppp'>{name}<span style='display:none' class='ppp_id'>{id}</span></p></a></li>";
-            //     node = node.replace("{name}", j[i].任务名);
-            //     node = node.replace("{id}", j[i].任务序号);
-            //     node = node.replace("{id}", j[i].任务序号);
-            //     $(".所有任务").append(node);
-            // }
-            // $(".ppp").click(function () {
-            //
-            //     TaskPage($(this).find(".ppp_id").html(), false);
-            // });
-            // var j = $.parseJSON(window.external.取玩家已领任务());
-            //
-            // $(".已领任务").html("");
-            // for (var i = 0; i < j.length; i++) {
-            //     var node = "<li class=\"a\"  id=\"task_li_{id}\"><a style=\"cursor:pointer\" onclik=\"void(0)\"><p class='ppp2'>{name}<span style='display:none' class='ppp_id'>{id}</span></p></a></li>";
-            //
-            //     node = node.replace("{name}", j[i].任务名);
-            //     node = node.replace("{id}", j[i].任务序号);
-            //     node = node.replace("{id}", j[i].任务序号);
-            //     if (j[i].已完成 != "0") {
-            //
-            //         $(".已领任务").append(node);
-            //     }
-            //
-            // }
-            // $(".ppp2").click(function () {
-            //
-            //     TaskPage($(this).find(".ppp_id").html(), true);
-            // });
         }
+        function openTask1() {
+            var j = $.parseJSON(window.external.取所有可领任务());
+            updateClass(j);
+            $(".任务面板").hide();
+
+            $(".ppp").click(function () {
+
+                TaskPage($(this).find(".ppp_id").html(), false);
+            });
+	        var j = $.parseJSON(window.external.取玩家已领任务());
+
+            $(".已领任务").html("");
+            for (var i = 0; i < j.length; i++) {
+                var node = "<li class=\"a\"  id=\"task_li_{id}\"><a style=\"cursor:pointer\" onclik=\"void(0)\"><p class='ppp2'>{name}<span style='display:none' class='ppp_id'>{id}</span></p></a></li>";
+
+                var taskname = j[i].任务名;
+                if (taskname.indexOf("【") != -1 && taskname.indexOf("】") != -1) {
+                    var namearray = taskname.split("】");
+	                taskname = namearray[1];
+                }
+                node = node.replace("{name}", taskname);
+                node = node.replace("{id}", j[i].任务序号);
+                node = node.replace("{id}", j[i].任务序号);
+                if (j[i].已完成 != "0") {
+
+                    $(".已领任务").append(node);
+                }
+
+            }
+            $(".ppp2").click(function () {
+
+                TaskPage($(this).find(".ppp_id").html(), true);
+            });
+			$(".class_title").click(function(){
+				tabClick($(this).attr("data-xuhao"));
+			});
+
+        }
+        var ioo = 1;
+        function updateClass(json) {
+            var html =
+                "<ul class=\"lev\">" +
+                "<li id=\"task{序号}\" class=\" s{标题}\">" +
+                "<a style=\"cursor:pointer\" onclick=\"bid={序号};void(0);\">" +
+                "<p class=\"class_title\" data-xuhao='task{序号}'>{标题}</p>" +
+                "</a>" +
+                "</li>" +
+                "</ul>" +
+                "<ul id=\"con_task_{序号}\" style='display:none' class=\"con hiden {标题} c{CLASS}\"></ui>";
+            $(".task_list").html("<ul class=\"lev\"><li  id=\"task2\" class=\"on\"  onclick=\"setTab('task',2,2)\"> <a style=\"cursor:pointer\" onclick=\"getTaskDetail('2');bid=2;void(0);\"><p onclick=\"tabClick('task2')\" onclick=\"taskASwap(this)\">已接受任务</p></a></li></ul><ul id=\"con_task_2\" class=\"con hiden 已领任务 已接受任务\"></ul>");
+            ioo++;
+            try {
+                for (var i = 0; i < json.length; i++) {
+
+                    var className = json[i].任务名.split("】");
+
+                    className = className[0].replace("【", "");
+                    if (json[i].任务名.indexOf("【") == -1 || json[i].任务名.indexOf("】") == -1 || className == "") {
+                        className = "未分类";
+
+                    }
+                    var classTitle = className;
+
+                    className = stringToHex(className);
+
+
+
+                    if ($(".c" + className).length <= 0) {
+
+                        var thtml = html.replace("{CLASS}", className);
+                        thtml = thtml.replace("{序号}", 1256 + i);
+                        thtml = thtml.replace("{序号}", 1256 + i);
+                        thtml = thtml.replace("{序号}", 1256 + i);
+                        thtml = thtml.replace("{序号}", 1256 + i);
+                        thtml = thtml.replace("{序号}", 1256 + i);
+                        thtml = thtml.replace("{序号}", 1256 + i);
+                        thtml = thtml.replace("{序号}", 1256 + i);
+                        thtml = thtml.replace("{标题}", classTitle);
+                        thtml = thtml.replace("{标题}", classTitle);
+                        thtml = thtml.replace("{标题}", classTitle);
+
+                        thtml = thtml.replace("{标题}", classTitle);
+                        $(".task_list").append(thtml);
+
+
+
+
+                    }
+                    var node = "<li class=\"a\" id=\"task_li_{id}\"><a style=\"cursor:pointer\" onclik=\"void(0)\"><p class='ppp'>{name}<span style='display:none' class='ppp_id'>{id}</span></p></a></li>";
+	                node = node.replace("{name}", json[i].任务名.replace("【" + classTitle + "】", ""));
+                    node = node.replace("{id}", json[i].任务序号);
+                    node = node.replace("{id}", json[i].任务序号);
+                    $(".c" + className).append(node);
+
+
+                }
+            } catch (err) {
+                alert(err);
+            }
+			
+        }
+
+        function stringToHex(str) {
+	        var val = "";
+	        for (var i = 0; i < str.length; i++) {
+		        val += str.charCodeAt(i).toString(16);
+	        }
+	        return val;
+
+        }
+
+
         function stop() {
             return false;
         }
@@ -200,8 +279,15 @@
             mapIID = i;
             if (i == "地狱之门") {
 
-                setTimeout(function () { window.external.updateBattle_page(i, 1, true); }, 100);
-            } else {
+                setTimeout(function () { window.external.updateBattle_page(i, 1, true, false); }, 100);
+            } 
+            else if (i == "通天塔") 
+            {
+                setTimeout(function () { window.external.updateBattle_page(i, 1, false, true); }, 100);
+	        }
+
+
+            else {
                 setTimeout(function () { window.external.updateBattle_page(i, 1); }, 100);
             }
 
@@ -209,7 +295,7 @@
         function zidong1() {
             $("#gw").attr("src", "Battle.html");
 
-            setTimeout(function () { window.external.updateBattle_page(mapIID, 1); }, 10);
+	        setTimeout(function () { window.external.updateBattle_page(mapIID, 1); }, 10);
         }
         var gj = false;
         function gjs(i) {
@@ -231,7 +317,7 @@
             $(".gamebox").width("788px");
             if (n == 3) {
                 clickState = "1";
-                $("#gw").attr("src", "petInfo.html");
+                $("#gw").attr("src", "/petInfo");
                 setTimeout(function () { window.external.updatePetInfo_page(); }, 100);
             } else if (n == 4) {
                 clickState = "1";
@@ -248,9 +334,7 @@
                 setTimeout(function () { window.external.showNpc() }, 100);
 
             } else if (n == 99) {
-
                 window.location.href = "petIndex.html";
-
             }
             return;
             //  showBox(n);
@@ -258,10 +342,17 @@
         function StartBattle(i) {
             clickState = "1";
             $("#gw").attr("src", "Battle.html");
-            $(".gamebox").width("988px");
-            if (i == "地狱之门") {
-                setTimeout(function () { window.external.updateBattle_page(i, 0, true); }, 100);
-            } else {
+	        $(".gamebox").width("988px");
+	        if (i == "地狱之门") 
+            {
+                setTimeout(function () { window.external.updateBattle_page(i, 0, true, false); }, 100);
+	        } 
+            else if (i == "通天塔") 
+            {
+                setTimeout(function () { window.external.updateBattle_page(i, 0, false, true); }, 100);
+	        }
+            else 
+            {
                 setTimeout(function () { window.external.updateBattle_page(i, 0); }, 100);
             }
 
@@ -272,10 +363,14 @@
             }
             $("#gw").attr("src", "Battle.html");
 
-            if (i == "地狱之门") {
-
-                setTimeout(function () { window.external.updateBattle_page(i, 0, true); }, 100);
-            } else {
+	        if (i == "地狱之门") {
+                setTimeout(function () { window.external.updateBattle_page(i, 0, true, false); }, 100);
+	        }
+            else if (i == "通天塔") 
+            {
+                setTimeout(function () { window.external.updateBattle_page(i, 0, false, true); }, 100);
+	        }
+            else {
                 setTimeout(function () { window.external.updateBattle_page(i, 0); }, 100);
             }
         }
@@ -582,9 +677,6 @@
                         showBox("装备分解失败！");
                     }
                 }
-
-
-
             }
             else {
                 showBox("请选择一个装备!");
@@ -781,12 +873,13 @@
             <!-- 在线玩家 开始 -->
 
             <div class="ol" style="display:block; margin-top:8px;margin-left:615px;color:#FFF"><span onclick="Load(99)" id="onlinec">点此刷新</span></div>
-            <input type="button" class="zaixian" value="在线礼包" onclick="window.alert('功能开发中，敬请期待！')" />
+	    <input type="button" class="meiri" value="每日礼包" onclick="window.external.receiveDailyGift()" />
+        <input type="button" class="update" value="检查更新" onclick="window.external.checkUpdate()" />
             <!-- 在线玩家 结束 -->
             <div class="chat_box">
                 <!-- 聊天框 开始 -->
                 <div class="chat_cont" id="chatDiv"><font color="#FF0000">[系统]：欢迎进入时空口袋单机版，您可以输入“/help”或点击游戏右下方“帮助”按钮以获取帮助。</font><br/>
-                    <font color="#FF0000">[系统]：近日，本游戏制作组发现有无良奸商在各平台上出售本游戏。制作组在此严正声明：本游戏为免费软件，未经授权，不得用于任何商业用途。如果你是花钱买到此游戏的，请立刻申请退钱，并投诉非法贩卖者! 欢迎加入我们的QQ交流群，群号为123134909（群内可免费下载本游戏）。</font></div>
+	              <font color="#FF0000">[声明]：近日，本游戏制作组发现有无良奸商在各平台上出售本游戏。制作组在此严正声明：本游戏为免费软件，未经授权，不得用于任何商业用途。如果你是花钱买到此游戏的，请立刻申请退钱，并投诉非法贩卖者! 欢迎加入我们的QQ交流群，群号为123134909（群内可免费下载本游戏）。</font></div>
                 <div id="help_chat_info" style="z-index:100;position:absolute;top:100px;display:block; left:250px"></div>
                 <div id="bbshow" style="z-index:100; position:absolute; display:block; left:235px; width:300px; top: -27px;"></div>
                 <div id="challenge_info" style="z-index:100; position:absolute; display:none; left:388px; width:300px; top: 46px;"></div>
@@ -844,11 +937,11 @@
                 </ul>
                 <ul class="menu_UL1">
                     <li onclick="window.external.recv('/help')"></li>
-                    <li onclick="window.alert('官网正在制作中！')"></li>
+		          <li onclick= "window.external.OpenMask()"></li>
                     <li onclick=javascript:void(0);></li>
-                    <li onclick="window.alert('有问题请到QQ群反馈！')"></li>
+		          <li onclick="window.external.AskHelp"></li>
                     <li onclick="window.external.OpenBBS()"></li>
-                    <li onclick= window.external.QuitGame;></li>
+		          <li onclick= "window.external.QuitGame;"></li>
                 </ul>
             </div>
         </div>
@@ -858,7 +951,7 @@
 <div id="main_bb" style="display:none">
     <div class="close_btn" onclick="$('#main_bb').hide()"></div>
     <div class="box_cont" id="bags">
-        <div class="i_pack">空间：<span id="dqkj"></span>&nbsp;道具总容量：<span id="道具容量"></span></div>
+    <div class="i_pack">已用空间：<span id="dqkj"></span>&nbsp;总空间：<span id="道具容量"></span></div>
         <div class="pack_title">
             <ul class="list l1">
                 <li>
@@ -1241,22 +1334,22 @@ sendm('(35)')" /> <img src="Content/Chat/36.gif" onclick="    sendm('(36)')" /> 
                 use();
 
 
-            },
-            200
+           },
+           100
         );
 
     }
     function openUrl(u) {
         $("#gw").attr("src", u);
     }
-</script>
+    </script>
 <div id="frienlist" style="position: absolute; width: 120px; padding: 6px; height: 165px; z-index: 1; left: 1007px; top: 436px; background-repeat: no-repeat; overflow: hidden; display: block; background-image:url(img/friend_blacklist_m.gif);">
-    <div id="frienlisthandle"  style="cursor:move; width:89px; height:21px; float: left; color:#FFFFFF"></div>
-    <div style="cursor: pointer; position: relative; float: right; width: 15px; margin-right: 7px; height: 17px;"></div>
-    <div id="frienlistDiv" style="width:100px; overflow:hidden; overflow-y:auto; width:110px; height:132px">
+      <div id="frienlisthandle"  style="cursor:move; width:89px; height:21px; float: left; color:#FFFFFF"></div>
+      <div style="cursor: pointer; position: relative; float: right; width: 15px; margin-right: 7px; height: 17px;"></div>
+      <div id="frienlistDiv" style="width:100px; overflow:hidden; overflow-y:auto; width:110px; height:132px">
         <ul class="在线列表" style="list-style:none; line-height:21px">
         </ul>
+  </div>
     </div>
-</div>
 </body>
 </html>

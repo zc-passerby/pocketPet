@@ -54,7 +54,9 @@ var loadUserDataByKey = function (userId, key) {
             var retJson = {};
             var targetStr = userDataArr[key].toLowerCase();
             if (typeof targetStr == 'string' && targetStr != '') {
-                var userInfoData = cryptoData.aes192Decrypt(targetStr, global.pwdKey);
+                //var userInfoData = cryptoData.aes192Decrypt(targetStr, global.pwdKey);
+                //先使用下面这一句，数据未加密，不需要解密
+                var userInfoData = userDataArr[key];
                 retJson = JSON.parse(userInfoData);
             }
             return retJson;
@@ -71,19 +73,9 @@ var saveUserDataByKey = function (userId, userDataSrc, key) {
         key -= 1;
         var userDataArr = readUserData(userId);
         var userData = JSON.stringify(userDataSrc);
-        userData = cryptoData.aes192Encrypt(userData, global.pwdKey);
-        userData = userData.toUpperCase();
-        // if (userDataArr.length > key) {
-        //     userDataArr[key] = userData;
-        //     saveUserData(userId, userDataArr);
-        // } else {
-        //     if (key == 0) {
-        //         userDataArr = [userData];
-        //         saveUserData(userId, userDataArr);
-        //     } else {
-        //         return -2;
-        //     }
-        // }
+        //暂时先屏蔽，数据不加密
+        /*userData = cryptoData.aes192Encrypt(userData, global.pwdKey);
+        userData = userData.toUpperCase();*/
         if (userDataArr.length <= key) {
             for (var i = 0; i <= key; i++) {
                 if (i >= userDataArr.length) {

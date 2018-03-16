@@ -90,7 +90,7 @@
             </div>
             <!--<div class="self_role"><img src="Content/Img/player/26.gif?rd=4564"></div>-->
             <div class="self_role">
-                <img src=<%= user.headImg %>>
+                <img src=<%= user.headImg %>?rd=4564>
             </div>
         </div>
 
@@ -109,17 +109,18 @@
                     <ul class="top  clearfix">
                         <li>                                            <li>
                         <li>玩家昵称：<span class="玩家名字"><%= user.nickname %></span></li>
+                        <li>玩家性别：<span class="性别">帅哥</span></li>
                         <li>论坛ID：<span class="论坛ID">一苇以航</span></li>
                         <li>宠物数量：<span class="宠物数量" >0</span></li>
 	                    <li>刷怪数：<span class="刷怪数" >0</span></li>              
                         <li>元宝：<span class="元宝" ><%= playerInfo.goldIngot %></span></li>
                         <li>水晶：<span class="水晶" ><%= playerInfo.crystal %></span></li>
                         <li>金币：<span class="金币"><%= playerInfo.goldCoin %></span></li>
+						<li>威望：<span class="威望" ><%= playerInfo.prestige %></span></li>
                         <li>时之券：<span class="时之券" >0</span></li>           
                         <li>VIP等级：<span class="VIP等级" >0</span></li>                     
                         <li>VIP积分：<span class="积分" >0</span></li>
-	                    <li>威望：<span class="威望" ><%= playerInfo.prestige %></span></li>
-	                    <li>自动涅槃次数：<span class="自动涅槃">0</span></li>
+
                     
                     </ul>
                     <ul class="bot">

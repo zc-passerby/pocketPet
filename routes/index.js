@@ -61,6 +61,9 @@ router.get('/petInfo', function (req, res) {
         req.session.error = "请先登录！";
         res.redirect('/login');
     }
+    var petInfo = req.session.petInfo;
+    var playerInfo = req.session.playerInfo;
+    res.render('petInfo', {petInfo:petInfo, playerInfo:playerInfo});
 });
 
 /* GET player information page. */
@@ -85,6 +88,8 @@ router.get('/playerInfo', function (req, res) {
     // });
     //var userId = req.session.userId;
     var playerInfo = req.session.playerInfo;
+    console.log(req.session.user);
+    console.log(req.session.playerInfo);
     res.render('playerInfo', {playerInfo:playerInfo});
 });
 

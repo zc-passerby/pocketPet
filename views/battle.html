@@ -287,7 +287,7 @@
             position: absolute;
             width: 37px;
             height: 34px;
-            left: 340px;
+            left: 340px;z-index:99999999;
             top: 10px;
             cursor: pointer;
         }
@@ -482,8 +482,8 @@
         <div style="color: #F0F;" id="ximo"></div>
     </div>
     <div id="returnPage" style="display: none">
-        <div style="position: absolute; left: 270px; height: 160px; top: 87px; color: #e1e1e1; line-height: 1.7; width: 246px; padding: 10px; z-index: 10000; overflow-y: auto; background-color: #025477; opacity: 0.68; filter: alpha(opacity=68);" class="window"></div>
-        <div style="position: absolute; left: 270px; height: 160px; top: 87px; color: #e1e1e1; line-height: 1.7; width: 246px; padding: 10px; z-index: 10000; overflow-y: auto;">
+        <div style="position: absolute; left: 270px; height: 160px; top: 87px; color: #e1e1e1; line-height: 1.7; width: 246px; padding: 10px; z-index:99999999; overflow-y: auto; background-color: #025477; opacity: 0.68; filter: alpha(opacity=68);" class="window"></div>
+        <div style="position: absolute; left: 270px; height: 160px; top: 87px; color: #e1e1e1; line-height: 1.7; width: 246px; padding: 10px; z-index:99999999; overflow-y: auto;">
             <div class="结果"></div>
             <div class="奖励">
                 获得经验：<span class="获得经验"></span><br>
@@ -495,7 +495,8 @@
             <span style="cursor: pointer;" onclick="window.parent.updateBattle(map)"><b>继续探险</b></span> <span onclick="window.parent.Load(2);" style="cursor: pointer;"><b>返回村庄</b></span><br>
         </div>
     </div>
-    <div id="jntool" class="捕捉面板" style="display: none; position: absolute; left: 432px; top: 110px; height: 136px; border: 0px; color: rgb(122, 147, 3); font-size: 12px; padding: 3px;">
+	<img style="position:absolute;left:999999px" id="hccc"/>
+    <div id="jntool" class="捕捉面板" style="z-index:99999999;display: none; position: absolute; left: 432px; top: 110px; height: 136px; border: 0px; color: rgb(122, 147, 3); font-size: 12px; padding: 3px;">
         <table style="min-width: 274px;" border="0" cellspacing="0" cellpadding="0">
             <tbody>
                 <tr>
@@ -535,7 +536,7 @@
             </tbody>
         </table>
     </div>
-    <div id="jntool2" class="技能面板" style="display: none; position: absolute; left: 343px; top: 110px; height: 136px; border: 0px; color: rgb(122, 147, 3); font-size: 12px; padding: 3px;">
+    <div id="jntool2" class="技能面板" style="display: none; position: absolute; left: 343px; top: 110px; height: 136px; border: 0px; color: rgb(122, 147, 3); font-size: 12px; padding: 3px;z-index:99999999">
         <table style="min-width: 274px;" border="0" cellspacing="0" cellpadding="0">
             <tbody>
                 <tr>
@@ -575,7 +576,7 @@
             </tbody>
         </table>
     </div>
-    <div id="jntool3" class="设置面板" style="display: none; position: absolute; left: 262px; top: 110px; height: 136px; border: 0px; color: rgb(122, 147, 3); font-size: 12px; padding: 3px;">
+    <div id="jntool3" class="设置面板" style="z-index:99999999;display: none; position: absolute; left: 262px; top: 110px; height: 136px; border: 0px; color: rgb(122, 147, 3); font-size: 12px; padding: 3px;">
         <table style="min-width: 274px;" border="0" cellspacing="0" cellpadding="0">
             <tbody>
                 <tr>
@@ -862,13 +863,19 @@
 
 	    }
 		var Init=0;
+		var stime = 100;
 		function showPNG(t){
 			if(t=="g")t="s";
-			html = " <IMG class='petPng' id='pet"+形象+"'  src=\"Content/PetPhoto/"+t+形象+"_1.png\" style='height:311px;width:788px;z-index:0;POSITION:ABSOLUTE' />";
+			
+			html = " <IMG class='petPng' id='pet"+形象+"'  style='height:311px;width:788px;z-index:10000;POSITION:ABSOLUTE' />";
 			 $("#info_page1").html(html);
 			if(Init!=0)clearInterval(Init);
-			
-			Init = setInterval("play"+t+"()",100);
+			if(t=="s"){
+				Init = setInterval("play"+t+"()",stime);
+			}else{
+				Init = setInterval("play"+t+"()",100);
+			}
+		
 			if(形象==516){
 				
 			}
@@ -881,7 +888,7 @@
 				zI=1;
 			}
 		
-			$(".petPng").attr("src","Content/PetPhoto/z"+形象+"_"+zI+".png");
+			$(".petPng").css("background-image","url(Content/PetPhoto/z"+形象+"_"+zI+".png)");
 		
 		}
 		var sI=1;
@@ -892,7 +899,7 @@
 				sI=1;
 			}
 		
-			$(".petPng").attr("src","Content/PetPhoto/s"+形象+"_"+sI+".png");
+			$(".petPng").css("background-image","url(Content/PetPhoto/s"+形象+"_"+sI+".png)");
 		
 		}
 	    var 形象;
@@ -900,11 +907,46 @@
 		var zCount = 10;
 		var sCount = 31;
 	    function showFlashPet(t) {
-			if(形象==516 || 形象 == 524){
-				zCount = 10;
-				sCount = 31;
-				showPNG(t);
-				return;
+            if (形象 == 516 || 形象 == 524) {
+                zCount = 10;
+                sCount = 31;
+                showPNG(t);
+                return;
+            }
+            else if (形象 == 523) {
+	            zCount = 5;
+	            sCount = 31;
+	            showPNG(t);
+	            return;
+            }
+            else if (形象 == 525) {
+	            zCount = 13;
+	            sCount = 31;
+	            showPNG(t);
+	            return;
+            }else if(形象 == 526){
+				zCount = 11;
+	            sCount = 40;
+	            showPNG(t);
+				stime = 75;
+	            return;
+			}else if(形象 == 527){
+				zCount = 12;
+	            sCount = 31;
+	            showPNG(t);
+	            return;
+			}else if(形象 == 528){
+				zCount = 13;
+	            sCount = 40;
+	            showPNG(t);
+				stime = 75;
+	            return;
+			}else if(形象 == 529){
+				zCount = 15;
+	            sCount = 40;
+	            showPNG(t);
+				stime = 75;
+	            return;
 			}
 		    var left = "0";
 		    var height = "315";
@@ -916,11 +958,11 @@
 
 		    var fhtml = "<div style='margin-top:" + top + "px;margin-left:" + left + "px;" + f + "'><object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' id='sw' width='988' height='" + height + "' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab'>" +
 			    "<param name='movie' value='Content/FlashPet/" + t + 形象 + ".swf'>" +
-			    "<param name='allowScriptAccess' value='never' />  " +
+			    "<param name='allowScriptAccess' value='always' />  " +
 			    "<param name='allowFullScreen' value='false' />  " +
 			    "<param name='quality' value='high' />  " +
 			    "<param name='wmode' value='transparent' />" +
-			    "<embed src='Content/FlashPet/" + t + 形象 + ".swf' quality='high' width='988' height='" + height + "' name='sw' align='middle' play='true' loop='false' allowScriptAccess='never' type='application/x-shockwave-flash' wmode='transparent' pluginspage='http://www.macromedia.com/go/getflashplayer'></object></div>";
+			    "<embed src='Content/FlashPet/" + t + 形象 + ".swf' quality='high' width='988' height='" + height + "' name='sw' align='middle' play='true' loop='false' allowScriptAccess='always' type='application/x-shockwave-flash' wmode='transparent' pluginspage='http://www.macromedia.com/go/getflashplayer'></object></div>";
 
 		    $("#info_page1").html(fhtml);
 	    }
@@ -1173,7 +1215,9 @@
 		    cwMp = j.剩余魔法;
 		    if (j.战斗是否结束 == 0) {
 			    debug("回合完毕，结果：宠物(" + cwHp + "),怪物(" + gwHp + ")");
-		    } else {
+            }
+            else
+            {   
 			    debug("回合已经结束!");
 		    }
 
@@ -1229,12 +1273,19 @@
 				    $("#returnPage").show();
 				    $("#gj").hide();
 				    $(".奖励").show();
-				    debug("战斗获胜!获得奖励:" + jsons.获得道具 + ",获得金币:" + jsons.获得金币 + ",获得元宝:" + jsons.获得元宝 + ",获得经验:" + jsons.获得经验);
+                    debug("战斗获胜!获得奖励:" + jsons.获得道具 + ",获得金币:" + jsons.获得金币 + ",获得元宝:" + jsons.获得元宝 + ",获得经验:" + jsons.获得经验);
+
+                    if (j.Auto == 2) {
+                        window.parent.Load(2);
+	                    //window.parent.recvMsg("钥匙不足，自动地狱通天已停止");
+                    }
+
 				    setTimeout(function () {
 					    if (zidong == 1) {
 						    window.parent.zidong(map);
 					    }
-				    }, 1000);
+                    }, 1000);
+                    
 
 
 			    } else {
@@ -1248,9 +1299,12 @@
 
 	    }
 
-	    function fj(sh, json) {
-		    debug("宠物受到伤害:" + sh);
-		    $("#state").css("left", "50px");
+        function fj(sh, json) {
+            debug("宠物受到伤害:" + sh);
+
+
+
+	        $("#state").css("left", "50px");
 		    var cwLeft = 0;
 		    var cwWidth = $("#cw").width();
 		    $("#jn").html("普通攻击");
@@ -1318,12 +1372,19 @@
 				    $(".捕捉面板").hide();
 				    $(".技能面板").hide();
 				    $("#gj").hide();
-				    debug("战败!");
+                    debug("战败!");
+
+                    if (json.Auto == 1) {
+                        window.parent.Load(2);
+                        //window.parent.recvMsg("怪物太厉害了，自动地狱通天已停止！")
+                    }
+
 				    setTimeout(function () {
 					    if (zidong == 1) {
 						    window.parent.zidong(map);
 					    }
-				    }, 1000);
+                    }, 1000);
+                    
 			    } else {
 				    t = 10;
 				    gj = false;

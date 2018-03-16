@@ -117,13 +117,13 @@ body {
 
 
 
-<div onclick="openMode('103')" id="sfk" style="position:absolute; cursor:pointer; left:22px; top:232px;" width=20 height=20 title="Ê··Ò¿ËË¹ÃÜÑ¨">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div onclick="openMode('9003')" id="sfk" style="position:absolute; cursor:pointer; left:22px; top:232px;" width=20 height=20 title="Ê··Ò¿ËË¹ÃÜÑ¨">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
-<div onclick="openMode('102')" id="hlw" style="position:absolute; cursor:pointer; left:153px; top:32px;" width=20 height=20 title="»ðÁúÍõµÄ¹¬µî" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div onclick="openMode('9002')" id="hlw" style="position:absolute; cursor:pointer; left:153px; top:32px;" width=20 height=20 title="»ðÁúÍõµÄ¹¬µî" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
-<div onclick="openMode('101')" id="ysw" style="position:absolute;cursor:pointer;left:695px;top:226px;border:1;" width=20 height=20 title="ÒÁËÕÍõµÄÉñÄ¹" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div onclick="openMode('9001')" id="ysw" style="position:absolute;cursor:pointer;left:695px;top:226px;border:1;" width=20 height=20 title="ÒÁËÕÍõµÄÉñÄ¹" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
-<div onclick="openMode('106')" id="llc" style="position:absolute;cursor:pointer;left:523px;top:38px;border:1;" width=20 height=20 title="Ááçç³Ç" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div onclick="openMode('9004')" id="llc" style="position:absolute;cursor:pointer;left:523px;top:38px;border:1;" width=20 height=20 title="Ááçç³Ç" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
 
 
@@ -143,22 +143,22 @@ body {
 
 <div style="position:absolute; left:367px; top:95px; border:0; cursor:pointer; line-height:23px" title="Ê¥µ®Ð¡ÎÝ" onclick="openMode('12')" >
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-<div id="ico"><div id="btn" onclick="lingqu()"></div></div>
+<!--<div id="ico"><div id="btn" onclick="lingqu()"></div></div>-->
 
 <div style="position:absolute; left:420px; top:8px; border:0; cursor:pointer; width: 15px;" title="ÇÐ»»µØÍ¼" onClick="window.parent.openUrl('BattleMap_1.html')">
 <img src="img/up.gif" alt="ÇÐ»»µØÍ¼"></div>
 	
-</div>
+
 </body>
 </html>
 <script language="javascript" type="text/javascript">
-	function showNpc(){
-		$("#ico").show();
-	}
-	function lingqu(){
-		$("#ico").hide();
-		window.parent.Alert(window.external.lingqu());
-	}
+	//function showNpc(){
+		//$("#ico").show();
+	//}
+	//function lingqu(){
+		//$("#ico").hide();
+		//window.parent.Alert(window.external.lingqu());
+	//}
 	function goMap(n,t)
 	{
 		//if(n==0) 
@@ -262,8 +262,8 @@ body {
 		window.location.href = "MapInfo/t"+i+".html";
 		}
 	// Add by DuHao 2009-5-13
-function copyWord(words)
+/*function copyWord(words)
 {
 	window.parent.$('baike_input').value=words;
-}
+}*/
 </script>  

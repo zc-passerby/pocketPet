@@ -31,7 +31,6 @@ body {
 </head>
 <!--background-image:url(../images/ui/map/map1.gif)-->
 <body style="margin:0;" oncontextmenu="event.returnValue=false" onkeydown="KeyDown()">
-<div style="width:80px;height:80px;POSITION: absolute;top: 242px;left: 5px;" onClick="openMode('199')"></div>
 <div style="width:786px;height:321px;margin-left:5px;margin-top:5px; background-image:url(img/map3.jpg); background-repeat:no-repeat" oncontextmenu="event.returnValue=false"></div>
 
 
@@ -39,7 +38,7 @@ body {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
 
-<div style="position:absolute; left:363px; top:161px; border:0; cursor:pointer; width: 79px;" title="圣兽云殿" onClick="copyWord('圣兽云殿');window.parent.$('gw').src='./function/Team_Mod.php?n=20';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div style="position:absolute; left:363px; top:161px; border:0; cursor:pointer; width: 79px;" title="圣兽云殿" onClick="openMode('102')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
 <div style="position:absolute;left:509px;top:184px;border:0;cursor:pointer;" title="危之路(8)" onClick="copyWord('危之路');goMap(0,121);">
 <div style="width:75px; height:24px;background:url(img/0121.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/03.png');
@@ -95,7 +94,7 @@ body {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
 
-<div style="position:absolute;left:641px;top:80px;border:0;cursor:pointer; width:27px; height:77px" title="通天塔" onClick="copyWord('通天塔');window.parent.$('gw').src='./function/Team_Mod.php?n=126';"></div>
+<div style="position:absolute;left:641px;top:80px;border:0;cursor:pointer; width:27px; height:77px" title="通天塔" onclick="window.parent.StartBattle('通天塔')"></div>
 
 
 
@@ -103,10 +102,10 @@ body {
 <script language="javascript" type="text/javascript">
 
 	// Add by DuHao 2009-5-13
-	function copyWord(words)
+	/*function copyWord(words)
 	{
 		window.parent.$('baike_input').value=words;
-	}
+	}*/
 
 	function goMap(n,t)
 	{

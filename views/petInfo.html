@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>petInfo</title>
     <link href="Content/CSS/PetInfo.css" rel="stylesheet" />
     <script src="Content/Javascript/jquery-1.8.3.min.js"></script>
@@ -9,19 +9,11 @@
         var zbList;
         var tzList;
 		
-		function loadIF(){
-
-			if(window.external.check()=="true"){
-		//		
-				//$("body").remove();
-			}
-		}
 		function text(msg){
 			alert("recv:"+msg);
 		}
+
         $(function () {
-		
-			
 			$("#bottom div").width(66);
             $(".pettab li").click(function () {
                 $("#page1").hide();
@@ -31,29 +23,28 @@
                 $(this).addClass("on");
                 $("#page" + ($(this).index() + 1)).show();
             });
-
-
         });
 
-        function showInt(i){
+        function showInt(i) {
 			var num=i;
 			if (i >=100000000000000){
 			    i=toDecimal(i/100000000000000);
-				num = i+"°ÙÕ×";	
+				num = i+"ç™¾å…†";	
 			}
 			else if(i>=1000000000000){
 				i=toDecimal(i/1000000000000);
-				num = i+"Õ×";	
+				num = i+"å…†";	
 			}
 			else if(i>=10000000000){
 				i=toDecimal(i/10000000000);
-				num = i+"°ÙÒÚ";	
+				num = i+"ç™¾äº¿";	
 			}else if(i>=100000000){
 				i=toDecimal(i/100000000);
-				num = i+"ÒÚ";	
+				num = i+"äº¿";	
 			}
 			return num;
 		}
+
 		function toDecimal(x) {  
             var f = parseFloat(x);  
             if (isNaN(f)) {  
@@ -62,146 +53,168 @@
             f = Math.round(x*100)/100;  
             return f;  
 			
-        }  var Mid;
-		var Õ½¶·Á¦=0;
+        }
+
+        var Mid;
+		var æˆ˜æ–—åŠ›=0;
 		function updateMainPet(json){
-			Mid=json.³èÎïĞòºÅ;
-			Õ½¶·Á¦=0;
-			$(".µÈ¼¶").html(json.µÈ¼¶);
-			if(typeof(json.µÈ¼¶)=="undefined")$(".µÈ¼¶").html("0");
+			Mid=json.å® ç‰©åºå·;
+			æˆ˜æ–—åŠ›=0;
+			$(".ç­‰çº§").html(json.ç­‰çº§);
+			if(typeof(json.ç­‰çº§)=="undefined")$(".ç­‰çº§").html("0");
 		
-			$(".ÎåĞĞ").html(json.ÎåĞĞ);
-			if(typeof(json.ÎåĞĞ)=="undefined")$(".ÎåĞĞ").html("0");
+			$(".äº”è¡Œ").html(json.äº”è¡Œ);
+			if(typeof(json.äº”è¡Œ)=="undefined")$(".äº”è¡Œ").html("0");
 			
-			$(".ÉúÃü").html(showInt(json.ÉúÃü));
-			if(typeof(json.ÉúÃü)=="undefined")$(".ÉúÃü").html("0");
-			Õ½¶·Á¦+=json.ÉúÃü/10000;
+			$(".ç”Ÿå‘½").html(showInt(json.ç”Ÿå‘½));
+			if(typeof(json.ç”Ÿå‘½)=="undefined")$(".ç”Ÿå‘½").html("0");
+			æˆ˜æ–—åŠ›+=json.ç”Ÿå‘½/10000;
 			
-			$(".Ä§·¨").html(showInt(json.Ä§·¨));
-			if(typeof(json.Ä§·¨)=="undefined")$(".Ä§·¨").html("0");
-			Õ½¶·Á¦+=json.Ä§·¨/10000;
+			$(".é­”æ³•").html(showInt(json.é­”æ³•));
+			if(typeof(json.é­”æ³•)=="undefined")$(".é­”æ³•").html("0");
+			æˆ˜æ–—åŠ›+=json.é­”æ³•/10000;
 			
-			$(".×î´óÉúÃü").html(showInt(json.×î´óÉúÃü));
-			if(typeof(json.×î´óÉúÃü)=="undefined")$(".×î´óÉúÃü").html("0");
+			$(".æœ€å¤§ç”Ÿå‘½").html(showInt(json.æœ€å¤§ç”Ÿå‘½));
+			if(typeof(json.æœ€å¤§ç”Ÿå‘½)=="undefined")$(".æœ€å¤§ç”Ÿå‘½").html("0");
 			
-			$(".×î´óÄ§·¨").html(showInt(json.×î´óÄ§·¨));
-			if(typeof(json.×î´óÄ§·¨)=="undefined")$(".×î´óÄ§·¨").html("0");
+			$(".æœ€å¤§é­”æ³•").html(showInt(json.æœ€å¤§é­”æ³•));
+			if(typeof(json.æœ€å¤§é­”æ³•)=="undefined")$(".æœ€å¤§é­”æ³•").html("0");
 
-			if (isNaN(parseFloat(json.¼ÓÉî)) != true)
+			if (isNaN(parseFloat(json.åŠ æ·±)) != true)
             {
-                $(".¼ÓÉî").html(parseInt(100 * parseFloat(json.¼ÓÉî)) + "%");
-	            if(typeof(json.¼ÓÉî)=="undefined")$(".¼ÓÉî").html("0");
+                $(".åŠ æ·±").html(parseInt(100 * parseFloat(json.åŠ æ·±)) + "%");
+	            if(typeof(json.åŠ æ·±)=="undefined")$(".åŠ æ·±").html("0");
             }
             else
             {
-               $(".¼ÓÉî").html("0%");
+               $(".åŠ æ·±").html("0%");
             }
 
-            if (isNaN(parseFloat(json.µÖÏû))!= true)
+            if (isNaN(parseFloat(json.æŠµæ¶ˆ))!= true)
             {
-                $(".µÖÏû").html(parseInt(100 * parseFloat(json.µÖÏû)) + "%");
-	            if(typeof(json.µÖÏû)=="undefined")$(".µÖÏû").html("0");
+                $(".æŠµæ¶ˆ").html(parseInt(100 * parseFloat(json.æŠµæ¶ˆ)) + "%");
+	            if(typeof(json.æŠµæ¶ˆ)=="undefined")$(".æŠµæ¶ˆ").html("0");
             }
             else
             {
-               $(".µÖÏû").html("0%");
+               $(".æŠµæ¶ˆ").html("0%");
             }
             
-            if (isNaN(parseFloat(json.ÎüÑª))!= true)
+            if (isNaN(parseFloat(json.å¸è¡€))!= true)
             {
-                $(".ÎüÑª").html(parseInt(100 * parseFloat(json.ÎüÑª)) + "%");
-	            if(typeof(json.ÎüÑª)=="undefined")$(".ÎüÑª").html("0");
+                $(".å¸è¡€").html(parseInt(100 * parseFloat(json.å¸è¡€)) + "%");
+	            if(typeof(json.å¸è¡€)=="undefined")$(".å¸è¡€").html("0");
             }
             else
             {
-               $(".ÎüÑª").html("0%");
+               $(".å¸è¡€").html("0%");
             }
 
-            if (isNaN(parseFloat(json.ÎüÄ§))!= true)
+            if (isNaN(parseFloat(json.å¸é­”))!= true)
             {
-                $(".ÎüÄ§").html(parseInt(100 * parseFloat(json.ÎüÄ§)) + "%");
-	            if(typeof(json.ÎüÄ§)=="undefined")$(".ÎüÄ§").html("0");
+                $(".å¸é­”").html(parseInt(100 * parseFloat(json.å¸é­”)) + "%");
+	            if(typeof(json.å¸é­”)=="undefined")$(".å¸é­”").html("0");
             }
             else
             {
-               $(".ÎüÄ§").html("0%");
+               $(".å¸é­”").html("0%");
             }
 			
-			$(".¹¥»÷").html(showInt(json.¹¥»÷));
-			if(typeof(json.¹¥»÷)=="undefined")$(".¹¥»÷").html("0");
-			Õ½¶·Á¦+=json.¹¥»÷/800;
+			$(".æ”»å‡»").html(showInt(json.æ”»å‡»));
+			if(typeof(json.æ”»å‡»)=="undefined")$(".æ”»å‡»").html("0");
+			æˆ˜æ–—åŠ›+=json.æ”»å‡»/800;
 			
-			$(".·ÀÓù").html(showInt(json.·ÀÓù));
-			if(typeof(json.·ÀÓù)=="undefined")$(".·ÀÓù").html("0");
-			Õ½¶·Á¦+=json.·ÀÓù/1000;
-			$(".ÃüÖĞ").html(showInt(json.ÃüÖĞ));
-			if(typeof(json.ÃüÖĞ)=="undefined")$(".ÃüÖĞ").html("0");
-			Õ½¶·Á¦+=json.ÃüÖĞ/500;
+			$(".é˜²å¾¡").html(showInt(json.é˜²å¾¡));
+			if(typeof(json.é˜²å¾¡)=="undefined")$(".é˜²å¾¡").html("0");
+			æˆ˜æ–—åŠ›+=json.é˜²å¾¡/1000;
+			$(".å‘½ä¸­").html(showInt(json.å‘½ä¸­));
+			if(typeof(json.å‘½ä¸­)=="undefined")$(".å‘½ä¸­").html("0");
+			æˆ˜æ–—åŠ›+=json.å‘½ä¸­/500;
 			
-			$(".ÉÁ±Ü").html(showInt(json.ÉÁ±Ü));
-			if(typeof(json.ÉÁ±Ü)=="undefined")$(".ÉÁ±Ü").html("0");
-			Õ½¶·Á¦+=json.ÉÁ±Ü/4000;
-			$(".ËÙ¶È").html(showInt(json.ËÙ¶È));
-			if(typeof(json.ËÙ¶È)=="undefined")$(".ËÙ¶È").html("0");
-			Õ½¶·Á¦+=json.ËÙ¶È/2500;
-			$(".³É³¤").html(showInt(json.³É³¤));
-			if(typeof(json.³É³¤)=="undefined")$(".³É³¤").html("0");
+			$(".é—ªé¿").html(showInt(json.é—ªé¿));
+			if(typeof(json.é—ªé¿)=="undefined")$(".é—ªé¿").html("0");
+			æˆ˜æ–—åŠ›+=json.é—ªé¿/4000;
+			$(".é€Ÿåº¦").html(showInt(json.é€Ÿåº¦));
+			if(typeof(json.é€Ÿåº¦)=="undefined")$(".é€Ÿåº¦").html("0");
+			æˆ˜æ–—åŠ›+=json.é€Ÿåº¦/2500;
+			$(".æˆé•¿").html(showInt(json.æˆé•¿));
+			if(typeof(json.æˆé•¿)=="undefined")$(".æˆé•¿").html("0");
 
 
-			$(".½ø»¯´ÎÊı").html(json.ÒÑ½ø»¯´ÎÊı);
-			if(typeof(json.ÒÑ½ø»¯´ÎÊı)=="undefined")$(".½ø»¯´ÎÊı").html("0");
-			if(typeof(json.¼¼ÄÜÏÔÊ¾)!="undefined"){
-				var ¼¼ÄÜ = json.¼¼ÄÜÏÔÊ¾.split(",");
-				$(".¼¼ÄÜÁĞ±í").html("");
-				for(var i = 0;i<¼¼ÄÜ.length;i++){
-					var ¼¼ÄÜ×é = ¼¼ÄÜ[i].split("|");
-					if(¼¼ÄÜ×é.length>=2){
-						if(¼¼ÄÜ×é[4]=="true"){
-							$(".¼¼ÄÜÁĞ±í").html($(".¼¼ÄÜÁĞ±í").html()+"<li onselectstart='return false;'  onclick=\"sj('BUFF',"+¼¼ÄÜ×é[2]+",this,"+Mid+")\"><b>[¼Ó³É]</b>&nbsp;"+¼¼ÄÜ×é[0]+"(<span class='jnlv'>"+¼¼ÄÜ×é[1]+"</span>)</li>");
-							Õ½¶·Á¦+=¼¼ÄÜ×é[1]*35;
-						}else{
-							
-							$(".¼¼ÄÜÁĞ±í").html($(".¼¼ÄÜÁĞ±í").html()+"<li onselectstart='return false;' onclick=\"sj('¼¼ÄÜ',"+¼¼ÄÜ×é[2]+",this,"+Mid+")\"><b>[¼¼ÄÜ]</b>&nbsp;"+¼¼ÄÜ×é[0]+"(<span class='jnlv'>"+¼¼ÄÜ×é[1]+"</span>)</li>");
-							Õ½¶·Á¦+=¼¼ÄÜ×é[1]*25;
+			$(".è¿›åŒ–æ¬¡æ•°").html(json.å·²è¿›åŒ–æ¬¡æ•°);
+			if(typeof(json.å·²è¿›åŒ–æ¬¡æ•°)=="undefined")$(".è¿›åŒ–æ¬¡æ•°").html("0");
+			if(typeof(json.æŠ€èƒ½æ˜¾ç¤º)!="undefined"){
+				var æŠ€èƒ½ = json.æŠ€èƒ½æ˜¾ç¤º.split(",");
+				$(".æŠ€èƒ½åˆ—è¡¨").html("");
+				for(var i = 0;i<æŠ€èƒ½.length;i++){
+					var æŠ€èƒ½ç»„ = æŠ€èƒ½[i].split("|");
+					if(æŠ€èƒ½ç»„.length>=2){
+						if (æŠ€èƒ½ç»„[4] == "true") {
+
+							$(".æŠ€èƒ½åˆ—è¡¨").html($(".æŠ€èƒ½åˆ—è¡¨").html() +
+								"<li  data-id='" + æŠ€èƒ½ç»„[2] + "' onselectstart='return false;'  onclick=\"sj('BUFF'," +
+								æŠ€èƒ½ç»„[2] + ",this," + Mid + ")\"><b>[åŠ æˆ]</b> " + æŠ€èƒ½ç»„[0] +
+								"(<span class='jnlv'>" + æŠ€èƒ½ç»„[1] + "</span>)</span>&nbsp;<span style='color:#3c5dff;' onclick=\"deleteJN('" + Mid + "','" + æŠ€èƒ½ç»„[2] + "')\">åˆ </span></li>");
+							æˆ˜æ–—åŠ› += æŠ€èƒ½ç»„[1] * 35;
+						} else {
+
+                            $(".æŠ€èƒ½åˆ—è¡¨").html($(".æŠ€èƒ½åˆ—è¡¨").html() +
+                                "<li data-id='" + æŠ€èƒ½ç»„[2]
+								+ "' onselectstart='return false;' ><span onclick=\"sj('æŠ€èƒ½'," +
+								æŠ€èƒ½ç»„[2] + ",this," + Mid + ")\"><b>[æŠ€èƒ½]</b> " + æŠ€èƒ½ç»„[0] + "(<span class='jnlv'>" +
+								æŠ€èƒ½ç»„[1] + "</span>)</span>&nbsp;<span style='color:#3c5dff' onclick=\"deleteJN('" + Mid + "','" + æŠ€èƒ½ç»„[2] + "')\">åˆ </span></li>");
+							æˆ˜æ–—åŠ› += æŠ€èƒ½ç»„[1] * 25;
 						}
 					}
 					
 				}
-				ĞÎÏó=json.ĞÎÏó;
-				if(json.ÎåĞĞ=="Â}" || json.ÎåĞĞ=="·ğ"
-){
+				å½¢è±¡=json.å½¢è±¡;
+				if(json.äº”è¡Œ=="è–" || json.äº”è¡Œ=="ä½›"){
 					
 					showFlashPet("z");
 					
 					
 				}else{
-					setPetICO(json.ĞÎÏó);
+					setPetICO(json.å½¢è±¡);
 				}
 			}
-			Õ½¶·Á¦=Math.ceil(Õ½¶·Á¦);
-			$(".Õ½¶·Á¦").html(Õ½¶·Á¦);
+			æˆ˜æ–—åŠ›=Math.ceil(æˆ˜æ–—åŠ›);
+			$(".æˆ˜æ–—åŠ›").html(æˆ˜æ–—åŠ›);
 			/*	
-			$(".Éı¼¶¾­Ñé").html(showInt(window.external.getExp(JSON.µÈ¼¶)));	
-			$(".cwjson").html(window.external.getPetInfo1(JSON.³èÎïĞòºÅ));
-			$(".µ±Ç°¾­Ñé").html(showInt(window.external.getExp_(JSON.µ±Ç°¾­Ñé,JSON.µÈ¼¶)))*/
-			if(typeof(json.µ±Ç°¾­Ñé)=="undefined")$(".µ±Ç°¾­Ñé").html("0");
+			$(".å‡çº§ç»éªŒ").html(showInt(window.external.getExp(JSON.ç­‰çº§)));	
+			$(".cwjson").html(window.external.getPetInfo1(JSON.å® ç‰©åºå·));
+			$(".å½“å‰ç»éªŒ").html(showInt(window.external.getExp_(JSON.å½“å‰ç»éªŒ,JSON.ç­‰çº§)))*/
+			if(typeof(json.å½“å‰ç»éªŒ)=="undefined")$(".å½“å‰ç»éªŒ").html("0");
 
-		}
-		function sj(type,id,dom,petid){
+        }
+
+        function deleteJN(pet, skill) {
+	        if (confirm("æ‚¨ç¡®å®šè¦åˆ é™¤è¯¥æŠ€èƒ½å—ï¼Ÿæœ¬æ“ä½œä¸å¯é€†ï¼")) {
+		        var result = window.external.deleteJN(pet, skill);
+		        if (result == 1) {
+			        window.parent.showBox("æŠ€èƒ½åˆ é™¤æˆåŠŸï¼");
+		        } else {
+			        window.parent.showBox("æŠ€èƒ½åˆ é™¤å¤±è´¥ï¼Œè¯·é‡è¯•ï¼");
+		        }
+	        }
+        }
+
+
+        function sj(type,id,dom,petid){
 			var returns = window.external.jnsj(petid,id,type);
 			if(returns>-1){
-				window.parent.showBox("¼¼ÄÜÉı¼¶³É¹¦£¡");
+				window.parent.showBox("æŠ€èƒ½å‡çº§æˆåŠŸï¼");
 				$(dom).find(".jnlv").html(returns);
 			}else if(returns==-2){
-				window.parent.showBox("¼¼ÄÜÒÑ¾­Âú¼¶À²~~");	
-			}else{
-				window.parent.showBox("¼¼ÄÜÉı¼¶Ê§°Ü£¡ÇëÈ·¶¨ÄúÓµÓĞÉı¼¶µÀ¾ß£¡");	
+                window.parent.showBox("æŠ€èƒ½å·²ç»æ»¡çº§å•¦~~");
+            }else {
+				window.parent.showBox("æŠ€èƒ½å‡çº§å¤±è´¥ï¼è¯·ç¡®å®šæ‚¨æ‹¥æœ‰å‡çº§é“å…·ï¼");	
 			}
 		}
 		function getJSONStr(i){
 			return JSON.stringify(i);
 		}
-		var ĞÎÏó;
+		var å½¢è±¡;
 		function readPet(json){
 			
 			var j = $.parseJSON(json);
@@ -213,18 +226,18 @@
 			for(i = 0;i<j.length;i++){
 				var c = "yy";
 				ii++;
-				if(j[i].×´Ì¬=="0"){
+				if(j[i].çŠ¶æ€=="0"){
 				
-					//setPetICO(j[i].ĞÎÏó);
+					//setPetICO(j[i].å½¢è±¡);
 					updateMainPet(j[i]);
 
 					c = "";
 				}
-				html = "<div  class=\""+c+"\" onclick=\"setPetWz("+j[i].³èÎïĞòºÅ+",$(this).index())\">"+
+				html = "<div  class=\""+c+"\" onclick=\"setPetWz("+j[i].å® ç‰©åºå·+",$(this).index())\">"+
 					"<em>"+
-					"<a style='' >"+j[i].³èÎïÃû×Ö+"<br />LV "+j[i].µÈ¼¶+"</a>"+
+					"<a style='' >"+j[i].å® ç‰©åå­—+"<br />LV "+j[i].ç­‰çº§+"</a>"+
 					"</em>"+
-					"<img style=\"border-radius: 5px; \" src=\"Content/PetPhoto/k"+j[i].ĞÎÏó+".gif\" onerror=\"this.src='Content/PetPhoto/k"+j[i].ĞÎÏó+".png'\" />"+
+					"<img style=\"border-radius: 5px; \" src=\"Content/PetPhoto/k"+j[i].å½¢è±¡+".gif\" onerror=\"this.src='Content/PetPhoto/k"+j[i].å½¢è±¡+".png'\" />"+
 					"</div>";
 				
 			
@@ -248,7 +261,7 @@
 
 			var html;
 			if(id>=1000) {
-				html = " <IMG STYLE=\" height: 150px;width: 166px;\" src=\"Content/PetPhoto/z"+id+".gif\" />";
+				html = " <IMG STYLE=\" height: 150px;width: 166px;\" />";
 			} else {
 				html = " <IMG src=\"Content/PetPhoto/z"+id+".gif\" />";
 			}
@@ -256,14 +269,16 @@
 			$(".petO").html(html);
 		}
 		var Init=0;
+		var petList_png = "516|524|523|525|526|527|528|529"
 		function showPNG(t){
-			 html = " <IMG class='petPng' id='pet"+ĞÎÏó+"'  src=\"Content/PetPhoto/"+t+ĞÎÏó+"_1.png\" style='height:311px;width:788px;z-index:999' />";
-			 
+			 html = " <IMG class='petPng' id='pet"+å½¢è±¡+"'  style='height:311px;width:788px;z-index:999' />";
+		
 			if(Init!=0)clearInterval(Init);
 			
 			Init = setInterval("play"+t+"()",100);
 			$(".petO").html(html);
-			if(ĞÎÏó==516 || ĞÎÏó == 524){
+			
+            if (petList_png.indexOf(å½¢è±¡)!=-1){
 				
 				$(".petO .petPng:eq(0)").css("POSITION","ABSOLUTE");
 
@@ -285,30 +300,62 @@
 				zI=1;
 			}
 		
-			$(".petPng").attr("src","Content/PetPhoto/z"+ĞÎÏó+"_"+zI+".png");
+			$(".petPng").css("background-image","url(Content/PetPhoto/z"+å½¢è±¡+"_"+zI+".png)");
 		
 		}
 		var zCount = 10;
 		var sCount = 31;
 		function showFlashPet(t){
-            if (ĞÎÏó == 516 || ĞÎÏó == 524){
+            if (å½¢è±¡ == 516 || å½¢è±¡ == 524){
 				zCount = 10;
 				sCount = 31;
 				showPNG(t);
 				return;
+            }
+			else if (å½¢è±¡ == 523) {
+				zCount = 5;
+				sCount = 31;
+				showPNG(t);
+				return;
+            }
+            else if (å½¢è±¡ == 525) {
+	            zCount = 13;
+	            sCount = 31;
+	            showPNG(t);
+	            return;
+            }else if(å½¢è±¡ == 526){
+				zCount = 11;
+	            sCount = 40;
+	            showPNG(t);
+	            return;
+			}else if(å½¢è±¡ == 527){
+				zCount = 12;
+	            sCount = 31;
+	            showPNG(t);
+	            return;
+			}else if(å½¢è±¡ == 528){
+				zCount = 13;
+	            sCount = 40;
+	            showPNG(t);
+	            return;
+			}else if(å½¢è±¡ == 529){
+				zCount = 15;
+	            sCount = 40;
+	            showPNG(t);
+	            return;
 			}
 			var width=488;
-			if(ĞÎÏó>513){
+			if(å½¢è±¡>513){
 				t="f";	
 				width=232;
 			}
 			var fhtml =  "<div><object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' id='sw' width='"+width+"' height='200' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab'>"+
-			"<param name='movie' value='Content/FlashPet/"+t+ĞÎÏó+".swf'>"+
-			"<param name='allowScriptAccess' value='never' />  "+
+			"<param name='movie' value='Content/FlashPet/"+t+å½¢è±¡+".swf'>"+
+			"<param name='allowScriptAccess' value='always' />  "+
 			"<param name='allowFullScreen' value='false' />  "+
 			"<param name='quality' value='high' />  "+
 			"<param name='wmode' value='transparent' />"+  
-			"<embed src='Content/FlashPet/"+t+ĞÎÏó+".swf' quality='high' width='488' height='200' name='sw' align='middle' play='true' loop='false' allowScriptAccess='never' type='application/x-shockwave-flash' wmode='transparent' pluginspage='http://www.macromedia.com/go/getflashplayer'></object></div>";
+			"<embed src='Content/FlashPet/"+t+å½¢è±¡+".swf' quality='high' width='488' height='200' name='sw' align='middle' play='true' loop='false' allowScriptAccess='always' type='application/x-shockwave-flash' wmode='transparent' pluginspage='http://www.macromedia.com/go/getflashplayer'></object></div>";
 					
 					$(".petO").html(fhtml);	
 			}
@@ -316,46 +363,46 @@
             if (ajax.vailZb(i).value == "ok") {
                 $(t).remove();
                 if($("#zbst").html()==""){
-                    $("#zbst").html("ÉíÌå");
+                    $("#zbst").html("èº«ä½“");
                 }
                 if ($("#zbwq").html() == "") {
-                    $("#zbwq").html("ÎäÆ÷");
+                    $("#zbwq").html("æ­¦å™¨");
                 }
                 if ($("#zbjb").html() == "") {
-                    $("#zbjb").html("½Å²¿");
+                    $("#zbjb").html("è„šéƒ¨");
                 }
                 if ($("#zbcb").html() == "") {
-                    $("#zbcb").html("³á°ò");
+                    $("#zbcb").html("ç¿…è†€");
                 }
                 if ($("#zbbs").html()== "") {
-                    $("#zbbs").html("±¦Ê¯");
+                    $("#zbbs").html("å®çŸ³");
                 }
                 if ($("#zbdj").html() == "") {
-                    $("#zbdj").html("µÀ¾ß");
+                    $("#zbdj").html("é“å…·");
                 }
                 if ($("#zbjz").html() == "") {
-                    $("#zbjz").html("½äÖ¸");
+                    $("#zbjz").html("æˆ’æŒ‡");
                 }
                 if ($("#zbsz").html() == "") {
-                    $("#zbsz").html("ÊÖïí");
+                    $("#zbsz").html("æ‰‹é•¯");
                 }
                 if ($("#zbxl").html()== "") {
-                    $("#zbxl").html("ÏîÁ´");
+                    $("#zbxl").html("é¡¹é“¾");
                 }
                 if ($("#zbtb").html() == "") {
-                    $("#zbtb").html("Í·²¿");
+                    $("#zbtb").html("å¤´éƒ¨");
                 }
                 if ($("#zbls").html() == "") {
-                    $("#zbls").html("ÁéÊÎ");
+                    $("#zbls").html("çµé¥°");
                 }
                 if ($("#zbfb").html() == "") {
-                    $("#zbfb").html("·¨±¦");
+                    $("#zbfb").html("æ³•å®");
                 }
 
 
 
             } else {
-                parent.window.showBox("ÏµÍ³·±Ã¦£¡");
+                parent.window.showBox("ç³»ç»Ÿç¹å¿™ï¼");
             }
         }
         var pid;
@@ -382,18 +429,18 @@
 				
 				updateMainPet($.parseJSON(window.external.getPetInfo(id)));
                  window.parent.jid=null;
-			window.parent.jname="ÆÕÍ¨¹¥»÷";
+			window.parent.jname="æ™®é€šæ”»å‡»";
             
 
 		}
-        function getSkill(id) {
+        /*function getSkill(id) {
             var skillStr = ajax.getSkillList(id).value;
             var skillStrList = skillStr.split("|");
             var html = "";
             for (var i = 0; i < skillStrList.length; i++) {
                 var skillInfo = skillStrList[i].split(",");
 
-                html += "<li><span> <input type='button' onclick='upSkill(" + skillInfo[2] + ")' value='Éı¼¶'>" + skillInfo[0] + "&nbsp;&nbsp;<span id='j" + skillInfo[2] + "'>" + skillInfo[1] + "</span>  ¼¶ </li>";
+                html += "<li><span> <input type='button' onclick='upSkill(" + skillInfo[2] + ")' value='å‡çº§'>" + skillInfo[0] + "&nbsp;&nbsp;<span id='j" + skillInfo[2] + "'>" + skillInfo[1] + "</span>  çº§ </li>";
 
             }
             $("#p3_right ul").html(html);
@@ -430,66 +477,67 @@
                     window.parent.showBox(r[1]);
                 }
             } else if (r == "ok") {
-                window.parent.showBox("Ñ§Ï°³É¹¦£¡");
+                window.parent.showBox("å­¦ä¹ æˆåŠŸï¼");
                 window.location = window.location;
             }
-        }
+        }*/
 		function showUserInfo(json){
 			var j = $.parseJSON(json);
-			$(".Íæ¼ÒÃû×Ö").html(j.Ãû×Ö);
-			$(".½ğ±Ò").html(j.½ğ±Ò);
-			$(".Ôª±¦").html(j.Ôª±¦);
-			$(".Ö÷³èÃû×Ö").html(j.Ö÷³èÃû×Ö);
-			$(".Ë®¾§").html(j.Ë®¾§);
-			$(".³èÎïÊıÁ¿").html(j.³èÎïÊıÁ¿);
+            $(".ç©å®¶åå­—").html(j.åå­—);
+            $(".é‡‘å¸").html(j.é‡‘å¸);
+			$(".æ°´æ™¶").html(j.æ°´æ™¶);
+			$(".å…ƒå®").html(j.å…ƒå®);
+			$(".ä¸»å® åå­—").html(j.ä¸»å® åå­—);
+            $(".å® ç‰©æ•°é‡").html(j.å® ç‰©æ•°é‡);
+            $(".æ€§åˆ«").html(j.sex);
 		    windows.alert("test");
 		}
 		function loadZB(j){
 			
 			
-			$(".ÉíÌå").html("ÉíÌå");
+			$(".èº«ä½“").html("èº«ä½“");
 	 
-			$(".ÎäÆ÷").html("ÎäÆ÷");
+			$(".æ­¦å™¨").html("æ­¦å™¨");
 	   
-			$(".½Å²¿").html("½Å²¿");
+			$(".è„šéƒ¨").html("è„šéƒ¨");
 	  
-			$(".³á°ò").html("³á°ò");
+			$(".ç¿…è†€").html("ç¿…è†€");
 	   
-			$(".±¦Ê¯").html("±¦Ê¯");
+			$(".å®çŸ³").html("å®çŸ³");
 	  
-			$(".µÀ¾ß").html("µÀ¾ß");
+			$(".é“å…·").html("é“å…·");
 	   
-			$(".½äÖ¸").html("½äÖ¸");
+			$(".æˆ’æŒ‡").html("æˆ’æŒ‡");
 		
-			$(".ÊÖïí").html("ÊÖïí");
+			$(".æ‰‹é•¯").html("æ‰‹é•¯");
 	   
-			$(".ÏîÁ´").html("ÏîÁ´");
+			$(".é¡¹é“¾").html("é¡¹é“¾");
 	 
-			$(".Í·²¿").html("Í·²¿");
-            $(".¿¨ÅÆ×ó").html("<img src=\"Content/Img/PetInfo/zbsx.gif\">");
-			$(".¿¨ÅÆÓÒ").html("<img src=\"Content/Img/PetInfo/zbsx.gif\">");
-            $(".ÁéÊÎ").html("ÁéÊÎ");
-            $(".·¨±¦").html("·¨±¦");
+			$(".å¤´éƒ¨").html("å¤´éƒ¨");
+            $(".å¡ç‰Œå·¦").html("<img src=\"Content/Img/PetInfo/zbsx.gif\">");
+			$(".å¡ç‰Œå³").html("<img src=\"Content/Img/PetInfo/zbsx.gif\">");
+            $(".çµé¥°").html("çµé¥°");
+            $(".æ³•å®").html("æ³•å®");
 
 			var j = $.parseJSON(j);
 			for(var i = 0;i < j.length;i++){
-				$("."+j[i].ÀàĞÍ).html("<img src=\"Content/Img/prop/prop/"+j[i].ICO+".gif\"/><div class='wpid' style='display:none'>"+j[i].ID+"</div><div class='propName' style='display:none'>"+j[i].Name+"</div>");
+				$("."+j[i].ç±»å‹).html("<img src=\"Content/Img/prop/prop/"+j[i].ICO+".gif\"/><div class='wpid' style='display:none'>"+j[i].ID+"</div><div class='propName' style='display:none'>"+j[i].Name+"</div>");
 				
 				
 			}
-			//×°±¸²Û
-			 $(".×°±¸²Û li").mouseover(function(e){
-				 ¡¡e = e||window.event;
+			//è£…å¤‡æ§½
+			 $(".è£…å¤‡æ§½ li").mouseover(function(e){
+				 ã€€e = e||window.event;
 				 //  window.parent.hoveWp1(e,this,"#FFF",$(this).find(".wpid").html())
-				   window.parent.hoveZB_1(e,this,"#FFF",$(this).find(".wpid").html(),$(this).find(".propName").html(),"×°±¸",Mid);
+				   window.parent.hoveZB_1(e,this,"#FFF",$(this).find(".wpid").html(),$(this).find(".propName").html(),"è£…å¤‡",Mid);
 			 });
-			$(".×°±¸²Û li").mouseout(function(e){
-				 ¡¡window.parent.hoveWp1hide();
+			$(".è£…å¤‡æ§½ li").mouseout(function(e){
+				 ã€€window.parent.hoveWp1hide();
 			});
-			$(".×°±¸²Û li").dblclick(function(e){
+			$(".è£…å¤‡æ§½ li").dblclick(function(e){
 				
 				if(window.external.xiexia($(this).find(".wpid").html())){
-					 window.parent.showBox("Ğ¶ÏÂ×°±¸³É¹¦£¡");
+					 window.parent.showBox("å¸ä¸‹è£…å¤‡æˆåŠŸï¼");
 					 $(this).html("");
 				}
 			});
@@ -511,7 +559,7 @@
     </style>
 </head>
 
-<body onload="loadIF()" style="width:788px;">
+<body onload="loadIF();" style="width:788px;">
     <div id="baginfo" style="margin-top: 0; z-index: 10020; position: absolute; display: none;">
         <table style="font-size:12px;" width="185" cellpadding="0" cellspacing="0" border="0">
             <tbody>
@@ -547,137 +595,142 @@
         <div id="left">
             <div id="left_left">
 
-	            <span class="Íæ¼ÒÃû×Ö">canku</span><br/>±¦±´£º<font color="green"><span class="Ö÷³èÃû×Ö"></span></font><br/>
-               
-                
-	            Õ½¶·Á¦£º<span class="Õ½¶·Á¦" >0</span><br/>
-	            ĞÔ±ğ£ºÃÀÅ®<br/>
-	            ³èÎïÊıÁ¿£º<span class="³èÎïÊıÁ¿"></span><br/>
-	            ½ğ±Ò£º<span class="½ğ±Ò">0</span><br/>
-	            Ôª±¦£º<span class="Ôª±¦"></span><br/>
-	            Ë®¾§£º<span class="Ë®¾§"></span><br/>
-               
+	            <span class="ç©å®¶åå­—"><%= user.nickname %></span><br/>å®è´ï¼š<%= petInfo.bagPet[0].petName %><font color="green"><span class="ä¸»å® åå­—"></span></font><br/>
+                ç©å®¶æ€§åˆ«ï¼š<span class="æ€§åˆ«"><% if (user.sex == 1) {%> å¸…å“¥ <% } else { %> ç¾å¥³ <% } %></span><br/>
+	            æˆ˜æ–—åŠ›ï¼š<span class="æˆ˜æ–—åŠ›" >0</span><br/>
+	            å® ç‰©æ•°é‡ï¼š<span class="å® ç‰©æ•°é‡"><%= petInfo.bagPet.length + petInfo.pasturePet.length %></span><br/>
+	            é‡‘å¸ï¼š<span class="é‡‘å¸"><%= playerInfo.goldCoin %></span><br/>
+	            å…ƒå®ï¼š<span class="å…ƒå®"><%= playerInfo.goldIngot %></span><br/>
+	            æ°´æ™¶ï¼š<span class="æ°´æ™¶"><%= playerInfo.crystal %></span><br/>               
             </div>
             <div id="left_right">
-                <img src="Content/player/26.gif?rd=4847848" />
-      
+                <!--<img src="Content/player/26.gif?rd=4847848" />-->
+                <img src=<%= user.smallHeadImg %>?rd=4847848 />
             </div>
-    <div id="bottom" style=" word-wrap: break-word;">
-          
-    </div>
+            <div id="bottom" style=" word-wrap: break-word;">
+                <% for (var i = 0; i < 3; i++) { %>
+                    <% if (petInfo.bagPet[i]) { %>
+                        <% if (petInfo.majorPet == i) { %>
+                            <div class="" onclick="setPetWz(<%= i %>)">
+                        <% } else { %>
+                            <div class="yy" onclick="setPetWz(<%= i %>)">
+                        <% } %>
+                        <em><a style=''><%= petInfo.bagPet[i].petName %></a>
+                        <img style="border-radius: 5px;" src=Content/PetPhoto/k<%= petInfo.bagPet[petInfo.majorPet].petId %>.gif onerror=this.src=Content/PetPhoto/k<%= petInfo.bagPet[petInfo.majorPet].petId %>.png />
+                        </div>
+                    <% } else { %>
+                        <div><em></em><img style="border-radius: 5px;" src="Content/PetPhoto/nopet.gif" /></div>
+                    <% } %>
+                <% } %>
+            </div>
 
         </div>
         <div id="right">
             <ul class="pettab" style="position:absolute;z-index:999999">
-                <li id="pet1" class="on"><p class="p1">´øÁìµÄ³èÎï</p></li>
-                <li id="pet2"><p class="p2">ÊôĞÔ</p></li>
-                <li id="pet3"><p class="p3">¼¼ÄÜ</p></li>
+                <li id="pet1" class="on"><p class="p1">å¸¦é¢†çš„å® ç‰©</p></li>
+                <li id="pet2"><p class="p2">å±æ€§</p></li>
+                <li id="pet3"><p class="p3">æŠ€èƒ½</p></li>
             </ul>
 			<div style="height:35px"></div>
             <div id="page1" >
                 <div id="right_bottom" style="display:block">
                     <div id="rb_left">
                         <div id="rbl_left">
-                            <ul class="×°±¸²Û">
-                                <li class="i1 ÉíÌå">ÉíÌå</li>
-                                <li class="i2 Í·²¿">Í·²¿</li>
-                                <li class="i3 ÏîÁ´">ÏîÁ´</li>
-                                <li class="i4 ÎäÆ÷">ÎäÆ÷</li>
-                                <li class="i5 ÊÖïí">ÊÖïí</li>
-                                <li class="i6 ½Å²¿">½Å²¿</li>
-                                <li class="i7 ½äÖ¸">½äÖ¸</li>
-                                <li class="i8 ³á°ò">³á°ò</li>
-                                <li class="i9 ±¦Ê¯">±¦Ê¯</li>
-                                <li class="i10 µÀ¾ß">µÀ¾ß</li>
+                            <ul class="è£…å¤‡æ§½">
+                                <li class="i1 èº«ä½“">èº«ä½“</li>
+                                <li class="i2 å¤´éƒ¨">å¤´éƒ¨</li>
+                                <li class="i3 é¡¹é“¾">é¡¹é“¾</li>
+                                <li class="i4 æ­¦å™¨">æ­¦å™¨</li>
+                                <li class="i5 æ‰‹é•¯">æ‰‹é•¯</li>
+                                <li class="i6 è„šéƒ¨">è„šéƒ¨</li>
+                                <li class="i7 æˆ’æŒ‡">æˆ’æŒ‡</li>
+                                <li class="i8 ç¿…è†€">ç¿…è†€</li>
+                                <li class="i9 å®çŸ³">å®çŸ³</li>
+                                <li class="i10 é“å…·">é“å…·</li>
 
-                                <li class="i11 ¿¨ÅÆÓÒ"><img src="Content/Img/PetInfo/zbsx.gif"></li>
-                                <li class="i12 ¿¨ÅÆ×ó"><img src="Content/Img/PetInfo/zbsx.gif"></li>
-                                <li class="i13 ÁéÊÎ">ÁéÊÎ</li>
-                                <li class="i14 ·¨±¦">·¨±¦</li>
+                                <li class="i11 å¡ç‰Œå³"><img src="Content/Img/PetInfo/zbsx.gif"></li>
+                                <li class="i12 å¡ç‰Œå·¦"><img src="Content/Img/PetInfo/zbsx.gif"></li>
+                                <li class="i13 çµé¥°">çµé¥°</li>
+                                <li class="i14 æ³•å®">æ³•å®</li>
                             </ul>
                        
                            
                             <h2 class="petO" >
-                                
+                                <img src=Content/PetPhoto/z<%= petInfo.bagPet[petInfo.majorPet].petId %>.gif>
                             </h2>
                         </div>
-                        <h2 style="    margin-top: 10px;">ËµÃ÷£ºË«»÷×°±¸Í¼±ê¿ÉÒÔÍÑÏÂ×°±¸£¡</h2>
-                        <!--<div style="cursor:pointer;" onclick="javascript:void(0);">·¢ËÍÌôÕ½ĞÅÏ¢</div>-->
+                        <h2 style="    margin-top: 10px;">è¯´æ˜ï¼šåŒå‡»è£…å¤‡å›¾æ ‡å¯ä»¥è„±ä¸‹è£…å¤‡ï¼</h2>
+                        <!--<div style="cursor:pointer;" onclick="javascript:void(0);">å‘é€æŒ‘æˆ˜ä¿¡æ¯</div>-->
                     </div>
 
                     <div id="rb_right">
-	                    µÈ¼¶£º<span class="µÈ¼¶">10</span><br/>
-	                    ÎåĞĞ£º<span class="ÎåĞĞ">Ê¥</span><br/>
-	                    ÉúÃü£º<span class="×î´óÉúÃü">1000</span><br/>
-	                    Ä§·¨£º<span class="×î´óÄ§·¨">2000</span><br/>
-	                    ¹¥»÷£º<span class="¹¥»÷">68000</span><br/>
-	                    ·ÀÓù£º<span class="·ÀÓù">4000</span><br/>
-	                    ÃüÖĞ£º<span class="ÃüÖĞ">6000</span><br/>
-	                    ÉÁ±Ü£º<span class="ÉÁ±Ü">7000</span><br/>
-	                    ËÙ¶È£º<span class="ËÙ¶È">5000</span><br/>
-                        ³É³¤£º<span class="³É³¤">50.5</span>
+	                    ç­‰çº§ï¼š<span class="ç­‰çº§">0</span><br/>
+	                    äº”è¡Œï¼š<span class="äº”è¡Œ"><%= petInfo.bagPet[petInfo.majorPet].petDept %></span><br/>
+	                    ç”Ÿå‘½ï¼š<span class="æœ€å¤§ç”Ÿå‘½"><%= petInfo.bagPet[petInfo.majorPet].HP %></span><br/>
+	                    é­”æ³•ï¼š<span class="æœ€å¤§é­”æ³•"><%= petInfo.bagPet[petInfo.majorPet].MP %></span><br/>
+	                    æ”»å‡»ï¼š<span class="æ”»å‡»"><%= petInfo.bagPet[petInfo.majorPet].ATK %></span><br/>
+	                    é˜²å¾¡ï¼š<span class="é˜²å¾¡"><%= petInfo.bagPet[petInfo.majorPet].DEF %></span><br/>
+	                    å‘½ä¸­ï¼š<span class="å‘½ä¸­"><%= petInfo.bagPet[petInfo.majorPet].ACC %></span><br/>
+	                    é—ªé¿ï¼š<span class="é—ªé¿"><%= petInfo.bagPet[petInfo.majorPet].EVA %></span><br/>
+	                    é€Ÿåº¦ï¼š<span class="é€Ÿåº¦"><%= petInfo.bagPet[petInfo.majorPet].SPE %></span><br/>
+                        æˆé•¿ï¼š<span class="æˆé•¿"><%= petInfo.bagPet[petInfo.majorPet].CC %></span>
                     </div>
                 </div>
             </div>
-            <!--page1½áÊø±êÇ©-->
             <div id="page2" style="display:none">
                 <div id="p2_left" style="    margin: 0 0 0 30px;">
                     <h2 class="petO">
-
-                            
-
 
                     </h2>
                    
                     <ul style="z-index:99999">
                         <li>
-	                        µÈ¼¶£º<span class="µÈ¼¶">10</span><br/>
-	                        µ±Ç°¾­Ñé£º<span class="µ±Ç°¾­Ñé">0</span><br/>
-	                        Éı¼¶¾­Ñé£º<span class="Éı¼¶¾­Ñé"></span><br/>
-                            ÎåĞĞ£º<span class="ÎåĞĞ">Ê¥</span>
+	                        ç­‰çº§ï¼š<span class="ç­‰çº§">10</span><br/>
+	                        å½“å‰ç»éªŒï¼š<span class="å½“å‰ç»éªŒ">0</span><br/>
+	                        å‡çº§ç»éªŒï¼š<span class="å‡çº§ç»éªŒ"></span><br/>
+                            äº”è¡Œï¼š<span class="äº”è¡Œ">åœ£</span>
                         </li>
                         <li>
-	                        ÉúÃü£º<span class="×î´óÉúÃü">1000</span><br/>
-	                        Ä§·¨£º<span class="×î´óÄ§·¨">2000</span><br/>
-	                        ¹¥»÷£º<span class="¹¥»÷">68000</span><br/>
-                            ·ÀÓù£º<span class="·ÀÓù">4000</span>
+	                        ç”Ÿå‘½ï¼š<span class="æœ€å¤§ç”Ÿå‘½">1000</span><br/>
+	                        é­”æ³•ï¼š<span class="æœ€å¤§é­”æ³•">2000</span><br/>
+	                        æ”»å‡»ï¼š<span class="æ”»å‡»">68000</span><br/>
+                            é˜²å¾¡ï¼š<span class="é˜²å¾¡">4000</span>
                         </li>
                         <li>
-	                        ÃüÖĞ£º<span class="ÃüÖĞ">6000</span><br/>
-	                        ÉÁ±Ü£º<span class="ÉÁ±Ü">7000</span><br/>
-	                        ËÙ¶È£º<span class="ËÙ¶È">5000</span><br/>
-                            ³É³¤£º<span class="³É³¤">50.5</span>
+	                        å‘½ä¸­ï¼š<span class="å‘½ä¸­">6000</span><br/>
+	                        é—ªé¿ï¼š<span class="é—ªé¿">7000</span><br/>
+	                        é€Ÿåº¦ï¼š<span class="é€Ÿåº¦">5000</span><br/>
+                            æˆé•¿ï¼š<span class="æˆé•¿">50.5</span>
                         </li>
                     </ul>
                 </div>
                 <div id="p2_right">
-                    ½ğ¿¹£º0<br>
-                    Ä¾¿¹£º0<br>
-                    Ë®¿¹£º0<br>
-                    »ğ¿¹£º0<br>
-                    ÍÁ¿¹£º0<br>
-	                ¼ÓÉî£º<span class="¼ÓÉî">0%</span><br/>
-	                µÖÏû£º<span class="µÖÏû">0%</span><br/>
-	                ÎüÑª£º<span class="ÎüÑª">0%</span><br/>
-	                ÎüÄ§£º<span class="ÎüÄ§">0%</span><br/>
-                    ½ø»¯´ÎÊı£º<span class="½ø»¯´ÎÊı">0</span>
+                    é‡‘æŠ—ï¼š0<br>
+                    æœ¨æŠ—ï¼š0<br>
+                    æ°´æŠ—ï¼š0<br>
+                    ç«æŠ—ï¼š0<br>
+                    åœŸæŠ—ï¼š0<br>
+	                åŠ æ·±ï¼š<span class="åŠ æ·±">0%</span><br/>
+	                æŠµæ¶ˆï¼š<span class="æŠµæ¶ˆ">0%</span><br/>
+	                å¸è¡€ï¼š<span class="å¸è¡€">0%</span><br/>
+	                å¸é­”ï¼š<span class="å¸é­”">0%</span><br/>
+                    è¿›åŒ–æ¬¡æ•°ï¼š<span class="è¿›åŒ–æ¬¡æ•°">0</span>
                 </div>
             </div>
-            <!--page2½áÊø±êÇ©-->
             <div id="page3" style="display:none">
                 <div id="p3_left">
                     <h2 class="petO">
                     </h2>
-                    <h3>
+                    <!--<h3>
                         <select id="jlist" name="jlist">
-                            <option value="0">°ü¹üÖĞÃ»ÓĞ¼¼ÄÜÊé</option>
+                            <option value="0">åŒ…è£¹ä¸­æ²¡æœ‰æŠ€èƒ½ä¹¦</option>
                         </select>
                         <input type="button" onclick="useSkillProp()" style="width:39px; height:17px; margin-top:2px; background:url(i_bnt.gif) left -34px; border:none; cursor:pointer" value="">
-                    </h3>
+                    </h3>-->
                 </div>
 
                 <div id="p3_right" style="position:relative;z-index:9999">
-                    <ul class="¼¼ÄÜÁĞ±í"></ul>
+                    <ul class="æŠ€èƒ½åˆ—è¡¨"></ul>
                 </div>
             </div>
         </div>

@@ -33,7 +33,9 @@ router.post('/login', function (req, res) {
                     req.session.userId = userInfo.id;
                     req.session.user = userInfo;
                     req.session.playerInfo = userDataHandler.loadUserDataByKey(req.session.userId, userDataHandler.userDataSettings.userInfo);
+                    req.session.petInfo = userDataHandler.loadUserDataByKey(req.session.userId, userDataHandler.userDataSettings.petInfo);
                     console.log(req.session.playerInfo);
+                    console.log(req.session.petInfo);
                     userFun.setUserData(req, User, userInfo);
                     res.send(200);
                 }
@@ -93,11 +95,14 @@ router.post('/register', function (req, res) {
             } else { //可以注册
                 params.sex = sex;
                 var headImg = 'images/head/35.gif';
+                var smallHeadImg = 'images/head/25.gif';
                 if (~~head >= 1 && ~~head <= 6) {
                     headImg = 'images/head/3' + ~~head + '.gif';
+                    smallHeadImg = 'images/head/2' + ~~head + '.gif';
                 }
                 params.headImg = headImg;
-                params.playerInfo = JSON.stringify(getDefaultPlayerInfo());
+                params.smallHeadImg = smallHeadImg;
+                //params.playerInfo = JSON.stringify(userFun.getDefaultPlayerInfo());
                 User.insert(params, function (err, result) {
                     if (err) {  //查询数据库失败就返回给原post处（login.html) 状态码为500的错误
                         //res.send(500);

@@ -2,7 +2,7 @@ module.exports = [
     {
         key: 'User',
         name: 'userInfo',
-        fields: ['id', 'username', 'email', 'nickname', 'password', 'sex', 'headImg', 'playerInfo', 'lastLoginTime', 'registerTime', 'lastLoginIp', 'timestamp']
+        fields: ['id', 'username', 'email', 'nickname', 'password', 'sex', 'headImg', 'smallHeadImg', 'playerInfo', 'lastLoginTime', 'registerTime', 'lastLoginIp', 'timestamp']
     },
     {
         key: 'UserPet',

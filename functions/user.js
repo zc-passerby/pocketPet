@@ -1,4 +1,5 @@
 var userDataHandler = require('../common/userDataHandler');
+var pet = require('./pet');
 
 //获取用户IP
 function getClientIp(req) {
@@ -10,6 +11,8 @@ function createUserData(userId) {
     console.log('createUserData');
     var playerInfo = getDefaultPlayerInfo();
     userDataHandler.saveUserDataByKey(userId, playerInfo, userDataHandler.userDataSettings.userInfo);
+    var petInfo = pet.setFirstPet('1');
+    userDataHandler.saveUserDataByKey(userId, petInfo, userDataHandler.userDataSettings.petInfo);
 }
 
 //用户的初始数据

@@ -33,8 +33,6 @@
 		function showUserInfo(json){
 			
 			var j = $.parseJSON(json);
-			$(".玩家名字").html(j.名字);
-			$(".金币").html(j.金币);
 			$(".元宝").html(j.元宝);
 			$(".水晶").html(j.水晶);
             $(".积分").html(j.VIP积分);
@@ -81,7 +79,7 @@
 		var cardid=0;
 		
 		//卡片
-		function card(id){
+		/*function card(id){
 			var card = document.getElementById('card');
 			cardid = id;
 			if(card.style.display == "none"){
@@ -119,7 +117,7 @@
 		function cardpwd1(){
 			var card = document.getElementById('card');
 			card.style.display = "none";
-		}
+		}*/
 		function readYuanbao(json){
 			var html=
 			"<tr class=\"daoju\" onClick=\"sel(this);bid={ID};price={价格};\" onMouseOver=\"xuanfu(this)\" >"+
@@ -136,7 +134,9 @@
 				h = h.replace("{ID}",j[i].商品序号);
 				h = h.replace("{ID}",j[i].商品序号);
 			    h = h.replace("{ID}",j[i].商品序号);
-				h = h.replace("{名字}",j[i].道具名字);
+
+				var sl = String(j[i].商品数量);
+				h = h.replace("{名字}", j[i].道具名字 + (sl == '1' ? "" : "*" + sl));
 				
 				h = h.replace("{价格}",j[i].商品价格);
 				h = h.replace("{价格}",j[i].商品价格);
@@ -171,8 +171,10 @@
 				var h = html.replace("{图标}",j[i].道具图标);
 				h = h.replace("{ID}",j[i].商品序号);
 				h = h.replace("{ID}",j[i].商品序号);
-			    h = h.replace("{ID}",j[i].商品序号);
-				h = h.replace("{名字}",j[i].道具名字);
+                h = h.replace("{ID}", j[i].商品序号);
+
+				var sl = String(j[i].商品数量);
+				h = h.replace("{名字}", j[i].道具名字 + (sl == '1' ? "" : "*" + sl));
 				
 				h = h.replace("{价格}",j[i].商品价格);
 				h = h.replace("{价格}",j[i].商品价格);
@@ -242,8 +244,10 @@
 				h = h.replace("{ID}",j[i].商品序号);
 				h = h.replace("{ID}",j[i].商品序号);
 				h = h.replace("{ID}",j[i].商品序号);
-			h = h.replace("{ID}",j[i].商品序号);
-				h = h.replace("{名字}",j[i].道具名字);
+			    h = h.replace("{ID}",j[i].商品序号);
+
+				var sl = String(j[i].商品数量);
+				h = h.replace("{名字}", j[i].道具名字 + (sl == '1' ? "" : "*" + sl));
 			
 				h = h.replace("{价格}",j[i].商品价格);
 				h = h.replace("{价格}",j[i].商品价格);
@@ -278,8 +282,10 @@
 				h = h.replace("{ID}",j[i].商品序号);
 				h = h.replace("{ID}",j[i].商品序号);
 				h = h.replace("{ID}",j[i].商品序号);
-			h = h.replace("{ID}",j[i].商品序号);
-				h = h.replace("{名字}",j[i].道具名字);
+                h = h.replace("{ID}", j[i].商品序号);
+
+				var sl = String(j[i].商品数量);
+				h = h.replace("{名字}", j[i].道具名字 + (sl == '1' ? "" : "*" + sl));
 			
 				h = h.replace("{价格}",j[i].商品价格);
 				h = h.replace("{价格}",j[i].商品价格);
@@ -666,7 +672,7 @@
 				 var sump = price * parseInt($('#num_').val());
 
                 if (sump === 0) { window.parent.Alert('数据错误！'); return; }
-                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + '元宝！')){
+                if (confirm('你确定购买选中的物品吗? 总共将花费您' + sump + '元宝！')){
 					
 					if(window.external.buy(1,bid,nums)){
 						window.external.updateProp();
@@ -703,7 +709,7 @@
 				 var sump = price * parseInt($('#sjnum').val());
 
                 if (sump == 0) { window.parent.Alert('数据错误！'); return; }
-                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + '水晶！')){
+                if (confirm('你确定购买选中的物品吗? 总共将花费您' + sump + '水晶！')){
 					
 					if(window.external.buy(2,bid,nums)){
 						window.external.updateProp();
@@ -727,7 +733,7 @@
 				 var sump = price * parseInt($('#spannum').val());
 
                 if (sump == 0) { window.parent.Alert('数据错误！'); return; }
-                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + '时之结晶！')){
+                if (confirm('你确定购买选中的物品吗? 总共将花费您' + sump + '时之结晶！')){
 					
 					if(window.external.buy(6,bid,nums)){
 						window.external.updateProp();
@@ -751,7 +757,7 @@
                 var sump = price * parseInt($('#vipnum').val());
 
                 if (sump == 0) { window.parent.Alert('数据错误！'); return; }
-                if (confirm('你确定购买选中的物品吗? 总共将花费您 ' + sump + ' VIP积分！')) {
+                if (confirm('你确定购买选中的物品吗? 总共将花费您' + sump + ' VIP积分！')) {
 				
 					if(window.external.buy(4,bid,nums)){
 						window.external.updateProp();

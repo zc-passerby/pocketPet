@@ -12,10 +12,10 @@
     position: relative;
     color: #724908;
 }
-.zaixian {
+.meiri {
     position: absolute;
-    left: 65px;
-    top: 6px;
+    left: 75px;
+    top: 7px;
     width: 59px;
     height: 17px;
     color: #772200;
@@ -23,6 +23,18 @@
     background: url(../img/prop/ico_btn.gif);
     cursor: pointer;
 }
+.update {
+    position: absolute;
+    left: 165px;
+    top: 7px;
+    width: 59px;
+    height: 17px;
+    color: #772200;
+    border: none;
+    background: url(../img/prop/ico_btn.gif);
+    cursor: pointer;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
     font-size: 100%;

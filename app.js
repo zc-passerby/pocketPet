@@ -19,6 +19,7 @@ global.userPetDefine = null;
 //定义数据表实体
 db.define(tableDefine);
 
+pet.loadUserPetDefine();
 //Express配置
 var app = express();
 app.use(session({
