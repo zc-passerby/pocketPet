@@ -11,6 +11,8 @@ var pet = require('./functions/pet');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var tasks = require('./routes/tasks');
+var pets = require('./routes/pets');
 
 global.db = require('./common/dbutil').Instance();
 global.pwdKey = 'justForPocketPet';
@@ -58,10 +60,12 @@ app.use(function (req, res, next) {
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/login', index);
-app.use('/register', index);
-app.use('/logout', index);
-app.use('/home', index);
+app.use('/tasks', tasks);
+app.use('/pets', pets);
+//app.use('/login', index);
+//app.use('/register', index);
+//app.use('/logout', index);
+//app.use('/home', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

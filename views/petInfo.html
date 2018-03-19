@@ -8,7 +8,7 @@
     <script type="text/javascript">
         var zbList;
         var tzList;
-		
+
 		function text(msg){
 			alert("recv:"+msg);
 		}
@@ -410,7 +410,6 @@
             pid = id;
             var r = "";
          //   var strR = ajax.setPetMain(id).value.split('<f>');
-            
             var data = "0";
 			if (data == "0") {
 				
@@ -422,65 +421,23 @@
 						$(dom[i]).addClass("yy");
 
 					}else{
-						$(dom[i]).removeClass	("yy");
+						$(dom[i]).removeClass("yy");
 						}
 					}
 				}
-				
 				updateMainPet($.parseJSON(window.external.getPetInfo(id)));
                  window.parent.jid=null;
 			window.parent.jname="普通攻击";
-            
-
 		}
-        /*function getSkill(id) {
-            var skillStr = ajax.getSkillList(id).value;
-            var skillStrList = skillStr.split("|");
-            var html = "";
-            for (var i = 0; i < skillStrList.length; i++) {
-                var skillInfo = skillStrList[i].split(",");
-
-                html += "<li><span> <input type='button' onclick='upSkill(" + skillInfo[2] + ")' value='升级'>" + skillInfo[0] + "&nbsp;&nbsp;<span id='j" + skillInfo[2] + "'>" + skillInfo[1] + "</span>  级 </li>";
-
-            }
-            $("#p3_right ul").html(html);
-
+        function setMajorPet(bagId) {
+            data = {'bagId':bagId};
+            $.ajax({
+                url: '/pets/setMajorPet',
+                    type: 'GET',
+                    data: data
+            });
         }
-        function getSkillProp() {
-            var skillPropStr = ajax.getPropSkill().value;
-            var skillPropList = skillPropStr.split("|");
-            var html = "";
-            for (var i = 0; i < skillPropList.length; i++) {
-                var skillPropInfo = skillPropList[i].split(",");
-                html += "<option value='" + skillPropInfo[1] + "'>" + skillPropInfo[0] + "</option>";
-            }
-            $("#jlist").html(html);
-        }
-        function upSkill(sId) {
-            var r = ajax.upSkill(sId).value.split("|");
-            if (r.length > 1) {
-                if (r[0] == "xxk") {
-                    window.parent.showBox(r[1]);
-                }
-            } else if (r == "ok") {
-                var l = $("#j" + sId).html();
-                l = parseInt(l) + 1;
-                $("#j" + sId).html(l);
-            }
 
-        }
-        function useSkillProp() {
-            var propId = $("#jlist option:selected").val();
-            var r = ajax.useSkillProp(propId, pid).value.split("|");
-            if (r.length > 1) {
-                if (r[0] == "xxk") {
-                    window.parent.showBox(r[1]);
-                }
-            } else if (r == "ok") {
-                window.parent.showBox("学习成功！");
-                window.location = window.location;
-            }
-        }*/
 		function showUserInfo(json){
 			var j = $.parseJSON(json);
             $(".玩家名字").html(j.名字);
@@ -611,12 +568,12 @@
                 <% for (var i = 0; i < 3; i++) { %>
                     <% if (petInfo.bagPet[i]) { %>
                         <% if (petInfo.majorPet == i) { %>
-                            <div class="" onclick="setPetWz(<%= i %>)">
+                            <div class="" onclick="setMajorPet(<%= i %>)">
                         <% } else { %>
-                            <div class="yy" onclick="setPetWz(<%= i %>)">
+                            <div class="yy" onclick="setMajorPet(<%= i %>)">
                         <% } %>
-                        <em><a style=''><%= petInfo.bagPet[i].petName %></a>
-                        <img style="border-radius: 5px;" src=Content/PetPhoto/k<%= petInfo.bagPet[petInfo.majorPet].petId %>.gif onerror=this.src=Content/PetPhoto/k<%= petInfo.bagPet[petInfo.majorPet].petId %>.png />
+                                <em><a style=''><%= petInfo.bagPet[i].petName %><br />LV <%= 1 %></a></em>
+                        <img style="border-radius: 5px;" src=Content/PetPhoto/k<%= petInfo.bagPet[i].petId %>.gif onerror=this.src=Content/PetPhoto/k<%= petInfo.bagPet[i].petId %>.png />
                         </div>
                     <% } else { %>
                         <div><em></em><img style="border-radius: 5px;" src="Content/PetPhoto/nopet.gif" /></div>
@@ -664,7 +621,7 @@
                     </div>
 
                     <div id="rb_right">
-	                    等级：<span class="等级">0</span><br/>
+	                    等级：<span class="等级">1</span><br/>
 	                    五行：<span class="五行"><%= petInfo.bagPet[petInfo.majorPet].petDept %></span><br/>
 	                    生命：<span class="最大生命"><%= petInfo.bagPet[petInfo.majorPet].HP %></span><br/>
 	                    魔法：<span class="最大魔法"><%= petInfo.bagPet[petInfo.majorPet].MP %></span><br/>
@@ -680,27 +637,27 @@
             <div id="page2" style="display:none">
                 <div id="p2_left" style="    margin: 0 0 0 30px;">
                     <h2 class="petO">
-
+                        <img src=Content/PetPhoto/z<%= petInfo.bagPet[petInfo.majorPet].petId %>.gif>
                     </h2>
                    
                     <ul style="z-index:99999">
                         <li>
-	                        等级：<span class="等级">10</span><br/>
+	                        等级：<span class="等级">1</span><br/>
 	                        当前经验：<span class="当前经验">0</span><br/>
-	                        升级经验：<span class="升级经验"></span><br/>
-                            五行：<span class="五行">圣</span>
+	                        升级经验：<span class="升级经验">0</span><br/>
+                            五行：<span class="五行"><%= petInfo.bagPet[petInfo.majorPet].petDept %></span>
                         </li>
                         <li>
-	                        生命：<span class="最大生命">1000</span><br/>
-	                        魔法：<span class="最大魔法">2000</span><br/>
-	                        攻击：<span class="攻击">68000</span><br/>
-                            防御：<span class="防御">4000</span>
+	                        生命：<span class="最大生命"><%= petInfo.bagPet[petInfo.majorPet].HP %></span><br/>
+	                        魔法：<span class="最大魔法"><%= petInfo.bagPet[petInfo.majorPet].MP %></span><br/>
+	                        攻击：<span class="攻击"><%= petInfo.bagPet[petInfo.majorPet].ATK %></span><br/>
+                            防御：<span class="防御"><%= petInfo.bagPet[petInfo.majorPet].DEF %></span>
                         </li>
                         <li>
-	                        命中：<span class="命中">6000</span><br/>
-	                        闪避：<span class="闪避">7000</span><br/>
-	                        速度：<span class="速度">5000</span><br/>
-                            成长：<span class="成长">50.5</span>
+	                        命中：<span class="命中"><%= petInfo.bagPet[petInfo.majorPet].ACC %></span><br/>
+	                        闪避：<span class="闪避"><%= petInfo.bagPet[petInfo.majorPet].EVA %></span><br/>
+	                        速度：<span class="速度"><%= petInfo.bagPet[petInfo.majorPet].SPE %></span><br/>
+                            成长：<span class="成长"><%= petInfo.bagPet[petInfo.majorPet].CC %></span>
                         </li>
                     </ul>
                 </div>
@@ -720,13 +677,14 @@
             <div id="page3" style="display:none">
                 <div id="p3_left">
                     <h2 class="petO">
+                        <img src=Content/PetPhoto/z<%= petInfo.bagPet[petInfo.majorPet].petId %>.gif>
                     </h2>
-                    <!--<h3>
+                    <<h3>
                         <select id="jlist" name="jlist">
                             <option value="0">包裹中没有技能书</option>
                         </select>
                         <input type="button" onclick="useSkillProp()" style="width:39px; height:17px; margin-top:2px; background:url(i_bnt.gif) left -34px; border:none; cursor:pointer" value="">
-                    </h3>-->
+                    </h3>>
                 </div>
 
                 <div id="p3_right" style="position:relative;z-index:9999">
