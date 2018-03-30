@@ -9,7 +9,7 @@ router.get('/setMajorPet', function (req, res) {
     var bagId = req.query.bagId;
     var petInfo = userDataHandler.loadUserDataByKey(req.session.userId, userDataHandler.userDataSettings.petInfo);
     petInfo.majorPet = bagId;
-    req.session.petInfo = petInfo;
+    userDataHandler.saveUserDataByKey(req.session.userId, petInfo, userDataHandler.userDataSettings.petInfo);
     res.send(petInfo);
 });
 

@@ -1,138 +1,269 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>map</title>
-<style>
-	body{
-		padding:0;
-		margin:0}
-	#main{
-		background-image:url(Content/Flash/map_city_c.bmp) ;
-		background-repeat:no-repeat;
-		height:313px;
-		width:790px;
-		}
-	#button{
-		width:123px;
-		height:113px;
-	
-		position:absolute;
-		cursor:pointer;
-		}
-	#button1{
-		width:125px;
-		height:155px;
-		position:absolute;
-		
-		top:56px;
-		left:230px;
-		cursor:pointer;
-		
-		}
-		
-	#button1:hover{
-		    width: 177px;
-    height: 180px;
-    position: absolute;
-    /* border: 1px solid #00C; */
-    top: 56px;
-    left: 230px;
-    cursor: pointer;
-    background: url(Content/Flash/map_city_c_a.bmp) no-repeat -230px -56px;
-  
-		}
-		
-	#button2{
-		width: 129px;
-    height: 86px;
-    position: absolute;
-   
-    top: 0;
-    left: 356px;
-    cursor: pointer;
-		
-		}
-	#button2:hover{
-	     width: 152px;
-		height: 145px;
-		position: absolute;
-		/* border: 1px solid #00C; */
-		top: 0;
-		left: 353px;
-		cursor: pointer;
-		background: url(Content/Flash/map_city_c_a.bmp) no-repeat -353px -0px;
-  
-	}
-	#button3{
-		width: 186px;
-		height: 132px;
-		position: absolute;
-	  
-		top: 0;
-		left: 479px;
-		cursor: pointer;
-		
-		}
-	#button3:hover{
-	     width: 186px;
-		height: 132px;
-		position: absolute;
-		/* border: 1px solid #00C; */
-		top: 0;
-		left: 479px;
-		cursor: pointer;
-		background: url(Content/Flash/map_city_c_a.bmp) no-repeat -479px -0px;
-  
-	}
-	#button4{
-	    width: 100px;
-		height: 100px;
-		position: absolute;
-		top: 148px;
-		left: 606px;
-		cursor: pointer;
-		}
-	#button4:hover{
-	     width: 100px;
-		height: 100px;
-		position: absolute;
-		/* border: 1px solid #00C; */
-		top: 148Px;
-		left: 606px;
-		cursor: pointer;
-		background: url(Content/Flash/map_city_c_a.bmp) no-repeat -606px -148px;
-  
-	}
-	#button:hover{	
-		background-image:url(Content/Flash/map_city_c_a.bmp);
-		}
-	#button5{
-	    width: 100px;
-		height: 100px;
-		position: absolute;
-		top: 11px;
-		left: 680px;
-		cursor: pointer;
-		
-		}
-	#button5:hover{	
-	background: url(Content/Flash/map_city_c_a.bmp) no-repeat -680px -11px;
-		}
-	div{
-		padding:0;
-		margin:0;}
-</style>
-</head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <style>
+        body{
+            background-image: url(shapes/MAP.PNG);
+            width: 786px;
+            height: 320px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            BACKGROUND-REPEAT: NO-REPEAT;
+        }
+        .m1{
 
+            BACKGROUND-REPEAT: NO-REPEAT;
+            width: 110px;
+            height: 74px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            CURSOR: POINTER;
+        }
+        .m1:hover{
+
+            background-image: url(shapes/10.PNG);
+
+
+        }
+        .m1 .title{
+            background-image: url(shapes/b.PNG);
+            width: 110px;
+            height: 74px;
+            BACKGROUND-POSITION-X: -44PX;
+            BACKGROUND-POSITION-Y: -6PX;
+        }
+        .m2{
+
+            BACKGROUND-REPEAT: NO-REPEAT;
+            width: 221px;
+            height: 200px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            position: absolute;
+            left: 183px;
+            top: 18px;
+            CURSOR: POINTER;
+        }
+        .m2:hover{
+            background-image: url(shapes/15.PNG);
+
+
+        }
+        .m2 .title{
+            background-image: url(shapes/b.PNG);
+            width: 100PX;
+            height: 100PX;
+            background-position-x: 531px;
+            BACKGROUND-POSITION-Y: -43PX;
+            MARGIN-LEFT: 68px;
+            margin-top: 40px;
+
+        }
+        .m3{
+
+            BACKGROUND-REPEAT: NO-REPEAT;
+            width: 150px;
+            height: 141px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            position: absolute;
+            left: 330px;
+            top: 0px;
+            CURSOR: POINTER;
+        }
+        .m3:hover{
+            background-image: url(shapes/20.PNG);
+
+
+        }
+        .m3 .title{
+            background-image: url(shapes/b.PNG);
+            width: 80px;
+            BACKGROUND-POSITION-X: -406px;
+            height: 100px;
+            margin-left: 53px;
+            MARGIN-TOP: 10PX;
+
+        }
+        .m4{
+            width:150px;
+            height:141px;
+            POSITION: ABSOLUTE;
+            LEFT: 478PX;
+            BACKGROUND-REPEAT: NO-REPEAT;
+
+
+        }
+        .m4:hover{
+            background-image: url(shapes/40.PNG);
+
+
+        }
+        .m4 .title{
+            background-image: url(shapes/b.PNG);
+            width: 85px;
+            height: 58px;
+            BACKGROUND-POSITION-X: -528px;
+            BACKGROUND-POSITION-Y: -49PX;
+            margin: 44PX 53PX;
+        }
+        .m7{
+
+            BACKGROUND-REPEAT: NO-REPEAT;
+            width: 61px;
+            height: 87px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            position: absolute;
+            left: 458px;
+            top: 147px;
+            CURSOR: POINTER;
+        }
+        .m7:hover{
+            background-image: url(shapes/30.PNG);
+        }
+        .m7 .title{
+            background-image: url(shapes/b.PNG);
+            width: 59px;
+            height: 44px;
+            BACKGROUND-POSITION-X: -463px;
+            BACKGROUND-POSITION-Y: -154PX;
+            margin: 1px;
+        }
+        .m6{
+
+
+            BACKGROUND-REPEAT: NO-REPEAT;
+            width: 142px;
+            height: 162px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            position: absolute;
+            left:649px;
+
+            CURSOR: POINTER;
+        }
+        .m6:hover{
+            background-image: url(shapes/25.PNG);
+
+
+        }
+        .m6 .title{
+            background-image: url(shapes/b.PNG);
+            width: 63px;
+            height: 51px;
+            BACKGROUND-POSITION-X: -685px;
+            BACKGROUND-POSITION-Y: -44PX;
+            margin: 40PX 39PX;
+        }
+        .m9{
+            BACKGROUND-REPEAT: NO-REPEAT;
+            width: 202px;
+            height: 154px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            position: absolute;
+            left: 9px;
+            top: 148px;
+            CURSOR: POINTER;
+        }
+        .m9:hover{
+            background-image: url(shapes/5.PNG);
+
+
+        }
+        .m9 .title{
+            background-image: url(shapes/b.PNG);
+            width: 202px;
+            height: 154px;
+            BACKGROUND-POSITION-X: -13px;
+            BACKGROUND-POSITION-Y: -156PX;
+        }
+        .b{
+            background-image: url(shapes/b.PNG);
+            width: 786px;
+            height: 320px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            BACKGROUND-REPEAT: NO-REPEAT;
+            BACKGROUND-POSITION-X: -10PX;
+            position: absolute;
+            BACKGROUND-POSITION-Y: -10PX;
+
+        }
+        .next{
+            background-image: url(shapes/44.PNG);
+            width: 59px;
+            height: 41px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            BACKGROUND-REPEAT: NO-REPEAT;
+            POSITION: ABSOLUTE;
+            LEFT: 715px;
+            TOP: 117PX;
+            CURSOR: POINTER;
+        }
+
+    </style>
+    <script>
+        var u = false;
+        $(function(){
+            setInterval(function(){
+                var left = parseInt($(".next").css("left"));
+                if(left == 730){
+                    u = false;
+                }else if(left == 715){
+                    u = true;
+                }
+                if(u){
+                    left+=1;
+                }else{
+                    left-=1;
+                }
+                $(".next").css("left",left+"px");
+            },15)
+        });
+
+        function openNpc(index) {
+            if (index == 1) {
+                window.parent.$('#gw').attr("src", "/petInfo");
+            } else if (index == 2) {
+                window.parent.$('#gw').attr("src", "/petInfo");
+            } else if (index == 3) {
+                window.parent.$('#gw').attr("src", "/petInfo");
+            } else if (index == 4) {
+                window.parent.$('#gw').attr("src", "/petInfo");
+            } else if (index == 5) {
+                window.parent.$('#gw').attr("src", "/petInfo");
+            } else if (index == 6) {
+                window.parent.$('#gw').attr("src", "/petInfo");
+            } else if (index == 7) {
+                window.parent.$('#gw').attr("src", "/petInfo");
+            } else if (index == 8) {
+                window.parent.$('#gw').attr("src", "/centralTown?target=2");
+            }
+        }
+    </script>
+</head>
 <body>
-	<div id="main">
-    	<div id="button" onclick="window.parent.openNpc(1)"></div>
-        <div id="button1" onclick="window.parent.openNpc(2)"></div>
-        <div id="button2" onclick="window.parent.openNpc(3)"></div>
-        <div id="button3" onclick="window.parent.openNpc(4)"></div>
-        <div id="button4" onclick="window.parent.openNpc(5)"></div>
-        <div id="button5" onclick="window.parent.openNpc(6)"></div>
-    </div>
+
+<div class="m1" onclick="openNpc(1)"><div class="title"></div></div>
+<div class="m2" onclick="openNpc(2)"><div class="title"></div></div>
+<div class="m3" onclick="openNpc(3)"><div class="title"></div></div>
+<div class="m4" onclick="openNpc(4)"><div class="title"></div></div>
+<div class="m6" onclick="openNpc(5)"><div class="title"></div></div>
+<div class="m7" onclick="openNpc(6)"><div class="title"></div></div>
+<div class="m9" onclick="openNpc(7)"><div class="title"></div></div>
+<div class="next" onclick="openNpc(8)"></div>
 </body>
 </html>

@@ -5,146 +5,28 @@
     <title>野外探险</title>
     <style type="text/css"> 
     <!--
-        body {
-            width: auto;
-            height: auto;
-            margin: 0px auto;
-            font-size: 12px;
-            background:#eeeeee;
-        }
-        * {
-            margin: 0px;
-            padding: 0px;
-        }
-        pre {
-            margin: 0px;
-            padding: 0px;
-            float: left;
-        }
-        img {
-            margin: 0px;
-            padding: 0px;
-            border: 0px;
-        }
-        ul {
-            margin: 0px;
-            padding: 0px;
-        }
-        li {
-            display: inline;
-            list-style-type: none;
-        }
-        tr td {
-            float:left;
-            margin-right:10px;
-        }
-        .zdzd_box {
-            width:788px;
-            height:319px;
-            float:left;
-        }
-        .box_left {
-            width:301px;
-            height:319px;
-            float:left;
-            background:url(img/zdzd_bj1.jpg);
-        }
-        .box_zhong {
-            width:283px;
-            height:319px;
-            float:left;
-            background:url(img/zdzd_bj2.jpg);
-        }
-        .box_right {
-            width:204px;
-            height:319px;
-            float:left;
-            background:url(img/zdzd_bj3.jpg);
-        }
-        .zdzd_jiesao {
-            width:230px;
-            height:90px;
-            float:left;
-            margin:70px 0px 0px 40px;
-            -margin:70px 0px 0px 20px;
-            float:left;
-            line-height:22px;
-            overflow:hidden;
-        }
-        .zdzd_cong {
-            width:247px;
-            height:84px;
-            float:left;
-            margin:50px 0px 0px 10px
-            line-height:22px;
-        }
-        .zhong_list {
-            width:260px;
-            height:210px;
-            float:left;
-            margin:0px 0px 0px 5px;
-            line-height:22px;
-            margin-top:59px;
-            color:#335e00;
-            overflow:hidden;
-            scrollbar-face-color:#a1d87c;
-            scrollbar-highlight-color:#ffffff;
-            scrollbar-3dlight-color:#cdefb9;
-            scrollbar-shadow-color:#ffffff;
-            scrollbar-darkshadow-color:#cdefb9;
-            scrollbar-track-color:#cdefb9;
-            scrollbar-arrow-color:#ffffff;
-        }
-        .zhong_list a {
-            text-decoration:none;
-            color:#335e00;
-        }
-        .zhong_list a:hover {
-            text-decoration:none;
-            color:#335e00;
-        }
-        .zhong_list li {
-            width:240px;
-            height:26px;
-            float:left;
-            line-height:27px;
-            display:inline;
-        }
-        .title {
-            width:120px;
-            height:22px;
-            float:left;
-            line-height:22px;
-            overflow:hidden;
-        }
-        .title2 {
-            width:35px;
-            height:22px;
-            float:left;
-            line-height:22px;
-        }
-        .title3 {
-            width:69px;
-            height:17px;
-            float:left;
-            line-height:22px;
-            text-align:center;
-            margin-top:2px;
-        }
-        .anniu {
-            width:265px;
-            height:29px;
-            float:left;
-            margin:15px 0px 0px 5px;
-            -margin:15px 0px 0px 0px;
-        }
-        .anniu1 {
-            width:80px;
-            height:29px;
-            float:left;
-            margin:0px 0px 0px 7px;
-            -margin:0px 0px 0px 5px;
-        }
+        body { width: auto; height: auto; margin: 0px auto; font-size: 12px; background:#eeeeee;}
+        *{ margin: 0px; padding: 0px; }
+        pre { margin: 0px; padding: 0px; float: left; }
+        img { margin: 0px; padding: 0px; border: 0px; }
+        ul { margin: 0px; padding: 0px; }
+        li { display: inline; list-style-type: none; }
+        tr td { float:left; margin-right:10px; }
+        .zdzd_box { width:788px; height:319px; float:left;}
+        .box_left { width:301px; height:319px; float:left; background:url(img/zdzd_bj1.jpg);}
+        .box_zhong { width:283px; height:319px; float:left; background:url(img/zdzd_bj2.jpg);}
+        .box_right { width:204px; height:319px; float:left; background:url(img/zdzd_bj3.jpg);}
+        .zdzd_jiesao { width:230px; height:90px; float:left; margin:70px 0px 0px 40px; -margin:70px 0px 0px 20px;float:left; line-height:22px; overflow:hidden;}
+        .zdzd_cong { width:247px; height:84px; float:left; margin:50px 0px 0px 10px; line-height:22px;}
+        .zhong_list { width:260px; height:210px; float:left; margin:0px 0px 0px 5px;line-height:22px; margin-top:59px; color:#335e00; overflow:hidden;scrollbar-face-color:#a1d87c;scrollbar-highlight-color:#ffffff;scrollbar-3dlight-color:#cdefb9;scrollbar-shadow-color:#ffffff;scrollbar-darkshadow-color:#cdefb9;scrollbar-track-color:#cdefb9;scrollbar-arrow-color:#ffffff;}
+        .zhong_list a { text-decoration:none; color:#335e00;}
+        .zhong_list a:hover { text-decoration:none; color:#335e00;}
+        .zhong_list li { width:240px; height:26px; float:left;line-height:27px; display:inline;}
+        .title { width:120px; height:22px; float:left;line-height:22px; overflow:hidden;}
+        .title2 { width:35px; height:22px; float:left;line-height:22px;}
+        .title3 { width:69px; height:17px; float:left;line-height:22px; text-align:center; margin-top:2px;}
+        .anniu { width:265px; height:29px; float:left; margin:15px 0px 0px 5px; -margin:15px 0px 0px 0px;}
+        .anniu1 { width:80px; height:29px; float:left; margin:0px 0px 0px 7px; -margin:0px 0px 0px 5px;}
         .zdzd_zxwj {
             width:170px;
             height:260px;
@@ -161,45 +43,22 @@
             scrollbar-arrow-color:#ffffff;
             line-height:26px;
         }
-        .zdzd_zxwj a {
-            text-decoration:none;
-            color:#335e00;
-        }
-        .zdzd_zxwj a:hover {
-            text-decoration:none;
-            color:#335e00;
-        }
-        .zxwj_list {
-            width:30px;
-            height:26px;
-            line-height:26px;
-            float:left;
-        }
-        .zxwj_list img {
-            margin:5px 0px 0px 4px;
-        }
-        .zxwj_list2  {
-            width:120px;
-            height:26px;
-            line-height:26px;
-            float:left;
-        }
-        .yy {
-            cursor:hand;
-            opacity: 0.5;
-            filter : progid:DXImageTransform.Microsoft.Alpha(style=0, opacity=50, finishOpacity=100);
-        }
+        .zdzd_zxwj a{ text-decoration:none; color:#335e00;}
+        .zdzd_zxwj a:hover{ text-decoration:none; color:#335e00;}
+        .zxwj_list  { width:30px; height:26px; line-height:26px; float:left;}
+        .zxwj_list img { margin:5px 0px 0px 4px;}
+        .zxwj_list2  { width:120px; height:26px; line-height:26px; float:left;}
+        .yy {cursor:hand;opacity: 0.5;filter : progid:DXImageTransform.Microsoft.Alpha(style=0, opacity=50, finishOpacity=100);}
     </style>
     <!--[if IE 6]>
-    <script type="text/javascript">
-        try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {}
+    <script type="text/javascript">try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {}
     </script>
     <![endif]-->
-    <script src="../Content/Javascript/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            window.external.showListPet();
-        });
+ <script src="../Content/Javascript/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		window.external.showListPet();
+	})
 	 function setPetWz(id,d) {
             pid = id;
             var r = "";

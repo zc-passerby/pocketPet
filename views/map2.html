@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <style>
+        body{
+            background-image: url(shapes/MAP2.PNG);
+            width: 786px;
+            height: 320px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            BACKGROUND-REPEAT: NO-REPEAT;
+        }
+        .m1{
+
+            BACKGROUND-REPEAT: NO-REPEAT;
+            width: 149px;
+            height: 133px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            position: absolute;
+            left: 0px;
+            top: 149px;
+            CURSOR: POINTER;
+        }
+        .m1:hover{
+
+            background-image: url(shapes/p15.PNG);
+
+
+        }
+        .m1 .title{
+            background-image: url(shapes/b2.PNG);
+            width: 110px;
+            height: 74px;
+            BACKGROUND-POSITION-X: 1px;
+            BACKGROUND-POSITION-Y: 171PX;
+        }
+        .m2{
+
+            BACKGROUND-REPEAT: NO-REPEAT;
+            width: 226px;
+            height: 194px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            position: absolute;
+            left: 336px;
+            TOP: 127PX;
+        }
+        .m2:hover{
+
+            background-image: url(shapes/p5.PNG);
+
+
+        }
+        .m2 .title{
+            background-image: url(shapes/b2.PNG);
+            width: 162px;
+            height: 67px;
+            BACKGROUND-POSITION-X: -337px;
+            BACKGROUND-POSITION-Y: 186PX;
+        }
+        .up{
+            background-image: url(shapes/24.PNG);
+            width: 59px;
+            height: 55px;
+            PADDING: 0PX;
+            MARGIN: 0PX;
+            BACKGROUND-REPEAT: NO-REPEAT;
+            POSITION: ABSOLUTE;
+            LEFT: 10px;
+            TOP: 88PX;
+            CURSOR: POINTER;
+        }
+    </style>
+    <script>
+        var u = false;
+        $(function(){
+            setInterval(function(){
+                var left = parseInt($(".up").css("left"));
+                if(left == 15){
+                    u = false;
+                }else if(left == 0){
+                    u = true;
+                }
+                if(u){
+                    left+=1;
+                }else{
+                    left-=1;
+                }
+                $(".up").css("left",left+"px");
+            },15)
+        });
+
+        function openNpc(index) {
+            if (index == 1) {
+                window.parent.$('#gw').attr("src", "/petInfo");
+            } else if (index == 2) {
+                window.parent.$('#gw').attr("src", "/petInfo");
+            } else if (index == 3) {
+                window.parent.$('#gw').attr('src', '/centralTown?target=1');
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="m1" onclick="openNpc(1)"><div class="title"></div></div>
+    <div class="m2" onclick="openNpc(2)"><div class="title"></div></div>
+    <div class="up" onclick="openNpc(3)"></div>
+</body>
+</html>

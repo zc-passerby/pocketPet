@@ -2,153 +2,111 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
-<script language="javascript" src="../javascript/prototype.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script language="javascript" src="Content/petMain/js/prototype.js"></script>
     <script src="Content/Javascript/jquery-1.8.3.min.js"></script>
-<link href="../css/iframe.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+    <!--
+    body {
+        margin-left: 15px;
+        margin-top: 15px;
 
-<style type="text/css">
-<!--
-body {
-	margin-left: 15px;
-	margin-top: 15px;
-	
-	margin-right: 0;
-	margin-bottom: 0;
-	font-size:12px;
-}
-#Layer1 {
-	position:absolute;
-	left:413px;
-	top:75px;
-	width:27px;
-	height:26px;
-	z-index:1;
-}
+        margin-right: 0;
+        margin-bottom: 0;
+        font-size:12px;
+    }
+    #Layer1 {
+        position:absolute;
+        left:413px;
+        top:75px;
+        width:27px;
+        height:26px;
+        z-index:1;
+    }
 
-#ico{
-	background-image:url(img/npc.jpg) ;
-	background-position:-1px 0;
-	height:242px;
-	width:788px;
-	position: absolute;
-	left: 5px;
-	top: 82px;
-	z-index:999;
-	display:none;
-	
-}
-#btn{
-    width: 129px;
-    height: 34px;
-    POSITION: absolute;
-    LEFT: 653px;
-    top: 204px;
-    cursor: pointer;
+    #ico{
+        background-image:url(img/npc.jpg) ;
+        background-position:-1px 0;
+        height:242px;
+        width:788px;
+        position: absolute;
+        left: 5px;
+        top: 82px;
+        z-index:999;
+        display:none;
 
-	}
-#btn:hover{
-	    background-image: url(img/npc1.png);
-    background-position: 134px 522px;}
--->
-</style>
+    }
+    #btn{
+        width: 129px;
+        height: 34px;
+        POSITION: absolute;
+        LEFT: 653px;
+        top: 204px;
+        cursor: pointer;
+
+        }
+    #btn:hover{
+            background-image: url(img/npc1.png);
+        background-position: 134px 522px;}
+    -->
+    </style>
 <!--[if IE 6]>
-<script type="text/javascript">try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {}
+<script type="text/javascript">
+    try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {}
 </script>
 <![endif]-->
 </head>
 <!--background-image:url(../images/ui/map/map.jpg)-->
 <body style="margin:0;" oncontextmenu="event.returnValue=false" onkeydown="KeyDown()">
-
-<div style="width:786px;height:321px;margin-left:5px;margin-top:5px; background-image:url(img/map6.jpg) ; background-repeat:no-repeat" oncontextmenu="event.returnValue=false" onkeydown="KeyDown()"></div>
-
-<div style="position:absolute;left:329px;top:255px;border:0;cursor:pointer;" title="ĞÂÊÖÑµÁ·Óª" >
-<div onclick="openMode('1')" style="width:83px; height:24px;background:url(img/1.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/1.png');
-"></div>
-<!--img src="img/1.png" alt="ĞÂÊÖÑµÁ·Óª"/--></div>
-
-	
-<div style="position:absolute;left:236px;top:192px;border:0;cursor:pointer;" title="Ñı¾«É­ÁÖ">
-<div onclick="openMode('2')" style="width:83px; height:24px;background:url(img/2.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/3.png');
-"></div></div>
-
-	
-<div onclick="openMode('3')" style="position:absolute;left:334px;top:155px;border:0;cursor:pointer;" title="³±Ï«º£ÑÄ" >
-<div style="width:83px; height:24px;background:url(img/3.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/3.png');
-"></div></div>
-
-<div  onclick="openMode('11')" style="position:absolute;left:475px;top:135px;border:0;cursor:pointer;" title="º£µ×ÊÀ½ç" >
-<div style="width:83px; height:24px;background:url(img/16.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/03.png');
-"></div></div>
-	
-<div onclick="openMode('4')" style="position:absolute;left:37px;top:38px;border:0;cursor:pointer;" title="¾ŞÊ¯É½Âö">
-<div style="width:83px; height:24px;background:url(img/4.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/4.png');
-"></div></div>
-
-
-<div onclick="openMode('5')" style="position:absolute;left:644px;top:282px;border:0;cursor:pointer;" title="»Æ½ğÁê" >
-<div style="width:83px; height:24px;background:url(img/5.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/5.png');
-"></div></div>
-
-				
-<div onclick="openMode('6')" style="position:absolute;left:28px;top:148px;border:0;cursor:pointer;" title="³ãÈÈÉ³Ì²">
-<div style="width:83px; height:24px;background:url(img/6.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/7.png');
-"></div></div>
-
-	
-<div onclick="openMode('7')" style="position:absolute;left:234px;top:72px;border:0;cursor:pointer;" title="ÓÈÂê»ğÉ½" >
-<div style="width:83px; height:24px;background:url(img/7.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/7.png');
-"></div></div>	
-
-	
-<div onclick="openMode('8')" style="position:absolute;left:166px;top:136px;border:0;cursor:pointer;" title="ËÀÍöÉ³Ä®">
-<div style="width:83px; height:24px;background:url(img/8.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/03.png');
-"></div></div>
-		
-
-<div  onclick="openMode('9')" style="position:absolute;left:126px;top:271px;border:0;cursor:pointer;" title="º£ÊĞÊ¢Â¥" >
-<div style="width:83px; height:24px;background:url(img/9.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/03.png');
-"></div></div>
-
-	
-<div onclick="openMode('10')" style="position:absolute;left:688px;top:82px;border:0;cursor:pointer;" title="±ùÌ²" >
-<div style="width:83px; height:24px;background:url(img/10.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/10.png');
-"></div></div>
-
-
-
-<div onclick="openMode('9003')" id="sfk" style="position:absolute; cursor:pointer; left:22px; top:232px;" width=20 height=20 title="Ê··Ò¿ËË¹ÃÜÑ¨">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
-<div onclick="openMode('9002')" id="hlw" style="position:absolute; cursor:pointer; left:153px; top:32px;" width=20 height=20 title="»ğÁúÍõµÄ¹¬µî" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
-<div onclick="openMode('9001')" id="ysw" style="position:absolute;cursor:pointer;left:695px;top:226px;border:1;" width=20 height=20 title="ÒÁËÕÍõµÄÉñÄ¹" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
-<div onclick="openMode('9004')" id="llc" style="position:absolute;cursor:pointer;left:523px;top:38px;border:1;" width=20 height=20 title="Ááçç³Ç" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
-
-
-<!--div id="battlefield" style="position:absolute; cursor:pointer; width:142px; height:36px; left: 507px; top: 192px;" onclick="copyWord('ÉñÊ¥Õ½³¡');window.parent.$('gw').src='./function/guild_battle_mod.php';">&nbsp;&nbsp;&nbsp;&nbsp;¼Ò×åÕ½³¡</div-->
-
-<div id="battlefield" onclick="window.parent.Alert('¸±±¾ÔİÎ´¿ª·¢')" style="position:absolute; cursor:pointer; width:77px; height:28px; left: 507px; top: 285px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
-
-<!--div style="position:absolute; left:527px; top:94px; border:0px; cursor:pointer; line-height:23px" title="ÉñÃØĞ¡Îİ" onclick="copyWord('Ê¥µ®Ğ¡Îİ');window.parent.$('gw').src='./function/tarot_Mod.php';">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ËşÂŞÅÆ</div-->
-
-<div style="position:absolute; left:663px; top:175px; border:0; cursor:pointer; line-height:23px; width: 74px;" onclick="window.parent.StartBattle('99999')" title="Å®ÉñÒªÈû" >
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
-<div style="position:absolute; left:535px; top:177px; border:0; cursor:pointer; line-height:23px; width: 87px;" onclick="window.parent.StartBattle('µØÓüÖ®ÃÅ')" title="µØÓüÖ®ÃÅ" >
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
-<div style="position:absolute; left:367px; top:95px; border:0; cursor:pointer; line-height:23px" title="Ê¥µ®Ğ¡Îİ" onclick="openMode('12')" >
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-<!--<div id="ico"><div id="btn" onclick="lingqu()"></div></div>-->
-
-<div style="position:absolute; left:420px; top:8px; border:0; cursor:pointer; width: 15px;" title="ÇĞ»»µØÍ¼" onClick="window.parent.openUrl('BattleMap_1.html')">
-<img src="img/up.gif" alt="ÇĞ»»µØÍ¼"></div>
-	
-
+    <div style="width:786px;height:321px;margin-left:5px;margin-top:5px; background-image:url(img/map6.jpg) ; background-repeat:no-repeat" oncontextmenu="event.returnValue=false" onkeydown="KeyDown()"></div>
+    <div style="position:absolute;left:329px;top:255px;border:0;cursor:pointer;" title="æ–°æ‰‹è®­ç»ƒè¥" >
+        <div onclick="openMode('1')" style="width:83px; height:24px;background:url(img/1.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/1.png');"></div>
+    </div>
+    <div style="position:absolute;left:236px;top:192px;border:0;cursor:pointer;" title="å¦–ç²¾æ£®æ—">
+        <div onclick="openMode('2')" style="width:83px; height:24px;background:url(img/2.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/3.png');"></div>
+    </div>
+    <div onclick="openMode('3')" style="position:absolute;left:334px;top:155px;border:0;cursor:pointer;" title="æ½®æ±æµ·æ¶¯" >
+        <div style="width:83px; height:24px;background:url(img/3.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/3.png');"></div>
+    </div>
+    <div  onclick="openMode('11')" style="position:absolute;left:475px;top:135px;border:0;cursor:pointer;" title="æµ·åº•ä¸–ç•Œ" >
+        <div style="width:83px; height:24px;background:url(img/16.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/03.png');"></div>
+    </div>
+    <div onclick="openMode('4')" style="position:absolute;left:37px;top:38px;border:0;cursor:pointer;" title="å·¨çŸ³å±±è„‰">
+        <div style="width:83px; height:24px;background:url(img/4.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/4.png');"></div>
+    </div>
+    <div onclick="openMode('5')" style="position:absolute;left:644px;top:282px;border:0;cursor:pointer;" title="é»„é‡‘é™µ" >
+        <div style="width:83px; height:24px;background:url(img/5.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/5.png');"></div>
+    </div>
+    <div onclick="openMode('6')" style="position:absolute;left:28px;top:148px;border:0;cursor:pointer;" title="ç‚½çƒ­æ²™æ»©">
+        <div style="width:83px; height:24px;background:url(img/6.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/7.png');"></div>
+    </div>
+    <div onclick="openMode('7')" style="position:absolute;left:234px;top:72px;border:0;cursor:pointer;" title="å°¤ç›ç«å±±" >
+        <div style="width:83px; height:24px;background:url(img/7.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/7.png');"></div>
+    </div>
+    <div onclick="openMode('8')" style="position:absolute;left:166px;top:136px;border:0;cursor:pointer;" title="æ­»äº¡æ²™æ¼ ">
+        <div style="width:83px; height:24px;background:url(img/8.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/03.png');"></div>
+    </div>
+    <div  onclick="openMode('9')" style="position:absolute;left:126px;top:271px;border:0;cursor:pointer;" title="æµ·å¸‚ç››æ¥¼" >
+        <div style="width:83px; height:24px;background:url(img/9.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/03.png');"></div>
+    </div>
+    <div onclick="openMode('10')" style="position:absolute;left:688px;top:82px;border:0;cursor:pointer;" title="å†°æ»©" >
+        <div style="width:83px; height:24px;background:url(img/10.png); _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='image', src='img/10.png');"></div>
+    </div>
+    <div onclick="openMode('9003')" id="sfk" style="position:absolute; cursor:pointer; left:22px; top:232px;" width=20 height=20 title="å²èŠ¬å…‹æ–¯å¯†ç©´">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div onclick="openMode('9002')" id="hlw" style="position:absolute; cursor:pointer; left:153px; top:32px;" width=20 height=20 title="ç«é¾™ç‹çš„å®«æ®¿" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div onclick="openMode('9001')" id="ysw" style="position:absolute;cursor:pointer;left:695px;top:226px;border:1;" width=20 height=20 title="ä¼Šè‹ç‹çš„ç¥å¢“" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div onclick="openMode('9004')" id="llc" style="position:absolute;cursor:pointer;left:523px;top:38px;border:1;" width=20 height=20 title="ç²ç‘åŸ" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <!--div id="battlefield" style="position:absolute; cursor:pointer; width:142px; height:36px; left: 507px; top: 192px;" onclick="copyWord('ç¥åœ£æˆ˜åœº');window.parent.$('gw').src='./function/guild_battle_mod.php';">&nbsp;&nbsp;&nbsp;&nbsp;å®¶æ—æˆ˜åœº</div-->
+    <div id="battlefield" onclick="window.parent.Alert('å‰¯æœ¬æš‚æœªå¼€å‘')" style="position:absolute; cursor:pointer; width:77px; height:28px; left: 507px; top: 285px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <!--div style="position:absolute; left:527px; top:94px; border:0px; cursor:pointer; line-height:23px" title="ç¥ç§˜å°å±‹" onclick="copyWord('åœ£è¯å°å±‹');window.parent.$('gw').src='./function/tarot_Mod.php';">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;å¡”ç½—ç‰Œ</div-->
+    <div style="position:absolute; left:663px; top:175px; border:0; cursor:pointer; line-height:23px; width: 74px;" onclick="window.parent.StartBattle('99999')" title="å¥³ç¥è¦å¡" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div style="position:absolute; left:535px; top:177px; border:0; cursor:pointer; line-height:23px; width: 87px;" onclick="window.parent.StartBattle('åœ°ç‹±ä¹‹é—¨')" title="åœ°ç‹±ä¹‹é—¨" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div style="position:absolute; left:367px; top:95px; border:0; cursor:pointer; line-height:23px" title="åœ£è¯å°å±‹" onclick="openMode('12')" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <!--<div id="ico"><div id="btn" onclick="lingqu()"></div></div>-->
+    <div style="position:absolute; left:420px; top:8px; border:0; cursor:pointer; width: 15px;" title="åˆ‡æ¢åœ°å›¾" onClick="openMode('switch')">
+        <img src="img/up.gif" alt="åˆ‡æ¢åœ°å›¾">
+    </div>
 </body>
 </html>
 <script language="javascript" type="text/javascript">
@@ -163,7 +121,7 @@ body {
 	{
 		//if(n==0) 
 		//{
-			//if(confirm('Äú»¹Ã»ÓĞ´ò¿ª¸ÃµØÍ¼£¬ÒªÊ¹ÓÃÔ¿³×´ò¿ªÂğ£¿')==true)
+			//if(confirm('æ‚¨è¿˜æ²¡æœ‰æ‰“å¼€è¯¥åœ°å›¾ï¼Œè¦ä½¿ç”¨é’¥åŒ™æ‰“å¼€å—ï¼Ÿ')==true)
 			//{
 				//openMap(t);
 			//}
@@ -189,7 +147,7 @@ body {
 							var v = parseInt(f.responseText);
 							if(v == 11)
 							{
-								window.parent.Alert("¿ªÆôµØÍ¼³É¹¦£¡");
+								window.parent.Alert("å¼€å¯åœ°å›¾æˆåŠŸï¼");
 								window.parent.$('gw').src='./function/Team_Mod.php?n='+t;
 							}
 						},
@@ -208,21 +166,21 @@ body {
 					}
 					else if(v == 1)
 					{
-						window.parent.Alert("µØÍ¼Êı¾İ´íÎó£¡");
+						window.parent.Alert("åœ°å›¾æ•°æ®é”™è¯¯ï¼");
 					}
 					else if(v == 2)
 					{
-						window.parent.Alert("ÄúµÄµ±Ç°ÍşÍû²»¹»£¡");
+						window.parent.Alert("æ‚¨çš„å½“å‰å¨æœ›ä¸å¤Ÿï¼");
 					}
 					else if(v == 3)
 					{
-						window.parent.Alert("ÄúÃ»ÓĞÕâ¸öÎïÆ·£¡");
+						window.parent.Alert("æ‚¨æ²¡æœ‰è¿™ä¸ªç‰©å“ï¼");
 					}
 					else if(v == 12)
 					{
 						if(n==0) 
 						{
-							if(confirm('Äú»¹Ã»ÓĞ´ò¿ª¸ÃµØÍ¼£¬ÒªÊ¹ÓÃÔ¿³×´ò¿ªÂğ£¿')==true)
+							if(confirm('æ‚¨è¿˜æ²¡æœ‰æ‰“å¼€è¯¥åœ°å›¾ï¼Œè¦ä½¿ç”¨é’¥åŒ™æ‰“å¼€å—ï¼Ÿ')==true)
 							{
 								openMap(t);
 							}
@@ -250,7 +208,7 @@ body {
 		//}
 	}
 	
-	//¸±±¾µØÍ¼ÅĞ¶Ï
+	//å‰¯æœ¬åœ°å›¾åˆ¤æ–­
 	function fbMap(id)
 	{
 		if(id != "")
@@ -260,10 +218,10 @@ body {
 	}
 	function openMode(i){
 		window.location.href = "MapInfo/t"+i+".html";
-		}
+    }
 	// Add by DuHao 2009-5-13
-/*function copyWord(words)
-{
-	window.parent.$('baike_input').value=words;
-}*/
+    /*function copyWord(words)
+    {
+        window.parent.$('baike_input').value=words;
+    }*/
 </script>  

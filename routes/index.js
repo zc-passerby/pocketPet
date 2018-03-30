@@ -1,6 +1,7 @@
 var express = require('express');
 var cryptoData = require('../common/cryptoData');
 var router = express.Router();
+var userDataHandler = require('../common/userDataHandler');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -43,6 +44,12 @@ router.get('/fieldExpedition', function (req, res) {
         req.session.error = "请先登录！";
         res.redirect('/login');
     }
+    var target = req.query.target;
+    if (target == 1) {
+        res.render('battleMap');
+    } else if (target == 2) {
+        res.render('battleMap_1');
+    }
 });
 
 /* GET central town page. */
@@ -51,6 +58,12 @@ router.get('/centralTown', function (req, res) {
     if (!req.session.user) {
         req.session.error = "请先登录！";
         res.redirect('/login');
+    }
+    var target = req.query.target;
+    if (target == 1) {
+        res.render('map');
+    } else if (target == 2) {
+        res.render('map2');
     }
 });
 
@@ -61,8 +74,8 @@ router.get('/petInfo', function (req, res) {
         req.session.error = "请先登录！";
         res.redirect('/login');
     }
-    var petInfo = req.session.petInfo;
-    var playerInfo = req.session.playerInfo;
+    var petInfo = userDataHandler.loadUserDataByKey(req.session.userId, userDataHandler.userDataSettings.petInfo);
+    var playerInfo = userDataHandler.loadUserDataByKey(req.session.userId, userDataHandler.userDataSettings.userInfo);
     res.render('petInfo', {petInfo:petInfo, playerInfo:playerInfo});
 });
 
@@ -73,23 +86,7 @@ router.get('/playerInfo', function (req, res) {
         req.session.error = "请先登录！";
         res.redirect('/login');
     }
-    // var User = db.get('User');
-    // var userId = req.session.user.id;
-    // User.select(userId, function (err, result) {
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         if (result) {
-    //             //var userInfo = result;
-    //             req.session.user = result;
-    //             res.render('playerInfo');
-    //         }
-    //     }
-    // });
-    //var userId = req.session.userId;
-    var playerInfo = req.session.playerInfo;
-    console.log(req.session.user);
-    console.log(req.session.playerInfo);
+    var playerInfo = userDataHandler.loadUserDataByKey(req.session.userId, userDataHandler.userDataSettings.userInfo);
     res.render('playerInfo', {playerInfo:playerInfo});
 });
 

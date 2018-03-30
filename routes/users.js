@@ -32,10 +32,6 @@ router.post('/login', function (req, res) {
                 } else { //信息匹配成功，则将此对象（匹配到的user) 赋给session.user ,更新登陆时间并返回成功
                     req.session.userId = userInfo.id;
                     req.session.user = userInfo;
-                    req.session.playerInfo = userDataHandler.loadUserDataByKey(req.session.userId, userDataHandler.userDataSettings.userInfo);
-                    req.session.petInfo = userDataHandler.loadUserDataByKey(req.session.userId, userDataHandler.userDataSettings.petInfo);
-                    console.log(req.session.playerInfo);
-                    console.log(req.session.petInfo);
                     userFun.setUserData(req, User, userInfo);
                     res.send(200);
                 }

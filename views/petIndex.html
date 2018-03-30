@@ -324,15 +324,11 @@
                 $("#gw").attr("src", "/playerInfo");
                 setTimeout(function () { window.external.updatePlayerInfo_page(); }, 100);
             } else if (n == 2) {
-
-                $("#gw").attr("src", "map.html");
+                $("#gw").attr("src", "/centralTown?target=1");
                 window.external.addHP();
-
             } else if (n == 1) {
-
-                $("#gw").attr("src", "BattleMap.html");
+                $("#gw").attr("src", "/fieldExpedition?target=1");
                 setTimeout(function () { window.external.showNpc() }, 100);
-
             } else if (n == 99) {
                 window.location.href = "petIndex.html";
             }
@@ -441,7 +437,7 @@
             $("#zbfj").hide();
             $("#incangku").show();
             $("#inpiliang").show();
-            window.external.updateIndex_Page();
+            //window.external.updateIndex_Page();
             $("#main_bb").show();
             //pl = 1;
 
