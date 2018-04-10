@@ -5,6 +5,8 @@ var userDataHandler = require('../common/userDataHandler');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    console.log(global.fieldMapDefine);
+    console.log(global.fieldMapDefine['1']['mapPetsInfo']['§神秘人§']);
     res.render('index', {title : '口袋精灵2测试区'});   // 到达此路径则渲染index文件，并传出title值供 index.html使用
 });
 

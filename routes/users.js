@@ -5,6 +5,7 @@ var svgCaptcha = require('svg-captcha');
 var cryptoData = require('../common/cryptoData');
 var userDataHandler = require('../common/userDataHandler');
 
+var petFun = require('../functions/pet');
 var userFun = require('../functions/user');
 
 /* GET users listing. */
@@ -156,6 +157,9 @@ router.get('/getCaptcha', function (req, res) {
 
 //设置初始宠物
 router.get('/setFirstPet', function (req, res) {
+    var petId = req.query.petId;
+    var petInfo = petFun.setFirstPet(petId);
+    userDataHandler.saveUserDataByKey(req.session.userId, petInfo, userDataHandler.userDataSettings.petInfo);
     res.send(200);
 });
 

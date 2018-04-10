@@ -217,7 +217,13 @@
 		}
 	}
 	function openMode(i){
-		window.location.href = "MapInfo/t"+i+".html";
+		//window.location.href = "MapInfo/t"+i+".html";
+        var data = {"mapId":i};
+        $.ajax({
+            url: '/maps/enterMap',
+            type: 'get',
+            data: data
+        });
     }
 	// Add by DuHao 2009-5-13
     /*function copyWord(words)

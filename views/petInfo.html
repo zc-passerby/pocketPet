@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>petInfo</title>
     <link href="Content/CSS/PetInfo.css" rel="stylesheet" />
+    <link rel="stylesheet" href="stylesheets/playPngPet.css">
     <script src="Content/Javascript/jquery-1.8.3.min.js"></script>
     <style type="text/css">
         #pageZb {
@@ -20,7 +21,7 @@
         }
     </style>
 </head>
-<body style="width: 788px;">
+<body style="width: 788px;" onload=setMajorPet(<%= petInfo.majorPet %>)>
     <div id="baginfo" style="margin-top: 0; z-index: 10020; position: absolute; display: none;">
         <table style="font-size:12px;" width="185" cellpadding="0" cellspacing="0" border="0">
             <tbody>
@@ -67,7 +68,7 @@
                 <img src=<%= user.smallHeadImg %>?rd=4847848 />
             </div>
             <div id="bottom" style=" word-wrap: break-word;">
-                <% for (var i = 0; i < 3; i++) { %>
+                <!--<% for (var i = 0; i < 3; i++) { %>
                     <% if (petInfo.bagPet[i]) { %>
                         <% if (petInfo.majorPet == i) { %>
                             <div class="" onclick=setMajorPet(<%= i %>)>
@@ -80,7 +81,7 @@
                     <% } else { %>
                         <div><em></em><img style="border-radius: 5px;" src="Content/PetPhoto/nopet.gif" /></div>
                     <% } %>
-                <% } %>
+                <% } %>-->
             </div>
         </div>
         <div id="right">
@@ -233,8 +234,17 @@
 
         function updateMajorPet(majorPet) {
             var html = '';
+            var petImg = JSON.parse(majorPet.petImg);
+            var pngSteps = petImg.z.steps - 1;
+            var pngDuration = pngSteps / 20;
+            if (pngDuration < 1) {
+                pngDuration = 1;
+            }
             $('.主宠名字').html(majorPet.petName);
-            html = '<img src="Content/PetPhoto/z'+ majorPet.petId + '.gif">';
+            html = '<div class="playPngPets" style="height: ' + petImg.z.height + 'px; width: ' + petImg.z.width + 'px; background: url(Content/PetPhotoPng/z'
+                   + majorPet.petId + '.png) no-repeat; -webkit-animation-duration: ' + pngDuration +'s; animation-duration: '+ pngDuration + 's; -webkit-animation-timing-function: steps('
+                   + pngSteps + '); animation-timing-function: steps(' + pngSteps + ');"></div>';
+            //console.log(html);
             $('.petO').html(html);
             $('.等级').html('1');
             $('.五行').html(majorPet.petDept);
@@ -262,8 +272,8 @@
                     }
                     html = '<div class="' + petClass + '" onclick="setMajorPet(' + i + ')">'
                              + '<em>' + '<a style="">' + targetPet.petName + '<br />LV 1' + '</a>' + '</em>'
-                             + '<img style="border-radius: 5px;" src="Content/PetPhoto/k'
-                             + targetPet.petId + '.gif" onerror="this.src=\'Content/PetPhoto/k' + targetPet.petId + '.png\'" /></div>';
+                             + '<img style="border-radius: 5px;" src="Content/PetPhotoPng/k'
+                             + targetPet.petId + '.png" onerror="this.src=\'Content/PetPhoto/k' + targetPet.petId + '.png\'" /></div>';
                 } else {
                     html = '<div><em></em><img style="border-radius: 5px;" src="Content/PetPhoto/nopet.gif"/></div>';
                 }
@@ -275,6 +285,7 @@
             if (bagId != 0 && bagId != 1 && bagId!=2) {
                 return;
             }
+            //console.log('-----------------------------');
             var data = {'bagId':bagId};
             $.ajax({
                 url: '/pets/setMajorPet',

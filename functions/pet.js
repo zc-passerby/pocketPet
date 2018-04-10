@@ -49,7 +49,8 @@ function loadUserPetDefine() {
 }
 
 function reloadUserPetDefine() {
-    global.userPetDefine = getUserPetDefineFromDb();
+    global.userPetDefine = null;
+    getUserPetDefineFromDb();
 }
 
 function setFirstPet(petId) {
@@ -61,12 +62,13 @@ function setFirstPet(petId) {
     if (petId == null || petId == '') {
         petId = '1';
     }
-    loadUserPetDefine();
+    //loadUserPetDefine();
     //console.log(global.userPetDefine);
     var targetPet = global.userPetDefine[petId];
     var singlePet = petAttrbuteBase;
     singlePet.petId = targetPet.petId;
     singlePet.petName = targetPet.petName;
+    singlePet.petImg = targetPet.petImg;
     singlePet.petDept = targetPet.petDept;
     singlePet.petClass = targetPet.petClass;
     singlePet.petSkills = targetPet.petSkills;
@@ -77,6 +79,7 @@ function setFirstPet(petId) {
     //console.log(petInfo);
     return petInfo;
 }
+
 
 //exports.petAttrbuteBase = petAttrbuteBase;
 exports.loadUserPetDefine = loadUserPetDefine;

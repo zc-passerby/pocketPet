@@ -7,21 +7,26 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var session = require('express-session');
 var tableDefine = require('./common/tableDefine');
-var pet = require('./functions/pet');
+
+var petFun = require('./functions/pet');
+var mapFun = require('./functions/map');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var tasks = require('./routes/tasks');
 var pets = require('./routes/pets');
+var maps = require('./routes/maps');
 
 global.db = require('./common/dbutil').Instance();
 global.pwdKey = 'justForPocketPet';
 global.userPetDefine = null;
+global.fieldMapDefine = null;
 
 //定义数据表实体
 db.define(tableDefine);
 
-pet.loadUserPetDefine();
+petFun.loadUserPetDefine();
+mapFun.loadFieldMapDefine();
 //Express配置
 var app = express();
 app.use(session({
@@ -62,6 +67,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/tasks', tasks);
 app.use('/pets', pets);
+app.use('/maps', maps);
 //app.use('/login', index);
 //app.use('/register', index);
 //app.use('/logout', index);

@@ -1,0 +1,32 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+@-webkit-keyframes playPngPets {
+    from {
+        background-position: 0%;
+    }
+    to {
+        background-position: 100%;
+    }
+}
+
+@keyframes playPngPets {
+    to {
+        background-position: 100%;
+    }
+}
+
+.playPngPets {
+    -webkit-animation-name: playPngPets;
+            animation-name: playPngPets;
+    /*需要根据图片帧数进行调整
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+    */
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    /*需要根据图片的帧数进行调整
+    -webkit-animation-timing-function: steps(11);
+            animation-timing-function: steps(11);
+    */
+}

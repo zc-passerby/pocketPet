@@ -133,9 +133,9 @@
                 returnreg();
             } else {
                 $.ajax({
-                    url: 'user/setFirstPet',
-                    type: 'post',
-                    data: {userId:userId},
+                    url: '/users/setFirstPet',
+                    type: 'get',
+                    data: {userId:userId, petId:id},
                     success: function (resData, status) {
                         if (status == 'success') {
                             alert('宠物选择成功，点确定将转到登录页面！');
