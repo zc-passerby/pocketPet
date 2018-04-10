@@ -218,12 +218,13 @@
 	}
 	function openMode(i){
 		//window.location.href = "MapInfo/t"+i+".html";
-        var data = {"mapId":i};
-        $.ajax({
-            url: '/maps/enterMap',
-            type: 'get',
-            data: data
-        });
+        // var data = {"mapId":i};
+        // $.ajax({
+         //    url: '/maps/enterMap',
+         //    type: 'get',
+         //    data: data
+        // });
+        window.parent.$('#gw').attr("src", "/maps/enterMap?mapId=" + i.toString());
     }
 	// Add by DuHao 2009-5-13
     /*function copyWord(words)

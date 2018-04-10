@@ -47,19 +47,19 @@
             width:301px;
             height:319px;
             float:left;
-            background:url(../public/MapInfo/img/zdzd_bj1.jpg);
+            background:url(/MapInfo/img/zdzd_bj1.jpg);
         }
         .box_zhong {
             width:283px;
             height:319px;
             float:left;
-            background:url(../public/MapInfo/img/zdzd_bj2.jpg);
+            background:url(/MapInfo/img/zdzd_bj2.jpg);
         }
         .box_right {
             width:204px;
             height:319px;
             float:left;
-            background:url(../public/MapInfo/img/zdzd_bj3.jpg);
+            background:url(/MapInfo/img/zdzd_bj3.jpg);
         }
         .zdzd_jiesao {
             width:230px;
@@ -195,7 +195,7 @@
         try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {}
     </script>
     <![endif]-->
-    <script src="../public/Content/Javascript/jquery-1.8.3.min.js"></script>
+    <script src="/Content/Javascript/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">
         $(function(){
             window.external.showListPet();
@@ -243,7 +243,11 @@
     <div class="zdzd_box">
 	    <div class="box_left">
             <div class="zdzd_jiesao">
-                出现怪物：<%= mapInfo.monsterList %>
+                出现怪物：
+                <%= mapInfo.mapPetList %>
+                <!--<% for (var m in mapInfo.mapPetList) { %>
+                <%= m %>
+                <% } %>-->
             </div>
             <div class="zdzd_cong">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -251,7 +255,7 @@
                         <td width="25">&nbsp;</td>
                         <% var i = 1; %>
                         <% for (var m in bagPets) { %>
-                            <td><img src='Content/PetPhotoPng/k<%= m.petId %>.gif' alt=<%= m.petName %> style='cursor:pointer;filter:alpha(opacity=50);'id=i<%= i %>></td>
+                            <td><img src='/Content/PetPhotoPng/k<%= m.petId %>.png'  style='cursor:pointer;filter:alpha(opacity=50);' id=i<%= i %>></td>
                             <% i = i + 1; %>
                         <% } %>
                         <!--
@@ -277,27 +281,27 @@
                 </table>
             </div>
             <div class="anniu">
-                <div class="anniu1"><img src="../public/MapInfo/img/zd.gif" width="78" height="29" style="cursor:pointer;" onclick="window.parent.StartBattle('{地图序号}')"/></div>
-                <div class="anniu1" id="creatUTeam"><img src="../public/MapInfo/img/cjdw.gif" width="78" height="29" style="cursor:pointer;" onclick="if(confirm('确定要建立你的队伍？')){createTeam()}" /></div>
+                <div class="anniu1"><img src="/MapInfo/img/zd.gif" width="78" height="29" style="cursor:pointer;" onclick="window.parent.StartBattle('{地图序号}')"/></div>
+                <div class="anniu1" id="creatUTeam"><img src="/MapInfo/img/cjdw.gif" width="78" height="29" style="cursor:pointer;" onclick="if(confirm('确定要建立你的队伍？')){createTeam()}" /></div>
             </div>
         </div>
         <div class="box_right">
             <div class="zdzd_zxwj">
                 <ul>
                     <li>
-                        <div class="zxwj_list "><img src="../public/MapInfo/img/ren.gif" width="13" height="15" /></div>
+                        <div class="zxwj_list "><img src="/MapInfo/img/ren.gif" width="13" height="15" /></div>
                         <div class="zxwj_list2 " style="cursor:pointer">未开发
                         </div>
                     </li>
                     <li>
-                        <div class="zxwj_list "><img src="../public/MapInfo/img/ren.gif" width="13" height="15" /></div>
+                        <div class="zxwj_list "><img src="/MapInfo/img/ren.gif" width="13" height="15" /></div>
                         <div class="zxwj_list2 " style="cursor:pointer">未开发</div>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div id="menu" style="display:none; position:absolute; left:0;top:0; background-color:#FFFFFF; border:0px solid #006666; background:url(../public/MapInfo/img/team_menu.png); background-repeat:no-repeat;height:123px; color:#FFFFFF">
+    <div id="menu" style="display:none; position:absolute; left:0;top:0; background-color:#FFFFFF; border:0px solid #006666; background:url(/MapInfo/img/team_menu.png); background-repeat:no-repeat;height:123px; color:#FFFFFF">
         <table width="87" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td height="18" scope="col" align="right">
